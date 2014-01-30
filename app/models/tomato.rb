@@ -1,3 +1,4 @@
-class Tomato < ActiveRecord::Base
-  attr_accessible :body, :end_time, :move_id, :start_time, :state, :title, :user_id
+class State < ActiveRecord::Base
+  attr_accessible :body, :position, :title, :visibility
+  has_and_belongs_to_many :moves
 end
