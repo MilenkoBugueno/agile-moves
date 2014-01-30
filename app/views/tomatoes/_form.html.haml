@@ -1,0 +1,11 @@
+= simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :body
+  = f.input :end_time
+  = f.input :start_time
+  = f.input :state
+  = f.input :title
+  = f.input :user_id
+  = f.input :move_id
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), tomatoes_path, :class => 'btn'

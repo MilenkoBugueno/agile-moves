@@ -1,0 +1,25 @@
+- model_class = State
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
+
+%p
+  %strong= model_class.human_attribute_name(:body) + ':'
+  %br
+  = @state.body
+%p
+  %strong= model_class.human_attribute_name(:position) + ':'
+  %br
+  = @state.position
+%p
+  %strong= model_class.human_attribute_name(:title) + ':'
+  %br
+  = @state.title
+%p
+  %strong= model_class.human_attribute_name(:visibility) + ':'
+  %br
+  = @state.visibility
+
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), states_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_state_path(@state), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), state_path(@state), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

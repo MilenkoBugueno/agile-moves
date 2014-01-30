@@ -1,0 +1,9 @@
+= simple_form_for @move_type, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :body
+  = f.input :thumb_rating
+  = f.input :star_rating
+  = f.input :has_tomatoes
+  = f.input :title
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), move_types_path, :class => 'btn'

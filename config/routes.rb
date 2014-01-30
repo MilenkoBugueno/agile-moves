@@ -1,4 +1,16 @@
 AgileMovesOs::Application.routes.draw do
+  resources :tomatoes
+
+
+  resources :states
+
+
+  resources :ratings
+
+
+  resources :move_types
+
+
   resources :moves
 
 

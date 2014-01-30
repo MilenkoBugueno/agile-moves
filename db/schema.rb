@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140130170525) do
+ActiveRecord::Schema.define(:version => 20140130182326) do
+
+  create_table "move_types", :force => true do |t|
+    t.text     "body"
+    t.boolean  "thumb_rating"
+    t.boolean  "star_rating"
+    t.boolean  "has_tomatoes"
+    t.string   "title"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "moves", :force => true do |t|
     t.text     "body"
@@ -21,6 +31,37 @@ ActiveRecord::Schema.define(:version => 20140130170525) do
     t.integer  "state_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.text     "body"
+    t.integer  "star_rating"
+    t.integer  "thumb_rating"
+    t.integer  "user_id"
+    t.integer  "move_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "states", :force => true do |t|
+    t.text     "body"
+    t.integer  "position"
+    t.integer  "title"
+    t.integer  "visibility"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tomatoes", :force => true do |t|
+    t.text     "body"
+    t.datetime "end_time"
+    t.datetime "start_time"
+    t.integer  "state"
+    t.string   "title"
+    t.integer  "user_id"
+    t.integer  "move_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
