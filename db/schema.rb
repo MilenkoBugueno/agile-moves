@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140130165056) do
+ActiveRecord::Schema.define(:version => 20140130170525) do
+
+  create_table "moves", :force => true do |t|
+    t.text     "body"
+    t.integer  "move_type_id"
+    t.integer  "user_id"
+    t.text     "title"
+    t.integer  "state_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

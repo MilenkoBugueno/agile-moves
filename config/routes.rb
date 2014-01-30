@@ -1,4 +1,7 @@
 AgileMovesOs::Application.routes.draw do
+  resources :moves
+
+
   authenticated :user do
     root :to => 'home#index'
   end

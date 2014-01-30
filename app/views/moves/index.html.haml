@@ -1,0 +1,29 @@
+- model_class = Move
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:body)
+      %th= model_class.human_attribute_name(:move_type_id)
+      %th= model_class.human_attribute_name(:user_id)
+      %th= model_class.human_attribute_name(:title)
+      %th= model_class.human_attribute_name(:state_id)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @moves.each do |move|
+      %tr
+        %td= link_to move.id, move_path(move)
+        %td= move.body
+        %td= move.move_type_id
+        %td= move.user_id
+        %td= move.title
+        %td= move.state_id
+        %td=l move.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_move_path(move), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_move_path, :class => 'btn btn-primary'
