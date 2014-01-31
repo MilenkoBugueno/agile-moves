@@ -6,3 +6,4 @@ class Tomato < ActiveRecord::Base
   def done
   end
 end
+    
