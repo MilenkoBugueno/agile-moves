@@ -1,9 +1,14 @@
 class MovesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /moves
   # GET /moves.json
   def index
-    @moves = Move.all
-
+    @moves = Move.order('created_at DESC')
+    @moves = @moves.by_user_id(params[:user]) if params[:user].present?
+    @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
+    
+    @states = State.order(:position)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @moves }
@@ -14,6 +19,8 @@ class MovesController < ApplicationController
   # GET /moves/1.json
   def show
     @move = Move.find(params[:id])
+    @ratings = Rating.where(:move_id => :id)
+    @ratings = Tomato.where(:move_id => :id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -41,6 +48,10 @@ class MovesController < ApplicationController
   # POST /moves.json
   def create
     @move = Move.new(params[:move])
+    #@ratings = @move.ratings
+    #@ratings.each do |rating|
+    #  RailsthemesMailer.test_email_one_column(rating.user)
+    #end
 
     respond_to do |format|
       if @move.save
@@ -80,4 +91,18 @@ class MovesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def move
+    @states = State.order(:position)
+    @states.each do |state|
+      if params["commit"]==state.title
+        Move.update_all({state_id: state.id}, {id: params[:moves_ids]})
+      end
+    end
+    
+    redirect_to moves_path
+    
+  end
+  
+ 
 end

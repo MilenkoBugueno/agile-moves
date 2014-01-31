@@ -6,6 +6,7 @@
   = f.input :title
   = f.input :body
   = f.association :user, :label => "Owner",  :default => current_user.id
+  = f.association :state, :label => "Move to list", include_blank: false 
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), moves_path, :class => 'btn'

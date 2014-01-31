@@ -11,7 +11,17 @@ AgileMovesOs::Application.routes.draw do
   resources :move_types
 
 
-  resources :moves
+  resources :moves do
+    resources :ratings
+    resources :tomatoes do
+      collection do
+        put :move
+      end
+    end
+    collection do
+      put :move
+    end
+  end
 
 
   authenticated :user do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140131044156) do
+ActiveRecord::Schema.define(:version => 20140131060949) do
 
   create_table "move_types", :force => true do |t|
     t.text     "body"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(:version => 20140131044156) do
     t.datetime "updated_at",   :null => false
     t.string   "title"
   end
+
+  create_table "moves_users", :id => false, :force => true do |t|
+    t.integer "move_id"
+    t.integer "user_id"
+  end
+
+  add_index "moves_users", ["move_id", "user_id"], :name => "index_moves_users_on_move_id_and_user_id"
 
   create_table "ratings", :force => true do |t|
     t.text     "body"
@@ -57,10 +64,10 @@ ActiveRecord::Schema.define(:version => 20140131044156) do
   create_table "states", :force => true do |t|
     t.text     "body"
     t.integer  "position"
-    t.integer  "title"
     t.integer  "visibility"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "title"
   end
 
   create_table "tomatoes", :force => true do |t|
