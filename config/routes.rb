@@ -1,7 +1,4 @@
 AgileMovesOs::Application.routes.draw do
-  resources :tomatoes
-
-
   resources :states
 
 
@@ -15,6 +12,7 @@ AgileMovesOs::Application.routes.draw do
     resources :ratings
     resources :tomatoes do
       collection do
+        put :done
         put :move
       end
     end
@@ -22,12 +20,19 @@ AgileMovesOs::Application.routes.draw do
       put :move
     end
   end
+  
+  resources :tomatoes do
+    collection do
+      put :done
+      put :move
+    end
+  end
 
 
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'moves#index'
   end
-  root :to => "home#index"
+  root :to => "moves#index"
   devise_for :users
   resources :users
 end
