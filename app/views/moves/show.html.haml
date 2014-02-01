@@ -32,6 +32,7 @@
         %th Last activity
         %th
         %th
+        %th
 
       - @move.tomatoes.each do |tomato|
         %tr
@@ -48,7 +49,7 @@
           %td= tomato.updated_at.to_s(:short)
           /%td= tomato.start_time
           /%td= tomato.end_time
-          /%td= link_to 'Show', tomato
+          %td= link_to 'Start', '#', :class => 'btn btn-mini btn-success' unless tomato.state != 1
           %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
           %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
 
