@@ -5,10 +5,13 @@
     = link_to t('.back', :default => t("helpers.links.back")), moves_path, :class => 'btn'
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_move_path(@move), :class => 'btn'
     = link_to t('.destroy', :default => t("helpers.links.destroy")), move_path(@move), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
-    =raw(@move.body)
   .span4
     %h5="Move type: #{@move.move_type.title}" 
     %h5="Owner: #{@move.user.name}"
+.row
+  .span8
+    %br 
+    %p=raw(@move.body)
 
 %hr
 
