@@ -29,7 +29,7 @@
         %th
         %th Title
         %th Owner
-        %th Created at
+        %th Last activity
         %th
         %th
 
@@ -45,7 +45,7 @@
               = image_tag("tomaterot.png", :width => 20, :height => 20)
           %td= link_to tomato.title, tomato
           %td= tomato.user.name
-          %td= tomato.created_at
+          %td= tomato.updated_at.to_s(:short)
           /%td= tomato.start_time
           /%td= tomato.end_time
           /%td= link_to 'Show', tomato
