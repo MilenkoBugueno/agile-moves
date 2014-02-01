@@ -16,7 +16,15 @@
 %hr
 
 %h3= "Tomatoes"
-  
+
+/Countdown Timer
+%div#counter
+.desc
+  /%dev Minutes
+  /%dev Seconds
+  /%a(href="" onclick="$('#counter').countdown('pause');return false")
+  /  Start
+
 %br
   
 -if @move.move_type.has_tomatoes
