@@ -14,15 +14,15 @@
     %br
     %table.table.table-striped
       %tr
-        %th
-        %th
-        %th Title
-        %th Owner
-        %th Reviewers
-        %th Move type
-        %th Last activity
-        %th
-        %th
+        %th{:width => "20px;"}
+        %th{:width => "100px;"}
+        %th{:width => "300px;"} Title
+        %th{:width => "100px;"} Owner
+        %th{:width => "200px;"} Reviewers
+        %th{:width => "100px;"} Move type
+        %th{:width => "100px;"} Last activity
+        %th{:width => "30px;"}
+        %th{:width => "30px;"}
 
       - @moves.by_state_id(state.id).each do |move|
         %tr
