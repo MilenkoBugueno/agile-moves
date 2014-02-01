@@ -76,8 +76,7 @@
           %td= link_to move.move_type.title, moves_path(:move_type => move.move_type.id)
           %td= move.updated_at.to_s(:short)
           %td= link_to 'Edit', edit_move_path(move), :class => 'btn btn-mini'
-          %td= link_to 'X', moves_path, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
-
+          %td= link_to 'X', move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
     %br
     
 
