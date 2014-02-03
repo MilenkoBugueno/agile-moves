@@ -1,6 +1,6 @@
 h1. Agile Moves
 
-This application is made to create and track so-called "agile" moves.
+This application is made to create and track so-called "Agile Moves".
 
 Agile Moves is a way for development teams to improve their team play on the job.
 
