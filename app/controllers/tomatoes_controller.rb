@@ -42,7 +42,15 @@ class TomatoesController < ApplicationController
   # POST /tomatoes.json
   def create
     @move = Move.find(params[:move_id])
-    @tomato = @move.tomatoes.create!(params[:tomato])
+    users = params['tomato']['user_id']
+    users.each do |user|
+      params['tomato']['user_id'] = user
+      @tomato = @move.tomatoes.create!(params[:tomato]) unless user.to_i <= 0
+    end
+    
+    if @tomato == nil
+      @tomato = @move.tomatoes.create!(params[:tomato])
+    end
     
     respond_to do |format|
       if @tomato.save

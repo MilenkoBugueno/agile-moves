@@ -55,7 +55,7 @@
             - elsif tomato.state == 2 #done
               = image_tag("tomaterot.png", :width => 20, :height => 20)
           %td= link_to tomato.title, tomato
-          %td= tomato.user.name
+          %td= tomato.user.name unless tomato.user == nil
           %td= tomato.updated_at.to_s(:short)
           /%td= tomato.start_time
           /%td= tomato.end_time
@@ -65,12 +65,11 @@
 
 
   =simple_form_for [@move, Tomato.new] do |f| 
-    /= f.input :body, input_html: {style: 'height:100px; width:300px'}
     = f.hidden_field :state, :value => 0
     = f.hidden_field :move_id, :value => @move.id
     .form-actions
-      = f.input :title, input_html: {style: 'width:300px'}, label: "create new tomato"
-      = f.association :user, :label => "Owner",  :default => current_user.id
+      = f.input :title, input_html: {style: 'width:300px'}, label: "Title"
+      = f.association :user, :as => :check_boxes, :label => "Owners"
       = f.button :submit, :class => 'btn-primary'
   
   %hr
