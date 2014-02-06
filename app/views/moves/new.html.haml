@@ -7,7 +7,7 @@
   = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
   = f.input :publish_date
   = f.association :user, :label => "Owner",  :default => current_user.id
-  = f.association :users, :as => :check_boxes, :label => "Team"
+  = f.association :users, :as => :check_boxes, :label => "Team", :checked => [current_user.id]
   = f.association :state, :label => "Move to list", include_blank: false 
   .form-actions
     = f.button :submit, :class => 'btn-primary'

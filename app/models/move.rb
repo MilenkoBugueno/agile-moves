@@ -12,6 +12,6 @@ class Move < ActiveRecord::Base
   scope :by_user_id, lambda {|uid| where(['user_id =?', uid])}
   scope :by_state_id, lambda {|uid| where(['state_id =?', uid])}
   scope :by_move_type, lambda {|uid| where(['move_type_id =?', uid])}
-  scope :by_user_id, lambda {|uid| joins(:users).where(['users.id =?', uid])}
+  scope :by_user_ids, lambda {|uid| joins(:users).where(['users.id =?', uid])}
   scope :already_reviewed, lambda {|uid| joins(:ratings).where(['ratings.user_id =?', uid])}
 end

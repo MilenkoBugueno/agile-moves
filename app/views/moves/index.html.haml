@@ -72,7 +72,7 @@
           %td= link_to move.user.name, moves_path(:user => move.user.id)
           %td
             -move.users.each do |reviewer|
-              ="#{reviewer.name} "
+              = link_to reviewer.name, moves_path(:user => reviewer.id)
           %td= link_to move.move_type.title, moves_path(:move_type => move.move_type.id)
           %td= move.publish_date.to_s(:short) unless move.publish_date == nil
           %td= link_to 'Edit', edit_move_path(move), :class => 'btn btn-mini'
