@@ -1,7 +1,7 @@
 = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
   = f.association :move_type, include_blank: false
-  = f.input :title
-  = f.input :body
+  = f.input :title, input_html: {style: 'width:500px;'}
+  = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
   = f.input :publish_date
   = f.association :user
   .form-actions
