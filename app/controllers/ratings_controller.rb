@@ -40,15 +40,24 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    @rating = Rating.new(params[:rating])
-
+    thumb_rating = -1
+    if params[:thumb_rating] == "Approve"
+      thumb_rating = 1;
+    elsif params[:thumb_rating] == "Reject"
+      thumb_rating = 0;
+    end
+    
+    @move = Move.find(params[:move_id])
+    @rating = @move.ratings.create!(params[:rating].merge(:thumb_rating => thumb_rating))
+    @rating.user_id = current_user.id
+    
     respond_to do |format|
       if @rating.save
-        format.html { redirect_to @rating, notice: 'Rating was successfully created.' }
-        format.json { render json: @rating, status: :created, location: @rating }
+        format.html { redirect_to @move, notice: 'Rating was successfully created.' }
+        format.json { render json: @move, status: :created, location: @move }
       else
         format.html { render action: "new" }
-        format.json { render json: @rating.errors, status: :unprocessable_entity }
+        format.json { render json: @move.errors, status: :unprocessable_entity }
       end
     end
   end

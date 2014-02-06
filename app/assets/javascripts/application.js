@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.countdown
+//= require jquery.countdown.min
 //= require twitter/bootstrap
 //= require bootstrap
 //= require_tree .
