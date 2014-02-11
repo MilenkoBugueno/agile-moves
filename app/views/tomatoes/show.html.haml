@@ -42,10 +42,10 @@
   .row
     .span6
       %h6
-        -if interruption.interruption_type == 1
+        -if interruption.interruption_type == 0
           = image_tag("verloren.png", :width => 20, :height => 20)
           = " External interruption at #{interruption.created_at.to_s(:short)}" unless interruption.user == nil
-        -elsif interruption.interruption_type == 0
+        -elsif interruption.interruption_type == 1
           = image_tag("verloren.png", :width => 20, :height => 20)
           = " Internal interruption at #{interruption.created_at.to_s(:short)}" unless interruption.user == nil
         -elsif interruption.interruption_type == -1

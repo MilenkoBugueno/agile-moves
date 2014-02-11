@@ -29,14 +29,15 @@
     %br
     %table.table.table-striped
       %tr
-        %th
-        %th
-        %th Title
-        %th Owner
-        %th Last activity
-        %th
-        %th
-        %th
+        %th{:width => "20px;"}
+        %th{:width => "20px;"}
+        %th{:width => "250px;"} Title
+        %th{:width => "100px;"} Owner
+        %th{:width => "100px;"} Interruptions
+        %th{:width => "120px;"} Last activity
+        %th{:width => "20px;"}
+        %th{:width => "20px;"}
+        %th{:width => "20px;"}
 
       - @move.tomatoes.each do |tomato|
         %tr
@@ -50,10 +51,30 @@
               = image_tag("tomaterot.png", :width => 20, :height => 20)
           %td= link_to tomato.title, tomato
           %td= tomato.user.name unless tomato.user == nil
+          %td
+            -internal=0; external=0; comments=0;
+            -tomato.interruptions.each do |interruption|
+              -case interruption.interruption_type
+                -when 0
+                  -external=external+1
+                -when 1
+                  -internal=internal+1
+                -when -1
+                  -comments=comments+1
+            -if external > 0
+              = "#{external}"
+              = image_tag("verloren.png", :width => 15, :height => 15)
+            -if internal > 0
+              = "#{internal}"
+              = image_tag("verloren.png", :width => 15, :height => 15)
+            -if comments > 0
+              = "#{comments}"
+              = image_tag("kommentar.gif", :width => 15, :height => 15)
+            
           %td= tomato.updated_at.to_s(:short)
           /%td= tomato.start_time
           /%td= tomato.end_time
-          %td= link_to 'Start', '#', :class => 'btn btn-mini btn-success' unless tomato.state != 1
+          %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
           %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
           %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
 
