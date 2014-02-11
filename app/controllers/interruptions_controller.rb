@@ -40,15 +40,24 @@ class InterruptionsController < ApplicationController
   # POST /interruptions
   # POST /interruptions.json
   def create
-    @interruption = Interruption.new(params[:interruption])
-
+    interruption_type = -1
+    if params[:interruption_type] == "internal"
+      interruption_type = 1;
+    elsif params[:interruption_type] == "external"
+      interruption_type = 0;
+    end
+    
+    @tomato = Tomato.find(params[:tomato_id])
+    @interruption = @tomato.interruptions.create!(params[:interruption].merge(:interruption_type => interruption_type))
+    @interruption.user_id = current_user.id
+    
     respond_to do |format|
       if @interruption.save
-        format.html { redirect_to @interruption, notice: 'Interruption was successfully created.' }
-        format.json { render json: @interruption, status: :created, location: @interruption }
+        format.html { redirect_to @tomato, notice: 'Interruption was successfully created.' }
+        format.json { render json: @tomato, status: :created, location: @tomato }
       else
         format.html { render action: "new" }
-        format.json { render json: @interruption.errors, status: :unprocessable_entity }
+        format.json { render json: @tomato.errors, status: :unprocessable_entity }
       end
     end
   end

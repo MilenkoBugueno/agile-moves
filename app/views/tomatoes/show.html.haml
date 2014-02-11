@@ -14,3 +14,26 @@
     %h5="Owner: #{@tomato.user.name}"
     
 %hr
+
+
+%h3 Timer
+%div#counter 
+.desc
+  %dev Minutes
+  %dev Seconds
+
+
+%h5= "Create New Interruption"  
+%br
+  
+=simple_form_for [@tomato, Interruption.new] do |f| 
+  = f.input :body, input_html: {style: 'height:100px; width:300px'}
+  = f.hidden_field :user_id, :value => current_user.id
+  .form-actions
+    = f.submit "Internal Interruption", :class => 'btn btn-primary', name: "interruption_type", value: "internal"
+    = f.submit "External Interruption", :class => 'btn-danger', name: "interruption_type", value: "external"
+    = f.submit "Comment", :class => 'btn', name: "interruption_type", value: "comment"
+
+%br
+%br
+%hr

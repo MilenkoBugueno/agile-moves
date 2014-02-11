@@ -25,6 +25,7 @@ AgileMovesOs::Application.routes.draw do
   end
   
   resources :tomatoes do
+    resources :interruptions
     collection do
       put :done
       put :move
