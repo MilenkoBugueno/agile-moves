@@ -1,4 +1,7 @@
 AgileMovesOs::Application.routes.draw do
+  resources :interruptions
+
+
   resources :states
 
 

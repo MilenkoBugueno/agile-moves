@@ -1,0 +1,25 @@
+%h1 Listing interruptions
+
+%table
+  %tr
+    %th Body
+    %th Interruption type
+    %th User
+    %th Tomato
+    %th
+    %th
+    %th
+
+  - @interruptions.each do |interruption|
+    %tr
+      %td= interruption.body
+      %td= interruption.interruption_type
+      %td= interruption.user_id
+      %td= interruption.tomato_id
+      %td= link_to 'Show', interruption
+      %td= link_to 'Edit', edit_interruption_path(interruption)
+      %td= link_to 'Destroy', interruption, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Interruption', new_interruption_path

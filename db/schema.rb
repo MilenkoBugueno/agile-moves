@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140202073846) do
+ActiveRecord::Schema.define(:version => 20140211112241) do
+
+  create_table "interruptions", :force => true do |t|
+    t.text     "body"
+    t.integer  "interruption_type"
+    t.integer  "user_id"
+    t.integer  "tomato_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "move_types", :force => true do |t|
     t.text     "body"

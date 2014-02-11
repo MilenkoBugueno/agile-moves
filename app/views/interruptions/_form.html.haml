@@ -1,0 +1,11 @@
+= simple_form_for(@interruption) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :body
+    = f.input :interruption_type
+    = f.input :user_id
+    = f.input :tomato_id
+
+  .form-actions
+    = f.button :submit

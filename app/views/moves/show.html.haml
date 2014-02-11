@@ -20,12 +20,6 @@
 -if @move.move_type.has_tomatoes
   %h3= "Tomatoes"
 
-  /Timer
-  %div#counter 
-  .desc
-    /%dev Minutes
-    /%dev Seconds
-  
   =form_tag done_tomatoes_path, method: :put do
     =hidden_field_tag "move_id", @move.id
     =submit_tag "mark as done", :class => 'btn btn-mini'

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Body:
+  = @interruption.body
+%p
+  %b Interruption type:
+  = @interruption.interruption_type
+%p
+  %b User:
+  = @interruption.user_id
+%p
+  %b Tomato:
+  = @interruption.tomato_id
+
+= link_to 'Edit', edit_interruption_path(@interruption)
+\|
+= link_to 'Back', interruptions_path

@@ -1,0 +1,2 @@
+module InterruptionsHelper
+end
