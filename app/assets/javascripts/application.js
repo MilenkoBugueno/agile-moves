@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.countdown
-//= require jquery.countdown.min
+//= require jquery.ui.all
+//= require jquery.timeTo
+//= require jquery.timeTo.min
+//= require countdown-timer
 //= require ckeditor/init
 //= require twitter/bootstrap
 //= require bootstrap
