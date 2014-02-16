@@ -12,10 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
-//= require jquery.timeTo
-//= require jquery.timeTo.min
-//= require countdown-timer
+//= require jquery.ui.datepicker
 //= require ckeditor/init
 //= require twitter/bootstrap
 //= require bootstrap

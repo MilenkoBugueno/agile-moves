@@ -5,7 +5,7 @@
   = f.association :move_type, include_blank: false
   = f.input :title, input_html: {style: 'width:500px;'}
   = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
-  = f.input :publish_date
+  = f.input :publish_date, :as => :string
   = f.association :user, :label => "Owner",  :default => current_user.id
   = f.association :users, :as => :check_boxes, :label => "Team", :checked => [current_user.id]
   = f.association :state, :label => "Move to list", include_blank: false 
