@@ -40,10 +40,10 @@
     .span6
       %h6
         -if interruption.interruption_type == 0
-          = image_tag("verloren.png", :width => 20, :height => 20)
+          = image_tag("tomategruenstoerer.png", :width => 25, :height => 25)
           = " External interruption at #{interruption.created_at.to_s(:short)}" unless interruption.user == nil
         -elsif interruption.interruption_type == 1
-          = image_tag("verloren.png", :width => 20, :height => 20)
+          = image_tag("tomategruenstoerer.png", :width => 25, :height => 25)
           = " Internal interruption at #{interruption.created_at.to_s(:short)}" unless interruption.user == nil
         -elsif interruption.interruption_type == -1
           = image_tag("kommentar.gif", :width => 20, :height => 20) 
