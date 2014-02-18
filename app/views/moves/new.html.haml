@@ -8,7 +8,7 @@
   = f.input :publish_date, :as => :string
   = f.association :user, :label => "Owner",  :selected =>  current_user.id
   = f.association :users, :as => :check_boxes, :label => "Team", :checked => [current_user.id]
-  = f.association :state, :label => "Move to list", include_blank: false 
+  = f.association :state, :label => "Move to list", include_blank: false, :collection => State.all(:order => 'position')
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), moves_path, :class => 'btn'
