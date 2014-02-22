@@ -1,9 +1,11 @@
 / add navigation links to this file
 - if user_signed_in?
-  %li= link_to 'Moves', moves_path
-  - MoveType.all.each do |move_type|
-    /%li= link_to move_type.title, moves_path(:move_type => move_type.id)
+  %li= link_to 'Plan', moves_path
+  %li= link_to 'Todo Today', tomatoes_path(:user => current_user.id)
+  %li= link_to 'Report', moves_path
+  %li= ". . . "
   %li= link_to 'Logout', destroy_user_session_path, :method=>'delete'
+  
 - else
   %li= link_to 'Login', new_user_session_path
 - if user_signed_in?

@@ -2,8 +2,11 @@ class TomatoesController < ApplicationController
   # GET /tomatoes
   # GET /tomatoes.json
   def index
-    @tomatoes = Tomato.all
-
+    @tomatoes = Tomato.order('state DESC')
+    @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
+    
+    @states = State.order(:position)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tomatoes }

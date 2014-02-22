@@ -1,33 +1,64 @@
 - model_class = Tomato
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:body)
-      %th= model_class.human_attribute_name(:end_time)
-      %th= model_class.human_attribute_name(:start_time)
-      %th= model_class.human_attribute_name(:state)
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:user_id)
-      %th= model_class.human_attribute_name(:move_id)
-      %th= model_class.human_attribute_name(:created_at)
-      %th=t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @tomatoes.each do |tomato|
-      %tr
-        %td= link_to tomato.id, tomato_path(tomato)
-        %td= tomato.body
-        %td= tomato.end_time
-        %td= tomato.start_time
-        %td= tomato.state
-        %td= tomato.title
-        %td= tomato.user_id
-        %td= tomato.move_id
-        %td=l tomato.created_at
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_tomato_path(tomato), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), tomato_path(tomato), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-= link_to t('.new', :default => t("helpers.links.new")), new_tomato_path, :class => 'btn btn-primary'
+  
+=form_tag done_tomatoes_path, method: :put do
+  =submit_tag "mark as done", :class => 'btn btn-mini'
+  =submit_tag "plan today", :class => 'btn btn-mini'
+  =submit_tag "unplan", :class => 'btn btn-mini'
+  %br
+  %br
+  %table.table.table-striped
+    %tr
+      %th{:width => "20px;"}
+      %th{:width => "20px;"}
+      %th{:width => "250px;"} Title
+      %th{:width => "150px;"} Pomodoro Story
+      %th{:width => "100px;"} Owner
+      %th{:width => "100px;"} Interruptions
+      %th{:width => "120px;"} Last activity
+      %th{:width => "20px;"}
+      %th{:width => "20px;"}
+      %th{:width => "20px;"}
+
+    - @tomatoes.todo_today().each do |tomato|
+      %tr
+        %td= check_box_tag "tomatoes_ids[]", tomato.id
+        %td 
+          - if tomato.state == 0 # not planed
+            = image_tag("tomategrau.png", :width => 20, :height => 20)
+          - elsif tomato.state == 1 #planed
+            = image_tag("tomategruen.png", :width => 20, :height => 20)
+          - elsif tomato.state == 2 #done
+            = image_tag("tomaterot.png", :width => 20, :height => 20)
+        %td= link_to tomato.title, tomato
+        %td= link_to tomato.move.title, move_path(tomato.move_id)
+        %td= link_to tomato.user.name, tomatoes_path(:user => tomato.user.id)  unless tomato.user == nil
+        %td
+          -internal=0; external=0; comments=0;
+          -tomato.interruptions.each do |interruption|
+            -case interruption.interruption_type
+              -when 0
+                -external=external+1
+              -when 1
+                -internal=internal+1
+              -when -1
+                -comments=comments+1
+          -if external > 0
+            = "#{external}"
+            = image_tag("tomategruenstoerer.png", :width => 20, :height => 20)
+          -if internal > 0
+            = "#{internal}"
+            = image_tag("tomategruenstoerer.png", :width => 20, :height => 20)
+          -if comments > 0
+            = "#{comments}"
+            = image_tag("kommentar.gif", :width => 15, :height => 15)
+        
+        %td= tomato.updated_at.to_s(:short)
+        %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
+        %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
+        %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
+
+  
+
