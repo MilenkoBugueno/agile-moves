@@ -1,9 +1,9 @@
 = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
   = f.input :title
   = f.input :body
+  = f.input :publish_date, :as => :string
   = f.input :end_time
   = f.input :start_time
-  = f.input :state
   = f.association :user
   .form-actions
     = f.button :submit, :class => 'btn-primary'

@@ -17,7 +17,7 @@
       %th{:width => "150px;"} Pomodoro Story
       %th{:width => "100px;"} Owner
       %th{:width => "100px;"} Interruptions
-      %th{:width => "120px;"} Last activity
+      %th{:width => "120px;"} Publish date
       %th{:width => "20px;"}
       %th{:width => "20px;"}
       %th{:width => "20px;"}
@@ -55,7 +55,7 @@
             = "#{comments}"
             = image_tag("kommentar.gif", :width => 15, :height => 15)
         
-        %td= tomato.updated_at.to_s(:short)
+        %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
         %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
         %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
         %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'

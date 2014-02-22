@@ -1,5 +1,5 @@
 class Tomato < ActiveRecord::Base
-  attr_accessible :body, :end_time, :start_time, :state, :title, :user_id, :move_id
+  attr_accessible :body, :end_time, :start_time, :state, :title, :user_id, :move_id, :publish_date
   belongs_to :move
   belongs_to :user
   has_many :interruptions

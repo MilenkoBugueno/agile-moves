@@ -69,11 +69,11 @@ class TomatoesController < ApplicationController
     @move = Move.find(params[:move_id])
     
     if params["commit"]=="mark as done"
-      Tomato.update_all({state: 2}, {id: params[:tomatoes_ids]})
+      Tomato.update_all({state: 2, publish_date: Date.today}, {id: params[:tomatoes_ids]})
     elsif params["commit"]=="plan today"
-      Tomato.update_all({state: 1}, {id: params[:tomatoes_ids]})
+      Tomato.update_all({state: 1, publish_date: Date.today}, {id: params[:tomatoes_ids]})
     elsif params["commit"]=="unplan"
-      Tomato.update_all({state: 0}, {id: params[:tomatoes_ids]})
+      Tomato.update_all({state: 0, publish_date: nil}, {id: params[:tomatoes_ids]})
     end  
     
     redirect_to @move
