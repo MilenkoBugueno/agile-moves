@@ -2,7 +2,7 @@
 .row
   .span8
     %h2= @tomato.title
-    = link_to "Back to my work", tomatoes_path(:user => current_user.id), :class => 'btn'
+    = link_to "Back to my work", tomatoes_path(:user => current_user.id, :date => Date.today), :class => 'btn'
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_tomato_path(@tomato), :class => 'btn'
     = link_to t('.destroy', :default => t("helpers.links.destroy")), tomato_path(@tomato), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
     %br
