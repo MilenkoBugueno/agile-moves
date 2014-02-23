@@ -2,6 +2,12 @@
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
 
+%div#tomatoes
+  %h2#month
+    = link_to "<", date: @date.prev_day
+    = link_to @date.strftime("%D"), date: @date
+    = link_to ">", date: @date.next_day
+
   
 =form_tag done_tomatoes_path, method: :put do
   =submit_tag "mark as done", :class => 'btn btn-mini'
@@ -22,7 +28,7 @@
       %th{:width => "20px;"}
       %th{:width => "20px;"}
 
-    - @tomatoes.todo_today().each do |tomato|
+    - @tomatoes.each do |tomato|
       %tr
         %td= check_box_tag "tomatoes_ids[]", tomato.id
         %td 

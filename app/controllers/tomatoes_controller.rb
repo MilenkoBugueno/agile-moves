@@ -4,6 +4,9 @@ class TomatoesController < ApplicationController
   def index
     @tomatoes = Tomato.order('state DESC')
     @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
+    @tomatoes = @tomatoes.by_date(params[:date]) if params[:date].present?
+    
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
     @states = State.order(:position)
     
@@ -66,7 +69,7 @@ class TomatoesController < ApplicationController
   end
   
   def done
-    @move = Move.find(params[:move_id])
+    @move = Move.find(params[:move_id]) unless params[:move_id] == nil
     
     if params["commit"]=="mark as done"
       Tomato.update_all({state: 2, publish_date: Date.today}, {id: params[:tomatoes_ids]})
@@ -76,7 +79,11 @@ class TomatoesController < ApplicationController
       Tomato.update_all({state: 0, publish_date: nil}, {id: params[:tomatoes_ids]})
     end  
     
-    redirect_to @move
+    if @move!= nil
+      redirect_to @move
+    else
+      redirect_to tomatoes_path(:user => current_user.id, :date => Date.today)
+    end
   end
   
   
