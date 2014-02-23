@@ -7,6 +7,13 @@ class MovesController < ApplicationController
     @moves = @moves.by_user_ids(params[:user]) if params[:user].present?
     @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
     
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    
+    @user = params[:user] ? params[:user] : current_user.id
+    
+    @users = User.all
+    
+    
     @states = State.order(:position)
     
     respond_to do |format|

@@ -82,6 +82,7 @@
     = f.hidden_field :move_id, :value => @move.id
     .form-actions
       = f.input :title, input_html: {style: 'width:300px'}, label: "Title"
+      = f.input :publish_date, :as => :string
       = f.association :user, :as => :check_boxes, :label => "Owners", :checked => [current_user.id]
       = f.button :submit, :class => 'btn-primary'
   

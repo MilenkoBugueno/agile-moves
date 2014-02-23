@@ -1,12 +1,20 @@
-- model_class = Tomato
-.page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+.row
+  .span4
+    %h3
+      Tomatoes
+  .span7
+    %p
+      Filter users:
+      -@users.each do |user|
+        = link_to user.name, tomatoes_path(:user => user.id, :date => @date), :class => 'btn btn-mini btn-warning :active'
 
+%hr
+  
 %div#tomatoes
   %h2#month
-    = link_to "<", date: @date.prev_day
-    = link_to @date.strftime("%D"), date: @date
-    = link_to ">", date: @date.next_day
+    = link_to "<", date: @date.prev_day, user: @user
+    = link_to @date.strftime("%D"), date: @date, user: @user
+    = link_to ">", date: @date.next_day, user: @user
 
   
 =form_tag done_tomatoes_path, method: :put do
@@ -40,7 +48,7 @@
             = image_tag("tomaterot.png", :width => 20, :height => 20)
         %td= link_to tomato.title, tomato
         %td= link_to tomato.move.title, move_path(tomato.move_id)
-        %td= link_to tomato.user.name, tomatoes_path(:user => tomato.user.id)  unless tomato.user == nil
+        %td= link_to tomato.user.name, tomatoes_path(:user => tomato.user.id, :date => @date)  unless tomato.user == nil
         %td
           -internal=0; external=0; comments=0;
           -tomato.interruptions.each do |interruption|

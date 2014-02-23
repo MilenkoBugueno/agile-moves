@@ -8,6 +8,10 @@ class TomatoesController < ApplicationController
     
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
+    @user = params[:user] ? params[:user] : current_user.id
+    
+    @users = User.all
+    
     @states = State.order(:position)
     
     respond_to do |format|

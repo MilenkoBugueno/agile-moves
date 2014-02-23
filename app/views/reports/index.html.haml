@@ -1,3 +1,16 @@
+.row
+  .span4
+    %h3
+      Reports
+  .span7
+    %p
+      Filter users:
+      -@users.each do |user|
+        = link_to user.name, reports_path(:user => user.id, :date => @date), :class => 'btn btn-mini btn-warning :active'
+
+%hr
+
+
 %div#tomatoes
   %h2#month
     = link_to "<", date: @date.prev_month

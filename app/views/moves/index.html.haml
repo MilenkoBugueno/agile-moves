@@ -1,8 +1,19 @@
-%h1 Moves
-= link_to 'New Move', new_move_path, :class => 'btn btn-primary'
+.row
+  .span4
+    %h3
+      Moves
+  .span7
+    %p
+      Filter users:
+      -@users.each do |user|
+        = link_to user.name, moves_path(:user => user.id, :date => @date), :class => 'btn btn-mini btn-warning :active'
+
+    
+%hr
+
 
 - @states.each do |state|
-  %h3= state.title
+  %h5= state.title
   
   =form_tag move_moves_path, method: :put do
     =hidden_field_tag "move_id", state.id
