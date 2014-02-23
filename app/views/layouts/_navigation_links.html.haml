@@ -2,7 +2,7 @@
 - if user_signed_in?
   %li= link_to 'Plan', moves_path
   %li= link_to 'Todo Today', tomatoes_path(:user => current_user.id)
-  %li= link_to 'Report', moves_path
+  %li= link_to 'Report', "reports/index"
   %li= ". . . "
   %li= link_to 'Logout', destroy_user_session_path, :method=>'delete'
   

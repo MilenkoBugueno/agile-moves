@@ -1,0 +1,16 @@
+%div#tomatoes
+  %h2#month
+    = link_to "<", date: @date.prev_month
+    = @date.strftime("%B %Y") 
+    = link_to ">", date: @date.next_month
+  = calendar @date do |date| 
+    = date.day
+    - if @tomatoes_by_date[date]
+      %ul
+        -@tomatoes_by_date[date].each do |tomato|
+          - if tomato.state == 0 # not planed
+            = image_tag("tomategrau.png", :width => 15, :height => 15)
+          - elsif tomato.state == 1 #planed
+            = image_tag("tomategruen.png", :width => 15, :height => 15)
+          - elsif tomato.state == 2 #done
+            = image_tag("tomaterot.png", :width => 15, :height => 15)

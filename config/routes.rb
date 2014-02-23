@@ -1,4 +1,6 @@
 AgileMovesOs::Application.routes.draw do
+  get "reports/index"
+
   resources :interruptions
 
 
