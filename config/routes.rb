@@ -1,4 +1,7 @@
 AgileMovesOs::Application.routes.draw do
+  resources :capacities
+
+
   #get "reports/index"
   #match 'reports/index/:id' => 'reports#index', :as => :reports_path
   

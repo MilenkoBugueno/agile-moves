@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140222212428) do
+ActiveRecord::Schema.define(:version => 20140225051105) do
+
+  create_table "capacities", :force => true do |t|
+    t.integer  "tomatoes_capacity"
+    t.date     "publish_date"
+    t.integer  "user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "interruptions", :force => true do |t|
     t.text     "body"
