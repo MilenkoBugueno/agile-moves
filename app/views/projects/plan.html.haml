@@ -1,4 +1,11 @@
 .row
+  .span8
+  .span4
+    = link_to 'Plan', plan_projects_path(id: @project.id), :class => 'btn btn-warning'
+    = link_to 'Work', plan_projects_path(id: @project.id), :class => 'btn btn-warning'
+    = link_to 'Report', plan_projects_path(id: @project.id), :class => 'btn btn-warning'
+      
+.row
   .form-actions
     .span6
       %h3
@@ -8,26 +15,32 @@
     
     .span5
       %br
+      %br
       %p
         Team:
         -@project.users.each do |user|
-          = link_to user.name, moves_path(:user => user.id, :move_type => @move_type), :class => 'btn btn-mini btn-warning :active'
-        = link_to "All", moves_path(:move_type => @move_type), :class => 'btn btn-mini btn-warning :active'
+          = link_to user.name, moves_path(:user => user.id, :move_type => @move_type), :class => 'btn btn-mini btn-info'
+        = link_to "All", moves_path(:move_type => @move_type), :class => 'btn btn-mini btn-info :active'
       %p
         Move types:
         -@move_types.each do |move_type|
           = link_to move_type.title, moves_path(:move_type => move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active'
         = link_to "All", moves_path(:user => @user), :class => 'btn btn-mini btn-info :active'
 
+%hr
+
 = link_to 'New Move', new_move_path, :class => 'btn btn-primary'
 
-- @states.each do |state|
+%br
+%br
+
+- @project.states.each do |state|
   %h5= state.title
   
   =form_tag move_moves_path, method: :put do
     =hidden_field_tag "move_id", state.id
     ="move to: "
-    - @states.each do |other_state|
+    - @project.states.each do |other_state|
       -if other_state != state 
         =submit_tag other_state.title, :class => 'btn btn-mini'
     %br

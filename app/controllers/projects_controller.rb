@@ -19,8 +19,6 @@ class ProjectsController < ApplicationController
     
     @states = State.order(:position)
     
-    
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -35,7 +33,8 @@ class ProjectsController < ApplicationController
     @move_types = MoveType.order('created_at DESC')
     @move_type = params[:move_type] if params[:move_type].present?
     
-
+    @states = State.where(project_id: @project.id).order(:position)
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }

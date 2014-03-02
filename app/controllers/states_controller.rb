@@ -25,7 +25,8 @@ class StatesController < ApplicationController
   # GET /states/new.json
   def new
     @state = State.new
-
+    @project = State.find(params[:project_id]) if params[:project_id].present?
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @state }
@@ -41,7 +42,7 @@ class StatesController < ApplicationController
   # POST /states.json
   def create
     @state = State.new(params[:state])
-
+    
     respond_to do |format|
       if @state.save
         format.html { redirect_to @state, notice: 'State was successfully created.' }
