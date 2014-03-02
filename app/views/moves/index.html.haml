@@ -7,7 +7,13 @@
     %p
       Filter users:
       -@users.each do |user|
-        = link_to user.name, moves_path(:user => user.id, :date => @date), :class => 'btn btn-mini btn-warning :active'
+        = link_to user.name, moves_path(:user => user.id, :move_type => @move_type), :class => 'btn btn-mini btn-warning :active'
+      = link_to "All", moves_path(:move_type => @move_type), :class => 'btn btn-mini btn-warning :active'
+    %p
+      Filter move type:
+      -@move_types.each do |move_type|
+        = link_to move_type.title, moves_path(:move_type => move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active'
+      = link_to "All", moves_path(:user => @user), :class => 'btn btn-mini btn-info :active'
 
     
 %hr
@@ -85,7 +91,7 @@
           %td
             -move.users.each do |reviewer|
               = link_to reviewer.name, moves_path(:user => reviewer.id)
-          %td= link_to move.move_type.title, moves_path(:move_type => move.move_type.id)
+          %td= link_to move.move_type.title, moves_path(:move_type => move.move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active'
           %td= move.publish_date.to_s(:short) unless move.publish_date == nil
           %td= link_to 'Edit', edit_move_path(move), :class => 'btn btn-mini'
           %td= link_to 'X', move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'

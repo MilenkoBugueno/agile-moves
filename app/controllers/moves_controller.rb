@@ -13,6 +13,8 @@ class MovesController < ApplicationController
     
     @users = User.all
     
+    @move_types = MoveType.order('created_at DESC')
+    @move_type = params[:move_type] if params[:move_type].present?
     
     @states = State.order(:position)
     
