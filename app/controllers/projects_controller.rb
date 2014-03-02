@@ -9,11 +9,32 @@ class ProjectsController < ApplicationController
       format.json { render json: @projects }
     end
   end
+  
+  def plan
+    @project = Project.find(params[:id])
+    @moves = Move.order('created_at DESC')
+    
+    @move_types = MoveType.order('created_at DESC')
+    @move_type = params[:move_type] if params[:move_type].present?
+    
+    @states = State.order(:position)
+    
+    
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @project }
+    end
+  end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
+    
+    @move_types = MoveType.order('created_at DESC')
+    @move_type = params[:move_type] if params[:move_type].present?
+    
 
     respond_to do |format|
       format.html # show.html.erb

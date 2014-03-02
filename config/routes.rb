@@ -1,26 +1,21 @@
 AgileMovesOs::Application.routes.draw do
-  resources :projects
-
+  resources :projects do
+    collection do
+      get 'plan'
+    end
+  end
 
   resources :capacities
 
-
-  #get "reports/index"
-  #match 'reports/index/:id' => 'reports#index', :as => :reports_path
-  
   resources :reports  
 
   resources :interruptions
 
-
   resources :states
-
 
   resources :ratings
 
-
   resources :move_types
-
 
   resources :moves do
     resources :ratings
