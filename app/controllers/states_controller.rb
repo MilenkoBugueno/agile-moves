@@ -25,7 +25,7 @@ class StatesController < ApplicationController
   # GET /states/new.json
   def new
     @state = State.new
-    @project = State.find(params[:project_id]) if params[:project_id].present?
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
     
     respond_to do |format|
       format.html # new.html.erb

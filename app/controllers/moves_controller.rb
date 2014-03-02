@@ -41,6 +41,9 @@ class MovesController < ApplicationController
   # GET /moves/new.json
   def new
     @move = Move.new
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
+    @states = State.order(:position)
+    @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
 
     respond_to do |format|
       format.html # new.html.erb
