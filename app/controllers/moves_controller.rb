@@ -60,6 +60,7 @@ class MovesController < ApplicationController
   # POST /moves.json
   def create
     @move = Move.new(params[:move])
+    @project = Project.find(@move.project_id) if @move.project_id.present?
     #@ratings = @move.ratings
     #@ratings.each do |rating|
     #  RailsthemesMailer.test_email_one_column(rating.user)
@@ -67,7 +68,7 @@ class MovesController < ApplicationController
 
     respond_to do |format|
       if @move.save
-        format.html { redirect_to @move, notice: 'Move was successfully created.' }
+        format.html { redirect_to plan_projects_path(:id => @project.id), notice: 'Move was successfully created.' }
         format.json { render json: @move, status: :created, location: @move }
       else
         format.html { render action: "new" }
@@ -80,10 +81,11 @@ class MovesController < ApplicationController
   # PUT /moves/1.json
   def update
     @move = Move.find(params[:id])
+    @project = Project.find(@move.project_id) if @move.project_id.present?
 
     respond_to do |format|
       if @move.update_attributes(params[:move])
-        format.html { redirect_to @move, notice: 'Move was successfully updated.' }
+        format.html { redirect_to @project, notice: 'Move was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

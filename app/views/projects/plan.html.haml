@@ -21,13 +21,13 @@
     %p
       Team:
       -@project.users.each do |user|
-        = link_to user.name, moves_path(:user => user.id, :move_type => @move_type), :class => 'btn btn-mini btn-info'
-      = link_to "All", moves_path(:move_type => @move_type), :class => 'btn btn-mini btn-info :active'
+        = link_to user.name, plan_projects_path(:id => @project.id, :user => user.id, :move_type => @move_type), :class => 'btn btn-mini btn-info'
+      = link_to "All", plan_projects_path(:id => @project.id, :move_type => @move_type), :class => 'btn btn-mini btn-info :active'
     %p
       Move types:
       -@move_types.each do |move_type|
-        = link_to move_type.title, moves_path(:move_type => move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active'
-      = link_to "All", moves_path(:user => @user), :class => 'btn btn-mini btn-info :active'
+        = link_to move_type.title, plan_projects_path(:id => @project.id, :user => @user, :move_type => move_type.id), :class => 'btn btn-mini btn-info :active'
+      = link_to "All", plan_projects_path(:id => @project.id, :user => @user), :class => 'btn btn-mini btn-info :active'
 
 %br
 
