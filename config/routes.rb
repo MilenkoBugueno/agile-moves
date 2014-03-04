@@ -2,6 +2,8 @@ AgileMovesOs::Application.routes.draw do
   resources :projects do
     collection do
       get 'plan'
+      get 'work'
+      get 'report'
     end
   end
 

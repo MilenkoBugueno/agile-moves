@@ -20,12 +20,46 @@ class ProjectsController < ApplicationController
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
     @user = params[:user] ? params[:user] : current_user.id
-    @users = User.all
     
     @move_types = MoveType.order('created_at DESC')
     @move_type = params[:move_type] if params[:move_type].present?
     
-    @states = State.order(:position)
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @project }
+    end
+  end
+  
+  def work
+    @project = Project.find(params[:id])
+    
+    @tomatoes = Tomato.order('state DESC')
+    @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
+    @tomatoes = @tomatoes.by_date(params[:date]) if params[:date].present?
+    
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    
+    @user = params[:user] ? params[:user] : current_user.id
+    
+    @move_types = MoveType.order('created_at DESC')
+    @move_type = params[:move_type] if params[:move_type].present?
+    
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @project }
+    end
+  end
+  
+  def report
+    @tomatoes = Tomato.order('state DESC')
+    @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
+    @tomatoes_by_date = @tomatoes.group_by(&:publish_date)
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    
+    @user = params[:user] ? params[:user] : current_user.id
+    
+    @users = User.all
     
     respond_to do |format|
       format.html # show.html.erb
