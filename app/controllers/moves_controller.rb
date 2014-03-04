@@ -85,7 +85,7 @@ class MovesController < ApplicationController
 
     respond_to do |format|
       if @move.update_attributes(params[:move])
-        format.html { redirect_to @project, notice: 'Move was successfully updated.' }
+        format.html { redirect_to plan_projects_path(:id => @project.id), notice: 'Move was successfully updatetd.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

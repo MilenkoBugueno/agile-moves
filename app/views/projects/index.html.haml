@@ -12,11 +12,12 @@
     - @projects.each do |project|
       %tr
         %td
-        %td= link_to project.title, project_path(project)
+        %td= link_to project.title, plan_projects_path(id: project.id)
         %td
           -project.users.each do |user|
             = user.name
         %td
+          = link_to "Admin", project_path(project), :class => 'btn btn-mini'
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 

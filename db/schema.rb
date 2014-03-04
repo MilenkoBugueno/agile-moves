@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140302214312) do
+ActiveRecord::Schema.define(:version => 20140304063311) do
 
   create_table "capacities", :force => true do |t|
     t.integer  "tomatoes_capacity"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20140302214312) do
     t.boolean  "star_rating"
     t.boolean  "has_tomatoes"
     t.string   "title"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.boolean  "has_twitter_idea"
   end
 
   create_table "moves", :force => true do |t|

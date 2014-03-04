@@ -17,8 +17,8 @@ class ReportsController < ApplicationController
   def ideas
     
     @moves = Move.order('created_at DESC')
-    @moves = @moves.by_user_ids(params[:user]) if params[:user].present?
-    @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
+    #@moves = @moves.by_user_ids(params[:user]) if params[:user].present?
+    @moves = @moves.twitter_idea()
     
     @user = params[:user] ? params[:user] : current_user.id
     

@@ -9,6 +9,7 @@
       %th= model_class.human_attribute_name(:thumb_rating)
       %th= model_class.human_attribute_name(:star_rating)
       %th= model_class.human_attribute_name(:has_tomatoes)
+      %th= model_class.human_attribute_name(:has_twitter_idea)
       %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
@@ -20,6 +21,7 @@
         %td= move_type.thumb_rating
         %td= move_type.star_rating
         %td= move_type.has_tomatoes
+        %td= move_type.has_twitter_idea
         %td= move_type.title
         %td=l move_type.created_at
         %td

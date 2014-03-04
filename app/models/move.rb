@@ -15,4 +15,6 @@ class Move < ActiveRecord::Base
   scope :by_move_type, lambda {|uid| where(['move_type_id =?', uid])}
   scope :by_user_ids, lambda {|uid| joins(:users).where(['users.id =?', uid])}
   scope :already_reviewed, lambda {|uid| joins(:ratings).where(['ratings.user_id =?', uid])}
+  
+  scope :twitter_idea, lambda {joins(:move_type).where(['has_twitter_idea =?', true])}
 end

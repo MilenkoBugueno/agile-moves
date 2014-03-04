@@ -4,6 +4,8 @@
   = f.input :thumb_rating
   = f.input :star_rating
   = f.input :has_tomatoes
+  = f.input :has_twitter_idea
+  
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), move_types_path, :class => 'btn'

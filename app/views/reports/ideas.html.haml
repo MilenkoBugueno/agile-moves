@@ -24,10 +24,10 @@
         ="#{total} Stars"
             
       %td= link_to move.title, move
-      %td= link_to move.user.name, moves_path(:user => move.user.id)
+      %td= move.user.name
       %td
         -move.users.each do |reviewer|
-          = link_to reviewer.name, moves_path(:user => reviewer.id)
+          = reviewer.name
       %td
         -if move.project != nil
           =link_to move.project.title, projects_path(id: move.project.id)
