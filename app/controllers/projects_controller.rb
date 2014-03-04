@@ -57,6 +57,12 @@ class ProjectsController < ApplicationController
     @tomatoes = Tomato.order('state DESC')
     @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
     @tomatoes_by_date = @tomatoes.group_by(&:publish_date)
+    
+    @ideas = Move.order('created_at DESC')
+    @ideas = @ideas.by_user_id(params[:user]) if params[:user].present?
+    @ideas = @ideas.twitter_idea()
+    
+    
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
     @user = params[:user] ? params[:user] : current_user.id
