@@ -9,7 +9,13 @@ AgileMovesOs::Application.routes.draw do
 
   resources :capacities
 
-  resources :reports  
+  resources :reports do
+    collection do
+      get 'index'
+      get 'tomatoes'
+      get 'ideas'
+    end  
+  end
 
   resources :interruptions
 

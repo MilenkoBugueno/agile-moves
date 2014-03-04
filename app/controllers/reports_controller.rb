@@ -1,5 +1,8 @@
 class ReportsController < ApplicationController
   def index
+    @user = params[:user] ? params[:user] : current_user.id
+  end
+  def tomatoes
     @tomatoes = Tomato.order('state DESC')
     @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
     @tomatoes_by_date = @tomatoes.group_by(&:publish_date)
@@ -9,5 +12,17 @@ class ReportsController < ApplicationController
     
     @users = User.all
     
+  end
+  
+  def ideas
+    
+    @moves = Move.order('created_at DESC')
+    @moves = @moves.by_user_ids(params[:user]) if params[:user].present?
+    @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
+    
+    @user = params[:user] ? params[:user] : current_user.id
+    
+    @move_types = MoveType.order('created_at DESC')
+    @move_type = params[:move_type] if params[:move_type].present?
   end
 end
