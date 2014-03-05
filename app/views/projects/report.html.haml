@@ -1,16 +1,22 @@
 =render :partial => "header"      
 
-#tabs
-  %ul.tabs
-    %li
-      = link_to "Tomatoes calender", '#tabs-1'
-    %li
-      = link_to "Twitter ideas", '#tabs-2'
-  #tabs-1
-    =render :partial => "report_calender"
-  #tabs-2
-    =render :partial => "report_ideas"
+%h4 Report Team Ideas
 
-:javascript
-  content_pane_tabs();
+%hr 
+
+=render :partial => "report_ideas"
+
+/#tabs
+/  %ul.tabs
+/    %li
+/      = link_to "Tomatoes calender", '#tabs-1'
+/    %li
+/      = link_to "Twitter ideas", '#tabs-2'
+/  #tabs-1
+/    =render :partial => "report_calender"
+/  #tabs-2
+/    =render :partial => "report_ideas"
+
+/:javascript
+/  content_pane_tabs();
 

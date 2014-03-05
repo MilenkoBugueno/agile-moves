@@ -3,19 +3,19 @@
 .row
   .span4
     %h4 Plan
-    = link_to 'New Move', new_move_path(project_id: @project.id), :class => 'btn btn-primary'
+    /= link_to 'New Move', new_move_path(project_id: @project.id), :class => 'btn btn-primary'
       
   .span7
     %p
-      Team:
+      /Team:
       -@project.users.each do |user|
-        = link_to user.name, plan_projects_path(:id => @project.id, :user => user.id, :move_type => @move_type), :class => 'btn btn-mini btn-info'
-      = link_to "All", plan_projects_path(:id => @project.id, :move_type => @move_type), :class => 'btn btn-mini btn-info :active'
+        /= link_to user.name, plan_projects_path(:id => @project.id, :user => user.id, :move_type => @move_type), :class => 'btn btn-mini btn-info'
+      /= link_to "All", plan_projects_path(:id => @project.id, :move_type => @move_type), :class => 'btn btn-mini btn-info :active'
     %p
-      Move types:
+      /Move types:
       -@move_types.each do |move_type|
-        = link_to move_type.title, plan_projects_path(:id => @project.id, :user => @user, :move_type => move_type.id), :class => 'btn btn-mini btn-info :active'
-      = link_to "All", plan_projects_path(:id => @project.id, :user => @user), :class => 'btn btn-mini btn-info :active'
+        /= link_to move_type.title, plan_projects_path(:id => @project.id, :user => @user, :move_type => move_type.id), :class => 'btn btn-mini btn-info :active'
+      /= link_to "All", plan_projects_path(:id => @project.id, :user => @user), :class => 'btn btn-mini btn-info :active'
 
 %br
 
@@ -98,7 +98,7 @@
     %br
     
 
-= link_to 'New Move', new_move_path(project_id: @project.id), :class => 'btn btn-primary'
+/= link_to 'New Move', new_move_path(project_id: @project.id), :class => 'btn btn-primary'
 
 %hr
 %br

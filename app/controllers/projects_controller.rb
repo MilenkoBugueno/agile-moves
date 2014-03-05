@@ -37,9 +37,14 @@ class ProjectsController < ApplicationController
     @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
     @tomatoes = @tomatoes.by_date(params[:date]) if params[:date].present?
     
+    @user = params[:user] ? params[:user] : current_user.id
+    
+    @ideas = Move.order('created_at DESC')
+    @ideas = @ideas.by_user_ids(@user)
+    @ideas = @ideas.twitter_idea()
+    
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
-    @user = params[:user] ? params[:user] : current_user.id
     
     @move_types = MoveType.order('created_at DESC')
     @move_type = params[:move_type] if params[:move_type].present?
