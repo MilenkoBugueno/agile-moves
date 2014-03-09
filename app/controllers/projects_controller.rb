@@ -42,6 +42,7 @@ class ProjectsController < ApplicationController
     
     @ideas = Move.order('created_at DESC')
     @ideas = @ideas.by_user_ids(@user)
+    @ideas = @ideas.by_project_id(@project.id) if params[:id].present?
     @ideas = @ideas.twitter_idea()
     
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
@@ -66,6 +67,7 @@ class ProjectsController < ApplicationController
     
     @ideas = Move.order('created_at DESC')
     @ideas = @ideas.by_user_id(params[:user]) if params[:user].present?
+    @ideas = @ideas.by_project_id(@project.id) if params[:id].present?
     @ideas = @ideas.twitter_idea()
     
     
