@@ -1,20 +1,19 @@
 =render :partial => "header"      
 
-%h4 Report
+%h4 Reports
 
-=render :partial => "report_ideas"
 
-/#tabs
-/  %ul.tabs
-/    %li
-/      = link_to "Tomatoes calender", '#tabs-1'
-/    %li
-/      = link_to "Twitter ideas", '#tabs-2'
-/  #tabs-1
-/    =render :partial => "report_calender"
-/  #tabs-2
-/    =render :partial => "report_ideas"
+#tabs
+  %ul.tabs
+    %li
+      = link_to "Stars Ranking", '#tabs-1'
+    %li
+      = link_to "Thumbs Ranking", '#tabs-2'
+  #tabs-1
+    =render :partial => "report_starrating"
+  #tabs-2
+    =render :partial => "report_thumbrating"
 
-/:javascript
-/  content_pane_tabs();
+:javascript
+  content_pane_tabs();
 

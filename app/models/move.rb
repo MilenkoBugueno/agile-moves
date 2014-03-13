@@ -17,5 +17,6 @@ class Move < ActiveRecord::Base
   scope :by_user_ids, lambda {|uid| joins(:users).where(['users.id =?', uid])}
   scope :already_reviewed, lambda {|uid| joins(:ratings).where(['ratings.user_id =?', uid])}
   
-  scope :twitter_idea, lambda {joins(:move_type).where(['has_twitter_idea =?', true])}
+  scope :by_star_rating, lambda {joins(:move_type).where(['star_rating =?', true])}
+  scope :by_thumb_rating, lambda {joins(:move_type).where(['thumb_rating =?', true])}
 end

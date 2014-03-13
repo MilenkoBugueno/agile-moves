@@ -9,12 +9,17 @@
     %th{:width => "30px;"}
     %th{:width => "30px;"}
 
-  - @ideas.each do |move|
+  - @moves.each do |move|
     -reviewed_by_me=0;
-    -if move.move_type.star_rating
+    -if move.move_type != nil  && move.move_type.star_rating
       -move.ratings.each do |rating|
         -if rating.user == current_user && rating.star_rating > 0
           -reviewed_by_me = rating.star_rating
+    -elsif move.move_type != nil  && move.move_type.thumb_rating
+      -move.ratings.each do |rating|
+        -if rating.user == current_user && rating.thumb_rating > 0
+          -reviewed_by_me = rating.thumb_rating
+    
     -if reviewed_by_me <= 0 && move.user != current_user
       %tr
         %td
@@ -24,7 +29,7 @@
         %td
           -move.users.each do |reviewer|
             = link_to reviewer.name, moves_path(:user => reviewer.id)
-        %td= link_to move.move_type.title, moves_path(:move_type => move.move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active'
+        %td= link_to move.move_type.title, moves_path(:move_type => move.move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active' unless move.move_type == nil
         %td= move.publish_date.to_s(:short) unless move.publish_date == nil
         %td= link_to 'Edit', edit_move_path(move), :class => 'btn btn-mini'
         %td= link_to 'X', move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'

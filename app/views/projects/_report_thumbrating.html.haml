@@ -1,0 +1,34 @@
+%table.table.table-striped
+  %tr
+    %th{:width => "100px;"} Rating
+    %th{:width => "300px;"} Title
+    %th{:width => "100px;"} Owner
+    %th{:width => "200px;"} Move Type
+    %th{:width => "80px;"} Publish date
+
+  - @thumb_moves.each do |move|
+    %tr
+      %td
+        -no_ups=0; no_downs=0; no_comments =0;
+        -count = move.ratings.count
+        -move.ratings.each do |vote|
+          -if vote.thumb_rating == 1
+            -no_ups=no_ups+1
+          -elsif vote.thumb_rating == 0
+            -no_downs=no_downs+1
+          -elsif vote.thumb_rating == -1
+            -no_comments = no_comments+1 
+        - if count > 0
+          -if no_downs > 0
+            = no_downs 
+            = image_tag("daumenrunter.png", :width => 15, :height => 15) 
+          -if no_ups > 0
+            = no_ups 
+            = image_tag("daumenhoch.png", :width => 15, :height => 15)
+          -if no_comments > 0
+            =no_comments
+            
+      %td= link_to move.title, move
+      %td= move.user.name
+      %td= link_to move.move_type.title, report_projects_path(:id=> @project.id, :move_type => move.move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active' unless move.move_type == nil
+      %td= move.publish_date.to_s(:short) unless move.publish_date == nil

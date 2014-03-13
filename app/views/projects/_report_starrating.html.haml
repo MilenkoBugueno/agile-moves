@@ -3,10 +3,10 @@
     %th{:width => "100px;"} Stars
     %th{:width => "300px;"} Title
     %th{:width => "100px;"} Owner
-    %th{:width => "200px;"} Team
+    %th{:width => "200px;"} Move Type
     %th{:width => "80px;"} Publish date
 
-  - @ideas.each do |move|
+  - @star_moves.each do |move|
     %tr
       %td
         -total=0;
@@ -18,7 +18,5 @@
             
       %td= link_to move.title, move
       %td= move.user.name
-      %td
-        -move.users.each do |reviewer|
-          = reviewer.name
+      %td= link_to move.move_type.title, report_projects_path(:id=> @project.id, :move_type => move.move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active' unless move.move_type == nil
       %td= move.publish_date.to_s(:short) unless move.publish_date == nil

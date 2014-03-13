@@ -40,10 +40,11 @@ class ProjectsController < ApplicationController
     
     @user = params[:user] ? params[:user] : current_user.id
     
-    @ideas = Move.order('created_at DESC')
-    @ideas = @ideas.by_user_ids(@user)
-    @ideas = @ideas.by_project_id(@project.id) if params[:id].present?
-    @ideas = @ideas.twitter_idea()
+    @moves = Move.order('created_at DESC')
+    @moves = @moves.by_user_ids(@user)
+    @moves = @moves.by_project_id(@project.id) if params[:id].present?
+    @star_moves = @moves.by_star_rating()
+    @thumb_moves = @moves.by_thumb_rating()
     
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
@@ -65,10 +66,10 @@ class ProjectsController < ApplicationController
     @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
     @tomatoes_by_date = @tomatoes.group_by(&:publish_date)
     
-    @ideas = Move.order('created_at DESC')
-    @ideas = @ideas.by_user_id(params[:user]) if params[:user].present?
-    @ideas = @ideas.by_project_id(@project.id) if params[:id].present?
-    @ideas = @ideas.twitter_idea()
+    @moves = Move.order('created_at DESC')
+    @moves = @moves.by_project_id(@project.id) if params[:id].present?
+    @star_moves = @moves.by_star_rating()
+    @thumb_moves = @moves.by_thumb_rating()
     
     
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
