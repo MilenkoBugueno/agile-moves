@@ -6,9 +6,7 @@
     %th{:width => "200px;"} Team
     %th{:width => "150px;"} Move type
     %th{:width => "80px;"} Publish date
-    %th{:width => "30px;"}
-    %th{:width => "30px;"}
-
+    
   - @moves.each do |move|
     -reviewed_by_me=0;
     -if move.move_type != nil  && move.move_type.star_rating
@@ -31,7 +29,5 @@
             = reviewer.name
         %td= link_to move.move_type.title, work_projects_path(id: @project.id, :move_type => move.move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active' unless move.move_type == nil
         %td= move.publish_date.to_s(:short) unless move.publish_date == nil
-        %td= link_to 'Edit', edit_move_path(move), :class => 'btn btn-mini'
-        %td= link_to 'X', move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
 %br
