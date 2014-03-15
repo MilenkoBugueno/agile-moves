@@ -66,14 +66,15 @@ class RatingsController < ApplicationController
   # PUT /ratings/1.json
   def update
     @rating = Rating.find(params[:id])
-
+    @move = Move.find(@rating.move_id)
+    
     respond_to do |format|
       if @rating.update_attributes(params[:rating])
-        format.html { redirect_to @rating, notice: 'Rating was successfully updated.' }
+        format.html { redirect_to @move, notice: 'Rating was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @rating.errors, status: :unprocessable_entity }
+        format.json { render json: @move.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -82,10 +83,11 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1.json
   def destroy
     @rating = Rating.find(params[:id])
+    @move = Move.find(@rating.move_id)
     @rating.destroy
 
     respond_to do |format|
-      format.html { redirect_to ratings_url }
+      format.html { redirect_to @move }
       format.json { head :no_content }
     end
   end

@@ -56,6 +56,7 @@ class MovesController < ApplicationController
   # GET /moves/1/edit
   def edit
     @move = Move.find(params[:id])
+    @project = Project.find(@move.project_id) if @move.project_id.present?
   end
 
   # POST /moves
@@ -100,25 +101,13 @@ class MovesController < ApplicationController
   # DELETE /moves/1.json
   def destroy
     @move = Move.find(params[:id])
+    @project = Project.find(@move.project_id) if @move.project_id.present?
     @move.destroy
 
     respond_to do |format|
-      format.html { redirect_to moves_url }
+      format.html { redirect_to work_projects_path(:id => @project.id) }
       format.json { head :no_content }
     end
-  end
-  
-  def move
-    @states = State.order(:position)
-    @states.each do |state|
-      if params["commit"]==state.title
-        Move.update_all({state_id: state.id}, {id: params[:moves_ids]})
-      end
-    end
-    
-    redirect_to moves_path
-    
-  end
-  
+  end  
  
 end
