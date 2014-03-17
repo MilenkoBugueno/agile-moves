@@ -8,17 +8,17 @@
     %th{:width => "80px;"} Publish date
     
   - @moves.each do |move|
-    -reviewed_by_me=0;
+    -reviewed_by_me=false;
     -if move.move_type != nil  && move.move_type.star_rating
       -move.ratings.each do |rating|
-        -if rating.user == current_user && rating.star_rating > 0
-          -reviewed_by_me = rating.star_rating
+        -if rating.user == current_user && rating.star_rating >= 0
+          -reviewed_by_me = true
     -elsif move.move_type != nil  && move.move_type.thumb_rating
       -move.ratings.each do |rating|
-        -if rating.user == current_user && rating.thumb_rating > 0
-          -reviewed_by_me = rating.thumb_rating
+        -if rating.user == current_user && rating.thumb_rating >= 0
+          -reviewed_by_me = true
     
-    -if reviewed_by_me <= 0 && move.user != current_user
+    -if !reviewed_by_me && move.user != current_user
       %tr
         %td
           =image_tag("bewerten.png", :width => 25, :height => 25)

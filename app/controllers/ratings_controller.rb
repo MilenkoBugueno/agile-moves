@@ -40,15 +40,19 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    thumb_rating = -1
+    @move = Move.find(params[:move_id])
+    @rating = @move.ratings.create!(params[:rating])
+    
     if params[:thumb_rating] == "Approve"
-      thumb_rating = 1;
+      @rating.thumb_rating = 1;
     elsif params[:thumb_rating] == "Reject"
-      thumb_rating = 0;
+      @rating.thumb_rating = 0;
     end
     
-    @move = Move.find(params[:move_id])
-    @rating = @move.ratings.create!(params[:rating].merge(:thumb_rating => thumb_rating))
+    if params[:star_rating] == "Reject"
+      @rating.star_rating = 0;
+    end
+    
     @rating.user_id = current_user.id
     
     respond_to do |format|

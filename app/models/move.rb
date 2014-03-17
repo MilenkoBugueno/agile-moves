@@ -30,6 +30,16 @@ class Move < ActiveRecord::Base
     return stars
   end
   
+  def rejects
+    rejects = 0;
+    self.ratings.each do |rating|
+      if rating.star_rating == 0
+        rejects = rejects + 1
+      end
+    end
+    return rejects
+  end
+  
   def thumbs_up
     thumbs_up = 0;
     self.ratings.each do |rating|
@@ -49,6 +59,7 @@ class Move < ActiveRecord::Base
     end
     return thumbs_down
   end
+  
   
   def comments
     comments = 0;
