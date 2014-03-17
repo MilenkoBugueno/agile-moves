@@ -9,24 +9,16 @@
   - @thumb_moves.each do |move|
     %tr
       %td
-        -no_ups=0; no_downs=0; no_comments =0;
-        -count = move.ratings.count
-        -move.ratings.each do |vote|
-          -if vote.thumb_rating == 1
-            -no_ups=no_ups+1
-          -elsif vote.thumb_rating == 0
-            -no_downs=no_downs+1
-          -elsif vote.thumb_rating == -1
-            -no_comments = no_comments+1 
-        - if count > 0
-          -if no_downs > 0
-            = no_downs 
-            = image_tag("daumenrunter.png", :width => 15, :height => 15) 
-          -if no_ups > 0
-            = no_ups 
-            = image_tag("daumenhoch.png", :width => 15, :height => 15)
-          -if no_comments > 0
-            =no_comments
+        -if move.thumbs_down > 0
+          = move.thumbs_down 
+          = image_tag("daumenrunter.png", :width => 15, :height => 15) 
+        -if move.thumbs_up > 0
+          = move.thumbs_up
+          = image_tag("daumenhoch.png", :width => 15, :height => 15)
+        -if move.comments > 0
+          = move.comments
+          = image_tag("kommentar.gif", :width => 15, :height => 15)
+        
             
       %td= link_to move.title, move
       %td= move.user.name

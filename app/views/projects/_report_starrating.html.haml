@@ -8,14 +8,7 @@
 
   - @star_moves.each do |move|
     %tr
-      %td
-        -total=0;
-        -count = move.ratings.count
-        -if move.move_type.star_rating
-          -move.ratings.each do |rating|
-            -total = total + rating.star_rating unless rating.star_rating == nil 
-        ="#{total} Stars"
-            
+      %td="#{move.stars} Stars"
       %td= link_to move.title, move
       %td= move.user.name
       %td= link_to move.move_type.title, report_projects_path(:id=> @project.id, :move_type => move.move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active' unless move.move_type == nil

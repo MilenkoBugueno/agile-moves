@@ -68,8 +68,8 @@ class ProjectsController < ApplicationController
     
     @moves = Move.order('created_at DESC')
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
-    @star_moves = @moves.by_star_rating()
-    @thumb_moves = @moves.by_thumb_rating()
+    @star_moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars}
+    @thumb_moves = @moves.by_thumb_rating().sort{|a,b| b.thumbs_up <=> a.thumbs_up}
     
     
     @date = params[:date] ? Date.parse(params[:date]) : Date.today

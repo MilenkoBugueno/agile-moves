@@ -19,4 +19,45 @@ class Move < ActiveRecord::Base
   
   scope :by_star_rating, lambda {joins(:move_type).where(['star_rating =?', true])}
   scope :by_thumb_rating, lambda {joins(:move_type).where(['thumb_rating =?', true])}
+  
+  def stars
+    stars = 0;
+    self.ratings.each do |rating|
+      if rating.star_rating > 0
+        stars = stars + rating.star_rating
+      end
+    end
+    return stars
+  end
+  
+  def thumbs_up
+    thumbs_up = 0;
+    self.ratings.each do |rating|
+      if rating.thumb_rating == 1
+        thumbs_up = thumbs_up + 1
+      end
+    end
+    return thumbs_up
+  end
+  
+  def thumbs_down
+    thumbs_down = 0;
+    self.ratings.each do |rating|
+      if rating.thumb_rating == 0
+        thumbs_down = thumbs_down + 1
+      end
+    end
+    return thumbs_down
+  end
+  
+  def comments
+    comments = 0;
+    self.ratings.each do |rating|
+      if rating.thumb_rating == -1 || rating.star_rating == -1
+        comments = comments + 1
+      end
+    end
+    return comments
+  end
+  
 end
