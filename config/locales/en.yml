@@ -3,5 +3,6 @@
 
 en:
   projects:
-    title: "Title"
+    title: "Projects"
     team: "Team"
+    project_title: "Title"
