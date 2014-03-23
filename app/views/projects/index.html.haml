@@ -5,9 +5,9 @@
   %thead
     %tr
       %th
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:team)
-      %th=t '.actions', :default => t("helpers.actions")
+      %th=t "projects.title"
+      %th=t "projects.team"
+      %th=t "helpers.actions"
   %tbody
     - @projects.each do |project|
       %tr
