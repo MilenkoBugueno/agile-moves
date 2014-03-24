@@ -1,0 +1,21 @@
+
+
+de:
+  projects:
+    title: "Projekte"
+    team: "Teams"
+    project_title: "Titel"
+  helpers:
+        actions: "Aktionen"
+        links:
+          back: "Zurück"
+          cancel: "Abbrechen"
+          confirm: "Sind sie sicher?"
+          destroy: "Löschen"
+          new: "Neu"
+          edit: "Bearbeiten"
+        titles:
+          edit: "Bearbeiten %{model}"
+          save: "Speichern %{model}"
+          new: "Neu %{model}"
+          delete: "Löschen %{model}"
