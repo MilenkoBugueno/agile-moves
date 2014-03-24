@@ -18,7 +18,6 @@ gem 'rolify'
 gem 'simple_form'
 gem "twitter-bootstrap-rails"
 gem 'execjs'
-gem 'therubyracer'
 gem "ckeditor"
 group :development do
   gem 'better_errors'
