@@ -2,6 +2,16 @@
 
 %h4 Work
 
-=render :partial => "work_rating"      
+%br
 
-=render :partial => "work_tomatoes"
+.row
+  .span2
+    %ul
+      -@project.move_types.each do |move_type|
+        %li
+          = link_to move_type.title, work_projects_path(id: @project.id, date: @date, move_type: move_type.id)
+  .span10
+    -if @move_type.thumb_rating || @move_type.star_rating
+      =render :partial => "work_rating"
+    -elsif @move_type.has_tomatoes
+      =render :partial => "work_tomatoes"

@@ -43,8 +43,9 @@ class ProjectsController < ApplicationController
     
     
     @move_types = MoveType.order('created_at DESC')
-    @move_type = params[:move_type] if params[:move_type].present?
-    
+    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(move_type_id)
+
     
     respond_to do |format|
       format.html # show.html.erb
