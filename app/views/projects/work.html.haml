@@ -1,11 +1,12 @@
 =render :partial => "header"      
 
-%h4 Work
-
-%br
-
 .row
   .span2
+    %h4
+      =@move_type.title unless @move_type == nil
+      Work
+      %hr
+
     %ul
       -@project.move_types.each do |move_type|
         %li

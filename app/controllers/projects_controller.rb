@@ -45,6 +45,7 @@ class ProjectsController < ApplicationController
     @move_types = MoveType.order('created_at DESC')
     move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
     @move_type = MoveType.find(move_type_id)
+    @moves = @moves.by_move_type(move_type_id) if params[:move_type].present?
 
     
     respond_to do |format|
@@ -64,8 +65,12 @@ class ProjectsController < ApplicationController
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
     @star_moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars}
     @thumb_moves = @moves.by_thumb_rating().sort{|a,b| b.thumbs_up <=> a.thumbs_up}
-    
-    
+
+    @move_types = MoveType.order('created_at DESC')
+    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(move_type_id)
+    @moves = @moves.by_move_type(move_type_id) if params[:move_type].present?
+
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
     @user = params[:user] ? params[:user] : current_user.id
