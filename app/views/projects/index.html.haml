@@ -12,7 +12,7 @@
     - @projects.each do |project|
       %tr
         %td
-        %td= link_to project.title, plan_projects_path(id: project.id)
+        %td= link_to project.title, work_projects_path(id: project.id)
         %td
           -project.users.each do |user|
             = user.name

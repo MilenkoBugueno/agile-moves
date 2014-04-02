@@ -16,8 +16,8 @@
           = link_to move_type.title, report_projects_path(id: @project.id, date: @date, move_type: move_type.id)
   .span10
     -if @move_type.thumb_rating
-      =render :partial => "report_thumbrating"
+      =render :partial => "report_rating"
     -elsif @move_type.star_rating
-      =render :partial => "report_starrating"
+      =render :partial => "report_rating"
     -elsif @move_type.has_tomatoes
       =render :partial => "report_calender"
