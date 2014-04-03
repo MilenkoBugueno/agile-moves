@@ -24,6 +24,9 @@ class TomatoesController < ApplicationController
   # GET /tomatoes/1.json
   def show
     @tomato = Tomato.find(params[:id])
+    @move_type = @tomato.move.move_type
+    @project = Project.find(@tomato.move.project_id) if @tomato.move.project_id.present?
+
 
     respond_to do |format|
       format.html # show.html.erb

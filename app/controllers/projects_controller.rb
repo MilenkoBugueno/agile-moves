@@ -15,12 +15,14 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     
     @moves = Move.order('created_at DESC')
-    @user = params[:user] ? params[:user] : current_user.id
+    @moves = @moves.by_project_id(@project.id) if params[:id].present?
 
-    @my_moves = @moves.by_user_id(@user)
+    @moves = @moves.by_user_id(params[:user]) if params[:user].present?
 
     move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
     @move_type = MoveType.find(move_type_id)
+
+    @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
 
     respond_to do |format|
       format.html # show.html.erb

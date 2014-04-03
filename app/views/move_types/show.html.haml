@@ -1,27 +1,20 @@
 - model_class = MoveType
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.titleize
+  %h1= @move_type.title
 
 %p
   %strong= model_class.human_attribute_name(:body) + ':'
   %br
   = @move_type.body
 %p
-  %strong= model_class.human_attribute_name(:thumb_rating) + ':'
-  %br
-  = @move_type.thumb_rating
-%p
-  %strong= model_class.human_attribute_name(:star_rating) + ':'
-  %br
-  = @move_type.star_rating
-%p
-  %strong= model_class.human_attribute_name(:has_tomatoes) + ':'
-  %br
-  = @move_type.has_tomatoes
-%p
-  %strong= model_class.human_attribute_name(:title) + ':'
-  %br
-  = @move_type.title
+  %strong= "Features:"
+  %ul
+    -if @move_type.thumb_rating
+      %li="Thumb rating"
+    -if @move_type.star_rating
+      %li="Star rating"
+    -if @move_type.has_tomatoes && @move_type.tomatoes_number != nil
+      %li="#{@move_type.tomatoes_number} generated tomatoes"
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), move_types_path, :class => 'btn'

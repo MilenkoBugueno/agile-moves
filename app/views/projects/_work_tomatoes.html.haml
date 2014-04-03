@@ -1,33 +1,29 @@
-=form_tag done_tomatoes_path, method: :put do
-  =submit_tag "mark as done", :class => 'btn btn-mini'
-  %br
-  %br
-  %table.table.table-striped
-    %tr
-      %th{:width => "20px;"}
-      %th{:width => "20px;"}
-      %th{:width => "250px;"} Title
-      %th{:width => "100px;"} Owner
-      %th{:width => "120px;"} Publish date
-      %th{:width => "20px;"}
-      %th{:width => "20px;"}
-      %th{:width => "20px;"}
+%br
+%br
+%table.table.table-striped
+  %tr
+    %th{:width => "20px;"}
+    %th{:width => "250px;"} Title
+    %th{:width => "100px;"} Owner
+    %th{:width => "120px;"} Publish date
+    %th{:width => "20px;"}
+    %th{:width => "20px;"}
+    %th{:width => "20px;"}
 
-    - @moves.each do |move|
-      - move.tomatoes.each do |tomato|
-        %tr
-          %td= check_box_tag "tomatoes_ids[]", tomato.id
-          %td
-            - if tomato.state == 0 # not planed
-              = image_tag("tomategrau.png", :width => 20, :height => 20)
-            - elsif tomato.state == 1 #planed
-              = image_tag("tomategruen.png", :width => 20, :height => 20)
-            - elsif tomato.state == 2 #done
-              = image_tag("tomaterot.png", :width => 20, :height => 20)
-          %td= link_to tomato.title, tomato
-          %td= link_to tomato.user.name, tomatoes_path(:user => tomato.user.id, :date => @date)  unless tomato.user == nil
-          %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
-          %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
-          %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
+  - @moves.each do |move|
+    - move.tomatoes.each do |tomato|
+      %tr
+        %td
+          - if tomato.state == 0 # not planed
+            = image_tag("tomategrau.png", :width => 20, :height => 20)
+          - elsif tomato.state == 1 #planed
+            = image_tag("tomategruen.png", :width => 20, :height => 20)
+          - elsif tomato.state == 2 #done
+            = image_tag("tomaterot.png", :width => 20, :height => 20)
+        %td= link_to tomato.title, tomato
+        %td= tomato.user.name
+        %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+        %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
+        %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
+        %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
 

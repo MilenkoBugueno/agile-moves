@@ -32,6 +32,7 @@ class MovesController < ApplicationController
     @ratings = Tomato.where(:move_id => :id)
     
     @project = Project.find(@move.project_id) if @move.project_id.present?
+    @move_type = @move.move_type
 
     respond_to do |format|
       format.html # show.html.erb
@@ -64,6 +65,7 @@ class MovesController < ApplicationController
   def create
     @move = Move.new(params[:move])
     @project = Project.find(@move.project_id) if @move.project_id.present?
+
     #@ratings = @move.ratings
     #@ratings.each do |rating|
     #  RailsthemesMailer.test_email_one_column(rating.user)
@@ -71,7 +73,7 @@ class MovesController < ApplicationController
 
     respond_to do |format|
       if @move.save
-        format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully created.' }
+        format.html { redirect_to plan_projects_path(:id => @project.id), notice: 'Move was successfully created.' }
         format.json { render json: @move, status: :created, location: @move }
       else
         format.html { render action: "new" }
@@ -88,7 +90,7 @@ class MovesController < ApplicationController
 
     respond_to do |format|
       if @move.update_attributes(params[:move])
-        format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully updatetd.' }
+        format.html { redirect_to plan_projects_path(:id => @project.id), notice: 'Move was successfully updatetd.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -105,7 +107,7 @@ class MovesController < ApplicationController
     @move.destroy
 
     respond_to do |format|
-      format.html { redirect_to work_projects_path(:id => @project.id) }
+      format.html { redirect_to plan_projects_path(:id => @project.id) }
       format.json { head :no_content }
     end
   end  
