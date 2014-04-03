@@ -10,10 +10,8 @@
       
     .span3
       = link_to 'Plan', plan_projects_path(id: @project.id), :class => 'btn btn-warning'
-      = link_to 'Work', work_projects_path(id: @project.id, date: @date), :class => 'btn btn-warning'
-      = link_to 'Report', report_projects_path(id: @project.id), :class => 'btn btn-warning'
+      = link_to 'Work', work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => 'btn btn-warning'
+      = link_to 'Report', report_projects_path(id: @project.id, move_type: @move_type.id), :class => 'btn btn-warning'
 
-%br 
-%br
 
 

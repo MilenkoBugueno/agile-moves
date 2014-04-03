@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140304063311) do
+ActiveRecord::Schema.define(:version => 20140403142151) do
 
   create_table "capacities", :force => true do |t|
     t.integer  "tomatoes_capacity"
@@ -39,7 +39,15 @@ ActiveRecord::Schema.define(:version => 20140304063311) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.boolean  "has_twitter_idea"
+    t.integer  "tomatoes_number"
   end
+
+  create_table "move_types_projects", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "move_type_id"
+  end
+
+  add_index "move_types_projects", ["project_id", "move_type_id"], :name => "index_project_move_types_on_project_id_and_move_type_id"
 
   create_table "moves", :force => true do |t|
     t.text     "body"

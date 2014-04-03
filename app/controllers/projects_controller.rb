@@ -15,16 +15,15 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     
     @moves = Move.order('created_at DESC')
-    @moves = @moves.by_user_ids(params[:user]) if params[:user].present?
+    @moves = @moves.by_project_id(@project.id) if params[:id].present?
+
+    @moves = @moves.by_user_id(params[:user]) if params[:user].present?
+
+    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(move_type_id)
+
     @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
-    
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    
-    @user = params[:user] ? params[:user] : current_user.id
-    
-    @move_types = MoveType.order('created_at DESC')
-    @move_type = params[:move_type] if params[:move_type].present?
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -33,25 +32,21 @@ class ProjectsController < ApplicationController
   
   def work
     @project = Project.find(params[:id])
-    
-    @tomatoes = Tomato.order('state DESC')
-    @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
-    @tomatoes = @tomatoes.by_date(params[:date]) if params[:date].present?
-    
+
     @user = params[:user] ? params[:user] : current_user.id
-    
+
     @moves = Move.order('created_at DESC')
     @moves = @moves.by_user_ids(@user)
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
-    @star_moves = @moves.by_star_rating()
-    @thumb_moves = @moves.by_thumb_rating()
-    
+
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
     
     @move_types = MoveType.order('created_at DESC')
-    @move_type = params[:move_type] if params[:move_type].present?
-    
+    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(move_type_id)
+    @moves = @moves.by_move_type(move_type_id) if params[:move_type].present?
+
     
     respond_to do |format|
       format.html # show.html.erb
@@ -68,10 +63,14 @@ class ProjectsController < ApplicationController
     
     @moves = Move.order('created_at DESC')
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
-    @star_moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars}
-    @thumb_moves = @moves.by_thumb_rating().sort{|a,b| b.thumbs_up <=> a.thumbs_up}
-    
-    
+
+    @move_types = MoveType.order('created_at DESC')
+    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(move_type_id)
+    @moves = @moves.by_move_type(move_type_id) if params[:move_type].present?
+
+    @moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars} if @move_type.star_rating
+
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
     @user = params[:user] ? params[:user] : current_user.id
@@ -90,8 +89,10 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     
     @move_types = MoveType.order('created_at DESC')
-    @move_type = params[:move_type] if params[:move_type].present?
-    
+    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(move_type_id)
+
+
     @states = State.where(project_id: @project.id).order(:position)
     
     respond_to do |format|

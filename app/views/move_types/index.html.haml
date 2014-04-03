@@ -4,25 +4,23 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:body)
       %th= model_class.human_attribute_name(:thumb_rating)
       %th= model_class.human_attribute_name(:star_rating)
       %th= model_class.human_attribute_name(:has_tomatoes)
       %th= model_class.human_attribute_name(:has_twitter_idea)
-      %th= model_class.human_attribute_name(:title)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @move_types.each do |move_type|
       %tr
-        %td= link_to move_type.id, move_type_path(move_type)
+        %td= link_to move_type.title, move_type_path(move_type)
         %td= move_type.body
         %td= move_type.thumb_rating
         %td= move_type.star_rating
         %td= move_type.has_tomatoes
         %td= move_type.has_twitter_idea
-        %td= move_type.title
         %td=l move_type.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_move_type_path(move_type), :class => 'btn btn-mini'

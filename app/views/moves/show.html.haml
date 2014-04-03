@@ -2,7 +2,7 @@
 .row
   .span8
     %h2= @move.title
-    = link_to "Back to Project", work_projects_path(:id => @project.id), :class => 'btn'
+    = link_to "Back to my work", work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_move_path(@move), :class => 'btn'
     = link_to t('.destroy', :default => t("helpers.links.destroy")), move_path(@move), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
   .span4
@@ -23,8 +23,8 @@
   =form_tag done_tomatoes_path, method: :put do
     =hidden_field_tag "move_id", @move.id
     =submit_tag "mark as done", :class => 'btn btn-mini'
-    =submit_tag "plan today", :class => 'btn btn-mini'
-    =submit_tag "unplan", :class => 'btn btn-mini'
+    /=submit_tag "plan today", :class => 'btn btn-mini'
+    /=submit_tag "unplan", :class => 'btn btn-mini'
     %br
     %br
     %table.table.table-striped

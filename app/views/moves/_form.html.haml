@@ -1,10 +1,10 @@
 = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
-  = f.association :move_type, include_blank: false
+  = f.association :move_type, include_blank: false, :collection => @project.move_types
   = f.input :title, input_html: {style: 'width:500px;'}
   = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
   = f.input :publish_date, :as => :string
-  = f.association :user
-  = f.association :users, :as => :check_boxes, :label => "Team"
+  = f.association :user, :collection => @project.users
+  = f.association :users, :as => :check_boxes, :label => "Team", :collection => @project.users
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to "Cancel", work_projects_path(:id => @project.id), :class => 'btn'
