@@ -7,5 +7,5 @@
   = f.association :users, :as => :check_boxes, :label => "Team"
   .form-actions
     = f.button :submit, :class => 'btn-primary'
-    = link_to "Cancel", work_projects_path(:id => @project.id), :class => 'btn'
+    = link_to t("helpers.links.cancel"), work_projects_path(:id => @project.id), :class => 'btn'
     

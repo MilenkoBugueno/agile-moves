@@ -1,13 +1,13 @@
 - model_class = Project
 .page-header
-  %h1=t "projects.title"
+  %h1=t "projects.header"
 %table.table.table-striped
   %thead
     %tr
       %th
-      %th=t "projects.project_title"
+      %th=t "projects.title"
       %th=t "projects.team"
-      %th=t "helpers.actions"
+      %th=t "projects.actions"
   %tbody
     - @projects.each do |project|
       %tr
@@ -17,8 +17,8 @@
           -project.users.each do |user|
             = user.name
         %td
-          = link_to "Admin", project_path(project), :class => 'btn btn-mini'
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_project_path(project), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), project_path(project), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+          = link_to t("helpers.links.admin"), project_path(project), :class => 'btn btn-mini'
+          = link_to t("helpers.links.edit"), edit_project_path(project), :class => 'btn btn-mini'
+          = link_to t("helpers.links.destroy"), project_path(project), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 
-= link_to t('.new', :default => t("helpers.links.new")), new_project_path, :class => 'btn btn-primary'
+= link_to t("helpers.links.new"), new_project_path, :class => 'btn btn-primary'

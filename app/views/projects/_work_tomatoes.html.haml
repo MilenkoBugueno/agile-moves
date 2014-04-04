@@ -8,7 +8,7 @@
       Team:
       -@project.users.each do |user|
         = link_to user.name, work_projects_path(:id => @project.id, :user => user.id, :move_type => @move_type, :date => @date), :class => 'btn btn-mini btn-info'
-      = link_to "All", work_projects_path(:id => @project.id, :move_type => @move_type, :date => @date), :class => 'btn btn-mini btn-info :active'
+      = link_to t("helpers.links.all"), work_projects_path(:id => @project.id, :move_type => @move_type, :date => @date), :class => 'btn btn-mini btn-info :active'
     %p
       /Move types:
       /-@move_types.each do |move_type|
@@ -79,7 +79,7 @@
             = image_tag("kommentar.gif", :width => 15, :height => 15)
         
         %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-        %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
-        %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
-        %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
+        %td= link_to t("helpers.links.start"), tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
+        %td= link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
+        %td= link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 
