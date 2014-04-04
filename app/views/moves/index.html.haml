@@ -62,14 +62,14 @@
             -when 2 
               = image_tag("tomaterot.png", :width => 15, :height => 15)
             
-      %td= link_to move.title, move
-      %td= move.user.name
+            %td= link_to move.title, move
+          %td= move.user.name
       %td
         -move.users.each do |reviewer|
           = reviewer.name
       %td= move.move_type.title
       %td= move.publish_date.to_s(:short) unless move.publish_date == nil
-      %td= link_to 'Edit', edit_move_path(move), :class => 'btn btn-mini'
-      %td= link_to 'X', move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+      %td= link_to t("helpers.links.edit"), edit_move_path(move), :class => 'btn btn-mini'
+      %td= link_to t("helpers.links.destroy"), move_path(move), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 %br
     

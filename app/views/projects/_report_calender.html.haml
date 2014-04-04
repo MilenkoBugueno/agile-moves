@@ -7,7 +7,7 @@
       Team:
       -@project.users.each do |user|
         = link_to user.name, report_projects_path(:id => @project.id, :user => user.id, :move_type => @move_type, :date => @date), :class => 'btn btn-mini btn-info'
-      = link_to "All", report_projects_path(:id => @project.id, :date => @date), :class => 'btn btn-mini btn-info :active'
+      = link_to t("helpers.links.all"), report_projects_path(:id => @project.id, :date => @date), :class => 'btn btn-mini btn-info :active'
     %p
 
 %hr

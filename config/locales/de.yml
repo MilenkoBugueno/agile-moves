@@ -1,21 +1,136 @@
 
 
+
 de:
   projects:
-    title: "Projekte"
-    team: "Teams"
-    project_title: "Titel"
+      header: "Projekte"
+      team: "Team"
+      title: "Titel"
+      actions: "Aktionen"
+      plan: "Planen"
+      work: "Arbeit"
+      report: "Bericht"
+      newmove: "Neuer Move"
+      editproject: "Projekt bearbeiten"
+      new: "Neues Projekt"
+  editaccount:
+      edit: "Konto bearbeiten"
+      cancelaccount: "Konto löschen"
+      currentpassword: "Wir benötigen ihr aktuelles Passwort um die Änderungen durchzuführen."
+      leaveblank: "Wenn sie nichts ändern möchten lassen sie das Feld bitte frei."
+      deleteuser: "Benutzer löschen"
+  navigation:
+      projects: "Projekte"
+      logout: "Ausloggen"
+      login: "Einloggen"
+      editaccount: "Konto bearbeiten"
+      english: "Englisch"
+      german: "Deutsch"
+      users: "Benutzer"
+      signup: "Registrieren"
+  login:
+      signin: "Anmelden"
+      signup: "Registrieren"
+      forgot: "Passwort vergessen?"
+      noconfirmation: "Haben sie keine Bestätigungsinformationen erhalten?"
+      nounlock: "Haben sie keine Unlock Informationen erhalten?"
+      signinwith: "Einloggen mit "
+  logout:
+  capacities:
+        newcapacity: "Neue Kapazität"
   helpers:
-        actions: "Aktionen"
+      links:
+         back: "Zurück"
+         cancel: "Abbrechen"
+         confirm: "Sind sie sicher?"
+         destroy: "Löschen"
+         admin: "Admin"
+         new: "Neu"
+         edit: "Bearbeiten"
+         approve: "Genehmigen"
+         show: "Zeigen"
+         reject: "Ablehnen"
+         comment: "Kommentieren"
+         all: "Alle"
+         mark: "Als fertig markieren"
+         plan: "Für heute einplanen"
+         unplan: "Aus dem Plan entfernen"
+         start: "Start"
+         ratings: "Bewertungen"
+         update: "Aktualisieren"
+         newthumbrating: "Erstelle neue Daumenbewertung"
+         newstarrating: "Erstelle eine neue Sternebewertung"
+         newinterruption: "Neue Unterbrechung"
+         starsranking: "Sterne Rangliste"
+         thumbsranking: "Daumen Rangliste"
+      titles:
+            edit: "Bearbeiten %{model}"
+            save: "Speichern %{model}"
+            delete: "Löschen %{model}"
+            new: "Neu"
+  moves:
         links:
-          back: "Zurück"
-          cancel: "Abbrechen"
-          confirm: "Sind sie sicher?"
-          destroy: "Löschen"
-          new: "Neu"
-          edit: "Bearbeiten"
-        titles:
-          edit: "Bearbeiten %{model}"
-          save: "Speichern %{model}"
-          new: "Neu %{model}"
-          delete: "Löschen %{model}"
+            owner: "Eigentümer"
+            owner2: "Eigentümer:"
+            moveto: "In Liste verschieben"
+            backtoproject: "Zurück zum Projekt"
+            movetype: "Move Typ:"
+            moveid: "Move Id"
+  error_notification:
+      default_message: "Bitte schauen sie sich die unten stehenden Fehler an:"
+  devise:
+      confirmations:
+         confirmed: "Ihr Konto wurde erfolgreich bestätigt."
+         send_instructions: "In wenigen Minuten werden sie eine Email empfangen in der sie Instruktionen finden wie sie ihr Konto bestätigen können."
+         send_paranoid_instructions: "Sollte ihre Email-Adresse bei uns registriert sein, werden sie in wenigen Minuten werden sie eine Email empfangen in der sie Instruktionen finden wie sie ihr Konto bestätigen können."
+      failure:
+         already_authenticated: "Sie sind bereits angemeldet."
+         inactive: "Ihr Konto wurde noch nicht aktiviert."
+         invalid: "Email oder Passwort ungültig"
+         locked: "Ihr Konto ist gesperrt."
+         last_attempt: "Sie haben noch einen Versuch bevor ihr Konto gesperrt wird."
+         not_found_in_database: "Die eingegebene Email oder das Passwort ist ungültig."
+         timeout: "Ihre Session ist abgelaufen. Bitte melden sie sich erneut an um fortzufahren."
+         unauthenticated: "Sie müssen sich erst anmelden, bzw. registirieren."
+         unconfirmed: "Sie müssen ihr Konto erst bestätigen bevor sie fortfahren können."
+      mailer:
+         confirmation_instructions:
+           subject: "Bestätigungs Anweisungen"
+         reset_password_instructions:
+           subject: "Anweisungen um das Passwort zurück zu setzen."
+         unlock_instructions:
+           subject: "Anweisungen zum entsperren des Kontos."
+      omniauth_callbacks:
+         failure: "Sie konnten nicht Authentifiziert werden."
+         success: "Authentifizierung erfolgreich."
+      passwords:
+         no_token: "Sie können auf diese Seite nicht zugreifen, ohne von einer Passwort-Reset-E-Mail hierher zu navigieren. Wenn Sie dies von einer Passwort-Reset-E-Mail tun, stellen Sie bitte sicher, dass Sie die vollständige vorgesehene URL verwenden."
+         send_instructions: "In Kürze werden sie eine Email erhalten in der beschrieben ist, wie sie ihr Passwort zurück setzen können."
+         send_paranoid_instructions: "Sollte ihre Email-Adresse bei uns registriert sein, werden sie eine Email erhalten in der beschrieben ist, wie sie ihr Passwort zurück setzen können."
+         updated: "Ihr Passwort wurde erfolgreich geändert. Sie sind nun angemeldet."
+         updated_not_active: "Ihr Passwort wurde erfolgreich geändert."
+      registrations:
+         destroyed: "Auf Wiedersehen. Ihr Konto wurde erfolgreich gelöscht. Wir hoffen sie bald wieder bei uns begrüssen zu dürfen."
+         signed_up: "Willkommen! Sie haben sich erfolgreich registriert."
+         signed_up_but_inactive: "Sie haben sich erfolgreich registriert. Allerdings ist ihr Konto noch nicht aktiviert."
+         signed_up_but_locked: "Sie haben sich erfolgreich registriert. Allerdings ist ihr Konto gesperrt."
+         signed_up_but_unconfirmed: "Eine Nachricht mit einem Bestätigungslink wurde an ihre Email-Adresse gesendet. Bitte klicken sie auf diesen Link um ihr Konto zu bestätigen."
+         update_needs_confirmation: "Sie haben ihr Konto erfolgreich aktualisiert. Um ihre neue Email-Adresse zu bestätigen klicken sie bitte auf den Bestätigungslink in der Mail, die wir an ihre neue Adresse gesendet haben."
+         updated: "Ihr Konto wurde erfolgreich aktualisiert."
+      sessions:
+         signed_in: "Anmeldung erfolgreich."
+         signed_out: "Abmeldung erfolgreich."
+      unlocks:
+         send_instructions: "In Kürze erhalten sie eine Email mit Anweisungen wie sie ihr Konto entsperren können."
+         send_paranoid_instructions: "Sollte ihr Konto bei uns existieren, erhalten sie in Kürze eine Email mit Anweisungen wie sie ihr Konto entsperren können."
+         unlocked: "Ihr Konto wurde erfolgreich entsperrt. Bitte melden sie sich an um fortzufahren."
+  errors:
+      messages:
+         already_confirmed: "ist bereits bestätigt. Bitte melden sie sich an."
+         confirmation_period_expired: "Die Bestätigungsperiode ist leider abgelaufen. Bitte beantragen sie eine Neue."
+         expired: "ist abgelaufen. Bitte beantragen sie eine Neue."
+         not_found: "nicht gefunden."
+         not_locked: "ist nicht gesperrt."
+         not_saved:
+           one: "Ein Fehler verhinderte, dass sie erfolgreich speichern konnten."
+           other: "Ein Fehler verhinderte, dass sie erfolgreich speichern konnten."

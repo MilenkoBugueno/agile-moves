@@ -1,12 +1,13 @@
 AgileMovesOs::Application.routes.draw do
+  scope ":locale" do                   #To change the url from for example http://localhost:3000/users/edit?locale=en
+                                      # to http://localhost:3000/en/users/edit
   resources :projects do
     collection do
       get 'plan'
       get 'work'
       get 'report'
     end
-  end
-
+       end
   resources :capacities
 
   resources :reports do
@@ -53,4 +54,5 @@ AgileMovesOs::Application.routes.draw do
   root :to => "projects#index"
   devise_for :users
   resources :users
+  end
 end

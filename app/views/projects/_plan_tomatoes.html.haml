@@ -76,7 +76,6 @@
                   =link_to image_tag("tomategruen.png", :width => 15, :height => 15)
                 -when 2 
                   =link_to image_tag("tomaterot.png", :width => 15, :height => 15)
-                
           %td= link_to move.title, move
           %td= link_to move.user.name, moves_path(:user => move.user.id)
           %td
@@ -84,8 +83,8 @@
               = link_to reviewer.name, moves_path(:user => reviewer.id)
           %td= link_to move.move_type.title, moves_path(:move_type => move.move_type.id, :user => @user), :class => 'btn btn-mini btn-info :active'
           %td= move.publish_date.to_s(:short) unless move.publish_date == nil
-          %td= link_to 'Edit', edit_move_path(move), :class => 'btn btn-mini'
-          %td= link_to 'X', move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+          %td= link_to t("helpers.links.edit"), edit_move_path(move), :class => 'btn btn-mini'
+          %td= link_to t("helpers.links.destroy"), move_path(move), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
     %br
 
 %hr

@@ -16,10 +16,10 @@
       %td= interruption.interruption_type
       %td= interruption.user_id
       %td= interruption.tomato_id
-      %td= link_to 'Show', interruption
-      %td= link_to 'Edit', edit_interruption_path(interruption)
-      %td= link_to 'Destroy', interruption, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to t("helpers.links.show"), interruption
+      %td= link_to t("helpers.links.edit"), edit_interruption_path(interruption)
+      %td= link_to t("helpers.links.destroy"), interruption, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }
 
 %br
 
-= link_to 'New Interruption', new_interruption_path
+= link_to t("helpers.links.newinterruption"), new_interruption_path
