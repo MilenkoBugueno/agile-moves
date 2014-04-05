@@ -4,21 +4,21 @@
 %strong Description:
 %br
 %br
-= raw(@project.body)
+  = raw(@project.body)
 
 %br
 
 %p
-%strong Team:
--@project.users.each do |user|
-= user.name
+  %strong Team:
+  -@project.users.each do |user|
+    = user.name
 
 %br
 
 %p
-%strong Move types:
--@move_types.each do |move_type|
-= move_type.title
+  %strong Move types:
+  -@move_types.each do |move_type|
+    = move_type.title
 
 %br
 %br
@@ -28,21 +28,22 @@
 %h4 Lists
 
 %table.table.table-striped
-%thead
-%tr
+  %thead
+    %tr
       %th
       %th Title
       %th Position
       %th=t '.actions', :default => t("helpers.actions")
-%tbody
-- @states.each do |state|
+
+  %tbody
+    - @states.each do |state|
       %tr
-%td
-%td= state.title
-%td= state.position
-%td
-= link_to t("helpers.links.edit"), edit_state_path(state), :class => 'btn btn-mini'
-= link_to t("helpers.links.destroy"), state_path(state), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+        %td
+        %td= state.title
+        %td= state.position
+        %td
+          = link_to t("helpers.links.edit"), edit_state_path(state), :class => 'btn btn-mini'
+          = link_to t("helpers.links.destroy"), state_path(state), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 
 = link_to t("projects.new"), new_state_path(project_id: @project.id), :class => 'btn btn-primary'
 

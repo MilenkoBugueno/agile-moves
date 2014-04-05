@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '3.2.17'
-gem 'mysql2'
+#gem 'mysql2'
+gem "sqlite3"
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -18,7 +19,7 @@ gem 'rolify'
 gem 'simple_form'
 gem "twitter-bootstrap-rails"
 gem 'execjs'
-gem 'therubyracer'
+#gem 'therubyracer'
 gem "ckeditor"
 group :development do
   gem 'better_errors'
@@ -28,6 +29,7 @@ group :development do
   gem 'guard-rails'
   gem 'guard-rspec'
   gem 'html2haml'
+  gem 'i18n'
   gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
