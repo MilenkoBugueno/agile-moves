@@ -17,9 +17,20 @@
 
 
 %h3 Timer
-
+#counter_2
+  .desc
 %div#countdown
-
+= button_tag "Start Timer", :id => "btoStart", :name => "los", :onClick => "start_me()"
+= text_field_tag "txtTimer", nil, "value" => 25, "size" => 6
+%br
+%br
+%table
+  %tr
+    %td Started
+    %td= text_field_tag "hidStartTime", nil, "size" => 6
+  %tr
+    %td Ended
+    %td= text_field_tag "hidEndTime", nil, "size" => 100
 %hr
 
 /= render :partial => 'interruptions' # in the first implementation we don't support interruptions
