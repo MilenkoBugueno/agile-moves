@@ -280,6 +280,7 @@ DEPENDENCIES
   haml-rails
   html2haml
   hub
+  i18n
   jquery-rails
   jquery-ui-rails
   launchy

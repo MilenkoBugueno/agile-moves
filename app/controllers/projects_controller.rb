@@ -12,7 +12,11 @@ class ProjectsController < ApplicationController
   end
   
   def plan
-    @project = Project.find(params[:id])
+    if params[:id].present?
+      @project = Project.find(params[:id])
+    else
+      @project = Project.all.first
+    end
     
     @moves = Move.order('created_at DESC')
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
@@ -31,7 +35,11 @@ class ProjectsController < ApplicationController
   end
   
   def work
-    @project = Project.find(params[:id])
+    if params[:id].present?
+      @project = Project.find(params[:id])
+    else
+      @project = Project.all.first
+    end
 
     @user = params[:user] ? params[:user] : current_user.id
 
@@ -41,13 +49,11 @@ class ProjectsController < ApplicationController
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
-    
     @move_types = MoveType.order('created_at DESC')
-    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
-    @move_type = MoveType.find(move_type_id)
-    @moves = @moves.by_move_type(move_type_id) if params[:move_type].present?
+    @move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(@move_type_id) unless @move_type_id == nil
+    @moves = @moves.by_move_type(@move_type_id) unless @move_type_id == nil
 
-    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -55,7 +61,11 @@ class ProjectsController < ApplicationController
   end
   
   def report
-    @project = Project.find(params[:id])
+    if params[:id].present?
+      @project = Project.find(params[:id])
+    else
+      @project = Project.all.first
+    end
     
     @tomatoes = Tomato.order('state DESC')
     @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
@@ -65,11 +75,11 @@ class ProjectsController < ApplicationController
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
 
     @move_types = MoveType.order('created_at DESC')
-    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
-    @move_type = MoveType.find(move_type_id)
-    @moves = @moves.by_move_type(move_type_id) if params[:move_type].present?
+    @move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(@move_type_id) unless @move_type_id == nil
+    @moves = @moves.by_move_type(@move_type_id) unless @move_type_id == nil
 
-    @moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars} if @move_type.star_rating
+    @moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars} if @move_type!= nil && @move_type.star_rating
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
@@ -86,12 +96,11 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project = Project.find(params[:id])
+    @project = Project.find(params[:id]) if params[:id].present?
     
     @move_types = MoveType.order('created_at DESC')
-    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
-    @move_type = MoveType.find(move_type_id)
-
+    @move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
+    @move_type = MoveType.find(@move_type_id) unless @move_type_id == nil
 
     @states = State.where(project_id: @project.id).order(:position)
     
@@ -136,7 +145,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
-    @project = Project.find(params[:id])
+    @project = Project.find(params[:id]) unless @project != nil
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -152,7 +161,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project = Project.find(params[:id])
+    @project = Project.find(params[:id]) if params[:id].present?
     @project.destroy
 
     respond_to do |format|

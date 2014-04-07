@@ -1,54 +1,19 @@
-.row
-  .span6
-    %h4 Tomatoes Work
-    /= link_to 'New Move', new_move_path(project_id: @project.id), :class => 'btn btn-primary'
-      
-  .span5
-    %p
-      Team:
-      -@project.users.each do |user|
-        = link_to user.name, work_projects_path(:id => @project.id, :user => user.id, :move_type => @move_type, :date => @date), :class => 'btn btn-mini btn-info'
-      = link_to t("helpers.links.all"), work_projects_path(:id => @project.id, :move_type => @move_type, :date => @date), :class => 'btn btn-mini btn-info :active'
-    %p
-      /Move types:
-      /-@move_types.each do |move_type|
-      /  = link_to move_type.title, work_projects_path(:id => @project.id, :user => @user, :move_type => move_type.id, :date => @date), :class => 'btn btn-mini btn-info :active'
-      /= link_to "All", work_projects_path(:id => @project.id, :user => @user, :date => @date), :class => 'btn btn-mini btn-info :active'
-
-
 %br
 %br
+%table.table.table-striped
+  %tr
+    %th{:width => "20px;"}
+    %th{:width => "250px;"} Title
+    %th{:width => "100px;"} Owner
+    %th{:width => "120px;"} Publish date
+    %th{:width => "20px;"}
+    %th{:width => "20px;"}
+    %th{:width => "20px;"}
 
-%div#tomatoes
-  %h2#month
-    = link_to "<", id: @project.id, date: @date.prev_day
-    = link_to @date.strftime("%D"), id: @project.id, date: @date
-    = link_to ">", id: @project.id, date: @date.next_day
-
-  
-=form_tag done_tomatoes_path, method: :put do
-  =submit_tag "mark as done", :class => 'btn btn-mini'
-  =submit_tag "plan today", :class => 'btn btn-mini'
-  =submit_tag "unplan", :class => 'btn btn-mini'
-  %br
-  %br
-  %table.table.table-striped
-    %tr
-      %th{:width => "20px;"}
-      %th{:width => "20px;"}
-      %th{:width => "250px;"} Title
-      %th{:width => "150px;"} Pomodoro Story
-      %th{:width => "100px;"} Owner
-      %th{:width => "100px;"} Interruptions
-      %th{:width => "120px;"} Publish date
-      %th{:width => "20px;"}
-      %th{:width => "20px;"}
-      %th{:width => "20px;"}
-
-    - @tomatoes.each do |tomato|
+  - @moves.each do |move|
+    - move.tomatoes.each do |tomato|
       %tr
-        %td= check_box_tag "tomatoes_ids[]", tomato.id
-        %td 
+        %td
           - if tomato.state == 0 # not planed
             = image_tag("tomategrau.png", :width => 20, :height => 20)
           - elsif tomato.state == 1 #planed
@@ -56,30 +21,9 @@
           - elsif tomato.state == 2 #done
             = image_tag("tomaterot.png", :width => 20, :height => 20)
         %td= link_to tomato.title, tomato
-        %td= link_to tomato.move.title, move_path(tomato.move_id)
-        %td= link_to tomato.user.name, tomatoes_path(:user => tomato.user.id, :date => @date)  unless tomato.user == nil
-        %td
-          -internal=0; external=0; comments=0;
-          -tomato.interruptions.each do |interruption|
-            -case interruption.interruption_type
-              -when 0
-                -external=external+1
-              -when 1
-                -internal=internal+1
-              -when -1
-                -comments=comments+1
-          -if external > 0
-            = "#{external}"
-            = image_tag("tomategruenstoerer.png", :width => 20, :height => 20)
-          -if internal > 0
-            = "#{internal}"
-            = image_tag("tomategruenstoerer.png", :width => 20, :height => 20)
-          -if comments > 0
-            = "#{comments}"
-            = image_tag("kommentar.gif", :width => 15, :height => 15)
-        
+        %td= tomato.user.name
         %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-        %td= link_to t("helpers.links.start"), tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
-        %td= link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
-        %td= link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+        %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
+        %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
+        %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
 
