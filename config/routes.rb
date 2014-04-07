@@ -3,20 +3,11 @@ AgileMovesOs::Application.routes.draw do
                                       # to http://localhost:3000/en/users/edit
   resources :projects do
     collection do
-      get 'plan'
       get 'work'
       get 'report'
     end
        end
   resources :capacities
-
-  resources :reports do
-    collection do
-      get 'index'
-      get 'tomatoes'
-      get 'ideas'
-    end  
-  end
 
   resources :interruptions
 

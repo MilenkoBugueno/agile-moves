@@ -10,30 +10,7 @@ class ProjectsController < ApplicationController
       format.json { render json: @projects }
     end
   end
-  
-  def plan
-    if params[:id].present?
-      @project = Project.find(params[:id])
-    else
-      @project = Project.all.first
-    end
-    
-    @moves = Move.order('created_at DESC')
-    @moves = @moves.by_project_id(@project.id) if params[:id].present?
 
-    @moves = @moves.by_user_id(params[:user]) if params[:user].present?
-
-    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
-    @move_type = MoveType.find(move_type_id)
-
-    @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @project }
-    end
-  end
-  
   def work
     if params[:id].present?
       @project = Project.find(params[:id])
