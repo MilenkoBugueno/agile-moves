@@ -2,7 +2,7 @@
 .row
   .span8
     %h2= @tomato.title
-    = link_to "Back to my work", tomatoes_path(:user => current_user.id, :date => Date.today), :class => 'btn'
+    = link_to "Back to my work", work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
     = link_to t('.edit', :default => t("helpers.links.edit")), edit_tomato_path(@tomato), :class => 'btn'
     = link_to t('.destroy', :default => t("helpers.links.destroy")), tomato_path(@tomato), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
     %br
@@ -17,43 +17,20 @@
 
 
 %h3 Timer
-
+#counter_2
+  .desc
 %div#countdown
-
+= button_tag "Start Timer", :id => "btoStart", :name => "los", :onClick => "start_me()"
+= text_field_tag "txtTimer", nil, "value" => 25, "size" => 6
+%br
+%br
+%table
+  %tr
+    %td Started
+    %td= text_field_tag "hidStartTime", nil, "size" => 6
+  %tr
+    %td Ended
+    %td= text_field_tag "hidEndTime", nil, "size" => 100
 %hr
-  
 
-
-%h4= "Interruptions"  
-  
-=simple_form_for [@tomato, Interruption.new] do |f| 
-  .form-actions
-    = f.input :body, input_html: {style: 'height:40px; width:400px'}, :label => "New Interruption"
-    = f.hidden_field :user_id, :value => current_user.id
-    = f.submit "Internal Interruption", :class => 'btn btn-primary', name: "interruption_type", value: "internal"
-    = f.submit "External Interruption", :class => 'btn-danger', name: "interruption_type", value: "external"
-    = f.submit "Comment", :class => 'btn', name: "interruption_type", value: "comment"
-    
-
--@tomato.interruptions.each do |interruption|
-  .row
-    .span6
-      %h6
-        -if interruption.interruption_type == 0
-          = image_tag("tomategruenstoerer.png", :width => 25, :height => 25)
-          = " External interruption at #{interruption.created_at.to_s(:short)}" unless interruption.user == nil
-        -elsif interruption.interruption_type == 1
-          = image_tag("tomategruenstoerer.png", :width => 25, :height => 25)
-          = " Internal interruption at #{interruption.created_at.to_s(:short)}" unless interruption.user == nil
-        -elsif interruption.interruption_type == -1
-          = image_tag("kommentar.gif", :width => 20, :height => 20) 
-          = " Comment from #{interruption.user.name} at #{interruption.created_at.to_s(:short)}" unless interruption.user == nil
-          
-    .span4
-      = link_to t('.edit', :default => t("helpers.links.edit")), edit_interruption_path(interruption), :class => 'btn btn-mini'
-      = link_to t('.destroy', :default => t("helpers.links.destroy")), interruption_path(interruption), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'      
-  .row
-    .span10
-      %blockquote
-        =raw(interruption.body)
-  %br
+/= render :partial => 'interruptions' # in the first implementation we don't support interruptions

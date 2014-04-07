@@ -1,7 +1,18 @@
 =render :partial => "header"      
 
-%h4 Work
+.row
+  .span2
+    %h5
+      =@move_type.title unless @move_type == nil
+      Work
+      %br
 
-=render :partial => "work_rating"      
-
-/=render :partial => "work_tomatoes"      
+    %ul
+      -@project.move_types.each do |move_type|
+        %li
+          = link_to move_type.title, work_projects_path(id: @project.id, date: @date, move_type: move_type.id)
+  .span10
+    -if @move_type.thumb_rating || @move_type.star_rating
+      =render :partial => "work_rating"
+    -elsif @move_type.has_tomatoes
+      =render :partial => "work_tomatoes"

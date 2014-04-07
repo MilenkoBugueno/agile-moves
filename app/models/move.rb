@@ -9,7 +9,9 @@ class Move < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :ratings
   has_many :tomatoes
-  
+
+  after_create :create_objects
+
   scope :by_user_id, lambda {|uid| where(['user_id =?', uid])}
   scope :by_project_id, lambda {|uid| where(['project_id =?', uid])}
   scope :by_state_id, lambda {|uid| where(['state_id =?', uid])}
@@ -19,6 +21,16 @@ class Move < ActiveRecord::Base
   
   scope :by_star_rating, lambda {joins(:move_type).where(['star_rating =?', true])}
   scope :by_thumb_rating, lambda {joins(:move_type).where(['thumb_rating =?', true])}
+
+  def create_objects
+    move_type = self.move_type
+    if move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
+      for i in 1..move_type.tomatoes_number
+        Tomato.create(:move_id => self.id, :title => "Tomato", :user_id => self.user_id, :state => 0)
+      end
+    end
+
+  end
   
   def stars
     stars = 0;

@@ -12,5 +12,5 @@
   = f.hidden_field :project_id, :value => @project.id
   .form-actions
     = f.button :submit, :class => 'btn-primary'
-    = link_to t("helpers.links.cancel"), work_projects_path(:id => @project.id), :class => 'btn'
+    = link_to "Cancel", work_projects_path(:id => @project.id), :class => 'btn'
     

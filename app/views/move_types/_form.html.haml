@@ -3,7 +3,11 @@
   = f.input :body
   = f.input :thumb_rating
   = f.input :star_rating
-  = f.input :has_tomatoes
+  .row
+    .span4
+      = f.input :has_tomatoes
+    .span8
+      = f.input :tomatoes_number, :label => "Number of automatically generated tomatoes"
   = f.input :has_twitter_idea
   
   .form-actions
