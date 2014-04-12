@@ -31,6 +31,16 @@
   %tr
     %td Ended
     %td= text_field_tag "hidEndTime", nil, "size" => 100
+
+/mark as done button
+= simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
+  = f.hidden_field :publish_date, :value => Date.today()
+  = f.hidden_field :state, :value => 2
+  /= f.hidden :end_time, todo-value
+  /= f.hidden :start_time, todo-value
+  .form-actions
+    = f.button :submit, "Mark as done", :class => 'btn-primary'
+
 %hr
 
 /= render :partial => 'interruptions' # in the first implementation we don't support interruptions
