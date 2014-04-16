@@ -8,8 +8,15 @@
     .span2
       = link_to t("projects.newmove"), new_move_path(project_id: @project.id), :class => 'btn btn-primary'
     .span3
-      = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date), :class => 'btn btn-warning'
-      = link_to t("projects.report"), report_projects_path(id: @project.id), :class => 'btn btn-warning'
+      - if page == "work"
+        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date), :class => 'btn btn-warning', :disabled => true
+        = link_to t("projects.report"), report_projects_path(id: @project.id), :class => 'btn btn-warning'
+      - elsif page == "report"
+        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date), :class => 'btn btn-warning'
+        = link_to t("projects.report"), report_projects_path(id: @project.id), :class => 'btn btn-warning', :disabled => true
+      -else
+        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date), :class => 'btn btn-warning'
+        = link_to t("projects.report"), report_projects_path(id: @project.id), :class => 'btn btn-warning'
 
 %br 
 %br

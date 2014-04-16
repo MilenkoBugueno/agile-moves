@@ -7,7 +7,7 @@ function start_me() {
     stime = document.getElementById("txtTimer").value;
     fnull = ((stime < 10) ? "0" : "");
     stime = fnull + stime + ":00";
-
+    //stime = "00:05";   //Debug-Zeit
     if (x == "los")
     {
 
@@ -29,8 +29,8 @@ function start_me() {
         var stunden  = ((anfang.getHours() < 10) ? "0" : "");
         var minuten  = ((anfang.getMinutes() < 10) ? "0" : "");
         azeit = stunden + anfang.getHours() + ":" + minuten + anfang.getMinutes();
-        document.getElementById("hidStartTime").value = azeit;
-        document.getElementById("hidEndTime").value = "";
+        document.getElementById("tomato_start_time").value = azeit;
+        document.getElementById("tomato_end_time").value = "";
         document.getElementById("btoStart").disabled = true;
     }
 }
@@ -43,10 +43,10 @@ function end_me() {
     var stunden  = ((ende.getHours() < 10) ? "0" : "");
     var minuten  = ((ende.getMinutes() < 10) ? "0" : "");
     ezeit = stunden + ende.getHours() + ":" + minuten + ende.getMinutes();
-    document.getElementById("hidEndTime").value = ezeit;
+    document.getElementById("tomato_end_time").value = ezeit;
 
-    var zeita = document.getElementById("hidStartTime").value;
-    var zeite = document.getElementById("hidEndTime").value;
+    //var zeita = document.getElementById("start_time").value;
+    //var zeite = document.getElementById("end_time").value;
 
     document.getElementById("btoStart").name = "los";
     document.getElementById("btoStart").disabled = false;
