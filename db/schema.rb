@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140403142151) do
+ActiveRecord::Schema.define(:version => 20140416053944) do
 
   create_table "capacities", :force => true do |t|
     t.integer  "tomatoes_capacity"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20140403142151) do
     t.integer  "move_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "tomato_id"
   end
 
   create_table "roles", :force => true do |t|

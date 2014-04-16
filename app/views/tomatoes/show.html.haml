@@ -16,21 +16,12 @@
 %hr
 
 
-%h3 Timer
 #counter_2
   .desc
 %div#countdown
-= button_tag "Start Timer", :id => "btoStart", :name => "los", :onClick => "start_me()"
+%br
+= button_tag "Start", :id => "btoStart", :class => 'btn btn-mini', :name => "los", :onClick => "start_me()"
 = text_field_tag "txtTimer", nil, "value" => 25, "size" => 6
-%br
-%br
-%table
-  %tr
-    %td Started
-    %td= text_field_tag "hidStartTime", nil, "size" => 6
-  %tr
-    %td Ended
-    %td= text_field_tag "hidEndTime", nil, "size" => 100
 
 /mark as done button
 = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
@@ -38,9 +29,57 @@
   = f.hidden_field :state, :value => 2
   /= f.hidden :end_time, todo-value
   /= f.hidden :start_time, todo-value
-  .form-actions
+  %br
+  -if @tomato.state == 2
+    = f.button :submit, "Marked as done", :class => 'btn-primary', disabled: true
+  -else
     = f.button :submit, "Mark as done", :class => 'btn-primary'
 
 %hr
 
-/= render :partial => 'interruptions' # in the first implementation we don't support interruptions
+-if @tomato.state == 2 && !@tomato.rating.present?
+  %h4= t("helpers.links.newtomatorating")
+  %br
+
+  =simple_form_for [@tomato, Rating.new] do |f|
+    = f.input :thumb_rating, :label => t("tomatoes.rating.thumbrating"), :collection => [['no', 0], ['yes', 1]], :as => :radio_buttons, item_wrapper_class: 'inline'
+    = f.input :star_rating, :label => t("tomatoes.rating.starrating"), :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
+    = f.input :body, :label => t("tomatoes.rating.change"), input_html: {style: 'height:100px; width:300px'}
+    = f.hidden_field :user_id, :value => current_user.id
+    .form-actions
+      = f.button :submit, :class => 'btn-primary'
+-elsif @tomato.rating.present?
+  /show rating
+  %h4= t("tomato.rating.showrating")
+  %br
+
+  -rating = @tomato.rating
+  %p
+    -if rating != nil
+      = t("tomatoes.rating.thumbrating")
+      -case rating.thumb_rating
+        -when 0
+          = image_tag("daumenrunter.png", :width => 20, :height => 20)
+        -when 1
+          = image_tag("daumenhoch.png", :width => 20, :height => 20)
+
+  %p
+    -if @tomato.rating != nil
+      = t("tomatoes.rating.starrating")
+      -case rating.star_rating
+        -when -1
+          = image_tag("kommentar.gif", :width => 20, :height => 20)
+        -when 0
+          = image_tag("daumenrunter.png", :width => 20, :height => 20)
+        -else
+          = rating.star_rating
+          = image_tag("star.png", :width => 20, :height => 20)
+  %p
+    = t("tomatoes.rating.change")
+    %blockquote
+      =raw(rating.body)
+  %p
+    = link_to t("helpers.links.edit"), edit_rating_path(rating), :class => 'btn btn-mini'
+    = link_to t("helpers.links.destroy"), rating_path(rating), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+
+

@@ -40,9 +40,16 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    @move = Move.find(params[:move_id])
-    @rating = @move.ratings.create!(params[:rating])
-    
+    if params[:move_id].present?
+      @move = Move.find(params[:move_id])
+      @rating = @move.ratings.create!(params[:rating])
+    elsif params[:tomato_id].present?
+      @tomato = Tomato.find(params[:tomato_id])
+      @move = @tomato.move
+      @rating = Rating.new(params[:rating])
+      @rating.tomato_id = @tomato.id
+    end
+
     if params[:thumb_rating] == "Approve"
       @rating.thumb_rating = 1;
     elsif params[:thumb_rating] == "Reject"
@@ -57,11 +64,11 @@ class RatingsController < ApplicationController
     
     respond_to do |format|
       if @rating.save
-        format.html { redirect_to @move, notice: 'Rating was successfully created.' }
-        format.json { render json: @move, status: :created, location: @move }
+        format.html { redirect_to @tomato, notice: 'Rating was successfully created.' }
+        format.json { render json: @tomato, status: :created, location: @tomato }
       else
         format.html { render action: "new" }
-        format.json { render json: @move.errors, status: :unprocessable_entity }
+        format.json { render json: @tomato.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -32,6 +32,7 @@ AgileMovesOs::Application.routes.draw do
   
   resources :tomatoes do
     resources :interruptions
+    resources :ratings
     collection do
       put :done
       put :move

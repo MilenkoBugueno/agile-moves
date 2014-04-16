@@ -63,6 +63,7 @@ en:
           newinterruption: "New Interruption"
           starsranking: "Stars Ranking"
           thumbsranking: "Thumbs Ranking"
+          newtomatorating: "Rate the Tomato"
       titles:
           edit: "Edit %{model}"
           save: "Save %{model}"
@@ -77,3 +78,11 @@ en:
           backtoproject: "Back to Project"
           movetype: "Move Type:"
           moveid: "Move Id"
+  tomatoes:
+      rating:
+          starrating: "Fun rating"
+          thumbrating: "Goal achieved?"
+          change: "What do I want to change?"
+  tomato:
+    rating:
+      showrating: "My Rating"

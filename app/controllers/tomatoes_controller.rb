@@ -117,7 +117,7 @@ class TomatoesController < ApplicationController
     @tomato.destroy
 
     respond_to do |format|
-      format.html { redirect_to tomatoes_url }
+      format.html { redirect_to work_projects_path(:id => @project.id) }
       format.json { head :no_content }
     end
   end
