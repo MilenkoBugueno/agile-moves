@@ -9,38 +9,35 @@
     %br
     =raw(@tomato.body)
   .span4
-    %h5="Start time: #{@tomato.start_time}" unless @tomato.start_time == nil
-    %h5="End time: #{@tomato.end_time}" unless @tomato.end_time == nil
+    %h5="Start time: #{@tomato.start_time.strftime("%H:%M")}" unless @tomato.start_time == nil
+    %h5="End time: #{@tomato.end_time.strftime("%H:%M")}" unless @tomato.end_time == nil
     %h5="Owner: #{@tomato.user.name}" unless @tomato.user == nil
     
 %hr
 
 
 %h3 Timer
-#counter_2
-  .desc
-%div#countdown
-= button_tag "Start Timer", :id => "btoStart", :name => "los", :onClick => "start_me()"
-= text_field_tag "txtTimer", nil, "value" => 25, "size" => 6
-%br
-%br
 %table
   %tr
-    %td Started
-    %td= text_field_tag "hidStartTime", nil, "size" => 6
-  %tr
-    %td Ended
-    %td= text_field_tag "hidEndTime", nil, "size" => 100
+    %td{:rowspan => 2}
+      #counter_2
+        .desc
+    %td{:rowspan => 2}
+      %div#countdown
+    %td
+      = button_tag "Start Timer", :id => "btoStart", :name => "los", :onClick => "start_me()"
+    %td{:rowspan => 2}
 
+  %tr
+    %td= text_field_tag "txtTimer", nil, "value" => 25, "style" => "height:12px;width:2em;"
 /mark as done button
 = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
   = f.hidden_field :publish_date, :value => Date.today()
   = f.hidden_field :state, :value => 2
-  /= f.hidden :end_time, todo-value
-  /= f.hidden :start_time, todo-value
+  = f.hidden_field :end_time
+  = f.hidden_field :start_time
   .form-actions
     = f.button :submit, "Mark as done", :class => 'btn-primary'
-
 %hr
 
 /= render :partial => 'interruptions' # in the first implementation we don't support interruptions
