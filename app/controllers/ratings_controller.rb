@@ -47,6 +47,10 @@ class RatingsController < ApplicationController
       @container = Tomato.find(params[:tomato_id])
       @rating = Rating.new(params[:rating])
     end
+    
+    if params[:reject_star_rating].present?
+      @rating.star_rating = 0
+    end
 
     respond_to do |format|
       if @rating.save
