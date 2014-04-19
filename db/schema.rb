@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20140418172722) do
     t.datetime "updated_at",        :null => false
   end
 
+<<<<<<< HEAD
   create_table "live_tomatoes", :force => true do |t|
     t.text     "title"
     t.text     "starttime"
@@ -42,6 +43,10 @@ ActiveRecord::Schema.define(:version => 20140418172722) do
     t.integer  "status"
     t.integer  "tomato_id"
   end
+=======
+# Could not dump table "move_types" because of following StandardError
+#   Unknown type 'bool' for column 'has_twitter_idea'
+>>>>>>> af3a870c0d4ba169d4ecbf90c4eaab0e575a823c
 
 # Could not dump table "move_types" because of following StandardError
 #   Unknown type 'bool' for column 'has_twitter_idea'
