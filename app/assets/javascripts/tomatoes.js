@@ -1,13 +1,32 @@
-function start_me() {
+function start_me(userid, username, title, tomato_id) {
 
+    var anfang;
+    var ende;
+    var azeit;
+    anfang = new Date();
+    var stunden  = ((anfang.getHours() < 10) ? "0" : "");
+    var minuten  = ((anfang.getMinutes() < 10) ? "0" : "");
+    var estunden;
+    var eminuten;
     var x;
     var stime;
     var fnull;
+    var ezeit;
+    var tomatendauer;
+
     x = document.getElementById("btoStart").name;
-    stime = document.getElementById("txtTimer").value;
+    tomatendauer = document.getElementById("txtTimer").value;
+    ende = new Date(anfang.getTime() + 60000*tomatendauer);
+    estunden  = ((ende.getHours() < 10) ? "0" : "");
+    eminuten  = ((ende.getMinutes() < 10) ? "0" : "");
+
     fnull = ((stime < 10) ? "0" : "");
-    stime = fnull + stime + ":00";
+    stime = fnull + tomatendauer + ":00";
     //stime = "00:05";   //Debug-Zeit
+    azeit = stunden + anfang.getHours() + ":" + minuten + anfang.getMinutes();
+    ezeit = estunden + ende.getHours() + ":" + eminuten + ende.getMinutes();
+    window.open('/de/live_tomatoes/new?live=1&tomato_id=' + tomato_id + '&userid=' + userid + '&username=' + username + '&title=' + title + '&starttime=' + azeit + '&endtime=' + ezeit + '&currenttime=' + tomatendauer,'mywindow');
+
     if (x == "los")
     {
 
@@ -23,12 +42,7 @@ function start_me() {
 
         document.getElementById("btoStart").name = "laeuft";
 
-        var anfang;
-        var azeit;
-        anfang = new Date();
-        var stunden  = ((anfang.getHours() < 10) ? "0" : "");
-        var minuten  = ((anfang.getMinutes() < 10) ? "0" : "");
-        azeit = stunden + anfang.getHours() + ":" + minuten + anfang.getMinutes();
+
         document.getElementById("tomato_start_time").value = azeit;
         document.getElementById("tomato_end_time").value = "";
         document.getElementById("btoStart").disabled = true;

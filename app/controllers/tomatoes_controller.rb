@@ -27,7 +27,6 @@ class TomatoesController < ApplicationController
     @move_type = @tomato.move.move_type
     @project = Project.find(@tomato.move.project_id) if @tomato.move.project_id.present?
 
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @tomato }
@@ -77,9 +76,12 @@ class TomatoesController < ApplicationController
   
   def done
     @move = Move.find(params[:move_id]) unless params[:move_id] == nil
-    
+
+    @live_tomato = LiveTomato.where(tomato_id: params[:tomato_id])
+
     if params["commit"]=="mark as done"
       Tomato.update_all({state: 2, publish_date: Date.today}, {id: params[:tomatoes_ids]})
+      LiveTomato.update(@live_tomato, :status => '2')
     elsif params["commit"]=="plan today"
       Tomato.update_all({state: 1, publish_date: Date.today}, {id: params[:tomatoes_ids]})
     elsif params["commit"]=="unplan"

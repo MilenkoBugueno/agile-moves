@@ -1,0 +1,33 @@
+%table{:class => 'live_tomato_table'}
+  %tr
+    %th Title
+    %th Starttime
+    %th Endtime
+    %th Remaining
+    %th Username
+    %th Status
+    %th Tomato ID
+    %th
+
+  - @live_tomatoes.each do |live_tomato|
+    %tr
+      %td= live_tomato.title
+      %td= live_tomato.starttime
+      %td= live_tomato.endtime
+      %td{:class => "remaining"}
+        = live_tomato.currenttime
+      %td= live_tomato.username
+      %td{:class => "live_tomato_status"}
+        - if live_tomato.status == 1
+          = image_tag("kitt-loader.gif")
+        - else
+          = image_tag("tomaterot.png", :size => "16x16")
+      %td{:class => "live_tomato_tomato_id"}
+        = live_tomato.tomato_id
+      %td= link_to 'Destroy', live_tomato, :method => :delete, :remote => true, :class => 'remove_live_tomato', :data => { :confirm => 'Are you sure?' }
+%br
+= link_to 'Refresh List', '/de/live_refresh', remote: true, :class => 'refresh_live_list'
+%span{:style => 'font-size: 75%'}
+  &nbsp;&nbsp;Last Refresh:
+  = Time.now.strftime("%H:%M:%S")
+%br

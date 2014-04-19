@@ -25,7 +25,7 @@
       %td{:rowspan => 2}
         %div#countdown
       %td
-        = button_tag "Start Timer", :id => "btoStart", :name => "los", :onClick => "start_me()"
+        = button_tag "Start Timer", :id => "btoStart", :name => "los", :onClick => "start_me('#{@tomato.user.id}', '#{@tomato.user.name}', '#{@tomato.title}', '#{@tomato.id}')"
       %td{:rowspan => 2}
     %tr
       %td= text_field_tag "txtTimer", nil, "value" => 25, "style" => "height:12px;width:2em;"
@@ -44,7 +44,6 @@
 -if @tomato.state == 2 && !@tomato.rating.present?
   %h4= t("helpers.links.newtomatorating")
   %br
-
   =simple_form_for [@tomato, Rating.new] do |f|
     = f.input :thumb_rating, :label => t("tomatoes.rating.thumbrating"), :collection => [['no', 0], ['yes', 1]], :as => :radio_buttons, item_wrapper_class: 'inline'
     = f.input :star_rating, :label => t("tomatoes.rating.starrating"), :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'

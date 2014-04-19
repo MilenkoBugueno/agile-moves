@@ -1,0 +1,26 @@
+%table
+  %tr
+    %td= image_tag("loader.gif")
+    %td Creating Tomato...
+#hideit{:style => "display: none"}
+  = simple_form_for(@live_tomato) do |f|
+    = f.error_notification
+    .form-inputs
+
+      = f.input :title
+
+      = f.input :starttime
+
+      = f.input :endtime
+
+      = f.input :currenttime
+
+      = f.input :username
+
+      = f.input :userid
+
+      = f.input :status
+
+      = f.input :tomato_id
+    .form-actions
+      = f.button :submit
