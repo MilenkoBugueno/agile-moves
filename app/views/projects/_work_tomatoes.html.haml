@@ -3,10 +3,10 @@
 %table.table.table-striped
   %tr
     %th{:width => "20px;"}
+    %th{:width => "20px;"} Rated?
     %th{:width => "250px;"} Title
     %th{:width => "100px;"} Owner
     %th{:width => "120px;"} Publish date
-    %th{:width => "20px;"}
     %th{:width => "20px;"}
     %th{:width => "20px;"}
 
@@ -20,10 +20,17 @@
             = image_tag("tomategruen.png", :width => 20, :height => 20)
           - elsif tomato.state == 2 #done
             = image_tag("tomaterot.png", :width => 20, :height => 20)
+        %td
+          - if tomato.rating != nil 
+            -if tomato.rating.thumb_rating > 0
+              = image_tag("daumenhoch.png", :width => 20, :height => 20)
+            -else
+              = image_tag("daumenrunter.png", :width => 20, :height => 20)
+          - else 
+            = image_tag("bewerten.png", :width => 20, :height => 20)
         %td= link_to tomato.title, tomato
         %td= tomato.user.name
         %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-        %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
         %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
         %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
 
