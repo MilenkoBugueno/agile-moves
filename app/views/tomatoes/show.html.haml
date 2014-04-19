@@ -49,6 +49,7 @@
     = f.input :star_rating, :label => t("tomatoes.rating.starrating"), :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
     = f.input :body, :label => t("tomatoes.rating.change"), input_html: {style: 'height:100px; width:300px'}
     = f.hidden_field :user_id, :value => current_user.id
+    = f.hidden_field :tomato_id, :value => @tomato.id
     .form-actions
       = f.button :submit, :class => 'btn-primary'
 -elsif @tomato.rating.present?
