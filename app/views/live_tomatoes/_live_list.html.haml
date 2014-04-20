@@ -7,6 +7,8 @@
     %th Username
     %th Status
     %th Tomato ID
+    %th Goal
+    %th Fun
     %th
 
   - @live_tomatoes.each do |live_tomato|
@@ -24,6 +26,23 @@
           = image_tag("tomaterot.png", :size => "16x16")
       %td{:class => "live_tomato_tomato_id"}
         = live_tomato.tomato_id
+      %td
+        -if live_tomato.thumb_rating != nil
+          -case live_tomato.thumb_rating
+            -when 0
+              = image_tag("daumenrunter.png", :width => 16, :height => 16)
+            -when 1
+              = image_tag("daumenhoch.png", :width => 16, :height => 16)
+      %td
+        -if live_tomato.star_rating != nil
+          -case live_tomato.star_rating
+            -when -1
+              = image_tag("kommentar.gif", :width => 16, :height => 16)
+            -when 0
+              = image_tag("daumenrunter.png", :width => 16, :height => 16)
+            -else
+              = live_tomato.star_rating
+              = image_tag("star.png", :width => 16, :height => 16)
       %td= link_to 'Destroy', live_tomato, :method => :delete, :remote => true, :class => 'remove_live_tomato', :data => { :confirm => 'Are you sure?' }
 %br
 = link_to 'Refresh List', '/de/live_refresh', remote: true, :class => 'refresh_live_list'

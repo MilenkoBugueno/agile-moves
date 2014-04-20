@@ -46,6 +46,13 @@ class RatingsController < ApplicationController
     elsif params[:tomato_id].present?
       @container = Tomato.find(params[:tomato_id])
       @rating = Rating.new(params[:rating])
+
+      if LiveTomato.where(:tomato_id => @container.id).blank?
+        # do nothing
+      else
+        @live_tomato = LiveTomato.where(tomato_id: @container.id)
+        LiveTomato.update(@live_tomato, :star_rating => @rating.star_rating, :thumb_rating => @rating.thumb_rating)
+      end
     end
     
     if params[:reject_star_rating].present?

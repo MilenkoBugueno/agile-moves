@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140418172722) do
+ActiveRecord::Schema.define(:version => 20140420182919) do
 
   create_table "capacities", :force => true do |t|
     t.integer  "tomatoes_capacity"
@@ -35,12 +35,14 @@ ActiveRecord::Schema.define(:version => 20140418172722) do
     t.text     "starttime"
     t.text     "endtime"
     t.integer  "currenttime"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "userid"
     t.text     "username"
     t.integer  "status"
     t.integer  "tomato_id"
+    t.integer  "thumb_rating"
+    t.integer  "star_rating"
   end
 
 # Could not dump table "move_types" because of following StandardError
