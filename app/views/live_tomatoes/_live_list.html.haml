@@ -17,7 +17,7 @@
       %td= live_tomato.starttime
       %td= live_tomato.endtime
       %td{:class => "remaining"}
-        = live_tomato.currenttime
+        = live_tomato.remaining_time(live_tomato)
       %td= live_tomato.username
       %td{:class => "live_tomato_status"}
         - if live_tomato.status == 1
