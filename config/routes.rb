@@ -10,8 +10,6 @@ AgileMovesOs::Application.routes.draw do
       get 'report'
     end
        end
-  resources :capacities
-
   resources :interruptions
 
   resources :states
