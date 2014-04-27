@@ -44,10 +44,24 @@
 -if @tomato.state == 2 && !@tomato.rating.present?
   %h4= t("helpers.links.newtomatorating")
   %br
+
+  %fieldset.star_rating
+    %input{:type => "radio", :id => "star5", :name => "rating", :value => "5", :onClick => "rate_me(5);"}
+    %label{:for => "star5"} Test
+    %input{:type => "radio", :id => "star4", :name => "rating", :value => "4", :onClick => "rate_me(4);"}
+    %label{:for => "star4"} Test
+    %input{:type => "radio", :id => "star3", :name => "rating", :value => "3", :onClick => "rate_me(3);"}
+    %label{:for => "star3"} Test
+    %input{:type => "radio", :id => "star2", :name => "rating", :value => "2", :onClick => "rate_me(2);"}
+    %label{:for => "star2"} Test
+    %input{:type => "radio", :id => "star1", :name => "rating", :value => "1", :onClick => "rate_me(1);"}
+    %label{:for => "star1"} Test
+  %br
   =simple_form_for [@tomato, Rating.new] do |f|
     = f.input :thumb_rating, :label => t("tomatoes.rating.thumbrating"), :collection => [['no', 0], ['yes', 1]], :as => :radio_buttons, item_wrapper_class: 'inline'
-    = f.input :star_rating, :label => t("tomatoes.rating.starrating"), :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
+    /= f.input :star_rating, :label => t("tomatoes.rating.starrating"), :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
     = f.input :body, :label => t("tomatoes.rating.change"), input_html: {style: 'height:100px; width:300px'}
+    = f.hidden_field :star_rating, :value => "0"
     = f.hidden_field :user_id, :value => current_user.id
     = f.hidden_field :tomato_id, :value => @tomato.id
     .form-actions

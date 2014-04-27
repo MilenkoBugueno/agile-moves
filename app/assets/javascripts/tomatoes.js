@@ -68,3 +68,7 @@ function end_me() {
     alert("AUFHÖREN!");
 
 }
+
+function rate_me(x) {
+    document.getElementById("rating_star_rating").value = x;
+}
