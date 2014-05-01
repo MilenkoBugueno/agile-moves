@@ -1,14 +1,15 @@
 %table{:class => 'live_tomato_table'}
   %tr
-    %th Title
-    %th Starttime
-    %th Endtime
-    %th Remaining
-    %th Username
-    %th Status
-    %th Tomato ID
-    %th Goal
-    %th Fun
+    %th= t("live_tomato.title")
+    %th= t("live_tomato.starttime")
+    %th= t("live_tomato.endtime")
+    %th= t("live_tomato.remaining")
+    %th= t("live_tomato.username")
+    %th= t("live_tomato.status")
+    %th= t("live_tomato.tomatoid")
+    %th= t("live_tomato.goal")
+    %th= t("live_tomato.fun")
+    -# TODO Check for Admin Rights
     %th
 
   - @live_tomatoes.each do |live_tomato|
@@ -43,10 +44,11 @@
             -else
               = live_tomato.star_rating
               = image_tag("star.png", :width => 16, :height => 16)
-      %td= link_to 'Destroy', live_tomato, :method => :delete, :remote => true, :class => 'remove_live_tomato', :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Destroy', live_tomato, :method => :delete, :remote => true, :class => 'remove_live_tomato', :data => { :confirm => t("helpers.links.confirm") }
 %br
-= link_to 'Refresh List', '/de/live_refresh', remote: true, :class => 'refresh_live_list'
+= link_to t("live_tomato.refresh"), '/de/live_refresh', remote: true, :class => 'refresh_live_list'
 %span{:style => 'font-size: 75%'}
-  &nbsp;&nbsp;Last Refresh:
+  &nbsp;&nbsp;
+  = t("live_tomato.last_refresh")
   = Time.now.strftime("%H:%M:%S")
 %br

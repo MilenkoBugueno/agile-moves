@@ -83,6 +83,20 @@ en:
           starrating: "Fun rating"
           thumbrating: "Goal achieved?"
           change: "What do I want to change?"
+      timer:
+        start: "Start Timer"
   tomato:
     rating:
       showrating: "My Rating"
+  live_tomato:
+      title: "Title"
+      starttime: "Start"
+      endtime: "End"
+      username: "User"
+      status: "Status"
+      tomatoid: "Tomato ID"
+      goal: "Goal"
+      fun: "Fun"
+      remaining: "Remaining"
+      refresh: "Refresh List"
+      last_refresh: "Last Refresh"

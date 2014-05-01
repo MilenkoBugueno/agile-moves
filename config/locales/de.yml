@@ -38,6 +38,9 @@ de:
   logout:
   capacities:
         newcapacity: "Neue Kapazität"
+  tomatoes:
+    timer:
+      start: "Start Timer"
   helpers:
       links:
          back: "Zurück"
@@ -76,6 +79,25 @@ de:
             backtoproject: "Zurück zum Projekt"
             movetype: "Move Typ:"
             moveid: "Move Id"
+  tomatoes:
+      rating:
+          starrating: "Fun rating"
+          thumbrating: "Goal achieved?"
+          change: "What do I want to change?"
+      timer:
+        start: "Start Timer"
+  live_tomato:
+      title: "Bezeichnung"
+      starttime: "Beginn"
+      endtime: "Ende"
+      username: "Benutzer"
+      status: "Status"
+      tomatoid: "Nummer"
+      goal: "Ziel"
+      fun: "Spaß"
+      remaining: "Verbleibend"
+      refresh: "Liste aktualisieren"
+      last_refresh: "Letzte Aktualisierung"
   error_notification:
       default_message: "Bitte schauen sie sich die unten stehenden Fehler an:"
   devise:
