@@ -19,11 +19,12 @@ function start_me(userid, username, title, tomato_id) {
 
     x = document.getElementById("btoStart").name;
     tomatendauer = document.getElementById("txtTimer").value;
+
     ende = new Date(anfang.getTime() + 60000*tomatendauer);
     estunden  = ((ende.getHours() < 10) ? "0" : "");
     eminuten  = ((ende.getMinutes() < 10) ? "0" : "");
 
-    fnull = ((stime < 10) ? "0" : "");
+    fnull = ((tomatendauer < 10) ? "0" : "");
     stime = fnull + tomatendauer + ":00";
     //stime = "00:05";   //Debug-Zeit
     tt_tomaten_zeit = stime;
@@ -106,4 +107,47 @@ function update_title() {
 
 function rate_me(x) {
     document.getElementById("rating_star_rating").value = x;
+}
+
+function show_comment() {
+
+    if (document.getElementById("tom_change_inp").style.display == "block") {
+        document.getElementById("tom_change_inp").style.display = "none";
+        document.getElementById("rating_body").value = "";
+    }
+    else {
+        document.getElementById("tom_change_inp").style.display = "block"
+    }
+    //Verhindert ein Ausführen des Links
+    return false;
+}
+
+function thumb_it(x) {
+    document.getElementById("rating_thumb_rating").value = x;
+    if (x == 1) {
+        document.getElementById("tomato_goal_up").style.height = "30px";
+        document.getElementById("tomato_goal_down").style.height = "20px";
+        document.getElementById("tomato_goal_up").onmouseout = function()
+        {
+          //don't change the function
+        };
+        document.getElementById("tomato_goal_down").onmouseout = function()
+        {
+            this.style='height: 20px';
+        };
+    }
+    else {
+        document.getElementById("tomato_goal_down").style.height = "30px";
+        document.getElementById("tomato_goal_up").style.height = "20px";
+        document.getElementById("tomato_goal_down").onmouseout = function()
+        {
+           //don't change the function
+        };
+        document.getElementById("tomato_goal_up").onmouseout = function()
+        {
+            this.style='height: 20px';
+        };
+    }
+
+    return false;
 }

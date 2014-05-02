@@ -29,7 +29,7 @@
       %td{:rowspan => 2}
     %tr
       %td= text_field_tag "txtTimer", nil, "value" => 25, "style" => "height:12px;width:2em;"
-  %audio{:src => "/assets/monks.wav", :id => "tomato_finished_id", :preload => "auto"}
+  %audio{:src => "/assets/monks.mp3", :id => "tomato_finished_id", :preload => "auto"}
 
   /mark as done button
   = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
@@ -48,21 +48,38 @@
   %h5= t("tomatoes.rating.starrating")
   %fieldset.star_rating
     %input{:type => "radio", :id => "star5", :name => "rating", :value => "5", :onClick => "rate_me(5);"}
-    %label{:for => "star5"} Test
+    %label{:for => "star5"} dummy
     %input{:type => "radio", :id => "star4", :name => "rating", :value => "4", :onClick => "rate_me(4);"}
-    %label{:for => "star4"} Test
+    %label{:for => "star4"} dummy
     %input{:type => "radio", :id => "star3", :name => "rating", :value => "3", :onClick => "rate_me(3);"}
-    %label{:for => "star3"} Test
+    %label{:for => "star3"} dummy
     %input{:type => "radio", :id => "star2", :name => "rating", :value => "2", :onClick => "rate_me(2);"}
-    %label{:for => "star2"} Test
+    %label{:for => "star2"} dummy
     %input{:type => "radio", :id => "star1", :name => "rating", :value => "1", :onClick => "rate_me(1);"}
-    %label{:for => "star1"} Test
+    %label{:for => "star1"} dummy
+  %br
+  %br
+  %h5= t("tomatoes.rating.thumbrating")
+  %table{:style => "height: 40px"}
+    %tr
+      %td{:style => "width: 40px"}
+        %a{:href => "#", :onClick => "return thumb_it(1)"}
+          = image_tag("daumenhoch.png", :id => "tomato_goal_up", :style => "height: 20px", :onMouseOver => "this.style='height: 30px'", :onMouseOut => "this.style='height: 20px'")
+      %td
+        %a{:href => "#", :onClick => "return thumb_it(0)"}
+          = image_tag("daumenrunter.png", :id => "tomato_goal_down", :style => "height: 20px", :onMouseOver => "this.style='height: 30px'", :onMouseOut => "this.style='height: 20px'")
+  %br
+  %br
+  %a{:href => "#", :onClick => "return show_comment()"}
+    %b= t("tomatoes.rating.comment")
   %br
   %br
   =simple_form_for [@tomato, Rating.new] do |f|
-    = f.input :thumb_rating, :label => t("tomatoes.rating.thumbrating"), :collection => [['no', 0], ['yes', 1]], :as => :radio_buttons, item_wrapper_class: 'inline'
+    #tom_change_inp{:style => "display:none"}
+      = f.input :body, input_html: {style: 'height:100px; width:300px'}, :label => false
+    = f.hidden_field :thumb_rating, :label => false
     /= f.input :star_rating, :label => t("tomatoes.rating.starrating"), :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
-    = f.input :body, :label => t("tomatoes.rating.change"), input_html: {style: 'height:100px; width:300px'}
+    /= f.input :body, :label => t("tomatoes.rating.change"), input_html: {style: 'height:100px; width:300px'}
     = f.hidden_field :star_rating, :value => "0"
     = f.hidden_field :user_id, :value => current_user.id
     = f.hidden_field :tomato_id, :value => @tomato.id
@@ -95,11 +112,11 @@
           = rating.star_rating
           = image_tag("star.png", :width => 20, :height => 20)
   %p
-    = t("tomatoes.rating.change")
+    = t("tomatoes.rating.commented")
     %blockquote
       =raw(rating.body)
   %p
     = link_to t("helpers.links.edit"), edit_rating_path(rating), :class => 'btn btn-mini'
-    = link_to t("helpers.links.destroy"), rating_path(rating), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+    //= link_to t("helpers.links.destroy"), rating_path(rating), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 
 

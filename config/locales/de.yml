@@ -82,8 +82,10 @@ de:
   tomatoes:
       rating:
           starrating: "Fun rating"
-          thumbrating: "Goal achieved?"
-          change: "What do I want to change?"
+          thumbrating: "Ziel erreicht?"
+          change: "Was möchte ich ändern?"
+          comment: "Tomate kommentieren"
+          commented: "Tomaten Kommentar"
       timer:
         start: "Start Timer"
   live_tomato:

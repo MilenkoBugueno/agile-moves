@@ -83,6 +83,8 @@ en:
           starrating: "Fun rating"
           thumbrating: "Goal achieved?"
           change: "What do I want to change?"
+          comment: "Comment tomato"
+          commented: "Tomato comment"
       timer:
         start: "Start Timer"
   tomato:
