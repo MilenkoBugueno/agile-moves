@@ -29,6 +29,7 @@
       %td{:rowspan => 2}
     %tr
       %td= text_field_tag "txtTimer", nil, "value" => 25, "style" => "height:12px;width:2em;"
+  %audio{:src => "/assets/monks.wav", :id => "tomato_finished_id", :preload => "auto"}
 
   /mark as done button
   = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
