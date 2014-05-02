@@ -17,8 +17,9 @@
           -project.users.each do |user|
             = user.name
         %td
-          = link_to t("helpers.links.admin"), project_path(project), :class => 'btn btn-mini'
-          = link_to t("helpers.links.edit"), edit_project_path(project), :class => 'btn btn-mini'
-          = link_to t("helpers.links.destroy"), project_path(project), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+          - if current_user.has_role? :admin
+            = link_to t("helpers.links.admin"), project_path(project), :class => 'btn btn-mini'
+            = link_to t("helpers.links.edit"), edit_project_path(project), :class => 'btn btn-mini'
+            = link_to t("helpers.links.destroy"), project_path(project), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 
 = link_to t("helpers.links.new"), new_project_path, :class => 'btn btn-primary'
