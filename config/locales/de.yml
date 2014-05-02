@@ -41,6 +41,11 @@ de:
   tomatoes:
     timer:
       start: "Start Timer"
+  tomato:
+    rating:
+      showrating: "Mein Rating"
+    actions:
+      markasdone: "Markiere als erledigt"
   helpers:
       links:
          back: "Zurück"
@@ -71,6 +76,8 @@ de:
             save: "Speichern %{model}"
             delete: "Löschen %{model}"
             new: "Neu"
+      actions:
+            backtowork: "Zurück zu meiner Arbeit"
   moves:
         links:
             owner: "Eigentümer"

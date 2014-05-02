@@ -69,6 +69,8 @@ en:
           save: "Save %{model}"
           delete: "Delete %{model}"
           new: "New"
+      actions:
+        backtowork: "Back to my work"
   moves:
       links:
           owner: "Owner"
@@ -90,6 +92,8 @@ en:
   tomato:
     rating:
       showrating: "My Rating"
+    actions:
+      markasdone: "Mark as done"
   live_tomato:
       title: "Title"
       starttime: "Start"
