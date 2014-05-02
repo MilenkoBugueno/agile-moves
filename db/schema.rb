@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20140425143629) do
   end
 
   create_table "move_types", :force => true do |t|
-    t.text     "title"
+    t.string     "title"
     t.text     "body"
     t.boolean  "thumb_rating"
     t.boolean  "star_rating"
