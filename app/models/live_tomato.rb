@@ -1,5 +1,5 @@
 class LiveTomato < ActiveRecord::Base
-  attr_accessible :currenttime, :endtime, :starttime, :title, :username, :userid, :status, :tomato_id, :star_rating, :thumb_rating
+  attr_accessible :currenttime, :endtime, :starttime, :title, :username, :userid, :status, :tomato_id, :star_rating, :thumb_rating, :created_at
   belongs_to :tomato
 
   def remaining_time(id)

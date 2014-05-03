@@ -89,6 +89,7 @@ en:
           commented: "Tomato comment"
       timer:
         start: "Start Timer"
+        stop: "The tomato has ended!"
   tomato:
     rating:
       showrating: "My Rating"

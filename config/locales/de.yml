@@ -92,6 +92,7 @@ de:
           commented: "Tomaten Kommentar"
       timer:
         start: "Start Timer"
+        stop: "Die Tomate ist vorbei!"
   live_tomato:
       livelist: "Wer arbeitet gerade?"
       title: "Bezeichnung"
