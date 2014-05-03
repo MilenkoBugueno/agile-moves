@@ -22,10 +22,17 @@ def create_user
   @user = FactoryGirl.create(:user, email: @visitor[:email])
 end
 
+def create_admin
+  create_visitor
+  delete_user
+  @user = FactoryGirl.create(:admin_user, email: @visitor[:email])
+end
+
 def delete_user
   @user ||= User.first conditions: {:email => @visitor[:email]}
   @user.destroy unless @user.nil?
 end
+
 
 def sign_up
   delete_user
@@ -55,6 +62,12 @@ Given /^I am logged in$/ do
   sign_in
 end
 
+Given /^I am logged in as a admin$/ do
+  create_admin
+  sign_in
+end
+
+
 Given /^I exist as a user$/ do
   create_user
 end
@@ -62,6 +75,10 @@ end
 Given /^I do not exist as a user$/ do
   create_visitor
   delete_user
+end
+
+Given /^I exist as a admin$/ do
+  create_admin
 end
 
 Given /^I exist as an unconfirmed user$/ do
@@ -129,7 +146,7 @@ When /^I edit my account details$/ do
 end
 
 When /^I look at the list of users$/ do
-  visit '/'
+  visit '/users/users'
 end
 
 ### THEN ###
@@ -174,7 +191,11 @@ Then /^I should see a mismatched password message$/ do
 end
 
 Then /^I should see a signed out message$/ do
-  page.should have_content "Signed out successfully."
+  page.should have_content I18n.t("devise.sessions.signed_out")
+end
+
+Then /^I should see a sign in message$/ do
+  page.should have_content I18n.t("devise.failure.unauthenticated")
 end
 
 Then /^I see an invalid login message$/ do

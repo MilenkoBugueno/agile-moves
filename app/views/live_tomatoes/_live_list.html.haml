@@ -1,0 +1,57 @@
+%table{:class => 'live_tomato_table'}
+  %tr
+    %th= t("live_tomato.title")
+    %th= t("live_tomato.starttime")
+    %th= t("live_tomato.endtime")
+    %th= t("live_tomato.remaining")
+    %th= t("live_tomato.username")
+    %th= t("live_tomato.status")
+    - if current_user.has_role? :admin
+      %th= t("live_tomato.tomatoid")
+    %th= t("live_tomato.goal")
+    %th= t("live_tomato.fun")
+    - if current_user.has_role? :admin
+      %th
+
+  - @live_tomatoes.each do |live_tomato|
+    %tr
+      %td= live_tomato.title
+      %td= live_tomato.starttime
+      %td= live_tomato.endtime
+      %td{:class => "remaining"}
+        = live_tomato.remaining_time(live_tomato)
+      %td= live_tomato.username
+      %td{:class => "live_tomato_status"}
+        - if live_tomato.status == 1
+          = image_tag("kitt-loader.gif")
+        - else
+          = image_tag("tomaterot.png", :size => "16x16")
+      - if current_user.has_role? :admin
+        %td{:class => "live_tomato_tomato_id"}
+          = live_tomato.tomato_id
+      %td
+        -if live_tomato.thumb_rating != nil
+          -case live_tomato.thumb_rating
+            -when 0
+              = image_tag("daumenrunter.png", :width => 16, :height => 16)
+            -when 1
+              = image_tag("daumenhoch.png", :width => 16, :height => 16)
+      %td
+        -if live_tomato.star_rating != nil
+          -case live_tomato.star_rating
+            -when -1
+              = image_tag("kommentar.gif", :width => 16, :height => 16)
+            -when 0
+              = image_tag("daumenrunter.png", :width => 16, :height => 16)
+            -else
+              = live_tomato.star_rating
+              = image_tag("star.png", :width => 16, :height => 16)
+      - if current_user.has_role? :admin
+        %td= link_to 'Destroy', live_tomato, :method => :delete, :remote => true, :class => 'remove_live_tomato', :data => { :confirm => t("helpers.links.confirm") }
+%br
+= link_to t("live_tomato.refresh"), '/de/live_refresh', remote: true, :class => 'refresh_live_list'
+%span{:style => 'font-size: 75%'}
+  &nbsp;&nbsp;
+  = t("live_tomato.last_refresh")
+  = Time.now.strftime("%H:%M:%S")
+%br

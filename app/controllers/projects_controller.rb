@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!
   # GET /projects
   # GET /projects.json
+
   def index
     @projects = Project.all
 
@@ -46,6 +47,7 @@ class ProjectsController < ApplicationController
     
     @tomatoes = Tomato.order('state DESC')
     @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
+    @tomatoes = @tomatoes.by_project_id(params[:id]) if params[:id].present?
     @tomatoes_by_date = @tomatoes.group_by(&:publish_date)
     
     @moves = Move.order('created_at DESC')

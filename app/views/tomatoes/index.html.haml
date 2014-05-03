@@ -71,7 +71,7 @@
         
         %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
         %td= link_to 'Start', tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
-        %td= link_to 'Edit', edit_tomato_path(tomato), :class => 'btn btn-mini'
+        %td= link_to 'Edi', edit_tomato_path(tomato), :class => 'btn btn-mini'
         %td= link_to 'X', tomato, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
 
   
