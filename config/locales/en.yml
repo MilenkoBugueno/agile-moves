@@ -76,6 +76,7 @@ en:
           owner3: "Owners"
           moveto: "Move to list"
           backtoproject: "Back to Project"
+          backtomywork: "Back to 'Work'"
           movetype: "Move Type:"
           moveid: "Move Id"
   tomatoes:
