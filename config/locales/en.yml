@@ -95,6 +95,7 @@ en:
     actions:
       markasdone: "Mark as done"
   live_tomato:
+      livelist: "How's working right now?"
       title: "Title"
       starttime: "Start"
       endtime: "End"

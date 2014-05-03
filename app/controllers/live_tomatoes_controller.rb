@@ -2,6 +2,10 @@ class LiveTomatoesController < ApplicationController
   # GET /live_tomatoes
   # GET /live_tomatoes.json
   def index
+    # live tomato liste auf den aktuellen Tag beschränken
+    gestern = 1.day.ago.strftime('%Y-%m-%d')
+    LiveTomato.delete_all "created_at < '" + gestern.to_s + "'"
+
     @live_tomatoes = LiveTomato.all
 
     respond_to do |format|
@@ -58,7 +62,8 @@ class LiveTomatoesController < ApplicationController
     respond_to do |format|
       if @live_tomato.save
         #format.html { redirect_to @live_tomato, notice: 'Live tomato was successfully created.' }
-        format.html { redirect_to live_tomatoes_path }
+        #format.html { redirect_to live_tomatoes_path }
+        format.html { render :text => '<script type="text/javascript"> window.close() </script>' }
         format.json { render json: @live_tomato, status: :created, location: @live_tomato }
       else
         format.html { render action: "new" }

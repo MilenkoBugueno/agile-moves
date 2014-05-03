@@ -38,9 +38,6 @@ de:
   logout:
   capacities:
         newcapacity: "Neue Kapazität"
-  tomatoes:
-    timer:
-      start: "Start Timer"
   tomato:
     rating:
       showrating: "Mein Rating"
@@ -96,6 +93,7 @@ de:
       timer:
         start: "Start Timer"
   live_tomato:
+      livelist: "Wer arbeitet gerade?"
       title: "Bezeichnung"
       starttime: "Beginn"
       endtime: "Ende"
