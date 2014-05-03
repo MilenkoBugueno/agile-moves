@@ -38,11 +38,9 @@ de:
   logout:
   capacities:
         newcapacity: "Neue Kapazität"
-  tomato:
-    rating:
-      showrating: "Mein Rating"
-    actions:
-      markasdone: "Markiere als erledigt"
+  tomatoes:
+    timer:
+      start: "Start Timer"
   helpers:
       links:
          back: "Zurück"
@@ -73,26 +71,24 @@ de:
             save: "Speichern %{model}"
             delete: "Löschen %{model}"
             new: "Neu"
-      actions:
-            backtowork: "Zurück zu meiner Arbeit"
   moves:
         links:
             owner: "Eigentümer"
             owner2: "Eigentümer:"
             moveto: "In Liste verschieben"
             backtoproject: "Zurück zum Projekt"
+            backtowork: "Zurück zu 'Arbeit'"
             movetype: "Move Typ:"
             moveid: "Move Id"
   tomatoes:
       rating:
           starrating: "Fun rating"
           thumbrating: "Ziel erreicht?"
-          change: "Was will ich nächste Mal ändern?"
+          change: "Was will ich nächstes Mal ändern?"
           comment: "Tomate kommentieren"
           commented: "Tomaten Kommentar"
       timer:
         start: "Start Timer"
-        stop: "Die Tomate ist vorbei!"
   live_tomato:
       livelist: "Wer arbeitet gerade?"
       title: "Bezeichnung"

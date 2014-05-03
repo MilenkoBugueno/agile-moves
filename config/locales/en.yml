@@ -69,8 +69,6 @@ en:
           save: "Save %{model}"
           delete: "Delete %{model}"
           new: "New"
-      actions:
-        backtowork: "Back to my work"
   moves:
       links:
           owner: "Owner"
@@ -78,6 +76,7 @@ en:
           owner3: "Owners"
           moveto: "Move to list"
           backtoproject: "Back to Project"
+          backtowork: "Back to 'Work'"
           movetype: "Move Type:"
           moveid: "Move Id"
   tomatoes:
