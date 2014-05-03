@@ -47,7 +47,6 @@ group :test do
   gem 'launchy'
 end
 group :test, :production do
-  #gem 'mysql2'
-  #gem 'sqlite3'
-  #gem 'therubyracer'
+  gem 'mysql2'
+  gem 'therubyracer'
 end
