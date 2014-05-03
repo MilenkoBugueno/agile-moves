@@ -40,7 +40,7 @@
     = f.hidden_field :end_time
     = f.hidden_field :start_time
     .form-actions
-      = f.button :submit, t("tomato.actions.markasdone"), :class => 'btn-primary'
+      = f.button :submit, t("tomatoes.actions.markasdone"), :class => 'btn-primary'
 
   %hr
 
@@ -89,7 +89,7 @@
       = f.button :submit, :class => 'btn-primary'
 -elsif @tomato.rating.present?
   /show rating
-  %h4= t("tomato.rating.showrating")
+  %h4= t("tomatoes.rating.showrating")
   %br
 
   -rating = @tomato.rating

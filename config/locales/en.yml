@@ -86,14 +86,12 @@ en:
           change: "What do I want to change next time?"
           comment: "Comment tomato"
           commented: "Tomato comment"
+          showrating: "My Rating"
       timer:
         start: "Start Timer"
         stop: "The tomato has ended!"
-  tomato:
-    rating:
-      showrating: "My Rating"
-    actions:
-      markasdone: "Mark as done"
+      actions:
+          markasdone: "Mark as done"
   live_tomato:
       livelist: "Who's working right now?"
       title: "Title"
