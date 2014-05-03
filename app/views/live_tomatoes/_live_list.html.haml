@@ -6,11 +6,12 @@
     %th= t("live_tomato.remaining")
     %th= t("live_tomato.username")
     %th= t("live_tomato.status")
-    %th= t("live_tomato.tomatoid")
+    - if current_user.has_role? :admin
+      %th= t("live_tomato.tomatoid")
     %th= t("live_tomato.goal")
     %th= t("live_tomato.fun")
-    -# TODO Check for Admin Rights
-    %th
+    - if current_user.has_role? :admin
+      %th
 
   - @live_tomatoes.each do |live_tomato|
     %tr
@@ -25,8 +26,9 @@
           = image_tag("kitt-loader.gif")
         - else
           = image_tag("tomaterot.png", :size => "16x16")
-      %td{:class => "live_tomato_tomato_id"}
-        = live_tomato.tomato_id
+      - if current_user.has_role? :admin
+        %td{:class => "live_tomato_tomato_id"}
+          = live_tomato.tomato_id
       %td
         -if live_tomato.thumb_rating != nil
           -case live_tomato.thumb_rating
@@ -44,7 +46,8 @@
             -else
               = live_tomato.star_rating
               = image_tag("star.png", :width => 16, :height => 16)
-      %td= link_to 'Destroy', live_tomato, :method => :delete, :remote => true, :class => 'remove_live_tomato', :data => { :confirm => t("helpers.links.confirm") }
+      - if current_user.has_role? :admin
+        %td= link_to 'Destroy', live_tomato, :method => :delete, :remote => true, :class => 'remove_live_tomato', :data => { :confirm => t("helpers.links.confirm") }
 %br
 = link_to t("live_tomato.refresh"), '/de/live_refresh', remote: true, :class => 'refresh_live_list'
 %span{:style => 'font-size: 75%'}

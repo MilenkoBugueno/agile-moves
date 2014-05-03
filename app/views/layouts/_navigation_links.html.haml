@@ -9,7 +9,7 @@
 - else
   %li= link_to t("navigation.login"), new_user_session_path
 - if user_signed_in?
-  %li= link_to t("navigation.editaccount"), edit_user_registration_path
+  %li= link_to current_user.name, edit_user_registration_path
 - else
   %li= link_to 'Sign up', new_user_registration_path
 - if (current_user != nil) && (current_user.has_role? :admin)
@@ -18,3 +18,6 @@
 %li= ". . . "
 %li= link_to_unless_current t("navigation.english"), locale: "en"
 %li= link_to_unless_current t("navigation.german"), locale: "de"
+%li
+  = link_to "#{t('live_tomato.livelist')} #{image_tag('new_window.png', :size => '12x12')}".html_safe, live_tomatoes_path, :target => "_blank"
+

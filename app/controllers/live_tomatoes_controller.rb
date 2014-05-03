@@ -2,6 +2,10 @@ class LiveTomatoesController < ApplicationController
   # GET /live_tomatoes
   # GET /live_tomatoes.json
   def index
+    # live tomato liste auf den aktuellen Tag beschränken
+    gestern = 1.day.ago.strftime('%Y-%m-%d')
+    LiveTomato.delete_all "created_at < '" + gestern.to_s + "'"
+
     @live_tomatoes = LiveTomato.all
 
     respond_to do |format|
@@ -25,6 +29,7 @@ class LiveTomatoesController < ApplicationController
   # GET /live_tomatoes/new
   # GET /live_tomatoes/new.json
   def new
+
     @live_tomato = LiveTomato.new
 
     if params['live'].to_i == 1
@@ -52,17 +57,31 @@ class LiveTomatoesController < ApplicationController
   # POST /live_tomatoes
   # POST /live_tomatoes.json
   def create
+    # See if there is already a live tomato with the same tomato id
+    if LiveTomato.where(:tomato_id => params[:live_tomato][:tomato_id]).blank?
+      @live_tomato = LiveTomato.new(params[:live_tomato])
+      update = false
+    else
+      @live_tomato = LiveTomato.where(tomato_id: params[:live_tomato][:tomato_id])
+      LiveTomato.update(@live_tomato, :starttime => params[:live_tomato][:starttime], :endtime => params[:live_tomato][:endtime], :created_at => Time.new)
+      update = true
+    end
 
-    @live_tomato = LiveTomato.new(params[:live_tomato])
 
     respond_to do |format|
-      if @live_tomato.save
-        #format.html { redirect_to @live_tomato, notice: 'Live tomato was successfully created.' }
-        format.html { redirect_to live_tomatoes_path }
-        format.json { render json: @live_tomato, status: :created, location: @live_tomato }
+      if update == false
+        if @live_tomato.save
+          #format.html { redirect_to @live_tomato, notice: 'Live tomato was successfully created.' }
+          #format.html { redirect_to live_tomatoes_path }
+          format.html { render :text => '<script type="text/javascript"> window.close() </script>' }
+          format.json { render json: @live_tomato, status: :created, location: @live_tomato }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @live_tomato.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: "new" }
-        format.json { render json: @live_tomato.errors, status: :unprocessable_entity }
+        format.html { render :text => '<script type="text/javascript"> window.close() </script>' }
+        format.json { render json: @live_tomato, status: :created, location: @live_tomato }
       end
     end
   end

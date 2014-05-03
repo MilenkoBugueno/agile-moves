@@ -38,11 +38,9 @@ de:
   logout:
   capacities:
         newcapacity: "Neue Kapazität"
-  tomato:
-    rating:
-      showrating: "Mein Rating"
-    actions:
-      markasdone: "Als erledigt markieren"
+  tomatoes:
+    timer:
+      start: "Start Timer"
   helpers:
       links:
          back: "Zurück"
@@ -73,15 +71,13 @@ de:
             save: "Speichern %{model}"
             delete: "Löschen %{model}"
             new: "Neu"
-      actions:
-            backtowork: "Zurück zu meiner Arbeit"
   moves:
         links:
             owner: "Eigentümer"
             owner2: "Eigentümer:"
             moveto: "In Liste verschieben"
             backtoproject: "Zurück zum Projekt"
-            backtomywork: "Zurück zu 'Arbeit'"
+            backtowork: "Zurück zu 'Arbeit'"
             movetype: "Move Typ:"
             moveid: "Move Id"
   tomatoes:

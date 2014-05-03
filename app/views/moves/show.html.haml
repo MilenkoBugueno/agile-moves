@@ -6,8 +6,8 @@
     = link_to t("helpers.links.edit"), edit_move_path(@move), :class => 'btn'
     = link_to t("helpers.links.destroy"), move_path(@move), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
   .span4
-    %h5=t("moves.links.movetype") #{@move.move_type.title}"
-    %h5=t("moves.links.owner2") #{@move.user.name}"
+    %h5=t("moves.links.movetype") + " #{@move.move_type.title}"
+    %h5=t("moves.links.owner2") + " #{@move.user.name}"
 .row
   .span8
     %br 
@@ -69,7 +69,7 @@
   
   
 
--if @move.move_type.thumb_rating || @move.move_type.star_rating
+-if (@move.move_type.thumb_rating || @move.move_type.star_rating)
   %h4= t("helpers.links.ratings")
   -@move.ratings.each do |rating|
     .row
@@ -113,7 +113,7 @@
 
 
 
--if @move.move_type.thumb_rating
+-if @move.move_type.thumb_rating && @move.user_id != current_user.id
   %h5= t("helpers.links.newthumbrating")
   %br
   
@@ -130,7 +130,7 @@
 %hr
 
 
--if @move.move_type.star_rating
+-if @move.move_type.star_rating && @move.user_id != current_user.id
   %h5= t("helpers.links.newstarrating")
   %br
   

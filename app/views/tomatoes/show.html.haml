@@ -2,7 +2,7 @@
 .row
   .span8
     %h2= @tomato.title
-    = link_to t("moves.links.backtomywork"), work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
+    = link_to t("moves.links.backtowork"), work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
     - if @tomato.user == current_user
       = link_to t("helpers.links.edit"), edit_tomato_path(@tomato), :class => 'btn'
       = link_to t("helpers.links.destroy"), tomato_path(@tomato), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
@@ -27,7 +27,7 @@
       %td{:rowspan => 2}
         %div#countdown
       %td
-        = button_tag t("tomatoes.timer.start"), :id => "btoStart", :name => "los", :onClick => "start_me('#{@tomato.user.id}', '#{@tomato.user.name}', '#{@tomato.title}', '#{@tomato.id}')"
+        = button_tag t("tomatoes.timer.start"), :id => "btoStart", :name => "los", :onClick => "start_me('#{@tomato.user.id}', '#{@tomato.user.name}', '#{@tomato.title}', '#{@tomato.id}', '#{t('tomatoes.timer.stop')}')"
       %td{:rowspan => 2}
     %tr
       %td= text_field_tag "txtTimer", nil, "value" => 25, "style" => "height:12px;width:2em;"

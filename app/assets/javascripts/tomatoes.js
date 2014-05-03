@@ -1,6 +1,6 @@
 var tt_tomaten_zeit;
 
-function start_me(userid, username, title, tomato_id) {
+function start_me(userid, username, title, tomato_id, stop_message) {
 
     var anfang;
     var ende;
@@ -41,7 +41,7 @@ function start_me(userid, username, title, tomato_id) {
             $('#counter_2').countdown({
             image: '/assets/digits.png',
             startTime: stime,
-            timerEnd: function(){ end_me(titletimer); },
+            timerEnd: function(){ end_me(titletimer, stop_message); },
             format: 'mm:ss'
             });
         });
@@ -55,7 +55,7 @@ function start_me(userid, username, title, tomato_id) {
     }
 }
 
-function end_me(titletimer) {
+function end_me(titletimer, stop_message) {
 
     var ende;
     var ezeit;
@@ -72,7 +72,7 @@ function end_me(titletimer) {
     document.getElementById("btoStart").disabled = false;
     window.clearInterval(titletimer);
     document.getElementById("tomato_finished_id").play();
-    alert("AUFHÖREN!");
+    alert(stop_message);
 
 }
 
