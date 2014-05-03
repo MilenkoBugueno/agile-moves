@@ -71,4 +71,4 @@
           = link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
       %td
         -if (tomato.user == current_user) || (current_user.has_role? :admin)
-          = link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm")}, :class => 'btn btn-mini btn-danger' if (tomato.user == current_user) || (current_user.has_role? :admin)
+          = link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm")}, :class => 'btn btn-mini btn-danger'
