@@ -87,7 +87,7 @@ de:
       rating:
           starrating: "Fun rating"
           thumbrating: "Ziel erreicht?"
-          change: "Was möchte ich ändern?"
+          change: "Was will ich nächste Mal ändern?"
           comment: "Tomate kommentieren"
           commented: "Tomaten Kommentar"
       timer:

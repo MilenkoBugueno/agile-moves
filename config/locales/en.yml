@@ -84,7 +84,7 @@ en:
       rating:
           starrating: "Fun rating"
           thumbrating: "Goal achieved?"
-          change: "What do I want to change?"
+          change: "What do I want to change next time?"
           comment: "Comment tomato"
           commented: "Tomato comment"
       timer:
@@ -95,7 +95,7 @@ en:
     actions:
       markasdone: "Mark as done"
   live_tomato:
-      livelist: "How's working right now?"
+      livelist: "Who's working right now?"
       title: "Title"
       starttime: "Start"
       endtime: "End"
