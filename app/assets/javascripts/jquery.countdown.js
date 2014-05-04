@@ -100,7 +100,6 @@ jQuery.fn.countdown = function(userOptions)
       margin(elem, mtop);
       if (margin(elem) / options.digitHeight % options.digitImages != 0)
         setTimeout(_move, options.stepTime);
-
       if (mtop == 0) digits[elem].__ismax = true;
     }
   };

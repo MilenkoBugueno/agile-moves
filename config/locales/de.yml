@@ -63,6 +63,7 @@ de:
          newinterruption: "Neue Unterbrechung"
          starsranking: "Sterne Rangliste"
          thumbsranking: "Daumen Rangliste"
+         newtomatorating: "Tomate bewerten"
       titles:
             edit: "Bearbeiten %{model}"
             save: "Speichern %{model}"
@@ -74,8 +75,35 @@ de:
             owner2: "Eigentümer:"
             moveto: "In Liste verschieben"
             backtoproject: "Zurück zum Projekt"
+            backtowork: "Zurück zu 'Arbeit'"
             movetype: "Move Typ:"
             moveid: "Move Id"
+  tomatoes:
+      rating:
+          starrating: "Fun rating"
+          thumbrating: "Ziel erreicht?"
+          change: "Was will ich nächstes Mal ändern?"
+          comment: "Tomate kommentieren"
+          commented: "Tomaten Kommentar"
+          showrating: "My Rating"
+      timer:
+        start: "Start Timer"
+        stop: "Die Tomate ist vorbei!"
+      actions:
+          markasdone: "Mark as done"
+  live_tomato:
+      livelist: "Wer arbeitet gerade?"
+      title: "Bezeichnung"
+      starttime: "Beginn"
+      endtime: "Ende"
+      username: "Benutzer"
+      status: "Status"
+      tomatoid: "Nummer"
+      goal: "Ziel"
+      fun: "Spaß"
+      remaining: "Verbleibend"
+      refresh: "Liste aktualisieren"
+      last_refresh: "Letzte Aktualisierung"
   error_notification:
       default_message: "Bitte schauen sie sich die unten stehenden Fehler an:"
   devise:

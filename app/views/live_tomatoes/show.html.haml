@@ -1,0 +1,20 @@
+- render 'live_tomatoes/index'
+
+%p#notice= notice
+
+%p
+  %b Title:
+  = @live_tomato.title
+%p
+  %b Starttime:
+  = @live_tomato.starttime
+%p
+  %b Endtime:
+  = @live_tomato.endtime
+%p
+  %b Currenttime:
+  = @live_tomato.currenttime
+
+= link_to 'Edit', edit_live_tomato_path(@live_tomato)
+\|
+= link_to 'Back', live_tomatoes_path

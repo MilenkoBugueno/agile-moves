@@ -8,8 +8,6 @@
 
 %table.table.table-striped
   %tr
-    %th{:width => "20px;"}
-    %th{:width => "100px;"}
     %th{:width => "300px;"} Title
     %th{:width => "100px;"} Owner
     %th{:width => "200px;"} Team
@@ -20,50 +18,10 @@
 
   - @moves.each do |move|
     %tr
-      %td= check_box_tag "moves_ids[]", move.id
       %td
-        -total=0; no_ups=0; no_downs=0; no_comments =0;
-        -count = move.ratings.count
-        -if move.move_type.thumb_rating
-          -move.ratings.each do |rating|
-            -case rating.thumb_rating
-            -when 1
-              -no_ups=no_ups+1
-            -when 0
-              -no_downs=no_downs+1
-            -when -1
-              -no_comments = no_comments+1 
-          - if no_downs > 0
-            = image_tag("verloren.png", :width => 25, :height => 25)
-          - else
-            -if no_ups >= 2
-              = image_tag("gewonnen.png", :width => 25, :height => 25)
-            -else
-              = image_tag("bewerten.png", :width => 25, :height => 25)
-        -elsif move.move_type.star_rating
-          -move.ratings.each do |rating|
-            -total = total + rating.star_rating unless rating.star_rating == nil 
-          - if total.to_f/count.to_f >= 4.0 && count >= 2
-            = image_tag("gewonnen.png", :width => 25, :height => 25)
-          - else
-            -if count >=2
-              = image_tag("verloren.png", :width => 25, :height => 25)
-            -else
-              = image_tag("bewerten.png", :width => 25, :height => 25)
-        -elsif move.move_type.has_tomatoes
-          -if move.tomatoes.count == 0
-            = image_tag("tomategrau.png", :width => 15, :height => 15)
-          -move.tomatoes.each do |tomato|
-            -case tomato.state
-            -when 0
-              = image_tag("tomategrau.png", :width => 15, :height => 15)
-            -when 1
-              = image_tag("tomategruen.png", :width => 15, :height => 15)
-            -when 2 
-              = image_tag("tomaterot.png", :width => 15, :height => 15)
-            
-            %td= link_to move.title, move
-          %td= move.user.name
+        = link_to move.title, move
+      %td
+        = move.user.name
       %td
         -move.users.each do |reviewer|
           = reviewer.name

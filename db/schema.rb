@@ -11,15 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140403142151) do
-
-  create_table "capacities", :force => true do |t|
-    t.integer  "tomatoes_capacity"
-    t.date     "publish_date"
-    t.integer  "user_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
+ActiveRecord::Schema.define(:version => 20140425143629) do
 
   create_table "interruptions", :force => true do |t|
     t.text     "body"
@@ -30,18 +22,32 @@ ActiveRecord::Schema.define(:version => 20140403142151) do
     t.datetime "updated_at",        :null => false
   end
 
+  create_table "live_tomatoes", :force => true do |t|
+    t.text     "title"
+    t.text     "starttime"
+    t.text     "endtime"
+    t.integer  "currenttime"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "userid"
+    t.text     "username"
+    t.integer  "status"
+    t.integer  "tomato_id"
+    t.integer  "thumb_rating"
+    t.integer  "star_rating"
+  end
+
   create_table "move_types", :force => true do |t|
+    t.string     "title"
     t.text     "body"
     t.boolean  "thumb_rating"
     t.boolean  "star_rating"
     t.boolean  "has_tomatoes"
-    t.string   "title"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
     t.boolean  "has_twitter_idea"
     t.integer  "tomatoes_number"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
-
   create_table "move_types_projects", :id => false, :force => true do |t|
     t.integer "project_id"
     t.integer "move_type_id"
@@ -90,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20140403142151) do
     t.integer  "move_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "tomato_id"
   end
 
   create_table "roles", :force => true do |t|

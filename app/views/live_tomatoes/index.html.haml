@@ -1,0 +1,5 @@
+%h1 Today's Live Tomatoes
+#live_ajax
+  = render :partial => 'live_list', :locals => { :live_tomatoes => @live_tomatoes }
+
+-#= link_to 'New Live tomato', new_live_tomato_path

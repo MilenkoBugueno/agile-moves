@@ -63,6 +63,7 @@ en:
           newinterruption: "New Interruption"
           starsranking: "Stars Ranking"
           thumbsranking: "Thumbs Ranking"
+          newtomatorating: "Rate the Tomato"
       titles:
           edit: "Edit %{model}"
           save: "Save %{model}"
@@ -75,5 +76,32 @@ en:
           owner3: "Owners"
           moveto: "Move to list"
           backtoproject: "Back to Project"
+          backtowork: "Back to 'Work'"
           movetype: "Move Type:"
           moveid: "Move Id"
+  tomatoes:
+      rating:
+          starrating: "Fun rating"
+          thumbrating: "Goal achieved?"
+          change: "What do I want to change next time?"
+          comment: "Comment tomato"
+          commented: "Tomato comment"
+          showrating: "My Rating"
+      timer:
+        start: "Start Timer"
+        stop: "The tomato has ended!"
+      actions:
+          markasdone: "Mark as done"
+  live_tomato:
+      livelist: "Who's working right now?"
+      title: "Title"
+      starttime: "Start"
+      endtime: "End"
+      username: "User"
+      status: "Status"
+      tomatoid: "Tomato ID"
+      goal: "Goal"
+      fun: "Fun"
+      remaining: "Remaining"
+      refresh: "Refresh List"
+      last_refresh: "Last Refresh"
