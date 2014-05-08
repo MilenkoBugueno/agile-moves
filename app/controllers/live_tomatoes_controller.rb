@@ -4,7 +4,7 @@ class LiveTomatoesController < ApplicationController
   def index
     # live tomato liste auf den aktuellen Tag beschränken
     gestern = 1.day.ago.strftime('%Y-%m-%d')
-    LiveTomato.delete_all "created_at < '" + gestern.to_s + "'"
+    LiveTomato.delete_all "created_at <= '" + gestern.to_s + "'"
 
     @live_tomatoes = LiveTomato.all
 
