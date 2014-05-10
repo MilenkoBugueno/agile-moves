@@ -12,26 +12,39 @@ class Move < ActiveRecord::Base
 
   after_create :create_objects
 
-  scope :by_user_id, lambda {|uid| where(['user_id =?', uid])}
-  scope :by_project_id, lambda {|uid| where(['project_id =?', uid])}
-  scope :by_state_id, lambda {|uid| where(['state_id =?', uid])}
-  scope :by_move_type, lambda {|uid| where(['move_type_id =?', uid])}
-  scope :by_user_ids, lambda {|uid| joins(:users).where(['users.id =?', uid])}
-  scope :already_reviewed, lambda {|uid| joins(:ratings).where(['ratings.user_id =?', uid])}
+  scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
+  scope :by_project_id, lambda {|uid| where(["#{table_name}.project_id =?", uid])}
+  scope :by_state_id, lambda {|uid| where(["#{table_name}.state_id =?", uid])}
+  scope :by_move_type, lambda {|uid| where(["#{table_name}.move_type_id =?", uid])}
+  scope :by_user_ids, lambda {|uid| joins(:users).where(["users.id =?", uid])}
+  scope :already_reviewed, lambda {|uid| joins(:ratings).where(["ratings.user_id =?", uid])}
+  scope :not_closed , lambda { where("#{table_name}.state_id != ?", 3)}
   
-  scope :by_star_rating, lambda {joins(:move_type).where(['star_rating =?', true])}
-  scope :by_thumb_rating, lambda {joins(:move_type).where(['thumb_rating =?', true])}
+  scope :by_star_rating, lambda {joins(:move_type).where(['move_types.star_rating =?', true])}
+  scope :by_thumb_rating, lambda {joins(:move_type).where(['move_types.thumb_rating =?', true])}
 
-  def create_objects
-    move_type = self.move_type
-    if move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
-      for i in 1..move_type.tomatoes_number
-        Tomato.create(:move_id => self.id, :title => self.title+" "+ i.to_s, :user_id => self.user_id, :state => 0)
+  after_initialize :init
+
+
+  def reviewed_by_me(current_user)
+    reviewed_by_me = false
+    if self.move_type != nil  && self.move_type.star_rating
+       self.ratings.each do |rating|
+         if rating.user == current_user && rating.star_rating != -1
+           reviewed_by_me = true
+         end
+       end
+    elsif self.move_type != nil  && self.move_type.thumb_rating
+      self.ratings.each do |rating|
+        if rating.user == current_user && rating.thumb_rating != -1
+          reviewed_by_me = true
+        end
       end
     end
 
+    return reviewed_by_me
   end
-  
+
   def stars
     stars = 0;
     self.ratings.each do |rating|
@@ -82,5 +95,23 @@ class Move < ActiveRecord::Base
     end
     return comments
   end
-  
+
+  private
+  def init
+    if self.new_record? && self.state_id.nil?
+      self.state_id = -1
+    end
+  end
+
+  def create_objects
+    move_type = self.move_type
+    if move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
+      for i in 1..move_type.tomatoes_number
+        Tomato.create(:move_id => self.id, :title => self.title+" "+ i.to_s, :user_id => self.user_id, :state => 0)
+      end
+    end
+
+  end
+
+
 end

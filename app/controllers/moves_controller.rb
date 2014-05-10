@@ -90,7 +90,7 @@ class MovesController < ApplicationController
 
     respond_to do |format|
       if @move.update_attributes(params[:move])
-        format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully updatetd.' }
+        format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

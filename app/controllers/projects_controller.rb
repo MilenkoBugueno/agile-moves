@@ -24,6 +24,7 @@ class ProjectsController < ApplicationController
     @moves = Move.order('created_at DESC')
     @moves = @moves.by_user_ids(@user)
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
+    @moves = @moves.not_closed
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     

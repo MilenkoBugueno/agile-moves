@@ -64,6 +64,8 @@ de:
          starsranking: "Sterne Rangliste"
          thumbsranking: "Daumen Rangliste"
          newtomatorating: "Tomate bewerten"
+         close: "Schließen"
+         skip: "Überspringen"
       titles:
             edit: "Bearbeiten %{model}"
             save: "Speichern %{model}"

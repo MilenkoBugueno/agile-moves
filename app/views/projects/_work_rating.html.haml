@@ -5,19 +5,10 @@
     %th{:width => "100px;"} Owner
     %th{:width => "200px;"} Team
     %th{:width => "80px;"} Publish date
+    %th{:width => "40px;"} Actions
     
   - @moves.each do |move|
-    -reviewed_by_me=false;
-    -if move.move_type != nil  && move.move_type.star_rating
-      -move.ratings.each do |rating|
-        -if rating.user == current_user && rating.star_rating >= 0
-          -reviewed_by_me = true
-    -elsif move.move_type != nil  && move.move_type.thumb_rating
-      -move.ratings.each do |rating|
-        -if rating.user == current_user && rating.thumb_rating >= 0
-          -reviewed_by_me = true
-    
-    -if !reviewed_by_me
+    -if !move.reviewed_by_me(current_user)
       %tr
         %td
           =image_tag("bewerten.png", :width => 25, :height => 25)
@@ -27,5 +18,14 @@
           -move.users.each do |reviewer|
             = reviewer.name
         %td= move.publish_date.to_s(:short) unless move.publish_date == nil
+        %td
+          -if move.user == current_user
+            = simple_form_for move, :html => { :class => 'form-horizontal' } do |f|
+              = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "closed").id
+              = f.button :submit, :class => 'btn btn-mini btn-danger', :value=> "Close"
+          -else
+            =simple_form_for [move, Rating.new] do |f|
+              = f.hidden_field :user_id, :value => current_user.id
+              = f.submit t("helpers.links.skip"), :class => 'btn btn-mini btn-warning', name: "skip_star_rating"
 
 %br
