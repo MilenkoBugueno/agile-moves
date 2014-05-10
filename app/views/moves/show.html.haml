@@ -77,6 +77,8 @@
         %h6
           -if @move.move_type.thumb_rating
             -case rating.thumb_rating
+              -when -2
+                = "Rating was skipped from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
               -when 0
                 = image_tag("daumenrunter.png", :width => 20, :height => 20)
                 = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"  
@@ -89,6 +91,8 @@
           
           -if @move.move_type.star_rating
             -case rating.star_rating
+              -when -2
+                = "Rating was skipped from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
               -when -1
                 = image_tag("kommentar.gif", :width => 20, :height => 20) 
                 = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"  

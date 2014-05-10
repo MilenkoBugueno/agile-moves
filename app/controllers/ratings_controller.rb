@@ -59,10 +59,21 @@ class RatingsController < ApplicationController
       @rating.star_rating = 0
     end
 
+    if params[:skip_star_rating].present?
+      @rating.star_rating = -2
+      @rating.thumb_rating = -2
+    end
+
     respond_to do |format|
       if @rating.save
-        format.html { redirect_to @container, notice: 'Rating was successfully created.' }
-        format.json { render json: @container, status: :created, location: @tomato }
+        if params[:skip_star_rating].present? && @container.project_id.present?
+          @project = Project.find(@container.project_id)
+          format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully skipped.' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to @container, notice: 'Rating was successfully created.' }
+          format.json { render json: @container, status: :created, location: @tomato }
+        end
       else
         format.html { render action: "new" }
         format.json { render json: @container.errors, status: :unprocessable_entity }

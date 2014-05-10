@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140425143629) do
+ActiveRecord::Schema.define(:version => 20140501133127) do
 
   create_table "interruptions", :force => true do |t|
     t.text     "body"
@@ -38,16 +38,17 @@ ActiveRecord::Schema.define(:version => 20140425143629) do
   end
 
   create_table "move_types", :force => true do |t|
-    t.string     "title"
+    t.string   "title"
     t.text     "body"
     t.boolean  "thumb_rating"
     t.boolean  "star_rating"
     t.boolean  "has_tomatoes"
     t.boolean  "has_twitter_idea"
     t.integer  "tomatoes_number"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
+
   create_table "move_types_projects", :id => false, :force => true do |t|
     t.integer "project_id"
     t.integer "move_type_id"
@@ -131,6 +132,7 @@ ActiveRecord::Schema.define(:version => 20140425143629) do
     t.date     "publish_date"
     t.time     "start_time"
     t.time     "end_time"
+    t.integer  "project_id"
   end
 
   create_table "users", :force => true do |t|
