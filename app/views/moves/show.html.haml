@@ -5,9 +5,10 @@
     = link_to t("moves.links.backtoproject"), work_projects_path(:id => @project.id), :class => 'btn'
     = link_to t("helpers.links.edit"), edit_move_path(@move), :class => 'btn'
     = link_to t("helpers.links.destroy"), move_path(@move), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
+
   .span4
-    %h5=t("moves.links.movetype") + ": #{@move.move_type.title}"
     %h5=t("moves.links.owner") + ": #{@move.user.name}"
+    %h5=t("moves.links.movetype") + ": #{@move.move_type.title}"
     %h5=t("moves.links.state") + ": #{@move.state.title}" if @move.state.present?
 .row
   .span8
@@ -132,7 +133,6 @@
 
 %br
 %br
-%hr
 
 
 -if @move.move_type.star_rating && @move.user_id != current_user.id
@@ -148,3 +148,8 @@
       = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating"
 
 
+%hr
+-if @move.user == current_user
+  = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
+    = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "closed").id
+    = f.button :submit, :class => 'btn btn-danger', :value=> t("moves.links.close")

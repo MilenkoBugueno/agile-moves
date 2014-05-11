@@ -66,6 +66,7 @@ de:
          newtomatorating: "Tomate bewerten"
          close: "Schließen"
          skip: "Überspringen"
+         closed: "geschloßen"
       titles:
             edit: "Bearbeiten %{model}"
             save: "Speichern %{model}"
@@ -80,6 +81,7 @@ de:
             movetype: "Move Typ"
             moveid: "Move Id"
             state: "Status"
+            close: "Move Schließen"
   tomatoes:
       rating:
           starrating: "Fun rating"

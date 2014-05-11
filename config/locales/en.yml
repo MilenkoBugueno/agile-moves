@@ -66,6 +66,7 @@ en:
           newtomatorating: "Rate the Tomato"
           skip: "Skip"
           close: "Close"
+          closed: "closed"
       titles:
           edit: "Edit %{model}"
           save: "Save %{model}"
@@ -80,6 +81,7 @@ en:
           backtowork: "Back to 'Work'"
           movetype: "Move Type"
           moveid: "Move Id"
+          close: "Close Move"
   tomatoes:
       rating:
           starrating: "Fun rating"
