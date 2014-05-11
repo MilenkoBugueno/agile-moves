@@ -2,8 +2,9 @@
   = f.input :title
   = f.input :body
   = f.input :publish_date, :as => :string
-  = f.input :end_time
   = f.input :start_time
+  = f.input :end_time
+  = f.input :state, :collection =>  [["Undone", 0], ["Done", 2]], :as => :radio_buttons, item_wrapper_class: 'inline'
   = f.association :user
   .form-actions
     = f.button :submit, :class => 'btn-primary'
