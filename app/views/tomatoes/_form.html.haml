@@ -7,4 +7,4 @@
   = f.association :user
   .form-actions
     = f.button :submit, :class => 'btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), tomatoes_path, :class => 'btn'
+    = link_to t("moves.links.backtowork"), work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'

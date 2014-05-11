@@ -125,7 +125,7 @@
     = f.input :body, input_html: {style: 'height:100px; width:300px'}
     = f.hidden_field :user_id, :value => current_user.id
     .form-actions
-      = f.submit t("helpers.links.approve"), :class => 'btn btn-primary', name: "thumb_rating", value: "Approve"
+      = f.submit t("helpers.links.approve"), :class => 'btn btn-success', name: "thumb_rating", value: "Approve"
       = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "thumb_rating", value: "Reject"
       = f.submit t("helpers.links.comment"), :class => 'btn btn-info', name: "thumb_rating", value: "Comment"
 
