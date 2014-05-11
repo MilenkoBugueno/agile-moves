@@ -23,11 +23,11 @@
       %ul
         -@tomatoes_by_date[date].each do |tomato|
           - if tomato.state == 0 # not planed
-            = image_tag("tomategrau.png", :width => 15, :height => 15)
+            =link_to image_tag("tomategrau.png", :width => 15, :height => 15, :alt => "Hallo"), tomato_path(tomato)
           - elsif tomato.state == 1 #planed
-            = image_tag("tomategruen.png", :width => 15, :height => 15)
+            =link_to  image_tag("tomategruen.png", :width => 15, :height => 15), tomato_path(tomato)
           - elsif tomato.state == 2 #done
-            = image_tag("tomaterot.png", :width => 15, :height => 15)
+            = link_to image_tag("tomaterot.png", :width => 15, :height => 15 ), tomato_path(tomato)
             
 %br
 %br
