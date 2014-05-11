@@ -6,8 +6,9 @@
     = link_to t("helpers.links.edit"), edit_move_path(@move), :class => 'btn'
     = link_to t("helpers.links.destroy"), move_path(@move), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
   .span4
-    %h5=t("moves.links.movetype") + " #{@move.move_type.title}"
-    %h5=t("moves.links.owner2") + " #{@move.user.name}"
+    %h5=t("moves.links.movetype") + ": #{@move.move_type.title}"
+    %h5=t("moves.links.owner") + ": #{@move.user.name}"
+    %h5=t("moves.links.state") + ": #{@move.state.title}" if @move.state.present?
 .row
   .span8
     %br 

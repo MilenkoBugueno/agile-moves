@@ -74,12 +74,11 @@ en:
   moves:
       links:
           owner: "Owner"
-          owner2: "Owner:"
           owner3: "Owners"
           moveto: "Move to list"
           backtoproject: "Back to Project"
           backtowork: "Back to 'Work'"
-          movetype: "Move Type:"
+          movetype: "Move Type"
           moveid: "Move Id"
   tomatoes:
       rating:
