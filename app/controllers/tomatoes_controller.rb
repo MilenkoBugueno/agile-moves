@@ -48,6 +48,8 @@ class TomatoesController < ApplicationController
   # GET /tomatoes/1/edit
   def edit
     @tomato = Tomato.find(params[:id])
+    @project = Project.find(@tomato.move.project_id) if @tomato.move.project_id.present?
+    @move_type = @tomato.move.move_type if @tomato.move.move_type.present?
   end
 
   # POST /tomatoes
