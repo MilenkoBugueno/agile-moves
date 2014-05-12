@@ -5,7 +5,6 @@
   = f.input :title
   = f.input :body
   = f.input :position
-  = f.hidden_field :project_id, :value => @project.id
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t('.cancel', :default => t("helpers.links.cancel")), states_path, :class => 'btn'
