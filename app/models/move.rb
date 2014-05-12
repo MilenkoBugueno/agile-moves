@@ -18,7 +18,7 @@ class Move < ActiveRecord::Base
   scope :by_move_type, lambda {|uid| where(["#{table_name}.move_type_id =?", uid])}
   scope :by_user_ids, lambda {|uid| joins(:users).where(["users.id =?", uid])}
   scope :already_reviewed, lambda {|uid| joins(:ratings).where(["ratings.user_id =?", uid])}
-  scope :not_closed , lambda { where("#{table_name}.state_id != ?", 3)}
+  scope :not_closed , lambda { where("#{table_name}.state_id != ?", State.find_or_create_by_title(:title => "closed").id)}
   
   scope :by_star_rating, lambda {joins(:move_type).where(['move_types.star_rating =?', true])}
   scope :by_thumb_rating, lambda {joins(:move_type).where(['move_types.thumb_rating =?', true])}
