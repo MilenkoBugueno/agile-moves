@@ -27,7 +27,6 @@ class TomatoesController < ApplicationController
     @move_type = @tomato.move.move_type
     @project = Project.find(@tomato.move.project_id) if @tomato.move.project_id.present?
 
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @tomato }
@@ -49,6 +48,8 @@ class TomatoesController < ApplicationController
   # GET /tomatoes/1/edit
   def edit
     @tomato = Tomato.find(params[:id])
+    @project = Project.find(@tomato.move.project_id) if @tomato.move.project_id.present?
+    @move_type = @tomato.move.move_type if @tomato.move.move_type.present?
   end
 
   # POST /tomatoes
@@ -77,7 +78,7 @@ class TomatoesController < ApplicationController
   
   def done
     @move = Move.find(params[:move_id]) unless params[:move_id] == nil
-    
+
     if params["commit"]=="mark as done"
       Tomato.update_all({state: 2, publish_date: Date.today}, {id: params[:tomatoes_ids]})
     elsif params["commit"]=="plan today"
@@ -99,6 +100,14 @@ class TomatoesController < ApplicationController
   def update
     @tomato = Tomato.find(params[:id])
 
+    # LiveTomato braucht den Status ebenfalls
+    if LiveTomato.where(:tomato_id => @tomato.id).blank?
+      # do nothing
+    else
+      @live_tomato = LiveTomato.where(tomato_id: @tomato.id)
+      LiveTomato.update(@live_tomato, :status => '2')
+    end
+
     respond_to do |format|
       if @tomato.update_attributes(params[:tomato])
         format.html { redirect_to @tomato, notice: 'Tomato was successfully updated.' }
@@ -114,10 +123,11 @@ class TomatoesController < ApplicationController
   # DELETE /tomatoes/1.json
   def destroy
     @tomato = Tomato.find(params[:id])
+    project_id = @tomato.move.project_id if @tomato.move.present?
     @tomato.destroy
 
     respond_to do |format|
-      format.html { redirect_to tomatoes_url }
+      format.html { redirect_to work_projects_path(:id => project_id) }
       format.json { head :no_content }
     end
   end

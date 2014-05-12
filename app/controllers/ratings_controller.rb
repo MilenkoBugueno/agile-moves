@@ -40,28 +40,43 @@ class RatingsController < ApplicationController
   # POST /ratings
   # POST /ratings.json
   def create
-    @move = Move.find(params[:move_id])
-    @rating = @move.ratings.create!(params[:rating])
-    
-    if params[:thumb_rating] == "Approve"
-      @rating.thumb_rating = 1;
-    elsif params[:thumb_rating] == "Reject"
-      @rating.thumb_rating = 0;
+    if params[:move_id].present?
+      @container = Move.find(params[:move_id])
+      @rating = @container.ratings.create!(params[:rating])
+    elsif params[:tomato_id].present?
+      @container = Tomato.find(params[:tomato_id])
+      @rating = Rating.new(params[:rating])
+
+      if LiveTomato.where(:tomato_id => @container.id).blank?
+        # do nothing
+      else
+        @live_tomato = LiveTomato.where(tomato_id: @container.id)
+        LiveTomato.update(@live_tomato, :star_rating => @rating.star_rating, :thumb_rating => @rating.thumb_rating)
+      end
     end
     
-    if params[:star_rating] == "Reject"
-      @rating.star_rating = 0;
+    if params[:reject_star_rating].present?
+      @rating.star_rating = 0
     end
-    
-    @rating.user_id = current_user.id
-    
+
+    if params[:skip_star_rating].present?
+      @rating.star_rating = -2
+      @rating.thumb_rating = -2
+    end
+
     respond_to do |format|
       if @rating.save
-        format.html { redirect_to @move, notice: 'Rating was successfully created.' }
-        format.json { render json: @move, status: :created, location: @move }
+        if params[:skip_star_rating].present? && @container.project_id.present?
+          @project = Project.find(@container.project_id)
+          format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully skipped.' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to @container, notice: 'Rating was successfully created.' }
+          format.json { render json: @container, status: :created, location: @tomato }
+        end
       else
         format.html { render action: "new" }
-        format.json { render json: @move.errors, status: :unprocessable_entity }
+        format.json { render json: @container.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,15 +85,19 @@ class RatingsController < ApplicationController
   # PUT /ratings/1.json
   def update
     @rating = Rating.find(params[:id])
-    @move = Move.find(@rating.move_id)
+    if @rating.move_id != nil
+      @container = @rating.move
+    elsif @rating.tomato_id != nil
+      @container = @rating.tomato
+    end
     
     respond_to do |format|
       if @rating.update_attributes(params[:rating])
-        format.html { redirect_to @move, notice: 'Rating was successfully updated.' }
+        format.html { redirect_to @container, notice: 'Rating was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @move.errors, status: :unprocessable_entity }
+        format.json { render json: @container.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -87,11 +106,15 @@ class RatingsController < ApplicationController
   # DELETE /ratings/1.json
   def destroy
     @rating = Rating.find(params[:id])
-    @move = Move.find(@rating.move_id)
+    if @rating.move_id != nil
+      @container = @rating.move
+    elsif @rating.tomato_id != nil
+      @container = @rating.tomato
+    end
     @rating.destroy
 
     respond_to do |format|
-      format.html { redirect_to @move }
+      format.html { redirect_to @container }
       format.json { head :no_content }
     end
   end

@@ -5,9 +5,11 @@
     = link_to t("moves.links.backtoproject"), work_projects_path(:id => @project.id), :class => 'btn'
     = link_to t("helpers.links.edit"), edit_move_path(@move), :class => 'btn'
     = link_to t("helpers.links.destroy"), move_path(@move), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
+
   .span4
-    %h5=t("moves.links.movetype") #{@move.move_type.title}"
-    %h5=t("moves.links.owner2") #{@move.user.name}"
+    %h5=t("moves.links.owner") + ": #{@move.user.name}"
+    %h5=t("moves.links.movetype") + ": #{@move.move_type.title}"
+    %h5=t("moves.links.state") + ": #{@move.state.title}" if @move.state.present?
 .row
   .span8
     %br 
@@ -33,7 +35,6 @@
         %th{:width => "20px;"}
         %th{:width => "250px;"} Title
         %th{:width => "100px;"} Owner
-        %th{:width => "100px;"} Interruptions
         %th{:width => "120px;"} Publish date
         %th{:width => "20px;"}
         %th{:width => "20px;"}
@@ -51,30 +52,10 @@
               = image_tag("tomaterot.png", :width => 20, :height => 20)
           %td= link_to tomato.title, tomato
           %td= tomato.user.name unless tomato.user == nil
-          %td
-            -internal=0; external=0; comments=0;
-            -tomato.interruptions.each do |interruption|
-              -case interruption.interruption_type
-                -when 0
-                  -external=external+1
-                -when 1
-                  -internal=internal+1
-                -when -1
-                  -comments=comments+1
-            -if external > 0
-              = "#{external}"
-              = image_tag("tomategruenstoerer.png", :width => 20, :height => 20)
-            -if internal > 0
-              = "#{internal}"
-              = image_tag("tomategruenstoerer.png", :width => 20, :height => 20)
-            -if comments > 0
-              = "#{comments}"
-              = image_tag("kommentar.gif", :width => 15, :height => 15)
-            
-            %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-            %td= link_to t("helpers.links.start"), tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
-            %td= link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
-            %td= link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+          %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+          %td= link_to t("helpers.links.start"), tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
+          %td= link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
+          %td= link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 
 
   =simple_form_for [@move, Tomato.new] do |f| 
@@ -90,7 +71,7 @@
   
   
 
--if @move.move_type.thumb_rating || @move.move_type.star_rating
+-if (@move.move_type.thumb_rating || @move.move_type.star_rating)
   %h4= t("helpers.links.ratings")
   -@move.ratings.each do |rating|
     .row
@@ -98,6 +79,8 @@
         %h6
           -if @move.move_type.thumb_rating
             -case rating.thumb_rating
+              -when -2
+                = "Rating was skipped from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
               -when 0
                 = image_tag("daumenrunter.png", :width => 20, :height => 20)
                 = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"  
@@ -110,6 +93,8 @@
           
           -if @move.move_type.star_rating
             -case rating.star_rating
+              -when -2
+                = "Rating was skipped from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
               -when -1
                 = image_tag("kommentar.gif", :width => 20, :height => 20) 
                 = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"  
@@ -134,7 +119,7 @@
 
 
 
--if @move.move_type.thumb_rating
+-if @move.move_type.thumb_rating && @move.user_id != current_user.id
   %h5= t("helpers.links.newthumbrating")
   %br
   
@@ -142,16 +127,15 @@
     = f.input :body, input_html: {style: 'height:100px; width:300px'}
     = f.hidden_field :user_id, :value => current_user.id
     .form-actions
-      = f.submit t("helpers.links.approve"), :class => 'btn btn-primary', name: "thumb_rating", value: "Approve"
+      = f.submit t("helpers.links.approve"), :class => 'btn btn-success', name: "thumb_rating", value: "Approve"
       = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "thumb_rating", value: "Reject"
       = f.submit t("helpers.links.comment"), :class => 'btn btn-info', name: "thumb_rating", value: "Comment"
 
 %br
 %br
-%hr
 
 
--if @move.move_type.star_rating
+-if @move.move_type.star_rating && @move.user_id != current_user.id
   %h5= t("helpers.links.newstarrating")
   %br
   
@@ -161,6 +145,11 @@
     = f.hidden_field :user_id, :value => current_user.id
     .form-actions
       = f.button :submit, :class => 'btn-primary'
-      = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "star_rating", value: "Reject"
+      = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating"
 
 
+%hr
+-if @move.user == current_user
+  = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
+    = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "closed").id
+    = f.button :submit, :class => 'btn btn-danger', :value=> t("moves.links.close")

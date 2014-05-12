@@ -1,4 +1,4 @@
-=render :partial => "header"      
+=render :partial => "header", :locals => {:page => "report"}
 
 .row
   .span2
@@ -18,4 +18,4 @@
       -elsif @move_type.star_rating
         =render :partial => "report_rating"
       -elsif @move_type.has_tomatoes
-        =render :partial => "report_calender"
+        =render :partial => "report_tomatoes"
