@@ -46,9 +46,9 @@ AgileMovesOs::Application.routes.draw do
   get '/en/live_refresh' => 'live_tomatoes#index'
 
   authenticated :user do
-    root :to => 'projects#index'
+    root :to => 'moves#index'
   end
-  root :to => "projects#index"
+  root :to => "moves#index"
   devise_for :users
   resources :users
   end

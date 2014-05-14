@@ -47,6 +47,7 @@ class MovesController < ApplicationController
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     @states = State.order(:position)
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
+    @move_type = params[:move_type_id] ? params[:move_type_id] : MoveType.first
 
     respond_to do |format|
       format.html # new.html.erb
@@ -65,11 +66,6 @@ class MovesController < ApplicationController
   def create
     @move = Move.new(params[:move])
     @project = Project.find(@move.project_id) if @move.project_id.present?
-
-    #@ratings = @move.ratings
-    #@ratings.each do |rating|
-    #  RailsthemesMailer.test_email_one_column(rating.user)
-    #end
 
     respond_to do |format|
       if @move.save

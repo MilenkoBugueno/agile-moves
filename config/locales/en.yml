@@ -28,6 +28,7 @@ en:
       german: "German"
       users: "Users"
       signup: "Sign up"
+      movetypes: "Move types"
   login:
       signin: "Sign in"
       signup: "Sign up"

@@ -1,23 +1,39 @@
 / add navigation links to this file
 - if user_signed_in?
-  %li= link_to t("navigation.projects"), projects_path
-
-  /%li= select_tag( 'user_id', options_for_select(Project.all.collect{ |u| [u.title, u.id] }))
-  %li= ". . . "
-  %li= link_to t("navigation.logout"), destroy_user_session_path, :method=>'delete'
-
+  %li.has-dropdown
+    = link_to t("navigation.projects"), projects_path
+    %ul.dropdown
+      -Project.all.each do |project|
+        %li
+          = link_to project.title, project_path(project)
+- if user_signed_in?
+  %li
+    = link_to current_user.name, edit_user_registration_path
+    %ul.dropdown
+      %li= link_to t("navigation.logout"), destroy_user_session_path, :method=>'delete'
 - else
   %li= link_to t("navigation.login"), new_user_session_path
-- if user_signed_in?
-  %li= link_to current_user.name, edit_user_registration_path
-- else
   %li= link_to 'Sign up', new_user_registration_path
 - if (current_user != nil) && (current_user.has_role? :admin)
-  %li= link_to t("navigation.users"), users_path
-  %li= link_to "Administration", move_types_path
-%li= ". . . "
-%li= link_to_unless_current t("navigation.english"), locale: "en"
-%li= link_to_unless_current t("navigation.german"), locale: "de"
+  %li.has-dropdown
+    = link_to "Administration", move_types_path
+    %ul.dropdown
+      %li
+        = link_to t("navigation.users"), users_path
+      %li
+        = link_to t("navigation.movetypes"), move_types_path
 %li
   = link_to "#{t('live_tomato.livelist')} #{image_tag('new_window.png', :size => '12x12')}".html_safe, live_tomatoes_path, :target => "_blank"
+
+%li.has-dropdown
+  -if locale == "en"
+    = link_to t("navigation.english"), locale: "en"
+  -else
+    = link_to t("navigation.german"), locale: "de"
+  %ul.dropdown
+    %li
+      -if locale == "en"
+        = link_to t("navigation.german"), locale: "de"
+      -else
+        = link_to t("navigation.english"), locale: "en"
 

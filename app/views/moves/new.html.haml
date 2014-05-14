@@ -2,7 +2,8 @@
 .page-header
   %h1=t 'helpers.titles.new', :model => model_class.model_name.human.titleize
 = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
-  = f.association :move_type, include_blank: false, :collection => @project.move_types
+  = f.association :move_type, include_blank: false, :collection => @project.move_types, :selected => @move_type
+  = f.association :project, include_blank: false,  :selected => @project.id
   = f.input :title, input_html: {style: 'width:500px;'}
   = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
   = f.input :publish_date, :as => :string
