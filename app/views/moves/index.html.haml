@@ -21,12 +21,12 @@
       %td
         = link_to move.title, move
       %td
-        = move.user.name
+        = move.user.name if move.user.present?
       %td
         -move.users.each do |reviewer|
           = reviewer.name
-      %td= move.move_type.title
-      %td= move.publish_date.to_s(:short) unless move.publish_date == nil
+      %td= move.move_type.title if move.move_type.present?
+      %td= move.publish_date.to_s(:short) if move.publish_date.present?
       %td
         - if current_user.has_role? :admin || current_user == move.user
           = link_to t("helpers.links.edit"), edit_move_path(move), :class => 'btn btn-mini'
