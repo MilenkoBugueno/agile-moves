@@ -29,6 +29,8 @@ en:
       users: "Users"
       signup: "Sign up"
       movetypes: "Move types"
+      extras: "Tools"
+      administration: "Administration"
   login:
       signin: "Sign in"
       signup: "Sign up"
@@ -109,3 +111,5 @@ en:
       remaining: "Remaining"
       refresh: "Refresh List"
       last_refresh: "Last Refresh"
+  user:
+    edit: "Edit User"
