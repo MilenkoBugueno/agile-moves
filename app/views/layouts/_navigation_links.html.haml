@@ -6,6 +6,11 @@
       -Project.all.each do |project|
         %li
           = link_to project.title, project_path(project)
+  %li.divider
+  %li
+    = link_to "#{t('live_tomato.livelist')} #{image_tag('new_window.png', :size => '12x12')}".html_safe, live_tomatoes_path, :target => "_blank"
+
+%li.divider
 - if user_signed_in?
   %li
     = link_to current_user.name, edit_user_registration_path
@@ -22,18 +27,19 @@
         = link_to t("navigation.users"), users_path
       %li
         = link_to t("navigation.movetypes"), move_types_path
-%li
-  = link_to "#{t('live_tomato.livelist')} #{image_tag('new_window.png', :size => '12x12')}".html_safe, live_tomatoes_path, :target => "_blank"
+
+%li.divider
 
 %li.has-dropdown
-  -if locale == "en"
+  -if I18n.locale == "en"
     = link_to t("navigation.english"), locale: "en"
   -else
     = link_to t("navigation.german"), locale: "de"
   %ul.dropdown
     %li
-      -if locale == "en"
+      -if I18n.locale == "en"
         = link_to t("navigation.german"), locale: "de"
       -else
         = link_to t("navigation.english"), locale: "en"
 
+%li.divider

@@ -13,6 +13,7 @@
  *= require jquery.ui.all
  */
 
+
 nav {
   a{
     font-style: normal;
@@ -36,6 +37,7 @@ nav {
       position: relative;
       height: 1px;
       left: -20px;
+
       li {
         list-style-type: none;
         padding-left: 10px;
@@ -52,5 +54,12 @@ nav {
   }
   li:hover > ul {
     display: block;
+  }
+  > ul .divider,
+  > ul [role="separator"] {
+    border: none;
+    border-right: 1px dashed #999999;
+    height: 30px;
+    padding-top: 10px;
   }
 }
