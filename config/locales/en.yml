@@ -31,6 +31,7 @@ en:
       movetypes: "Move types"
       extras: "Tools"
       administration: "Administration"
+      moves: "Moves"
   login:
       signin: "Sign in"
       signup: "Sign up"

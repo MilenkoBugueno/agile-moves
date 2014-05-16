@@ -12,4 +12,9 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def set_locale
+    I18n.locale = params[:locale] if params[:locale].present?
+    return ""
+  end
+
 end
