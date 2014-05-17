@@ -34,7 +34,7 @@ class ProjectsController < ApplicationController
     @moves = @moves.by_move_type(move_type_id) unless move_type_id == nil
 
     @tomatoes = Tomato.order('state DESC')
-    @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
+    @tomatoes = @tomatoes.by_user_id(current_user.id)
     @tomatoes = @tomatoes.by_project_id(params[:id]) if params[:id].present?
 
 
