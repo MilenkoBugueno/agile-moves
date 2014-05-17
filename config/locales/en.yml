@@ -88,6 +88,7 @@ en:
           movetype: "Move Type"
           moveid: "Move Id"
           close: "Close Move"
+      index: "Last moves"
   tomatoes:
       rating:
           starrating: "Fun rating"

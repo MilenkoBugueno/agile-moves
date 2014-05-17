@@ -85,6 +85,7 @@ de:
             moveid: "Move Id"
             state: "Status"
             close: "Move Schließen"
+        index: "Letzte Moves"
   tomatoes:
       rating:
           starrating: "Fun rating"

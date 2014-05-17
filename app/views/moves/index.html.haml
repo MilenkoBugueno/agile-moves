@@ -1,37 +1,31 @@
 = link_to "Back to Projects", projects_path, :class => 'btn btn-warning'
 
 
-%br
-%hr
-%br
 
+%hr
+
+%h3= t("moves.index")
+%br
 
 %table.table.table-striped
   %tr
     %th{:width => "300px;"} Title
+    %th{:width => "100px;"} Project
     %th{:width => "100px;"} Owner
     %th{:width => "200px;"} Team
     %th{:width => "150px;"} Move type
-    %th{:width => "80px;"} Publish date
-    %th{:width => "30px;"}
-    %th{:width => "30px;"}
+    %th{:width => "80px;"} Created at
+
 
   - @moves.each do |move|
     %tr
-      %td
-        = link_to move.title, move
-      %td
-        = move.user.name if move.user.present?
+      %td= link_to move.title, move
+      %td= move.project.title
+      %td= move.user.name if move.user.present?
       %td
         -move.users.each do |reviewer|
           = reviewer.name
       %td= move.move_type.title if move.move_type.present?
-      %td= move.publish_date.to_s(:short) if move.publish_date.present?
-      %td
-        - if current_user.has_role? :admin || current_user == move.user
-          = link_to t("helpers.links.edit"), edit_move_path(move), :class => 'btn btn-mini'
-      %td
-        - if current_user.has_role? :admin || current_user == move.user
-          = link_to t("helpers.links.destroy"), move_path(move), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
-%br
+      %td= move.created_at.to_s(:short) if move.created_at.present?
+
     
