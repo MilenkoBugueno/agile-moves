@@ -107,7 +107,7 @@ class LiveTomatoesController < ApplicationController
   def destroy
     @live_tomato = LiveTomato.find(params[:id])
     @live_tomato.destroy
-
+    log_admin("AdminLog: Live Tomato destroyed")
     respond_to do |format|
       format.html { redirect_to live_tomatoes_url }
       format.json { head :no_content }

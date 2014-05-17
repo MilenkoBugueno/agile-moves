@@ -83,7 +83,7 @@ class MovesController < ApplicationController
   def update
     @move = Move.find(params[:id])
     @project = Project.find(@move.project_id) if @move.project_id.present?
-
+    log_admin("AdminLog: Move updated")
     respond_to do |format|
       if @move.update_attributes(params[:move])
         format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully updated.' }
@@ -101,7 +101,7 @@ class MovesController < ApplicationController
     @move = Move.find(params[:id])
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @move.destroy
-
+    log_admin("AdminLog: Move destroyed")
     respond_to do |format|
       format.html { redirect_to work_projects_path(:id => @project.id) }
       format.json { head :no_content }

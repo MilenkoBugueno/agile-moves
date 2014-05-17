@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140501133127) do
+ActiveRecord::Schema.define(:version => 20140516231816) do
+
+  create_table "admin_logs", :force => true do |t|
+    t.string   "user_id"
+    t.string   "browser"
+    t.string   "ip_address"
+    t.string   "controller"
+    t.string   "action"
+    t.text     "params",     :limit => 255
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "username"
+  end
 
   create_table "interruptions", :force => true do |t|
     t.text     "body"
@@ -37,17 +50,8 @@ ActiveRecord::Schema.define(:version => 20140501133127) do
     t.integer  "star_rating"
   end
 
-  create_table "move_types", :force => true do |t|
-    t.string   "title"
-    t.text     "body"
-    t.boolean  "thumb_rating"
-    t.boolean  "star_rating"
-    t.boolean  "has_tomatoes"
-    t.boolean  "has_twitter_idea"
-    t.integer  "tomatoes_number"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
+# Could not dump table "move_types" because of following StandardError
+#   Unknown type 'bool' for column 'has_twitter_idea'
 
   create_table "move_types_projects", :id => false, :force => true do |t|
     t.integer "project_id"

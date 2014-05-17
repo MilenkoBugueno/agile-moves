@@ -45,6 +45,8 @@ AgileMovesOs::Application.routes.draw do
   get '/de/live_refresh' => 'live_tomatoes#index'
   get '/en/live_refresh' => 'live_tomatoes#index'
 
+  resources :admin_logs
+
   authenticated :user do
     root :to => 'moves#index'
   end

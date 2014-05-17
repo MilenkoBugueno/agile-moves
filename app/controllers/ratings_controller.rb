@@ -90,7 +90,7 @@ class RatingsController < ApplicationController
     elsif @rating.tomato_id != nil
       @container = @rating.tomato
     end
-    
+    log_admin("AdminLog: Rating updated")
     respond_to do |format|
       if @rating.update_attributes(params[:rating])
         format.html { redirect_to @container, notice: 'Rating was successfully updated.' }
@@ -112,7 +112,7 @@ class RatingsController < ApplicationController
       @container = @rating.tomato
     end
     @rating.destroy
-
+    log_admin("AdminLog: Rating destroyed")
     respond_to do |format|
       format.html { redirect_to @container }
       format.json { head :no_content }

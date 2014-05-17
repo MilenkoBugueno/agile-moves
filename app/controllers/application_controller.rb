@@ -16,4 +16,17 @@ class ApplicationController < ActionController::Base
   def default_url_options(options = {})
     {locale: I18n.locale}
   end
+
+  def log_admin(title)
+    @activity = AdminLog.new
+    @activity.user_id = current_user
+    @activity.username = current_user.name
+    @activity.title = title
+    @activity.browser = request.env['HTTP_USER_AGENT']
+    @activity.ip_address = request.env['REMOTE_ADDR']
+    @activity.controller = controller_name
+    @activity.action = action_name
+    @activity.params = params.inspect
+    @activity.save
+  end
 end

@@ -32,6 +32,7 @@ en:
       extras: "Tools"
       administration: "Administration"
       moves: "Moves"
+      adminlog: "Admin Log"
   login:
       signin: "Sign in"
       signup: "Sign up"

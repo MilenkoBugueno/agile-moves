@@ -107,7 +107,7 @@ class TomatoesController < ApplicationController
       @live_tomato = LiveTomato.where(tomato_id: @tomato.id)
       LiveTomato.update(@live_tomato, :status => '2')
     end
-
+    log_admin("AdminLog: Tomato updated")
     respond_to do |format|
       if @tomato.update_attributes(params[:tomato])
         format.html { redirect_to @tomato, notice: 'Tomato was successfully updated.' }
@@ -125,7 +125,7 @@ class TomatoesController < ApplicationController
     @tomato = Tomato.find(params[:id])
     project_id = @tomato.move.project_id if @tomato.move.present?
     @tomato.destroy
-
+    log_admin("AdminLog: Tomato destroyed")
     respond_to do |format|
       format.html { redirect_to work_projects_path(:id => project_id) }
       format.json { head :no_content }

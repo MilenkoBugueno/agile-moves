@@ -1,0 +1,33 @@
+.page-header
+  %h2 Admin Log
+%table.table.table-striped
+  %tr
+    %th Date
+    %th Title
+    %th User ID
+    %th.nav{:style => (@filter == "username")? "text-decoration:underline" : ""}
+      = drop_down "Username" do
+        - @adminlognames.each do |name|
+          = menu_item name, admin_logs_path(:filter => "username", :value => name.to_s)
+    %th Browser
+    %th IP Address
+    %th.nav{:style => (@filter == "controller")? "text-decoration:underline" : ""}
+      = drop_down "Controller" do
+        - @adminlogcontroller.each do |controller|
+          = menu_item controller, admin_logs_path(:filter => "controller", :value => controller.to_s)
+    %th.nav{:style => (@filter == "action")? "text-decoration:underline" : ""}
+      = drop_down "Action" do
+        - @adminlogaction.each do |action|
+          = menu_item action, admin_logs_path(:filter => "action", :value => action.to_s)
+    %th Parameters
+  - @adminlog.each do |entry|
+    %tr
+      %td= entry.created_at.strftime("%c")
+      %td= entry.title
+      %td= entry.user_id
+      %td= entry.username
+      %td= entry.browser
+      %td= entry.ip_address
+      %td= entry.controller
+      %td= entry.action
+      %td= entry.params
