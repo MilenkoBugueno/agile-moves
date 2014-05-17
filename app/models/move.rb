@@ -107,7 +107,7 @@ class Move < ActiveRecord::Base
     move_type = self.move_type
     if move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
       for i in 1..move_type.tomatoes_number
-        Tomato.create(:move_id => self.id, :title => self.title+" "+ i.to_s, :user_id => self.user_id, :state => 0)
+        Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 0)
       end
     end
 

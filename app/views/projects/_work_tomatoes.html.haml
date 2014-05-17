@@ -10,30 +10,29 @@
     %th{:width => "20px;"}
     %th{:width => "20px;"}
 
-  - @moves.each do |move|
-    - move.tomatoes.each do |tomato|
-      %tr
-        %td
-          - if tomato.state == 0 # not planed
-            = image_tag("tomategrau.png", :width => 20, :height => 20)
-          - elsif tomato.state == 1 #planed
-            = image_tag("tomategruen.png", :width => 20, :height => 20)
-          - elsif tomato.state == 2 #done
-            = image_tag("tomaterot.png", :width => 20, :height => 20)
-        %td
-          - if tomato.rating != nil 
-            -if tomato.rating.thumb_rating > 0
-              = image_tag("daumenhoch.png", :width => 20, :height => 20)
-            -else
-              = image_tag("daumenrunter.png", :width => 20, :height => 20)
-          - else 
-            = image_tag("bewerten.png", :width => 20, :height => 20)
-        %td= link_to tomato.title, tomato
-        %td= tomato.user.name
-        %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-        %td
-          = link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
-        %td
-          = link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+  - @tomatoes.each do |tomato|
+    %tr
+      %td
+        - if tomato.state == 0 # not planed
+          = image_tag("tomategrau.png", :width => 20, :height => 20)
+        - elsif tomato.state == 1 #planed
+          = image_tag("tomategruen.png", :width => 20, :height => 20)
+        - elsif tomato.state == 2 #done
+          = image_tag("tomaterot.png", :width => 20, :height => 20)
+      %td
+        - if tomato.rating != nil
+          -if tomato.rating.thumb_rating > 0
+            = image_tag("daumenhoch.png", :width => 20, :height => 20)
+          -else
+            = image_tag("daumenrunter.png", :width => 20, :height => 20)
+        - else
+          = image_tag("bewerten.png", :width => 20, :height => 20)
+      %td= link_to tomato.title, tomato
+      %td= tomato.user.name
+      %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+      %td
+        = link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
+      %td
+        = link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 
 
