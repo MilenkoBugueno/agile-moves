@@ -42,9 +42,11 @@ class RatingsController < ApplicationController
   def create
     if params[:move_id].present?
       @container = Move.find(params[:move_id])
+      @move_type = @container.move_type
       @rating = @container.ratings.create!(params[:rating])
     elsif params[:tomato_id].present?
       @container = Tomato.find(params[:tomato_id])
+      @move_type = @container.move.move_type
       @rating = Rating.new(params[:rating])
 
       if LiveTomato.where(:tomato_id => @container.id).blank?
@@ -68,7 +70,7 @@ class RatingsController < ApplicationController
       if @rating.save
         if params[:skip_star_rating].present? && @container.project_id.present?
           @project = Project.find(@container.project_id)
-          format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully skipped.' }
+          format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully skipped.' }
           format.json { head :no_content }
         else
           format.html { redirect_to @container, notice: 'Rating was successfully created.' }

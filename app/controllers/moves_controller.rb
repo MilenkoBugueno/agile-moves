@@ -47,7 +47,7 @@ class MovesController < ApplicationController
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     @states = State.order(:position)
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
-    @move_type = params[:move_type_id] ? params[:move_type_id] : MoveType.first
+    @move_type = params[:move_type] ? params[:move_type] : MoveType.first
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,6 +58,7 @@ class MovesController < ApplicationController
   # GET /moves/1/edit
   def edit
     @move = Move.find(params[:id])
+    @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
   end
 
@@ -65,11 +66,12 @@ class MovesController < ApplicationController
   # POST /moves.json
   def create
     @move = Move.new(params[:move])
+    @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
 
     respond_to do |format|
       if @move.save
-        format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully created.' }
+        format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully created.' }
         format.json { render json: @move, status: :created, location: @move }
       else
         format.html { render action: "new" }
@@ -82,11 +84,12 @@ class MovesController < ApplicationController
   # PUT /moves/1.json
   def update
     @move = Move.find(params[:id])
+    @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
     log_admin("AdminLog: Move updated")
     respond_to do |format|
       if @move.update_attributes(params[:move])
-        format.html { redirect_to work_projects_path(:id => @project.id), notice: 'Move was successfully updated.' }
+        format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -99,11 +102,12 @@ class MovesController < ApplicationController
   # DELETE /moves/1.json
   def destroy
     @move = Move.find(params[:id])
+    @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @move.destroy
     log_admin("AdminLog: Move destroyed")
     respond_to do |format|
-      format.html { redirect_to work_projects_path(:id => @project.id) }
+      format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id) }
       format.json { head :no_content }
     end
   end  

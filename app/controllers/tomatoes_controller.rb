@@ -123,11 +123,12 @@ class TomatoesController < ApplicationController
   # DELETE /tomatoes/1.json
   def destroy
     @tomato = Tomato.find(params[:id])
+    @move_type = @tomato.move.move_type
     project_id = @tomato.move.project_id if @tomato.move.present?
     @tomato.destroy
     log_admin("AdminLog: Tomato destroyed")
     respond_to do |format|
-      format.html { redirect_to work_projects_path(:id => project_id) }
+      format.html { redirect_to work_projects_path(:id => project_id, :move_type => @move_type.id) }
       format.json { head :no_content }
     end
   end
