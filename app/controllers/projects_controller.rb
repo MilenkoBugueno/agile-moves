@@ -36,6 +36,7 @@ class ProjectsController < ApplicationController
     @tomatoes = Tomato.order('state DESC')
     @tomatoes = @tomatoes.by_user_id(current_user.id)
     @tomatoes = @tomatoes.by_project_id(params[:id]) if params[:id].present?
+    @tomatoes = @tomatoes.not_closed
 
 
     respond_to do |format|
