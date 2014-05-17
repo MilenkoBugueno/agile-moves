@@ -57,7 +57,7 @@ class MoveTypesController < ApplicationController
   # PUT /move_types/1.json
   def update
     @move_type = MoveType.find(params[:id])
-
+    log_admin("AdminLog: Move Type updated")
     respond_to do |format|
       if @move_type.update_attributes(params[:move_type])
         format.html { redirect_to @move_type, notice: 'Move type was successfully updated.' }
@@ -74,7 +74,7 @@ class MoveTypesController < ApplicationController
   def destroy
     @move_type = MoveType.find(params[:id])
     @move_type.destroy
-
+    log_admin("AdminLog: Move Type destroyed")
     respond_to do |format|
       format.html { redirect_to move_types_url }
       format.json { head :no_content }

@@ -29,6 +29,7 @@ de:
       users: "Benutzer"
       signup: "Registrieren"
       movetypes: "Move types"
+      adminlog: "Admin Log"
   login:
       signin: "Anmelden"
       signup: "Registrieren"

@@ -15,8 +15,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user], :as => :admin)
       redirect_to users_path, :notice => "User updated."
+      log_admin("AdminLog: User updated")
     else
       redirect_to users_path, :alert => "Unable to update user."
+      log_admin("AdminLog: User update failed")
     end
   end
     
@@ -26,8 +28,10 @@ class UsersController < ApplicationController
     unless user == current_user
       user.destroy
       redirect_to users_path, :notice => "User deleted."
+      log_admin("AdminLog: User destroyed")
     else
       redirect_to users_path, :notice => "Can't delete yourself."
+      log_admin("AdminLog: User destroy self failed")
     end
   end
 end
