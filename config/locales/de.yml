@@ -68,7 +68,8 @@ de:
          newtomatorating: "Tomate bewerten"
          close: "Schließen"
          skip: "Überspringen"
-         closed: "geschloßen"
+         closed: "geschlossen"
+         skipped: "übersprungen"
       titles:
             edit: "Bearbeiten %{model}"
             save: "Speichern %{model}"

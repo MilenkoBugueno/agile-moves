@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
     @tomatoes = @tomatoes.by_project_id(params[:id]) if params[:id].present?
     @tomatoes_by_date = @tomatoes.group_by(&:publish_date)
     
-    @moves = Move.order('created_at DESC')
+    @moves = Move.order('publish_date DESC')
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
 
     @move_types = MoveType.order('created_at DESC')
