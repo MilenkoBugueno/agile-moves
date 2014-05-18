@@ -6,6 +6,7 @@
 
   = drop_down t("navigation.moves") do
     = menu_item t("projects.newmove"), new_move_path
+    = menu_item t("categories.index"), categories_path
     = menu_item "#{t('live_tomato.livelist')} #{image_tag('new_window.png', :size => '12x12')}".html_safe, live_tomatoes_path, :target => "_blank"
 
 

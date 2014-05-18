@@ -1,21 +1,20 @@
 %table.table.table-striped
   %tr
+    %th{:width => "70px;"} Rating
+    %th{:width => "140px;"} Title
+    %th{:width => "80px;"} Owner
+    %th{:width => "80px;"} Category
+    %th{:width => "80px;"} Publish Date
     %th{:width => "40px;"}
-    %th{:width => "40px;"}
-    %th{:width => "300px;"} Title
-    %th{:width => "100px;"} Owner
-    %th{:width => "80px;"} Publish date
 
 
   - @moves.each do |move|
     -if move.move_type != nil  && move.move_type.star_rating
       %tr
         %td
-          -if move.state.present? && move.state.closed
-            =link_to t("helpers.links.closed"), "#", :class => 'btn btn-mini btn-danger', :disabled => true
-        %td
-          =move.stars
+          = "#{move.stars}"
           = image_tag("star.png", :width => 15, :height => 15)
+          ="/ #{move.ratings.count} votes"
           -if move.rejects > 0
             = move.rejects
             = image_tag("daumenrunter.png", :width => 15, :height => 15)
@@ -28,13 +27,14 @@
             = link_to move.title, move
 
         %td= move.user.name
+        %td= move.category.title if move.category.present?
         %td= move.publish_date.to_s(:short) unless move.publish_date == nil
-
-    -elsif move.move_type != nil  && move.move_type.thumb_rating
-      %tr
         %td
           -if move.state.present? && move.state.closed
             =link_to t("helpers.links.closed"), "#", :class => 'btn btn-mini btn-danger', :disabled => true
+
+    -elsif move.move_type != nil  && move.move_type.thumb_rating
+      %tr
         %td
           -if move.thumbs_down > 0
             = move.thumbs_down
@@ -53,6 +53,10 @@
           -else
             = link_to move.title, move
         %td= move.user.name
+        %td= move.category.title if move.category.present?
         %td= move.publish_date.to_s(:short) unless move.publish_date == nil
+        %td
+          -if move.state.present? && move.state.closed
+            =link_to t("helpers.links.closed"), "#", :class => 'btn btn-mini btn-danger', :disabled => true
 
 

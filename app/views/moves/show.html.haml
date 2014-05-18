@@ -8,9 +8,23 @@
       = link_to t("helpers.links.destroy"), move_path(@move), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
 
   .span4
-    %h5=t("moves.links.owner") + ": #{@move.user.name}"
-    %h5=t("moves.links.movetype") + ": #{@move.move_type.title}"
-    %h5=t("moves.links.state") + ": #{@move.state.title}" if @move.state.present?
+    %strong=t("moves.links.owner") + ": "
+    ="#{@move.user.name}"
+    %hr
+    %strong=t("moves.links.movetype") + ": "
+    ="#{@move.move_type.title}"
+    %hr
+    %strong=t("moves.links.state") + ": "
+    ="#{@move.state.title}" if @move.state.present?
+    %hr
+    %strong=t("moves.links.team") + ": "
+    -@move.users.each do |usr|
+      ="#{usr.name} - "
+    %hr
+    %strong=t("moves.links.category") + ": "
+    ="#{@move.category.title}" if @move.category.present?
+    %hr
+
 .row
   .span8
     %br 
@@ -120,7 +134,7 @@
 
 
 
--if @move.move_type.thumb_rating && @move.user_id != current_user.id
+-if @move.move_type.thumb_rating
   %h5= t("helpers.links.newthumbrating")
   %br
   
@@ -128,25 +142,26 @@
     = f.input :body, input_html: {style: 'height:100px; width:300px'}
     = f.hidden_field :user_id, :value => current_user.id
     .form-actions
-      = f.submit t("helpers.links.approve"), :class => 'btn btn-success', name: "thumb_rating", value: "Approve"
-      = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "thumb_rating", value: "Reject"
-      = f.submit t("helpers.links.comment"), :class => 'btn btn-info', name: "thumb_rating", value: "Comment"
+      = f.submit t("helpers.links.approve"), :class => 'btn btn-success', name: "approve_thumb_rating", value: "Approve"
+      = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_thumb_rating", value: "Reject"
+      = f.submit t("helpers.links.comment"), :class => 'btn btn-info', name: "comment_thumb_rating", value: "Comment"
 
 %br
 %br
 
 
--if @move.move_type.star_rating && @move.user_id != current_user.id
+-if @move.move_type.star_rating
   %h5= t("helpers.links.newstarrating")
   %br
   
   =simple_form_for [@move, Rating.new] do |f| 
-    = f.input :star_rating, :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
+    = f.input :star_rating, :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline' unless @move.user == current_user
     = f.input :body, input_html: {style: 'height:100px; width:300px'}
     = f.hidden_field :user_id, :value => current_user.id
     .form-actions
-      = f.button :submit, :class => 'btn-primary'
-      = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating"
+      = f.button :submit, :class => 'btn-primary' unless @move.user == current_user
+      = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating" unless @move.user == current_user
+      = f.submit t("helpers.links.comment"), :class => 'btn btn-info', name: "comment_star_rating", value: "Comment"
 
 
 %hr
