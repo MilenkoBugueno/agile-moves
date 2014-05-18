@@ -1,14 +1,16 @@
 class Move < ActiveRecord::Base
-  attr_accessible :body, :move_type_id, :user_id, :title, :user_ids, :state_id, :publish_date, :project_id
+  attr_accessible :body, :move_type_id, :user_id, :title, :user_ids, :state_id, :publish_date, :project_id, :category_id
   validates_presence_of :title, :move_type_id
   
   belongs_to :user
   belongs_to :move_type
   belongs_to :state
   belongs_to :project
+  belongs_to :category
   has_and_belongs_to_many :users
   has_many :ratings
   has_many :tomatoes
+
 
   after_create :create_objects
 
