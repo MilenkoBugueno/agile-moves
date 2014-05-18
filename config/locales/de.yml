@@ -85,6 +85,8 @@ de:
             moveid: "Move Id"
             state: "Status"
             close: "Move Schließen"
+            team: "Team"
+            category: "Kategorie"
         index: "Letzte Moves"
   tomatoes:
       rating:
@@ -170,3 +172,5 @@ de:
          not_saved:
            one: "Ein Fehler verhinderte, dass sie erfolgreich speichern konnten."
            other: "Ein Fehler verhinderte, dass sie erfolgreich speichern konnten."
+  categories:
+    index: "Kategorien"

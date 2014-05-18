@@ -88,6 +88,8 @@ en:
           movetype: "Move Type"
           moveid: "Move Id"
           close: "Close Move"
+          team: "Team"
+          category: "Category"
       index: "Last moves"
   tomatoes:
       rating:
@@ -117,3 +119,5 @@ en:
       last_refresh: "Last Refresh"
   user:
     edit: "Edit User"
+  categories:
+    index: "Categories"

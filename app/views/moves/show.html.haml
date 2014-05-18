@@ -8,9 +8,23 @@
       = link_to t("helpers.links.destroy"), move_path(@move), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
 
   .span4
-    %h5=t("moves.links.owner") + ": #{@move.user.name}"
-    %h5=t("moves.links.movetype") + ": #{@move.move_type.title}"
-    %h5=t("moves.links.state") + ": #{@move.state.title}" if @move.state.present?
+    %strong=t("moves.links.owner") + ": "
+    ="#{@move.user.name}"
+    %hr
+    %strong=t("moves.links.movetype") + ": "
+    ="#{@move.move_type.title}"
+    %hr
+    %strong=t("moves.links.state") + ": "
+    ="#{@move.state.title}" if @move.state.present?
+    %hr
+    %strong=t("moves.links.team") + ": "
+    -@move.users.each do |usr|
+      ="#{usr.name} - "
+    %hr
+    %strong=t("moves.links.category") + ": "
+    ="#{@move.category.title}" if @move.category.present?
+    %hr
+
 .row
   .span8
     %br 
