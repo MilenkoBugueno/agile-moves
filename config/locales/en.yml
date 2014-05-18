@@ -78,6 +78,8 @@ en:
           save: "Save %{model}"
           delete: "Delete %{model}"
           new: "New"
+      wordpress:
+          publish: "Publish to Wordpress"
   moves:
       links:
           owner: "Owner"
