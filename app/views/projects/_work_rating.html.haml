@@ -1,6 +1,6 @@
 %table.table.table-striped
   %tr
-    %th{:width => "100px;"}
+    %th{:width => "150px;"}
     %th{:width => "300px;"} Title
     %th{:width => "100px;"} Owner
     %th{:width => "200px;"} Team
@@ -11,7 +11,22 @@
     -if !move.reviewed_by_me(current_user)
       %tr
         %td
-          =image_tag("bewerten.png", :width => 25, :height => 25)
+          -if move.move_type != nil  && move.move_type.star_rating
+            =image_tag("bewerten.png", :width => 20, :height => 20) unless move.user == current_user
+            = "#{move.stars}"
+            = image_tag("star.png", :width => 15, :height => 15)
+            ="/ #{move.ratings.count} votes"
+          -else
+            =image_tag("bewerten.png", :width => 20, :height => 20) unless move.user == current_user
+            -if move.thumbs_down > 0
+              = move.thumbs_down
+              = image_tag("daumenrunter.png", :width => 15, :height => 15)
+            -if move.thumbs_up > 0
+              = move.thumbs_up
+              = image_tag("daumenhoch.png", :width => 15, :height => 15)
+            -if move.comments > 0
+              = move.comments
+              = image_tag("kommentar.gif", :width => 15, :height => 15)
         %td= link_to move.title, move
         %td= move.user.name
         %td
