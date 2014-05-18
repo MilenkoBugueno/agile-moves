@@ -129,7 +129,7 @@ de:
          last_attempt: "Sie haben noch einen Versuch bevor ihr Konto gesperrt wird."
          not_found_in_database: "Die eingegebene Email oder das Passwort ist ungültig."
          timeout: "Ihre Session ist abgelaufen. Bitte melden sie sich erneut an um fortzufahren."
-         unauthenticated: "Sie müssen sich erst anmelden, bzw. registirieren."
+         unauthenticated: "Sie müssen sich erst anmelden, bzw. registrieren."
          unconfirmed: "Sie müssen ihr Konto erst bestätigen bevor sie fortfahren können."
       mailer:
          confirmation_instructions:
