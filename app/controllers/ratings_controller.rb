@@ -61,6 +61,14 @@ class RatingsController < ApplicationController
       @rating.star_rating = 0
     end
 
+    if params[:reject_thumb_rating].present?
+      @rating.thumb_rating = 0
+    end
+
+    if params[:approve_thumb_rating].present?
+      @rating.thumb_rating = 1
+    end
+
     if params[:skip_star_rating].present?
       @rating.star_rating = -2
       @rating.thumb_rating = -2
