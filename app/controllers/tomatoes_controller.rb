@@ -27,6 +27,26 @@ class TomatoesController < ApplicationController
     @move_type = @tomato.move.move_type
     @project = Project.find(@tomato.move.project_id) if @tomato.move.project_id.present?
 
+    #@wp_categories = wp_getCategories("learningtocode.de", "teamtool", "teamtool01", "1")
+    @wp_categories = Hash.new
+    @wp_blogs = wp_getUsersBlogs("learningtocode.de", "teamtool", "teamtool01")
+    @wp_blogs.each do |blog|
+      @wp_categories[blog] = wp_getCategories(blog, "teamtool", "teamtool01", "1")
+    end
+
+    # Wordpress Veröffentlichung
+    if params[:wppublish] == "true"
+      content = "Fun Rating: #{@tomato.rating.star_rating}\n\nGoal Reached: #{@tomato.rating.thumb_rating}\n\nTomatenkommentar: #{@tomato.rating.body}"
+      title = "#{@tomato.title} von #{@tomato.user.name} am #{@tomato.created_at.strftime("%d.%m.%Y")}"
+      @param_blogs = Hash.new
+      @param_blogs = wp_pre_publish(params[:publish_to])
+      #@tomato.dfsdf
+      @param_blogs.each do |blog, categories|
+        wp_publish(blog.to_s, "teamtool", "teamtool01", content, title, categories)
+      end
+      flash[:notice] = "Blog article published"
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @tomato }
@@ -132,6 +152,5 @@ class TomatoesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
   
 end

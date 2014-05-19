@@ -120,6 +120,14 @@
   %p
     - if @tomato.user == current_user
       = link_to t("helpers.links.edit"), edit_rating_path(rating), :class => 'btn btn-mini'
-    //= link_to t("helpers.links.destroy"), rating_path(rating), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
-
+      //= link_to t("helpers.links.destroy"), rating_path(rating), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+      %form{:action => tomato_path(:wppublish => "true"), :method => "get"}
+        %select{:class => "multiselect", :multiple => "multiple", :name => "publish_to[]"}
+          - @wp_blogs.each do |blog|
+            %optgroup{:label => "#{blog}"}
+              - @wp_categories[blog].each do |cat|
+                %option{:value => "#{blog}!#{cat}"}
+                  = cat
+        %input{:type => "hidden", :value => "true", :name => "wppublish"}
+        %input{:type => "submit", :value => t("helpers.wordpress.publish"), :class => "btn btn-mini"}
 

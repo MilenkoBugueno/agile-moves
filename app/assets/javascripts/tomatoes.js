@@ -1,5 +1,10 @@
 var tt_tomaten_zeit;
 
+// Mulitselect Dropdown Initialization
+$(document).ready(function() {
+    $('.multiselect').multiselect();
+    });
+
 function start_me(userid, username, title, tomato_id, stop_message) {
 
     var anfang;

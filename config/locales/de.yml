@@ -75,6 +75,8 @@ de:
             save: "Speichern %{model}"
             delete: "Löschen %{model}"
             new: "Neu"
+      wordpress:
+        publish: "In Wordpress publizieren"
   moves:
         links:
             owner: "Eigentümer"

@@ -18,10 +18,11 @@ gem 'simple_form'
 gem "twitter-bootstrap-rails"
 gem 'execjs'
 gem "ckeditor"
+gem 'rubypress'
 group :development do
   gem 'sqlite3'
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
+  gem 'binding_of_caller'
   gem 'guard-bundler'
   gem 'guard-cucumber'
   gem 'guard-rails'
