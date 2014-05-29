@@ -3,6 +3,7 @@ class Tomato < ActiveRecord::Base
   belongs_to :move
   belongs_to :user
   has_one :rating
+  has_many :comments
   
   scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
   scope :by_date, lambda {|uid| where(["#{table_name}.publish_date =?", uid])}

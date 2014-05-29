@@ -43,6 +43,8 @@ AgileMovesOs::Application.routes.draw do
     end
   end
 
+  resources :comments
+
   resources :live_tomatoes
 
   get '/de/live_refresh' => 'live_tomatoes#index'

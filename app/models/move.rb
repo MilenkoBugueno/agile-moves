@@ -10,6 +10,7 @@ class Move < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :ratings
   has_many :tomatoes
+  has_many :comments
 
 
   after_create :create_objects

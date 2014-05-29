@@ -130,4 +130,5 @@
                   = cat
         %input{:type => "hidden", :value => "true", :name => "wppublish"}
         %input{:type => "submit", :value => t("helpers.wordpress.publish"), :class => "btn btn-mini"}
-
+  %p
+    =render :partial => "shared/comments_list", :locals => { :type => "Tomate"}

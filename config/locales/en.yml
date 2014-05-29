@@ -80,6 +80,8 @@ en:
           new: "New"
       wordpress:
           publish: "Publish to Wordpress"
+      miscell:
+          at: "at"
   moves:
       links:
           owner: "Owner"

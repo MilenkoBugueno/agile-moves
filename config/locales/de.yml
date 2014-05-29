@@ -77,6 +77,8 @@ de:
             new: "Neu"
       wordpress:
         publish: "In Wordpress publizieren"
+      miscell:
+        at: "um"
   moves:
         links:
             owner: "Eigentümer"

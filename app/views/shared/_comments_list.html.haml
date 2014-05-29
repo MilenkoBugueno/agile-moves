@@ -1,0 +1,61 @@
+- last_level = 1
+- last_margin = 0
+- last_width = 800
+- @comments.each do |comment|
+  -if comment.level > last_level
+    - last_margin = last_margin + 50
+    - last_width = last_width - 50
+  -elsif comment.level == last_level
+    - last_margin = last_margin
+    - last_width = last_width
+  -else
+    - last_margin = 0
+    - last_width = 800
+  -if comment.lft != 1
+    #comment{:style => "background-color:whitesmoke;width:#{last_width}px;margin-left:#{last_margin}px;border-radius:20px;margin-bottom:2px;padding-top:10px;padding-bottom:10px;padding-left:16px;padding-right:16px"}
+      %table{:style => "width:#{last_width}px;"}
+        %tr
+          %td{:colspan => "2"}
+            %table
+              %tr
+                %td
+                  %span{:style => "font-size:120%;"}
+                    = comment.user.name
+              %tr
+                %td
+                  %span{:style => "font-size:80%"}
+                    = comment.created_at.strftime("%d.%m.%Y")
+                    = t("helpers.miscell.at")
+                    = comment.created_at.strftime("%H:%M")
+        %tr
+          %td
+            %span{:style => "background-color:whitesmoke;"}
+              = simple_format(comment.content)
+          %td{:align => "right"}
+            %input{:id => "show_div_comment_btn_#{comment.id}", :type => "button", :value => t("helpers.links.comment"), :class => "btn btn-mini", :onClick => "show_commentdiv(#{comment.id}, '#{t("helpers.links.cancel")}','#{t("helpers.links.comment")}', #{comment.level})"}
+    - last_level = comment.level
+  #commentdiv{:name => "add_comment_#{comment.id}", :style => "display:none"}
+    %form{:action => comments_path, :method => "post", :name => "comment"}
+      %input{:type => "hidden", :value => "0", :name => "first_comment"}
+      %input{:type => "hidden", :value => "#{comment.lft}", :name => "lft"}
+      %input{:type => "hidden", :value => "#{comment.rgt}", :name => "rgt"}
+      %input{:type => "hidden", :value => "#{comment.tomato_id}", :name => "tomato_id"}
+      %input{:type => "hidden", :value => "#{comment.move_id}", :name => "move_id"}
+      %input{:type => "hidden", :value => "#{current_user.id}", :name => "user_id"}
+      %textarea{:class => "ckeditor", :name => "content", :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'mini'}}
+      %input{:type => "submit", :value => "Antworten", :class => "btn btn-mini"}
+
+%table
+  %tr
+    %td{:colspan => "2"}
+      Kommentieren
+      - last_rgt = Comment.get_last_right(@tomato.id, "tomato")
+      %form{:action => comments_path, :method => "post", :name => "comment"}
+        %input{:type => "hidden", :value => "0", :name => "first_comment"}
+        %input{:type => "hidden", :value => "#{last_rgt}", :name => "lft"}
+        %input{:type => "hidden", :value => "#{last_rgt}", :name => "rgt"}
+        %input{:type => "hidden", :value => "#{@tomato.id}", :name => "tomato_id"}
+        %input{:type => "hidden", :value => "", :name => "move_id"}
+        %input{:type => "hidden", :value => "#{current_user.id}", :name => "user_id"}
+        %textarea{:name => "content", :class => "ckeditor"}
+        %input{:type => "submit", :value => "Kommentieren", :class => "btn btn-mini"}

@@ -27,6 +27,11 @@ class TomatoesController < ApplicationController
     @move_type = @tomato.move.move_type
     @project = Project.find(@tomato.move.project_id) if @tomato.move.project_id.present?
 
+    # Custom Query for Comments as Nested Set Tree
+    @comments = Comment.find_by_sql(["SELECT n.content, n.user_id, n.created_at, n.tomato_id, n.lft, n.rgt, n.move_id, n.id, COUNT(*)-1 AS level FROM comments AS n, comments AS p WHERE (n.tomato_id = ?) AND (n.lft BETWEEN p.lft AND p.rgt) GROUP BY n.lft ORDER BY n.lft;", @tomato.id])
+
+
+
     #@wp_categories = wp_getCategories("learningtocode.de", "teamtool", "teamtool01", "1")
     @wp_categories = Hash.new
     @wp_blogs = wp_getUsersBlogs("learningtocode.de", "teamtool", "teamtool01")

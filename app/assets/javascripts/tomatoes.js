@@ -121,7 +121,7 @@ function show_comment() {
         document.getElementById("rating_body").value = "";
     }
     else {
-        document.getElementById("tom_change_inp").style.display = "block"
+        document.getElementById("tom_change_inp").style.display = "block";
     }
     //Verhindert ein Ausführen des Links
     return false;
@@ -155,4 +155,21 @@ function thumb_it(x) {
     }
 
     return false;
+}
+
+function show_commentdiv(id, cancel, comment, offset) {
+
+    divname = "add_comment_" + id;
+    buttonname = "show_div_comment_btn_" + id;
+    //alert("Divname: " + divname);
+    offset = ((offset - 1) * 50) + 16;
+    document.getElementsByName(divname)[0].style.marginLeft = offset + "px";
+    if (document.getElementsByName(divname)[0].style.display == "none") {
+        document.getElementsByName(divname)[0].style.display = "block";
+        document.getElementById(buttonname).value = cancel;
+    }
+    else {
+        document.getElementsByName(divname)[0].style.display = "none";
+        document.getElementById(buttonname).value = comment;
+    }
 }
