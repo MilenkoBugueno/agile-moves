@@ -44,26 +44,31 @@ class CommentsController < ApplicationController
   # POST /states.json
   def create
     @comment = Comment.new
+    rgt = params['rgt']
+    lft = params['lft']
 
     # Wenn es noch keinen Kommentar für einen Move gibt, muss der Root-Eintrag des Baums vor einem Kommentar angelegt werden
     if params['first_comment'].to_i == 1
       # If root = 1 then there is a root entry, if root = 0 then something went wrong
-      root = create_root(params[:move_id], params[:tomato_id])
+      root = create_root(params[:move_id], params[:tomato_id], params[:user_id])
+      rgt = 2
+      lft = 2
     else
        root = 1
     end
 
     if root == 1
       if params[:tomato_id] != nil
-        Comment.update_rgt(params['tomato_id'], "tomato", params['rgt'])
-        Comment.update_lft(params['tomato_id'], "tomato", params['rgt'])
+        Comment.update_rgt(params['tomato_id'], "tomato", rgt)
+        Comment.update_lft(params['tomato_id'], "tomato", rgt)
       elsif params[:move_id] != nil
-        Comment.update_rgt(params['tomato_id'], "tomato", params['rgt'])
-        Comment.update_lft(params['tomato_id'], "tomato", params['rgt'])
+        Comment.update_rgt(params['move_id'], "move", params['rgt'])
+        Comment.update_lft(params['move_id'], "move", params['rgt'])
       end
 
-      @comment.lft = params['rgt']
-      @comment.rgt = params['rgt'].to_i + 1
+      #New Entry where the lft is rgt of the old value and rgt is one more
+      @comment.lft = rgt
+      @comment.rgt = rgt.to_i + 1
       @comment.content = params['content']
       @comment.user_id = params['user_id']
       @comment.move_id = params['move_id']
@@ -92,14 +97,15 @@ class CommentsController < ApplicationController
     end
   end
 
-  def create_root(move_id, tomato_id)
+  def create_root(move_id, tomato_id, user_id)
 
     @root_comment = Comment.new
     @root_comment.lft = 1
     @root_comment.rgt = 2
     @root_comment.content = "root"
-    @root_comment.move_id = params[:move_id]
-    @root_comment.tomato_id = params[:tomato_id]
+    @root_comment.move_id = move_id
+    @root_comment.tomato_id = tomato_id
+    @root_comment.user_id = user_id
 
     if @root_comment.save
       return 1

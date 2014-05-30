@@ -50,8 +50,12 @@
     %td{:colspan => "2"}
       Kommentieren
       - last_rgt = Comment.get_last_right(@tomato.id, "tomato")
+      - if last_rgt == nil
+        - first_comment = 1
+      - else
+        - first_comment = 0
       %form{:action => comments_path, :method => "post", :name => "comment"}
-        %input{:type => "hidden", :value => "0", :name => "first_comment"}
+        %input{:type => "hidden", :value => "#{first_comment}", :name => "first_comment"}
         %input{:type => "hidden", :value => "#{last_rgt}", :name => "lft"}
         %input{:type => "hidden", :value => "#{last_rgt}", :name => "rgt"}
         %input{:type => "hidden", :value => "#{@tomato.id}", :name => "tomato_id"}
