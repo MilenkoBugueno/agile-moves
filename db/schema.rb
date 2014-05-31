@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20140529111427) do
     t.string   "ip_address"
     t.string   "controller"
     t.string   "action"
-    t.text     "params",     :limit => 255
+    t.text     "params"
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -68,8 +68,17 @@ ActiveRecord::Schema.define(:version => 20140529111427) do
     t.integer  "star_rating"
   end
 
-# Could not dump table "move_types" because of following StandardError
-#   Unknown type 'bool' for column 'has_twitter_idea'
+  create_table "move_types", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.boolean  "thumb_rating"
+    t.boolean  "star_rating"
+    t.boolean  "has_tomatoes"
+    t.boolean  "has_twitter_idea"
+    t.integer  "tomatoes_number"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "move_types_projects", :id => false, :force => true do |t|
     t.integer "project_id"
