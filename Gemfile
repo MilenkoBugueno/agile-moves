@@ -15,10 +15,11 @@ gem 'figaro'
 gem 'haml-rails'
 gem 'rolify'
 gem 'simple_form'
-gem "twitter-bootstrap-rails"
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3'
 gem 'execjs'
 gem "ckeditor"
 gem 'rubypress'
+gem "less-rails"
 group :development do
   gem 'sqlite3'
   gem 'better_errors'
@@ -51,3 +52,4 @@ group :test, :production do
   gem 'mysql2'
   gem 'therubyracer'
 end
+
