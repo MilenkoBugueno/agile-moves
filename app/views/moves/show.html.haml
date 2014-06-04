@@ -3,6 +3,13 @@
 
 //=render :partial => "tomatoes_list"
 
-=render :partial => "ratings"
+-if @tomato.present?
+  - model_class = Tomato
+  =render :partial => "timer"
+  =render :partial => "tomato_rating"
+  =render :partial => "shared/comments_list", :locals => { :type => "Tomate"}
+  =render :partial => "publish_wordpress"
 
-=render :partial => "actions"
+-else
+  =render :partial => "ratings"
+  =render :partial => "actions"

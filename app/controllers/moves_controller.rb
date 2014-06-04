@@ -30,7 +30,34 @@ class MovesController < ApplicationController
     @move = Move.find(params[:id])
     @ratings = Rating.where(:move_id => :id)
     @ratings = Tomato.where(:move_id => :id)
-    
+
+    if @move.tomatoes.present?
+      @tomatoes = @move.tomatoes
+      @tomato = @tomatoes.first
+      # Custom Query for Comments as Nested Set Tree
+      @comments = Comment.find_by_sql(["SELECT n.content, n.user_id, n.created_at, n.tomato_id, n.lft, n.rgt, n.move_id, n.id, p.tomato_id, COUNT(*)-1 AS level FROM comments AS n, comments AS p WHERE (n.tomato_id = p.tomato_id) AND (n.tomato_id = ?) AND (n.lft BETWEEN p.lft AND p.rgt) GROUP BY n.lft ORDER BY n.lft;", @tomato.id])
+    end
+
+    #@wp_categories = wp_getCategories("learningtocode.de", "teamtool", "teamtool01", "1")
+    @wp_categories = Hash.new
+    @wp_blogs = wp_getUsersBlogs("learningtocode.de", "teamtool", "teamtool01")
+    @wp_blogs.each do |blog|
+      @wp_categories[blog] = wp_getCategories(blog, "teamtool", "teamtool01", "1")
+    end
+
+    # Wordpress publishing
+    if params[:wppublish] == "true"
+      content = "Fun Rating: #{@tomato.rating.star_rating}\n\nGoal Reached: #{@tomato.rating.thumb_rating}\n\nTomatenkommentar: #{@tomato.rating.body}"
+      title = "#{@tomato.title} von #{@tomato.user.name} am #{@tomato.created_at.strftime("%d.%m.%Y")}"
+      @param_blogs = Hash.new
+      @param_blogs = wp_pre_publish(params[:publish_to])
+      @param_blogs.each do |blog, categories|
+        wp_publish(blog.to_s, "teamtool", "teamtool01", content, title, categories)
+      end
+      flash[:notice] = "Blog article published"
+    end
+
+
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @move_type = @move.move_type
 
