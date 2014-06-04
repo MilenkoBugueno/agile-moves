@@ -1,0 +1,13 @@
+.panel.panel-primary
+  .panel-heading
+    %h2= @tomato.title
+  .panel-body
+    = link_to t("moves.links.backtowork"), work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
+    - if @tomato.user == current_user
+      = link_to t("helpers.links.edit"), edit_tomato_path(@tomato), :class => 'btn'
+      = link_to t("helpers.links.destroy"), tomato_path(@tomato), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
+    .row
+      .span6
+        =raw(@tomato.body)
+      .span4
+        %h5="Owner: #{@tomato.user.name}" unless @tomato.user == nil

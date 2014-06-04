@@ -106,6 +106,7 @@ en:
       timer:
         start: "Start Timer"
         stop: "The tomato has ended!"
+        timer: "Timer"
       actions:
           markasdone: "Mark as done"
   live_tomato:

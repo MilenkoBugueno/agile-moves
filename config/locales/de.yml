@@ -103,6 +103,7 @@ de:
       timer:
         start: "Start Timer"
         stop: "Die Tomate ist vorbei!"
+        timer: "Timer"
       actions:
           markasdone: "Mark as done"
   live_tomato:
