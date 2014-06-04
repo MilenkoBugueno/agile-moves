@@ -27,7 +27,7 @@
             = image_tag("daumenrunter.png", :width => 20, :height => 20)
         - else
           = image_tag("bewerten.png", :width => 20, :height => 20)
-      %td= link_to tomato.title, tomato
+      %td= link_to tomato.title, tomato.move
       %td= tomato.user.name
       %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
       %td

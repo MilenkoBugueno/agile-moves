@@ -41,18 +41,19 @@ class RatingsController < ApplicationController
   # POST /ratings.json
   def create
     if params[:move_id].present?
-      @container = Move.find(params[:move_id])
-      @move_type = @container.move_type
-      @rating = @container.ratings.create!(params[:rating])
+      @move = Move.find(params[:move_id])
+      @move_type = @move.move_type
+      @rating = @move.ratings.create!(params[:rating])
     elsif params[:tomato_id].present?
-      @container = Tomato.find(params[:tomato_id])
-      @move_type = @container.move.move_type
+      @tomato = Tomato.find(params[:tomato_id])
+      @move = @tomato.move
+      @move_type = @move.move_type
       @rating = Rating.new(params[:rating])
 
-      if LiveTomato.where(:tomato_id => @container.id).blank?
+      if LiveTomato.where(:tomato_id => @tomato.id).blank?
         # do nothing
       else
-        @live_tomato = LiveTomato.where(tomato_id: @container.id)
+        @live_tomato = LiveTomato.where(tomato_id: @tomato.id)
         LiveTomato.update(@live_tomato, :star_rating => @rating.star_rating, :thumb_rating => @rating.thumb_rating)
       end
     end
@@ -76,17 +77,17 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if @rating.save
-        if params[:skip_star_rating].present? && @container.project_id.present?
-          @project = Project.find(@container.project_id)
+        if params[:skip_star_rating].present? && @move.project_id.present?
+          @project = Project.find(@move.project_id)
           format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully skipped.' }
           format.json { head :no_content }
         else
-          format.html { redirect_to @container, notice: 'Rating was successfully created.' }
-          format.json { render json: @container, status: :created, location: @tomato }
+          format.html { redirect_to @move, notice: 'Rating was successfully created.' }
+          format.json { render json: @move, status: :created, location: @tomato }
         end
       else
         format.html { render action: "new" }
-        format.json { render json: @container.errors, status: :unprocessable_entity }
+        format.json { render json: @move.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -96,18 +97,18 @@ class RatingsController < ApplicationController
   def update
     @rating = Rating.find(params[:id])
     if @rating.move_id != nil
-      @container = @rating.move
+      @move = @rating.move
     elsif @rating.tomato_id != nil
-      @container = @rating.tomato
+      @move = @rating.tomato.move
     end
     log_admin("AdminLog: Rating updated")
     respond_to do |format|
       if @rating.update_attributes(params[:rating])
-        format.html { redirect_to @container, notice: 'Rating was successfully updated.' }
+        format.html { redirect_to @move, notice: 'Rating was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @container.errors, status: :unprocessable_entity }
+        format.json { render json: @move.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -117,14 +118,14 @@ class RatingsController < ApplicationController
   def destroy
     @rating = Rating.find(params[:id])
     if @rating.move_id != nil
-      @container = @rating.move
+      @move = @rating.move
     elsif @rating.tomato_id != nil
-      @container = @rating.tomato
+      @move = @rating.tomato
     end
     @rating.destroy
     log_admin("AdminLog: Rating destroyed")
     respond_to do |format|
-      format.html { redirect_to @container }
+      format.html { redirect_to @move }
       format.json { head :no_content }
     end
   end
