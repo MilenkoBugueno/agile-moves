@@ -23,11 +23,11 @@
       %ul
         -@tomatoes_by_date[date].each do |tomato|
           - if tomato.state == 0 # not planed
-            =link_to image_tag("tomategrau.png", :width => 15, :height => 15), tomato_path(tomato)
+            =link_to image_tag("tomategrau.png", :width => 15, :height => 15), move_path(tomato.move)
           - elsif tomato.state == 1 #planed
-            =link_to  image_tag("tomategruen.png", :width => 15, :height => 15), tomato_path(tomato)
+            =link_to  image_tag("tomategruen.png", :width => 15, :height => 15), move_path(tomato.move)
           - elsif tomato.state == 2 #done
-            = link_to image_tag("tomaterot.png", :width => 15, :height => 15 ), tomato_path(tomato)
+            = link_to image_tag("tomaterot.png", :width => 15, :height => 15 ), move_path(tomato.move)
             
 %br
 %br
@@ -63,7 +63,7 @@
           -if tomato.rating.star_rating > 0
             = tomato.rating.star_rating
             = image_tag("star.png", :width => 20, :height => 20)
-      %td= link_to tomato.title, tomato
+      %td= link_to tomato.title, tomato.move
       %td= tomato.user.name if tomato.user.present?
       %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
       %td
