@@ -11,7 +11,6 @@
 
   .span10
     -if @move_type != nil
-      -if @move_type.thumb_rating || @move_type.star_rating
-        =render :partial => "work_rating"
-      -elsif @move_type.has_tomatoes
-        =render :partial => "work_tomatoes"
+      - @move_type.widgets.each do |widget|
+        -if widget.widget_type == 1
+          =render :partial => widget.path

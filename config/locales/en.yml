@@ -34,6 +34,7 @@ en:
       administration: "Administration"
       moves: "Moves"
       adminlog: "Admin Log"
+      widgets: "Widgets"
   login:
       signin: "Sign in"
       signup: "Sign up"

@@ -1,16 +1,6 @@
 - model_class = Move
-=render :partial => "move_general"
 
-//=render :partial => "tomatoes_list"
-
--if @tomato.present?
-  - model_class = Tomato
-  =render :partial => "timer"
-  =render :partial => "tomato_rating"
-  =render :partial => "shared/comments_list", :locals => { :type => "Tomate"}
-  =render :partial => "publish_wordpress"
-  =render :partial => "actions"
-
--else
-  =render :partial => "ratings"
-  =render :partial => "actions"
+-if @move_type != nil
+  - @move_type.widgets.each do |widget|
+    -if widget.widget_type == 3
+      =render :partial => widget.path

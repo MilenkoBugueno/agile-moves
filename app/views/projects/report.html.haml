@@ -10,10 +10,7 @@
           = link_to move_type.title, work_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info"
 
   .span10
-    -if @move_type
-      -if @move_type.thumb_rating
-        =render :partial => "report_rating"
-      -elsif @move_type.star_rating
-        =render :partial => "report_rating"
-      -elsif @move_type.has_tomatoes
-        =render :partial => "report_tomatoes"
+    -if @move_type != nil
+      - @move_type.widgets.each do |widget|
+        -if widget.widget_type == 2
+          =render :partial => widget.path
