@@ -15,7 +15,7 @@
               %ul.dropdown-menu
                 -Project.all.each do |project|
                   %li
-                    %a{:href=>project_path(project)}= project.title
+                    =link_to project.title, work_projects_path(:id=>project.id)
           %ul.nav.navbar-nav
             %li.dropdown
               %a.dropdown-toggle{:href=>"#", "data-toggle"=>"dropdown"}

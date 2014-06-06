@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140529111427) do
+ActiveRecord::Schema.define(:version => 20140606114448) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(:version => 20140529111427) do
   end
 
   add_index "move_types_projects", ["project_id", "move_type_id"], :name => "index_project_move_types_on_project_id_and_move_type_id"
+
+  create_table "move_types_widgets", :id => false, :force => true do |t|
+    t.integer "move_type_id"
+    t.integer "widget_id"
+  end
+
+  add_index "move_types_widgets", ["move_type_id", "widget_id"], :name => "index_move_types_widgets_on_move_type_id_and_widget_id"
 
   create_table "moves", :force => true do |t|
     t.text     "body"
@@ -192,5 +199,13 @@ ActiveRecord::Schema.define(:version => 20140529111427) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  create_table "widgets", :force => true do |t|
+    t.string   "title"
+    t.string   "path"
+    t.integer  "widget_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end

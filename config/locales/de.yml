@@ -13,6 +13,7 @@ de:
       newmove: "Neuer Move"
       editproject: "Projekt bearbeiten"
       new: "Neues Projekt"
+      moves: "Moves"
   editaccount:
       edit: "Konto bearbeiten"
       cancelaccount: "Konto löschen"
