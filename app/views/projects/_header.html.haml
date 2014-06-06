@@ -1,26 +1,22 @@
 .row
-  .form-actions
-    .span6
-      %h3
-        = @project.title
-      %h3
-      - if current_user.has_role? :admin
-        = link_to t("helpers.links.edit"), edit_project_path(@project), :class => 'btn'
-        = link_to t("helpers.links.destroy"), project_path(@project), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
-    .span2
-      = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary'
-    .span3
-      - if page == "work"
-        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => 'btn btn-warning', :disabled => true
-        = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class => 'btn btn-warning'
-      - elsif page == "report"
-        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => 'btn btn-warning'
-        = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class => 'btn btn-warning', :disabled => true
-      -else
-        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => 'btn btn-warning'
-        = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class => 'btn btn-warning'
+  .span10
+    %ol.breadcrumb
+      %li
+        =link_to @project.title, "#"
+      %li
+        =link_to "work", work_projects_path
+      %li.active= @move_type.title
+  .span2
+    - if page == "work"
+      .btn-group
+        %button.btn.btn-default.active{:type => "button"}
+          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id)
+        %button.btn.btn-default{:type => "button"}
+          = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id)
 
-%br 
-%br
-
-
+    -else
+      .btn-group
+        %button.btn.btn-default{:type => "button"}
+          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id)
+        %button.btn.btn-default.active{:type => "button"}
+          = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id)
