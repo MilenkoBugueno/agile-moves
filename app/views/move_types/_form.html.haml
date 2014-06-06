@@ -1,14 +1,7 @@
 = simple_form_for @move_type, :html => { :class => 'form-horizontal' } do |f|
   = f.input :title
   = f.input :body
-  = f.input :thumb_rating
-  = f.input :star_rating
-  .row
-    .span4
-      = f.input :has_tomatoes
-    .span8
-      = f.input :tomatoes_number, :label => "Number of automatically generated tomatoes"
-  = f.input :has_twitter_idea
+  = f.association :widgets, :as => :check_boxes
   
   .form-actions
     = f.button :submit, :class => 'btn-primary'
