@@ -1,12 +1,12 @@
 .row
-  .span7
+  .span6
     %ol.breadcrumb
       %li
         =link_to @project.title, "#"
       %li
         =link_to "work", work_projects_path
       %li.active= @move_type.title
-  .span3
+  .span4
     = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary'
   .span2
     - if page == "work"

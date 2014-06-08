@@ -84,6 +84,7 @@ en:
           publish: "Publish to Wordpress"
       miscell:
           at: "at"
+      retro: "Retrospective"
   moves:
       links:
           owner: "Owner"

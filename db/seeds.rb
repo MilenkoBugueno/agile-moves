@@ -48,6 +48,8 @@ tomato_rating = Widget.find_or_create_by_title(:title => "Tomato rating", :path=
 
 tomato_comments = Widget.find_or_create_by_title(:title => "Tomato comment", :path=>"shared/comments_list", :widget_type => 3)
 
+tomato_retro = Widget.find_or_create_by_title(:title => "Tomato retro", :path=>"moves/tomato_retro", :widget_type => 3)
+
 moves_actions = Widget.find_or_create_by_title(:title=> "Moves actions", :path=>"moves/actions", :widget_type => 3)
 
 publish_wordpress = Widget.find_or_create_by_title(:title => "Publish wordpress", :path=>"moves/publish_wordpress", :widget_type => 3)
@@ -65,6 +67,10 @@ puts 'move type: ' << thumbs_move.title
 tomatoes_move = MoveType.find_or_create_by_title :title => "tomato move"
 tomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_rating, tomato_comments, moves_actions]
 puts 'move type: ' << tomatoes_move.title
+
+teamtomatoes_move = MoveType.find_or_create_by_title :title => "tomato move"
+teamtomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_rating, tomato_comments, tomato_retro, moves_actions]
+puts 'move type: ' << teamtomatoes_move.title
 
 
 puts 'DEFAULT PROJECTS'

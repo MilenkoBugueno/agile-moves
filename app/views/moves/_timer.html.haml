@@ -5,7 +5,7 @@
   .panel-heading
     %h3.panel-title= t("tomatoes.timer.timer")
   .panel-body
-    -if @tomato.move.users.include? current_user || @tomato.move.user == current_user
+    -if @tomato != nil && (@tomato.move.users.include? current_user || @tomato.move.user == current_user)
       .row
         -if @tomato.state != 2
           .span3

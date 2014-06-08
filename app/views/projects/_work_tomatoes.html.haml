@@ -12,12 +12,13 @@
       -tomato = move.tomatoes.first
       %tr
         %td
-          - if tomato.state == 0 # not planed
-            = image_tag("tomategrau.png", :width => 20, :height => 20)
-          - elsif tomato.state == 1 #planed
+          - if tomato.state == 1 #planed
             = image_tag("tomategruen.png", :width => 20, :height => 20)
           - elsif tomato.state == 2 #done
             = image_tag("tomaterot.png", :width => 20, :height => 20)
+          - else # not planed
+            = image_tag("tomategrau.png", :width => 20, :height => 20)
+
 
           - if tomato.rating != nil
             -if tomato.rating.thumb_rating > 0
