@@ -1,5 +1,5 @@
 .row
-  .span6
+  .col-md-6
     %ol.breadcrumb
       %li
         =link_to @project.title, "#"
@@ -9,19 +9,15 @@
         - else
           =link_to t("projects.report"), report_projects_path
       %li.active= @move_type.title
-  .span4
+  .col-md-4
     = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary'
-  .span2
+  .col-md-2
     - if page == "work"
       .btn-group
-        %button.btn.btn-default.active{:type => "button"}
-          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id)
-        %button.btn.btn-default{:type => "button"}
-          = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id)
+        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default active"
+        = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default"
 
     -else
       .btn-group
-        %button.btn.btn-default{:type => "button"}
-          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id)
-        %button.btn.btn-default.active{:type => "button"}
-          = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id)
+        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default"
+        = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default active"
