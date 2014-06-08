@@ -181,3 +181,7 @@ de:
            other: "Ein Fehler verhinderte, dass sie erfolgreich speichern konnten."
   categories:
     index: "Kategorien"
+  tomato:
+    publish_date: "Datum"
+    start_time: "Startzeit"
+    end_time: "Endzeit"
