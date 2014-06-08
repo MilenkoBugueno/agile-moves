@@ -6,9 +6,13 @@ class Tomato < ActiveRecord::Base
   has_many :comments
   
   scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
+  scope :by_user_ids, lambda {|uid| joins(:move) & Move.by_user_ids(uid)}
   scope :by_date, lambda {|uid| where(["#{table_name}.publish_date =?", uid])}
   scope :by_project_id, lambda {|uid| joins(:move).where(["moves.project_id =?", uid])}
   scope :not_closed , lambda { where("#{table_name}.state != ?", 2)}
 
+  def self.my_team_tomatoes(uid)
+    where(["users.id =?", uid])
+  end
 end
     

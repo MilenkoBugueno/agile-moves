@@ -22,9 +22,8 @@ class ProjectsController < ApplicationController
     @user = params[:user] ? params[:user] : current_user.id
 
     @moves = Move.order('created_at DESC')
-    @moves = @moves.by_user_ids(@user)
-    @moves = @moves.by_project_id(@project.id) if params[:id].present?
-    @moves = @moves.not_closed
+    @moves = @moves.by_user_ids(params[:user]) if params[:user].present?
+    @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     
@@ -32,12 +31,6 @@ class ProjectsController < ApplicationController
     move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
     @move_type = MoveType.find(move_type_id) unless move_type_id == nil
     @moves = @moves.by_move_type(move_type_id) unless move_type_id == nil
-
-    @tomatoes = Tomato.order('state DESC')
-    @tomatoes = @tomatoes.by_user_id(current_user.id)
-    @tomatoes = @tomatoes.by_project_id(params[:id]) if params[:id].present?
-    @tomatoes = @tomatoes.not_closed
-
 
     respond_to do |format|
       format.html # show.html.erb
@@ -51,19 +44,20 @@ class ProjectsController < ApplicationController
     else
       @project = Project.all.first
     end
-    
-    @tomatoes = Tomato.order('state DESC')
-    @tomatoes = @tomatoes.by_user_id(params[:user]) if params[:user].present?
-    @tomatoes = @tomatoes.by_project_id(params[:id]) if params[:id].present?
-    @tomatoes_by_date = @tomatoes.group_by(&:publish_date)
-    
-    @moves = Move.order('publish_date DESC')
-    @moves = @moves.by_project_id(@project.id) if params[:id].present?
+
+    @moves = Move.order('created_at DESC')
+    @moves = @moves.by_user_ids(params[:user]) if params[:user].present?
+    @moves = @moves.by_move_type(params[:move_type]) if params[:move_type].present?
+
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
     @move_types = MoveType.order('created_at DESC')
     move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
     @move_type = MoveType.find(move_type_id) unless move_type_id == nil
     @moves = @moves.by_move_type(move_type_id) unless move_type_id == nil
+
+    @moves_by_date = @moves.group_by(&:publish_date)
+
 
     @moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars} if @move_type!= nil && @move_type.star_rating
 
