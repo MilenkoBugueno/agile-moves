@@ -4,7 +4,10 @@
       %li
         =link_to @project.title, "#"
       %li
-        =link_to "work", work_projects_path
+        - if page == "work"
+          =link_to t("projects.work"), work_projects_path
+        - else
+          =link_to t("projects.report"), report_projects_path
       %li.active= @move_type.title
   .span4
     = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary'
