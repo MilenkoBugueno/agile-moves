@@ -36,9 +36,8 @@
     %th{:width => "60px;"} Rating
     %th{:width => "250px;"} Title
     %th{:width => "100px;"} Owner
+    %th{:width => "100px;"} Move type
     %th{:width => "120px;"} Publish date
-    %th{:width => "20px;"}
-    %th{:width => "20px;"}
 
   -@tomatoes.each do |tomato|
     %tr
@@ -65,10 +64,5 @@
             = image_tag("star.png", :width => 20, :height => 20)
       %td= link_to tomato.title, tomato.move
       %td= tomato.user.name if tomato.user.present?
+      %td= tomato.move.move_type.title if tomato.move.move_type.present?
       %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-      %td
-        - if (tomato.user == current_user) || (current_user.has_role? :admin)
-          = link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
-      %td
-        -if (tomato.user == current_user) || (current_user.has_role? :admin)
-          = link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm")}, :class => 'btn btn-mini btn-danger'

@@ -76,7 +76,7 @@ class CommentsController < ApplicationController
     else
       respond_to do |err|
         if params[:tomato_id] != nil
-          err.html { redirect_to @tomato, notice: "Couldn't create tomato root tree entry"  }
+          err.html { redirect_to @tomato.move, notice: "Couldn't create tomato root tree entry"  }
         else
           err.html { redirect_to @move, notice: "Couldn't create move root tree entry"}
         end
@@ -88,7 +88,7 @@ class CommentsController < ApplicationController
 
         # This is for returning to the right tomato after writing a comment
         @tomato = Tomato.find(params[:tomato_id])
-        format.html { redirect_to @tomato, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @tomato.move, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
