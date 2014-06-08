@@ -5,7 +5,7 @@
     .row
       .span7
         = link_to t("moves.links.backtoproject"), work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
-        - if current_user.has_role? :admin || current_user == @move.user
+        - if (current_user.has_role? :admin) || (current_user.id == @move.user_id)
           = link_to t("helpers.links.edit"), edit_move_path(@move), :class => 'btn'
           = link_to t("helpers.links.destroy"), move_path(@move), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
         %br
