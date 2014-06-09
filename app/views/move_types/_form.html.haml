@@ -2,6 +2,10 @@
   = f.input :title
   = f.input :body
   = f.association :widgets, :as => :check_boxes
+
+  =f.input :thumb_rating
+  =f.input :star_rating
+  =f.input :has_tomatoes
   
   .form-actions
     = f.button :submit, :class => 'btn-primary'
