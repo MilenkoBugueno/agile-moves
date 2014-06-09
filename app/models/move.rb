@@ -48,6 +48,32 @@ class Move < ActiveRecord::Base
     return reviewed_by_me
   end
 
+  def star_rating_by(user)
+    rated_by = false
+    if self.move_type != nil  && self.move_type.star_rating
+      self.ratings.each do |rating|
+        if rating.user == user && rating.star_rating != -1
+          rated_by = true
+        end
+      end
+    end
+
+    return rated_by
+  end
+
+  def thumb_rating_by(user)
+    rated_by = false
+    if self.move_type != nil  && self.move_type.thumb_rating
+      self.ratings.each do |rating|
+        if rating.user == user && rating.thumb_rating != -1
+          rated_by = true
+        end
+      end
+    end
+
+    return rated_by
+  end
+
   def stars
     stars = 0;
     self.ratings.each do |rating|

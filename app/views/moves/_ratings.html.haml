@@ -66,11 +66,11 @@
       %br
 
       =simple_form_for [@move, Rating.new] do |f|
-        = f.input :star_rating, :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline' unless @move.user == current_user
+        = f.input :star_rating, :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline' # unless @move.user == current_user
         = f.input :body, input_html: {style: 'height:100px; width:300px'}
         = f.hidden_field :user_id, :value => current_user.id
         .form-actions
-          = f.button :submit, :class => 'btn-primary' unless @move.user == current_user
-          = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating" unless @move.user == current_user
+          = f.button :submit, :class => 'btn-primary'# unless @move.user == current_user
+          = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating"# unless @move.user == current_user
           = f.submit t("helpers.links.comment"), :class => 'btn btn-info', name: "comment_star_rating", value: "Comment"
 
