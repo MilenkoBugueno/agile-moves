@@ -19,7 +19,6 @@ gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branc
 gem 'execjs'
 gem "ckeditor"
 gem 'rubypress'
-gem "less-rails"
 group :development do
   gem 'sqlite3'
   gem 'better_errors'
