@@ -19,4 +19,33 @@
 //= require_tree .
 //= require_tree ./ckeditor
 
+function select_all_team(name, text_all, text_none) {
+    var all = document.getElementsByName(name).length - 1;
+    var obj = document.getElementsByName(name);
+    var sel = 0;
 
+    for (var i = 0; i < obj.length - 1; i++ )
+    {
+        if (obj[i].checked == true) {
+            sel++;
+        }
+    }
+
+    if (sel == all) {
+       //Alle Angehakt
+        document.getElementById("link_all_team").innerHTML = text_all;
+        for (var i = 0; i < obj.length - 1; i++ )
+        {
+            obj[i].checked = false;
+        }
+    }
+    else {
+        //Nicht alle angehakt
+        document.getElementById("link_all_team").innerHTML = text_none;
+        for (var i = 0; i < obj.length - 1; i++ )
+        {
+            obj[i].checked = true;
+        }
+    }
+
+}

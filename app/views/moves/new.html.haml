@@ -1,6 +1,7 @@
 - model_class = Move
 .page-header
   %h1=t 'helpers.titles.new', :model => model_class.model_name.human.titleize
+
 = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
   -if @project.present?
     = f.association :move_type, include_blank: false, :collection => @project.move_types, :selected => @move_type
@@ -19,12 +20,14 @@
   -else
     = f.association :user, :label => t("moves.links.owner"),  :selected =>  current_user.id
     = f.association :users, :as => :check_boxes, :label => t("projects.team"), :checked => [current_user.id]
-
+  %p{:align => "center"}
+    = link_to t("moves.team.select_all"), "javascript:select_all_team('move[user_ids][]', '#{t('moves.team.select_all')}', '#{t('moves.team.select_none')}');", :id => 'link_all_team', :class => 'btn'
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     -if @project.present?
       = link_to "Cancel", work_projects_path(:id => @project.id), :class => 'btn'
     -else
       = link_to "Cancel", root_path, :class => 'btn'
+
 
     

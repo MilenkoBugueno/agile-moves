@@ -95,6 +95,9 @@ de:
             team: "Team"
             category: "Kategorie"
         index: "Letzte Moves"
+        team:
+          select_all: "Alle wählen"
+          select_none: "Alle abwählen"
   tomatoes:
       rating:
           starrating: "Fun rating"
