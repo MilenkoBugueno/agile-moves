@@ -1,6 +1,9 @@
 .panel.panel-default
   .panel-heading
-    %h4= t("tomatoes.rating.thumbrating")
+    -if @move.move_type.has_tomatoes
+      %h4= t("tomatoes.rating.thumbrating")
+    -else
+      %h4= t("moves.rating.thumbrating")
   .panel-body
 
     -if (@move.move_type.thumb_rating)
@@ -36,10 +39,8 @@
       %br
 
       =simple_form_for [@move, Rating.new] do |f|
-        = f.input :body, input_html: {style: 'height:100px; width:300px'}
         = f.hidden_field :user_id, :value => current_user.id
         .form-actions
           = f.submit t("helpers.links.approve"), :class => 'btn btn-success', name: "approve_thumb_rating", value: "Approve"
           = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_thumb_rating", value: "Reject"
-          = f.submit t("helpers.links.comment"), :class => 'btn btn-info', name: "comment_thumb_rating", value: "Comment"
 

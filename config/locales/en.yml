@@ -101,6 +101,9 @@ en:
       team:
         select_all: "Select all"
         select_none: "Select none"
+      rating:
+        starrating: "Star rating"
+        thumbrating: "Thumb rating"
   tomatoes:
       rating:
           starrating: "Fun rating"

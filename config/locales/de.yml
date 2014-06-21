@@ -98,6 +98,9 @@ de:
         team:
           select_all: "Alle wählen"
           select_none: "Alle abwählen"
+        rating:
+          thumbrating: "Daumenbewertung"
+          starrating: "Sternebewertung"
   tomatoes:
       rating:
           starrating: "Fun rating"
