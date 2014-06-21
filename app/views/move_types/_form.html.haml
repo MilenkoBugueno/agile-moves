@@ -1,6 +1,6 @@
 = simple_form_for @move_type, :html => { :class => 'form-horizontal' } do |f|
-  = f.input :title, input_html: {style: 'height:30px;'}
-  = f.input :body
+  = f.input :title, input_html: {style: 'height:30px;width: 500px;'}
+  = f.input :body, input_html: {style: 'height:200px;width: 500px;'}
   = f.association :widgets, :as => :check_boxes
 
   =f.input :thumb_rating

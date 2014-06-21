@@ -9,7 +9,7 @@
   -else
     = f.association :move_type, include_blank: false
     = f.association :project, include_blank: false
-  = f.input :title, input_html: {style: 'height:30px;'}
+  = f.input :title, input_html: {style: 'height:30px;width: 500px;'}
   = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
   = f.input :publish_date, :as => :string, input_html: { value: Date.today() }, input_html: {style: 'height:30px;'}
   = f.association :category, :collection => Category.order("title ASC")
