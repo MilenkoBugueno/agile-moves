@@ -15,7 +15,7 @@
             %div#countdown
             = button_tag t("tomatoes.timer.start"), :class => "btn btn-default btn-sm", :id => "btoStart", :name => "los", :onClick => "start_me('#{@tomato.user.id}', '#{@tomato.user.name}', '#{@tomato.title}', '#{@tomato.id}', '#{t('tomatoes.timer.stop')}')"
           .span1
-            = text_field_tag "txtTimer", nil, "value" => 25, "style" => "height:12px;width:2em;"
+            = text_field_tag "txtTimer", nil, "value" => 25, "style" => "height:30px;width:3em;"
       %audio{:src => "/assets/monks.mp3", :id => "tomato_finished_id", :preload => "auto"}
 
       %br
