@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: feb28d576cdcf3bf9fc6ff4ab206286adf56c68c
+  revision: 1d93c5a77049b3d21d17c847ad0531d7714fa229
   branch: bootstrap3
   specs:
     twitter-bootstrap-rails (3.1.1)
@@ -151,7 +151,7 @@ GEM
     launchy (2.4.2)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
-    listen (2.7.7)
+    listen (2.7.8)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -173,7 +173,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    quiet_assets (1.0.2)
+    quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
     rack (1.4.5)
     rack-cache (1.2)
@@ -213,9 +213,9 @@ GEM
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
       rspec-mocks (~> 3.0.0)
-    rspec-core (3.0.0)
+    rspec-core (3.0.1)
       rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.0)
+    rspec-expectations (3.0.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.0.0)
     rspec-mocks (3.0.1)
@@ -260,7 +260,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.39)
-    uglifier (2.5.0)
+    uglifier (2.5.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)

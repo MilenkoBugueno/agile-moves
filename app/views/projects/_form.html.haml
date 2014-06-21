@@ -1,5 +1,5 @@
 = simple_form_for @project, :html => { :class => 'form-horizontal' } do |f|
-  = f.input :title
+  = f.input :title, input_html: {style: 'height:30px;'}
   = f.input :body
   = f.association :users, :as => :check_boxes, :label => "Team"
   = f.association :move_types, :as => :check_boxes, :label => "Activate following moves"

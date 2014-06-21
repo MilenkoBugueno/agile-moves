@@ -1,28 +1,29 @@
-= simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
-  -if @project.present?
-    = f.association :move_type, include_blank: false, :collection => @project.move_types
-    = f.association :project, include_blank: false
-  -else
-    = f.association :move_type, include_blank: false
-    = f.association :project, include_blank: false
-  = f.input :title, input_html: {style: 'width:500px;'}
-  = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
-  = f.input :publish_date, :as => :string
-  = f.association :category, :collection => Category.order("title ASC")
-  -if @project.present?
-    = f.association :user, :label => t("moves.links.owner"), :collection => @project.users
-    = f.association :users, :as => :check_boxes, :label => t("projects.team"), :collection => @project.users
-    = f.hidden_field :project_id, :value => @project.id
-  -else
-    = f.association :user, :label => t("moves.links.owner")
-    = f.association :users, :as => :check_boxes, :label => t("projects.team")
-  %p{:align => "center"}
-    = link_to t("moves.team.select_all"), "javascript:select_all_team('move[user_ids][]', '#{t('moves.team.select_all')}', '#{t('moves.team.select_none')}');", :id => 'link_all_team', :class => 'btn'
-  .form-actions
-    = f.button :submit, :class => 'btn-primary'
+.input-group
+  = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
     -if @project.present?
-      = link_to "Cancel", work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
+      = f.association :move_type, include_blank: false, :collection => @project.move_types
+      = f.association :project, include_blank: false
     -else
-      = link_to "Cancel", root_path, :class => 'btn'
+      = f.association :move_type, include_blank: false
+      = f.association :project, include_blank: false
+    = f.input :title, input_html: {style: 'height:30px;'}
+    = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
+    = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;'}
+    = f.association :category, :collection => Category.order("title ASC")
+    -if @project.present?
+      = f.association :user, :label => t("moves.links.owner"), :collection => @project.users
+      = f.association :users, :as => :check_boxes, :label => t("projects.team"), :collection => @project.users
+      = f.hidden_field :project_id, :value => @project.id
+    -else
+      = f.association :user, :label => t("moves.links.owner")
+      = f.association :users, :as => :check_boxes, :label => t("projects.team")
+    %p{:align => "center"}
+      = link_to t("moves.team.select_all"), "javascript:select_all_team('move[user_ids][]', '#{t('moves.team.select_all')}', '#{t('moves.team.select_none')}');", :id => 'link_all_team', :class => 'btn'
+    .form-actions
+      = f.button :submit, :class => 'btn-primary'
+      -if @project.present?
+        = link_to "Cancel", work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
+      -else
+        = link_to "Cancel", root_path, :class => 'btn'
 
 
