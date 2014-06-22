@@ -70,7 +70,7 @@ tomatoes_move = MoveType.find_or_create_by_title :title => "tomato move", :has_t
 tomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_rating, tomato_comments, moves_actions]
 puts 'move type: ' << tomatoes_move.title
 
-teamtomatoes_move = MoveType.find_or_create_by_title :title => "tomato move", :has_tomatoes => true, :tomatoes_number => 1, :thumb_rating => true, , :star_rating => true
+teamtomatoes_move = MoveType.find_or_create_by_title :title => "tomato move", :has_tomatoes => true, :tomatoes_number => 1, :thumb_rating => true, :star_rating => true
 teamtomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, star_rating, thumb_rating, tomato_comments, tomato_retro, moves_actions]
 puts 'move type: ' << teamtomatoes_move.title
 
