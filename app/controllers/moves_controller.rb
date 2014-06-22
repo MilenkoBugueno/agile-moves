@@ -36,6 +36,8 @@ class MovesController < ApplicationController
       @tomato = @tomatoes.first
       # Custom Query for Comments as Nested Set Tree
       @comments = Comment.find_by_sql(["SELECT n.content, n.user_id, n.created_at, n.tomato_id, n.lft, n.rgt, n.move_id, n.id, p.tomato_id, COUNT(*)-1 AS level FROM comments AS n, comments AS p WHERE (n.tomato_id = p.tomato_id) AND (n.tomato_id = ?) AND (n.lft BETWEEN p.lft AND p.rgt) GROUP BY n.lft ORDER BY n.lft;", @tomato.id])
+    else
+      @comments = Comment.find_by_sql(["SELECT n.content, n.user_id, n.created_at, n.move_id, n.lft, n.rgt, n.id, p.move_id, COUNT(*)-1 AS level FROM comments AS n, comments AS p WHERE (n.move_id = p.move_id) AND (n.move_id = ?) AND (n.lft BETWEEN p.lft AND p.rgt) GROUP BY n.lft ORDER BY n.lft;", @move.id])
     end
 
     #@wp_categories = wp_getCategories("learningtocode.de", "teamtool", "teamtool01", "1")

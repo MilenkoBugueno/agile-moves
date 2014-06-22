@@ -43,7 +43,8 @@
           %input{:type => "hidden", :value => "0", :name => "first_comment"}
           %input{:type => "hidden", :value => "#{comment.lft}", :name => "lft"}
           %input{:type => "hidden", :value => "#{comment.rgt}", :name => "rgt"}
-          %input{:type => "hidden", :value => "#{comment.tomato_id}", :name => "tomato_id"}
+          -if @tomato.present?
+            %input{:type => "hidden", :value => "#{comment.tomato_id}", :name => "tomato_id"}
           %input{:type => "hidden", :value => "#{comment.move_id}", :name => "move_id"}
           %input{:type => "hidden", :value => "#{current_user.id}", :name => "user_id"}
           %textarea{:class => "ckeditor", :name => "content", :ckeditor => {:uiColor => '#AADC6E', :toolbar => 'mini'}}
@@ -53,7 +54,10 @@
       %tr
         %td{:colspan => "2"}
           = t("helpers.links.comment")
-          - last_rgt = Comment.get_last_right(@tomato.id, "tomato")
+          -if @tomato.present?
+            - last_rgt = Comment.get_last_right(@tomato.id, "tomato")
+          -else
+            - last_rgt = Comment.get_last_right(@move.id, "move")
           - if last_rgt == nil
             - first_comment = 1
           - else
@@ -62,8 +66,10 @@
             %input{:type => "hidden", :value => "#{first_comment}", :name => "first_comment"}
             %input{:type => "hidden", :value => "#{last_rgt}", :name => "lft"}
             %input{:type => "hidden", :value => "#{last_rgt}", :name => "rgt"}
-            %input{:type => "hidden", :value => "#{@tomato.id}", :name => "tomato_id"}
-            %input{:type => "hidden", :value => "", :name => "move_id"}
+            -if @tomato.present?
+              %input{:type => "hidden", :value => "#{@tomato.id}", :name => "tomato_id"}
+            - if @move.present?
+              %input{:type => "hidden", :value => "#{@move.id}", :name => "move_id"}
             %input{:type => "hidden", :value => "#{current_user.id}", :name => "user_id"}
             %textarea{:name => "content", :class => "ckeditor"}
             %input{:type => "submit", :value => t("helpers.links.comment"), :class => "btn btn-mini"}

@@ -90,6 +90,11 @@ class CommentsController < ApplicationController
         @tomato = Tomato.find(params[:tomato_id])
         format.html { redirect_to @tomato.move, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
+      elsif params[:move_id] != nil
+        # This is for returning to the right tomato after writing a comment
+        @move = Move.find(params[:move_id])
+        format.html { redirect_to @move, notice: 'Comment was successfully created.' }
+        format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
