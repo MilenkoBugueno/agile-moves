@@ -40,17 +40,17 @@ report_tomatoes = Widget.find_or_create_by_title(:title => "Report tomatoes", :p
 
 move_general = Widget.find_or_create_by_title(:title => "Move general", :path=>"moves/move_general", :widget_type => 3)
 
+tomatoes_timer = Widget.find_or_create_by_title(:title => "Tomatoes timer", :path=>"moves/timer", :widget_type => 3)
+
 thumb_rating = Widget.find_or_create_by_title(:title => "Thumb rating", :path=>"moves/thumbrating", :widget_type => 3)
 
 star_rating = Widget.find_or_create_by_title(:title => "Star rating", :path=>"moves/starrating", :widget_type => 3)
 
-tomatoes_timer = Widget.find_or_create_by_title(:title => "Tomatoes timer", :path=>"moves/timer", :widget_type => 3)
+tomato_retro = Widget.find_or_create_by_title(:title => "Tomato retro", :path=>"moves/tomato_retro", :widget_type => 3)
 
 tomato_rating = Widget.find_or_create_by_title(:title => "Tomato rating", :path=>"moves/tomato_rating", :widget_type => 3)
 
 tomato_comments = Widget.find_or_create_by_title(:title => "Tomato comment", :path=>"shared/comments_list", :widget_type => 3)
-
-tomato_retro = Widget.find_or_create_by_title(:title => "Tomato retro", :path=>"moves/tomato_retro", :widget_type => 3)
 
 moves_actions = Widget.find_or_create_by_title(:title=> "Moves actions", :path=>"moves/actions", :widget_type => 3)
 
@@ -58,19 +58,19 @@ publish_wordpress = Widget.find_or_create_by_title(:title => "Publish wordpress"
 
 
 puts 'DEFAULT MOVE TYPES'
-star_move = MoveType.find_or_create_by_title :title => "star move"
+star_move = MoveType.find_or_create_by_title :title => "Team Idea", :star_rating => true
 star_move.widgets = [work_rating, report_rating, move_general, star_rating, moves_actions]
 puts 'move type: ' << star_move.title
 
-thumbs_move = MoveType.find_or_create_by_title :title => "thumb move"
+thumbs_move = MoveType.find_or_create_by_title :title => "Review", :thumb_rating => true
 thumbs_move.widgets = [work_rating, report_rating, move_general, thumb_rating, moves_actions]
 puts 'move type: ' << thumbs_move.title
 
-tomatoes_move = MoveType.find_or_create_by_title :title => "tomato move"
+tomatoes_move = MoveType.find_or_create_by_title :title => "tomato move", :has_tomatoes => true, :tomatoes_number => 1
 tomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_rating, tomato_comments, moves_actions]
 puts 'move type: ' << tomatoes_move.title
 
-teamtomatoes_move = MoveType.find_or_create_by_title :title => "tomato move"
+teamtomatoes_move = MoveType.find_or_create_by_title :title => "tomato move", :has_tomatoes => true, :tomatoes_number => 1, :thumb_rating => true, , :star_rating => true
 teamtomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, star_rating, thumb_rating, tomato_comments, tomato_retro, moves_actions]
 puts 'move type: ' << teamtomatoes_move.title
 
