@@ -1,49 +1,50 @@
-.panel.panel-default
-  .panel-heading
-    -if @move.move_type.has_tomatoes
-      %h4= t("tomatoes.rating.starrating")
-    -else
-      %h4= t("moves.rating.starrating")
-  .panel-body
+-if (@tomato.present? && @tomato.state == 2) || !@move.move_type.has_tomatoes # for tomato moves this widget is shown after the tomamto is done
+  .panel.panel-default
+    .panel-heading
+      -if @move.move_type.has_tomatoes
+        %h4= t("tomatoes.rating.starrating")
+      -else
+        %h4= t("moves.rating.starrating")
+    .panel-body
 
-    -if (@move.move_type.star_rating)
-      -@move.ratings.each do |rating|
-        -if rating.thumb_rating <0
-          .row
-            .span6
-              %h6
-                -if @move.move_type.star_rating
-                  -case rating.star_rating
-                    -when -2
-                      = "Rating was skipped from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
-                    -when -1
-                      = image_tag("kommentar.gif", :width => 20, :height => 20)
-                      = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
-                    -when 0
-                      = image_tag("daumenrunter.png", :width => 20, :height => 20)
-                      = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
-                    -else
-                      = rating.star_rating
-                      = image_tag("star.png", :width => 20, :height => 20)
-                      = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
-            .span4
-              = link_to t("helpers.links.edit"), edit_rating_path(rating), :class => 'btn btn-mini'
-              = link_to t("helpers.links.destroy"), rating_path(rating), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
-            %br
-          .row
-            .span10
-              %blockquote
-                =raw(rating.body)
+      -if (@move.move_type.star_rating)
+        -@move.ratings.each do |rating|
+          -if rating.thumb_rating <0
+            .row
+              .span6
+                %h6
+                  -if @move.move_type.star_rating
+                    -case rating.star_rating
+                      -when -2
+                        = "Rating was skipped from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
+                      -when -1
+                        = image_tag("kommentar.gif", :width => 20, :height => 20)
+                        = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
+                      -when 0
+                        = image_tag("daumenrunter.png", :width => 20, :height => 20)
+                        = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
+                      -else
+                        = rating.star_rating
+                        = image_tag("star.png", :width => 20, :height => 20)
+                        = " from #{rating.user.name} at #{rating.created_at.to_s(:short)}"
+              .span4
+                = link_to t("helpers.links.edit"), edit_rating_path(rating), :class => 'btn btn-mini'
+                = link_to t("helpers.links.destroy"), rating_path(rating), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+              %br
+            .row
+              .span10
+                %blockquote
+                  =raw(rating.body)
 
 
-    -if @move.move_type.star_rating && !@move.star_rating_by(current_user)
-      %h5= t("helpers.links.newstarrating")
-      %br
+      -if @move.move_type.star_rating && !@move.star_rating_by(current_user)
+        %h5= t("helpers.links.newstarrating")
+        %br
 
-      =simple_form_for [@move, Rating.new] do |f|
-        = f.input :star_rating, :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
-        = f.hidden_field :user_id, :value => current_user.id
-        .form-actions
-          = f.button :submit, :class => 'btn-primary'
-          = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating"
+        =simple_form_for [@move, Rating.new] do |f|
+          = f.input :star_rating, :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
+          = f.hidden_field :user_id, :value => current_user.id
+          .form-actions
+            = f.button :submit, :class => 'btn-primary'
+            = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating"
 
