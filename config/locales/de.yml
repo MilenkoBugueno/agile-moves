@@ -72,6 +72,7 @@ de:
          skip: "Überspringen"
          closed: "geschlossen"
          skipped: "übersprungen"
+         send: "Senden zu"
       titles:
             edit: "Bearbeiten %{model}"
             save: "Speichern %{model}"
@@ -94,6 +95,8 @@ de:
             close: "Move Schließen"
             team: "Team"
             category: "Kategorie"
+            todotoday: "Todo Today"
+            activityinventory: "Activity Inventory"
         index: "Letzte Moves"
         team:
           select_all: "Alle wählen"

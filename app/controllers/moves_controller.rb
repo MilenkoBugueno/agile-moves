@@ -139,6 +139,14 @@ class MovesController < ApplicationController
       format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id) }
       format.json { head :no_content }
     end
-  end  
+  end
+
+  def sendto
+    @move_type = MoveType.find(params[:move_type_id])
+    @project = Project.find(params[:project_id])
+    @publish_date = params[:publish_date]==""? nil : params[:publish_date]
+        Move.update_all({publish_date: @publish_date}, {id: params[:move_ids]})
+    redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id)
+  end
  
 end

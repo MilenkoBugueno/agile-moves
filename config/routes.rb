@@ -33,7 +33,7 @@ AgileMovesOs::Application.routes.draw do
       end
     end
     collection do
-      put :move
+      put :sendto
     end
   end
   

@@ -75,6 +75,7 @@ en:
           close: "Close"
           closed: "closed"
           skipped: "übersprungen"
+          send: "send to"
       titles:
           edit: "Edit %{model}"
           save: "Save %{model}"
@@ -97,6 +98,8 @@ en:
           close: "Close Move"
           team: "Team"
           category: "Category"
+          todotoday: "Todo Today"
+          activityinventory: "Activity Inventory"
       index: "Last moves"
       team:
         select_all: "Select all"
