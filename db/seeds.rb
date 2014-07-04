@@ -28,11 +28,14 @@ puts 'user: ' << user2.name
 
 
 puts 'DEFAULT WIDGETS'
+
+plan_todo_today = Widget.find_or_create_by_title(:title => "Plan Todo Today", :path=>"projects/plan_todo_today", :widget_type => 0)
+
+
 work_rating = Widget.find_or_create_by_title(:title => "Work rating", :path=>"projects/work_rating", :widget_type => 1)
 
 work_tomatoes = Widget.find_or_create_by_title(:title => "Work tomatoes", :path=>"projects/work_tomatoes", :widget_type => 1)
 
-work_todo_today = Widget.find_or_create_by_title(:title => "Work Todo Today", :path=>"projects/work_todo_today", :widget_type => 1)
 
 
 report_rating = Widget.find_or_create_by_title(:title => "Report rating", :path=>"projects/report_rating", :widget_type => 2)
@@ -82,14 +85,14 @@ puts 'move type: ' << teamtomatoes_move.title
 
 
 todo_today_move = MoveType.find_or_create_by_title :title => "Todo Today", :has_tomatoes => true, :tomatoes_number => 1, :thumb_rating => true, :star_rating => true
-todo_today_move.widgets = [work_todo_today, report_tomatoes, move_general, tomatoes_timer, star_rating, thumb_rating, comments, tomato_retro, moves_actions]
+todo_today_move.widgets = [plan_todo_today, report_tomatoes, move_general, star_rating, thumb_rating, comments, moves_actions]
 puts 'move type: ' << todo_today_move.title
 
 
 puts 'DEFAULT PROJECTS'
 project = Project.find_or_create_by_title(:title => "Test project")
 project.users = [user, user1, user2]
-project.move_types = [star_move, thumbs_move, tomatoes_move,teamtomatoes_move, todo_today_move]
+project.move_types = [star_move, thumbs_move, tomatoes_move, teamtomatoes_move, todo_today_move]
 puts 'project: ' << project.title
 
 project2 = Project.find_or_create_by_title(:title => "Test project 2")

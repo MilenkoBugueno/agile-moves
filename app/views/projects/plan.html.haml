@@ -1,0 +1,14 @@
+=render :partial => "header", :locals => {:page => "plan"}
+
+.row
+  .col-md-2
+    .list-group
+      -@project.move_types.each do |move_type|
+        -if move_type.has_view(0)
+          = link_to move_type.title, plan_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info active"
+
+  .col-md-10
+    -if @move_type != nil
+      - @move_type.widgets.each do |widget|
+        -if widget.widget_type == 0
+          =render :partial => widget.path

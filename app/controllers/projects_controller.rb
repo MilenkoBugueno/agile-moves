@@ -12,6 +12,33 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def plan
+    if params[:id].present?
+      @project = Project.find(params[:id])
+    else
+      @project = Project.all.first
+    end
+
+    @user = params[:user] ? params[:user] : current_user.id
+
+    @moves = Move.order('created_at DESC')
+    @moves = @moves.by_user_ids(@user)
+    @moves = @moves.by_project_id(@project.id) if params[:id].present?
+    @moves = @moves.not_closed
+
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+
+    @move_type = MoveType.find(params[:move_type]) if params[:move_type].present?
+    if @move_type == nil || !@move_type.has_view(0)
+      @move_type = @project.move_types.has_widget_type(0).first
+    end
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @project }
+    end
+  end
+
   def work
     if params[:id].present?
       @project = Project.find(params[:id])
@@ -27,11 +54,12 @@ class ProjectsController < ApplicationController
     @moves = @moves.not_closed
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
-    
-    @move_types = MoveType.order('created_at DESC')
-    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
-    @move_type = MoveType.find(move_type_id) unless move_type_id == nil
-    @moves = @moves.by_move_type(move_type_id) unless move_type_id == nil
+
+    @move_type = MoveType.find(params[:move_type]) if params[:move_type].present?
+    if @move_type == nil || !@move_type.has_view(1)
+      @move_type = @project.move_types.has_widget_type(1).first
+    end
+    @moves = @moves.by_move_type(@move_type.id) unless @move_type.id == nil
 
     respond_to do |format|
       format.html # show.html.erb
@@ -52,10 +80,11 @@ class ProjectsController < ApplicationController
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
-    @move_types = MoveType.order('created_at DESC')
-    move_type_id = params[:move_type] ? params[:move_type] : @project.move_types.first
-    @move_type = MoveType.find(move_type_id) unless move_type_id == nil
-    @moves = @moves.by_move_type(move_type_id) unless move_type_id == nil
+    @move_type = MoveType.find(params[:move_type]) if params[:move_type].present?
+    if @move_type == nil || !@move_type.has_view(1)
+      @move_type = @project.move_types.has_widget_type(1).first
+    end
+    @moves = @moves.by_move_type(@move_type.id) unless @move_type.id == nil
 
     @moves_by_date = @moves.group_by(&:publish_date)
 

@@ -4,10 +4,11 @@
   .span2
     .list-group
       -@project.move_types.each do |move_type|
-        -if @move_type == move_type
-          = link_to move_type.title, report_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info active"
-        -else
-          = link_to move_type.title, report_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info"
+        -if move_type.has_view(2)
+          -if @move_type == move_type
+            = link_to move_type.title, report_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info active"
+          -else
+            = link_to move_type.title, report_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info"
 
   .span10
     -if @move_type != nil

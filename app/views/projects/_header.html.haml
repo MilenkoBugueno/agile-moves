@@ -6,18 +6,28 @@
       %li
         - if page == "work"
           =link_to t("projects.work"), work_projects_path
-        - else
+        - elsif  page == "report"
           =link_to t("projects.report"), report_projects_path
+        - else  page == "plan"
+          =link_to t("projects.plan"), plan_projects_path
       %li.active= @move_type.title
-  .col-md-4
+  .col-md-3
     = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary'
-  .col-md-2
+  .col-md-3
     - if page == "work"
       .btn-group
+        = link_to t("projects.plan"), plan_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default"
         = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default active"
         = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default"
 
-    -else
+    -elsif page == "report"
       .btn-group
+        = link_to t("projects.plan"), plan_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default"
         = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default"
         = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default active"
+    -else
+      .btn-group
+        = link_to t("projects.plan"), plan_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default active"
+        = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default"
+        = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default"
+
