@@ -5,9 +5,9 @@
     .list-group
       -@project.move_types.each do |move_type|
         -if @move_type == move_type
-          = link_to move_type.title, work_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info active"
+          = link_to move_type.title, report_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info active"
         -else
-          = link_to move_type.title, work_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info"
+          = link_to move_type.title, report_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info"
 
   .span10
     -if @move_type != nil
