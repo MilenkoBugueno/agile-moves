@@ -47,6 +47,8 @@ move_general = Widget.find_or_create_by_title(:title => "Move general", :path=>"
 
 tomatoes_timer = Widget.find_or_create_by_title(:title => "Tomatoes timer", :path=>"moves/timer", :widget_type => 3)
 
+tomatoes_list = Widget.find_or_create_by_title(:title => "Tomatoes list", :path=>"moves/tomatoes_list", :widget_type => 3)
+
 thumb_rating = Widget.find_or_create_by_title(:title => "Thumb rating", :path=>"moves/thumbrating", :widget_type => 3)
 
 star_rating = Widget.find_or_create_by_title(:title => "Star rating", :path=>"moves/starrating", :widget_type => 3)
@@ -85,7 +87,7 @@ puts 'move type: ' << teamtomatoes_move.title
 
 
 todo_today_move = MoveType.find_or_create_by_title :title => "Todo Today", :has_tomatoes => true, :tomatoes_number => 1, :thumb_rating => true, :star_rating => true
-todo_today_move.widgets = [plan_todo_today, report_tomatoes, move_general, star_rating, thumb_rating, comments, moves_actions]
+todo_today_move.widgets = [plan_todo_today, work_rating, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
 puts 'move type: ' << todo_today_move.title
 
 

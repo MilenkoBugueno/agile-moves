@@ -1,46 +1,32 @@
 -if @move.move_type.has_tomatoes
-  %h3= "Tomatoes"
-
-  =form_tag done_tomatoes_path, method: :put do
-    =hidden_field_tag t("moves.links.moveid"), @move.id
-    =submit_tag t("helpers.links.mark"), :class => 'btn btn-mini'
-    =submit_tag t("helpers.links.plan"), :class => 'btn btn-mini'
-    =submit_tag t("helpers.links.unplan"), :class => 'btn btn-mini'
-    %br
-    %br
-    %table.table.table-striped
-      %tr
-        %th{:width => "20px;"}
-        %th{:width => "20px;"}
-        %th{:width => "250px;"} Title
-        %th{:width => "100px;"} Owner
-        %th{:width => "120px;"} Publish date
-        %th{:width => "20px;"}
-        %th{:width => "20px;"}
-        %th{:width => "20px;"}
-
-      - @move.tomatoes.each do |tomato|
+  .panel.panel-default
+    .panel-heading
+      %h4= t("tomatoes.list")
+    .panel-body
+      %br
+      %br
+      %table.table.table-striped
         %tr
-          %td= check_box_tag "tomatoes_ids[]", tomato.id
-          %td
-            - if tomato.state == 0 # not planed
-              = image_tag("tomategrau.png", :width => 20, :height => 20)
-            - elsif tomato.state == 1 #planed
-              = image_tag("tomategruen.png", :width => 20, :height => 20)
-            - elsif tomato.state == 2 #done
-              = image_tag("tomaterot.png", :width => 20, :height => 20)
-          %td= link_to tomato.title, tomato
-          %td= tomato.user.name unless tomato.user == nil
-          %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td= link_to t("helpers.links.start"), tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
-          %td= link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
-          %td= link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+          %th{:width => "20px;"}
+          %th{:width => "250px;"} Title
+          %th{:width => "100px;"} Owner
+          %th{:width => "120px;"} Publish date
+          %th{:width => "20px;"}
+          %th{:width => "20px;"}
+          %th{:width => "20px;"}
 
-  =simple_form_for [@move, Tomato.new] do |f|
-    = f.hidden_field :state, :value => 0
-    = f.hidden_field :move_id, :value => @move.id
-    .form-actions
-      = f.input :title, input_html: {style: 'width:300px'}, label: t("projects.title")
-      = f.input :publish_date, :as => :string
-      = f.association :user, :as => :check_boxes, :label => t("moves.links.owner3"), :checked => [current_user.id]
-      = f.button :submit, :class => 'btn-primary'
+        - @move.tomatoes.each do |tomato|
+          %tr
+            %td
+              - if tomato.state == 0 # not planed
+                = image_tag("tomategrau.png", :width => 20, :height => 20)
+              - elsif tomato.state == 1 #planed
+                = image_tag("tomategruen.png", :width => 20, :height => 20)
+              - elsif tomato.state == 2 #done
+                = image_tag("tomaterot.png", :width => 20, :height => 20)
+            %td= link_to tomato.title, tomato
+            %td= tomato.user.name unless tomato.user == nil
+            %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+            %td= link_to t("helpers.links.start"), tomato, :class => 'btn btn-mini btn-success' unless tomato.state != 1
+            %td= link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
+            %td= link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'

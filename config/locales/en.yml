@@ -121,6 +121,7 @@ en:
         timer: "Timer"
       actions:
           markasdone: "Mark as done"
+      list: "Tomatoes list"
   live_tomato:
       livelist: "Who's working right now?"
       title: "Title"

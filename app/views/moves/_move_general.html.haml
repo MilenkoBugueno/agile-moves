@@ -1,6 +1,6 @@
 .panel.panel-primary
   .panel-heading
-    %h2= @move.title
+    %h3= @move.title
   .panel-body
     .row
       .span7
@@ -14,20 +14,20 @@
 
 
       .span4
-        %strong=t("moves.links.owner") + ": "
-        ="#{@move.user.name}"
-        %hr
-        %strong=t("moves.links.movetype") + ": "
-        ="#{@move.move_type.title}"
-        %hr
-        %strong=t("moves.links.state") + ": "
-        ="#{@move.state.title}" if @move.state.present?
-        %hr
-        %strong=t("moves.links.team") + ": "
-        -@move.users.each do |usr|
-          ="#{usr.name} - "
-        %hr
-        %strong=t("moves.links.category") + ": "
-        ="#{@move.category.title}" if @move.category.present?
-        %hr
+        %p
+          %strong=t("moves.links.owner") + ": "
+          ="#{@move.user.name}"
+        %p
+          %strong=t("moves.links.movetype") + ": "
+          ="#{@move.move_type.title}"
+        %p
+          %strong=t("moves.links.state") + ": "
+          ="#{@move.state.title}" if @move.state.present?
+        %p
+          %strong=t("moves.links.team") + ": "
+          -@move.users.each do |usr|
+            ="#{usr.name} - "
+        %p
+          %strong=t("moves.links.category") + ": "
+          ="#{@move.category.title}" if @move.category.present?
 

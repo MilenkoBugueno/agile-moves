@@ -81,8 +81,8 @@ class ProjectsController < ApplicationController
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
     @move_type = MoveType.find(params[:move_type]) if params[:move_type].present?
-    if @move_type == nil || !@move_type.has_view(1)
-      @move_type = @project.move_types.has_widget_type(1).first
+    if @move_type == nil || !@move_type.has_view(2)
+      @move_type = @project.move_types.has_widget_type(2).first
     end
     @moves = @moves.by_move_type(@move_type.id) unless @move_type.id == nil
 
