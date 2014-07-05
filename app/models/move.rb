@@ -134,8 +134,12 @@ class Move < ActiveRecord::Base
 
   def create_objects
     move_type = self.move_type
-    if move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
-      for i in 1..1
+    if move_type.make_my_day != nil && move_type.make_my_day
+      tomatoes = Tomato.where("user_id = ? AND publish_date= ?", self.user_id, Date.today())
+      self.tomatoes << tomatoes
+
+    elsif move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
+      for i in 1..tomatoes_number
         Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 0, :body => self.body)
       end
     end

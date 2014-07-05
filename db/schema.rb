@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140606114448) do
+ActiveRecord::Schema.define(:version => 20140705200213) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -76,8 +76,9 @@ ActiveRecord::Schema.define(:version => 20140606114448) do
     t.boolean  "has_tomatoes"
     t.boolean  "has_twitter_idea"
     t.integer  "tomatoes_number"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
+    t.boolean  "make_my_day",      :default => false
   end
 
   create_table "move_types_projects", :id => false, :force => true do |t|

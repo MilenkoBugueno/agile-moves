@@ -6,6 +6,8 @@
   =hidden_field_tag :publish_date, nil
   =submit_tag t("moves.links.activityinventory"), :class => 'btn btn-mini'
 
+  = link_to t("moves.links.makemyday"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_day: true), :class => 'btn btn-warning',:style=> 'float: right;'
+
   %br
   %br
   %table.table.table-striped
