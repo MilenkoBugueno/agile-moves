@@ -103,7 +103,7 @@ class TomatoesController < ApplicationController
         if @move.present?
           format.html { redirect_to @move, notice: 'Tomato was successfully created.' }
         else
-          format.html { redirect_to @tomato, notice: 'Tomato was successfully created.' }
+          format.html { redirect_to plan_projects_path(:id => @tomato.project.id), notice: 'Tomato was successfully created.' }
         end
 
       else
