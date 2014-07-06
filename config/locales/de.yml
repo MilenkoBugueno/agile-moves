@@ -98,6 +98,7 @@ de:
             category: "Kategorie"
             todotoday: "Todo Today"
             activityinventory: "Activity Inventory"
+            backtomove: "Zurück zu move"
         index: "Letzte Moves"
         team:
           select_all: "Alle wählen"

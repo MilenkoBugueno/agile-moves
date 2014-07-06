@@ -83,9 +83,9 @@ class TomatoesController < ApplicationController
   def create
     @move = Move.find(params[:move_id]) if params[:move_id].present?
     if @move != nil
-      users = params['tomato']['user_id']
-      if users.count > 0
-        users.each do |user|
+      user_id = params['tomato']['user_id']
+      if user_id.kind_of?(Array)
+        user_id.each do |user|
           params['tomato']['user_id'] = user
           @tomato = @move.tomatoes.create!(params[:tomato]) unless user.to_i <= 0
         end
@@ -147,7 +147,7 @@ class TomatoesController < ApplicationController
     log_admin("AdminLog: Tomato updated")
     respond_to do |format|
       if @tomato.update_attributes(params[:tomato])
-        format.html { redirect_to @tomato.move, notice: 'Tomato was successfully updated.' }
+        format.html { redirect_to @tomato, notice: 'Tomato was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -161,12 +161,18 @@ class TomatoesController < ApplicationController
   def destroy
     @tomato = Tomato.find(params[:id])
     @move_type = @tomato.move.move_type
+    @move = @tomato.move if @tomato.move.present?
     project_id = @tomato.move.project_id if @tomato.move.present?
     @tomato.destroy
     log_admin("AdminLog: Tomato destroyed")
     respond_to do |format|
-      format.html { redirect_to work_projects_path(:id => project_id, :move_type => @move_type.id) }
-      format.json { head :no_content }
+      if @move.present?
+        format.html { redirect_to @move }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to plan_projects_path(:id => @move.project.id), notice: 'Tomato was successfully deleted.' }
+      end
+
     end
   end
 

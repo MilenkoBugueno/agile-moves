@@ -78,16 +78,16 @@ vision_move.widgets = [work_rating, report_rating, move_general, thumb_rating, m
 puts 'move type: ' << vision_move.title
 
 tomatoes_move = MoveType.find_or_create_by_title :title => "Tomato", :has_tomatoes => true, :tomatoes_number => 1
-tomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_rating, comments, moves_actions]
+tomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_list, comments, moves_actions]
 puts 'move type: ' << tomatoes_move.title
 
 teamtomatoes_move = MoveType.find_or_create_by_title :title => "Teamtomato", :has_tomatoes => true, :tomatoes_number => 1, :thumb_rating => true, :star_rating => true
-teamtomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, star_rating, thumb_rating, comments, tomato_retro, moves_actions]
+teamtomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, tomato_retro, moves_actions]
 puts 'move type: ' << teamtomatoes_move.title
 
 
-todo_today_move = MoveType.find_or_create_by_title :title => "Todo Today", :has_tomatoes => true, :tomatoes_number => 1, :thumb_rating => true, :star_rating => true, :make_my_day => true
-todo_today_move.widgets = [plan_todo_today, work_rating, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
+todo_today_move = MoveType.find_or_create_by_title :title => "Todo Today", :has_tomatoes => true, :tomatoes_number => -1, :thumb_rating => true, :star_rating => true, :make_my_day => true
+todo_today_move.widgets = [plan_todo_today, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
 puts 'move type: ' << todo_today_move.title
 
 

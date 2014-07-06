@@ -1,9 +1,6 @@
 .panel.panel-default
   .panel-heading
-    -if @move.move_type.has_tomatoes
-      %h4= t("tomatoes.rating.starrating")
-    -else
-      %h4= t("moves.rating.starrating")
+    %h4= t("moves.rating.starrating")
   .panel-body
 
     -if (@move.move_type.star_rating)

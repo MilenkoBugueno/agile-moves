@@ -82,8 +82,8 @@ class RatingsController < ApplicationController
           format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully skipped.' }
           format.json { head :no_content }
         else
-          format.html { redirect_to @move, notice: 'Rating was successfully created.' }
-          format.json { render json: @move, status: :created, location: @tomato }
+          format.html { redirect_to @tomato, notice: 'Rating was successfully created.' }
+          format.json { render json: @tomato, status: :created, location: @tomato }
         end
       else
         format.html { render action: "new" }
