@@ -33,9 +33,6 @@ AgileMovesOs::Application.routes.draw do
         put :move
       end
     end
-    collection do
-      put :sendto
-    end
   end
   
   resources :tomatoes do
@@ -44,6 +41,7 @@ AgileMovesOs::Application.routes.draw do
     collection do
       put :done
       put :move
+      put :sendto
     end
   end
 

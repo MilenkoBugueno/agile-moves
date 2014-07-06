@@ -1,5 +1,5 @@
 %h5= t("moves.links.todotoday").upcase
-=form_tag sendto_moves_path, method: :put do
+=form_tag sendto_tomatoes_path, method: :put do
   =t("helpers.links.send")+":"
   =hidden_field_tag :move_type_id, @move_type.id
   =hidden_field_tag :project_id, @project.id
@@ -46,7 +46,7 @@
   %hr
 
 %h5= t("moves.links.activityinventory").upcase
-=form_tag sendto_moves_path, method: :put do
+=form_tag sendto_tomatoes_path, method: :put do
   =t("helpers.links.send")+":"
   =hidden_field_tag :move_type_id, @move_type.id
   =hidden_field_tag :project_id, @project.id

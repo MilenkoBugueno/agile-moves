@@ -14,6 +14,7 @@ en:
       editproject: "Edit Project"
       new: "New Project"
       moves: "Moves"
+      newtomato: "New tomato"
   editaccount:
       edit: "Edit account"
       cancelaccount: "Cancel my account"
