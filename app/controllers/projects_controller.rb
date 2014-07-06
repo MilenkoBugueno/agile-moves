@@ -21,10 +21,8 @@ class ProjectsController < ApplicationController
 
     @user = params[:user] ? params[:user] : current_user.id
 
-    @moves = Move.order('created_at DESC')
-    @moves = @moves.by_user_ids(@user)
-    @moves = @moves.by_project_id(@project.id) if params[:id].present?
-    @moves = @moves.not_closed
+    @tomatoes = Tomato.order('created_at DESC')
+    @tomatoes = @tomatoes.by_project_id(@project.id)
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
 

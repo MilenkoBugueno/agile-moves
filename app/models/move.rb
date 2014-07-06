@@ -136,7 +136,7 @@ class Move < ActiveRecord::Base
     move_type = self.move_type
     if move_type.make_my_day != nil && move_type.make_my_day
       tomatoes = Tomato.where("user_id = ? AND publish_date= ?", self.user_id, Date.today())
-      self.tomatoes << tomatoes
+      self.make_my_day << tomatoes
 
     elsif move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
       for i in 1..tomatoes_number

@@ -24,8 +24,8 @@ class TomatoesController < ApplicationController
   # GET /tomatoes/1.json
   def show
     @tomato = Tomato.find(params[:id])
-    @move_type = @tomato.move.move_type
-    @project = Project.find(@tomato.move.project_id) if @tomato.move.project_id.present?
+    @move_type = @tomato.move.move_type if @tomato.move.present?
+    @project = Project.find(@tomato.move.project_id) if @tomato.move.present? && @tomato.move.project_id.present?
 
     # Custom Query for Comments as Nested Set Tree
     @comments = Comment.find_by_sql(["SELECT n.content, n.user_id, n.created_at, n.tomato_id, n.lft, n.rgt, n.move_id, n.id, p.tomato_id, COUNT(*)-1 AS level FROM comments AS n, comments AS p WHERE (n.tomato_id = p.tomato_id) AND (n.tomato_id = ?) AND (n.lft BETWEEN p.lft AND p.rgt) GROUP BY n.lft ORDER BY n.lft;", @tomato.id])
@@ -63,6 +63,7 @@ class TomatoesController < ApplicationController
   def new
     @tomato = Tomato.new
     @tomato.user_id = current_user.id
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -80,20 +81,31 @@ class TomatoesController < ApplicationController
   # POST /tomatoes
   # POST /tomatoes.json
   def create
-    @move = Move.find(params[:move_id])
-    users = params['tomato']['user_id']
-    users.each do |user|
-      params['tomato']['user_id'] = user
-      @tomato = @move.tomatoes.create!(params[:tomato]) unless user.to_i <= 0
+    @move = Move.find(params[:move_id]) if params[:move_id].present?
+    if @move != nil
+      users = params['tomato']['user_id']
+      if users.count > 0
+        users.each do |user|
+          params['tomato']['user_id'] = user
+          @tomato = @move.tomatoes.create!(params[:tomato]) unless user.to_i <= 0
+        end
+      else
+        @tomato = @move.tomatoes.create!(params[:tomato])
+      end
     end
-    
+
     if @tomato == nil
-      @tomato = @move.tomatoes.create!(params[:tomato])
+      @tomato = Tomato.new(params[:tomato])
     end
     
     respond_to do |format|
       if @tomato.save
-        format.html { redirect_to @move, notice: 'Tomato was successfully created.' }
+        if @move.present?
+          format.html { redirect_to @move, notice: 'Tomato was successfully created.' }
+        else
+          format.html { redirect_to @tomato, notice: 'Tomato was successfully created.' }
+        end
+
       else
         format.html { render action: "new" }
         format.json { render json: @tomato.errors, status: :unprocessable_entity }
