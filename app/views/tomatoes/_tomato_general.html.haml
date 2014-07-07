@@ -6,7 +6,7 @@
       = link_to t("moves.links.backtomove"), @tomato.move, :class => 'btn'
       = link_to t("moves.links.backtowork"), work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn' if @project.present?
     -else
-      = link_to t("moves.links.backtowork"), work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn' if @project.present?
+      = link_to t("moves.links.backtoplan"), plan_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn' if @project.present?
     - if @tomato.user == current_user
       = link_to t("helpers.links.edit"), edit_tomato_path(@tomato), :class => 'btn'
       = link_to t("helpers.links.destroy"), tomato_path(@tomato), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'

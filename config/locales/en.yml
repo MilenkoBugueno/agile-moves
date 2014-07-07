@@ -103,6 +103,7 @@ en:
           activityinventory: "Activity Inventory"
           makemyday: "Make my day"
           backtomove: "Back to move"
+          backtoplan: "Back to plan"
       index: "Last moves"
       team:
         select_all: "Select all"

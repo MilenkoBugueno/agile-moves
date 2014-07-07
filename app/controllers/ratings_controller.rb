@@ -47,7 +47,7 @@ class RatingsController < ApplicationController
     elsif params[:tomato_id].present?
       @tomato = Tomato.find(params[:tomato_id])
       @move = @tomato.move
-      @move_type = @move.move_type
+      @move_type = @move.move_type if @move.present?
       @rating = Rating.new(params[:rating])
 
       if LiveTomato.where(:tomato_id => @tomato.id).blank?

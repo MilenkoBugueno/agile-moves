@@ -24,8 +24,21 @@ class TomatoesController < ApplicationController
   # GET /tomatoes/1.json
   def show
     @tomato = Tomato.find(params[:id])
-    @move_type = @tomato.move.move_type if @tomato.move.present?
-    @project = Project.find(@tomato.move.project_id) if @tomato.move.present? && @tomato.move.project_id.present?
+    #@move_type = @tomato.move.move_type if @tomato.move.present?
+    project_id =nil
+
+    if @tomato.move.present?
+      project_id = @tomato.move.project_id
+    elsif @tomato.project_id.present?
+      project_id = @tomato.project_id
+    end
+    @project = Project.find(project_id) if project_id.present?
+
+    if @tomato.move.present?
+      @move_type = @tomato.move.move_type
+    else
+      @move_type = @project.move_types.has_widget_type(0).first
+    end
 
     # Custom Query for Comments as Nested Set Tree
     @comments = Comment.find_by_sql(["SELECT n.content, n.user_id, n.created_at, n.tomato_id, n.lft, n.rgt, n.move_id, n.id, p.tomato_id, COUNT(*)-1 AS level FROM comments AS n, comments AS p WHERE (n.tomato_id = p.tomato_id) AND (n.tomato_id = ?) AND (n.lft BETWEEN p.lft AND p.rgt) GROUP BY n.lft ORDER BY n.lft;", @tomato.id])

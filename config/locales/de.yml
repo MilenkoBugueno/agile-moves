@@ -99,6 +99,7 @@ de:
             todotoday: "Todo Today"
             activityinventory: "Activity Inventory"
             backtomove: "Zurück zu move"
+            backtoplan: "Zurück zum Plan"
         index: "Letzte Moves"
         team:
           select_all: "Alle wählen"
