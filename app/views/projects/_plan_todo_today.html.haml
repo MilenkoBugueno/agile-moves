@@ -61,7 +61,6 @@
       %th{:width => "250px;"} Title
       %th{:width => "100px;"} Owner
       %th{:width => "80px;"} Publish date
-      %th{:width => "40px;"} Actions
 
     - @tomatoes.each do |tomato|
       -if (!tomato.publish_date.present? || !tomato.publish_date.today?)

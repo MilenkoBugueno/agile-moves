@@ -19,10 +19,9 @@ class ProjectsController < ApplicationController
       @project = Project.all.first
     end
 
-    @user = params[:user] ? params[:user] : current_user.id
-
     @tomatoes = Tomato.order('created_at DESC')
     @tomatoes = @tomatoes.by_project_id(@project.id)
+    @tomatoes = @tomatoes.by_user_id(current_user.id)
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
