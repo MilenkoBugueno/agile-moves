@@ -13,10 +13,11 @@
   %table.table.table-striped
     %tr
       %th{:width => "30px;"}
-      %th{:width => "100px;"}
-      %th{:width => "250px;"} Title
+      %th{:width => "50px;"}
+      %th{:width => "200px;"} Title
       %th{:width => "100px;"} Owner
       %th{:width => "80px;"} Publish date
+      %th{:width => "130px;"} Move
 
     - @tomatoes.each do |tomato|
       -if tomato.publish_date.present? && tomato.publish_date.today?
@@ -41,6 +42,9 @@
           %td= link_to tomato.title, tomato
           %td= tomato.user.name
           %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+
+
 
 
   %hr
@@ -57,20 +61,19 @@
   %table.table.table-striped
     %tr
       %th{:width => "30px;"}
-      %th{:width => "100px;"}
-      %th{:width => "250px;"} Title
+      %th{:width => "50px;"}
+      %th{:width => "200px;"} Title
       %th{:width => "100px;"} Owner
       %th{:width => "80px;"} Publish date
+      %th{:width => "130px;"}
 
     - @tomatoes.each do |tomato|
-      -if (!tomato.publish_date.present? || !tomato.publish_date.today?)
+      -if (!tomato.publish_date.present? || !tomato.publish_date.today?) && tomato.state != 2
         %tr
           %td= check_box_tag "tomato_ids[]", tomato.id
           %td
             - if tomato.state == 1 #planed
               = image_tag("tomategruen.png", :width => 20, :height => 20)
-            - elsif tomato.state == 2 #done
-              = image_tag("tomaterot.png", :width => 20, :height => 20)
             - else # not planed
               = image_tag("tomategrau.png", :width => 20, :height => 20)
 
@@ -85,3 +88,4 @@
           %td= link_to tomato.title, tomato
           %td= tomato.user.name
           %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+          %td
