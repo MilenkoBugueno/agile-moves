@@ -140,6 +140,6 @@ en:
       refresh: "Refresh List"
       last_refresh: "Last Refresh"
   user:
-    edit: "Edit User"
+    edit: "Edit Account"
   categories:
     index: "Categories"
