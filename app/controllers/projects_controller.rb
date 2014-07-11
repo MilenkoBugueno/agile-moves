@@ -72,7 +72,7 @@ class ProjectsController < ApplicationController
     end
 
     @moves = Move.order('created_at DESC')
-    @moves = @moves.by_user_ids(params[:user] ) if params[:user].present?
+    @moves = @moves.by_user_id(params[:user] ) if params[:user].present?
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
