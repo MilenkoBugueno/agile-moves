@@ -7,5 +7,6 @@ FactoryGirl.define do
     user_id 1
     title "MyText"
     state_id 1
+    publish_date Date.today()
   end
 end

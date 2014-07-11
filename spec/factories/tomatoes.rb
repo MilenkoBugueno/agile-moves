@@ -8,6 +8,5 @@ FactoryGirl.define do
     state 1
     title "MyString"
     user_id 1
-    move_id 1
   end
 end
