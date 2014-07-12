@@ -8,6 +8,13 @@ def create_tomatoes(num, date, user_id)
   end
 end
 
+def delete_tomatoes()
+  @tomatoes = Tomato.all
+  @tomatoes.each do |tomato|
+    tomato.destroy
+  end
+end
+
 def create_project()
   @project = FactoryGirl.create(:project, :title => "Project 1")
 end
@@ -16,7 +23,7 @@ end
 def create_move(move_type, date, user_id)
   visit '/'
   click_link "Test project"
-  click_link "New Move"
+  first(:link, "New Move").click
   select move_type.title, :from => "Move type"
   fill_in "Title", :with => move_type.title
   click_button "Create Move"
@@ -26,7 +33,7 @@ end
 ### GIVEN ###
 
 Given(/^(.*) tomatoes of me are planned for today$/) do |number|
-
+  delete_tomatoes()
   create_tomatoes(number.to_i, Date.today(), 1)
 end
 
@@ -48,7 +55,15 @@ Then(/^I see a move created message$/) do
   page.should have_content "Move was successfully created"
 end
 
+And(/^I see '(.*)' tomatoes in the tomatoes list widget$/) do |count|
+  for i in 1..count.to_i()
+    page.should have_content "Test tomato "+ i.to_s()
+  end
+
+end
+
 
 Then /^I should have ([0-9]+) moves?$/ do |count|
   Move.count.should == count.to_i
 end
+

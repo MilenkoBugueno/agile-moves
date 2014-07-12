@@ -15,7 +15,7 @@
     - if page == "plan"
       = link_to t("projects.newtomato"), new_tomato_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary'
     - else
-      = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary'
+      = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary', :type => "button"
   .col-md-3
     - if page == "work"
       .btn-group
