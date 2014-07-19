@@ -62,8 +62,8 @@ class CommentsController < ApplicationController
         Comment.update_rgt(params['tomato_id'], "tomato", rgt)
         Comment.update_lft(params['tomato_id'], "tomato", rgt)
       elsif params[:move_id] != nil
-        Comment.update_rgt(params['move_id'], "move", params['rgt'])
-        Comment.update_lft(params['move_id'], "move", params['rgt'])
+        Comment.update_rgt(params['move_id'], "move", rgt)
+        Comment.update_lft(params['move_id'], "move", rgt)
       end
 
       #New Entry where the lft is rgt of the old value and rgt is one more
@@ -95,7 +95,7 @@ class CommentsController < ApplicationController
         end
         format.json { render json: @comment, status: :created, location: @comment }
       elsif params[:move_id] != nil
-        # This is for returning to the right tomato after writing a comment
+        # This is for returning to the right move after writing a comment
         @move = Move.find(params[:move_id])
         format.html { redirect_to @move, notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
