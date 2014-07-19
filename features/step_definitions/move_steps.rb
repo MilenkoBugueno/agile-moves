@@ -29,6 +29,11 @@ def create_move(move_type, date, user_id)
   click_button "Create Move"
 end
 
+def create_moves(move_type, date, user_id, count)
+  for i in 0..count
+    create_move(move_type, date, user_id)
+  end
+end
 
 ### GIVEN ###
 

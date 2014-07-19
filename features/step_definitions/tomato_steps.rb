@@ -44,7 +44,8 @@ When(/^I have a move with (.*) tomato planned for today$/) do |arg1|
 end
 
 Given(/^I have several moves with (\d+) unplanned tomatoes$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+  move_type = MoveType.find_or_create_by_title(:title => "Tomato")
+  create_moves(move_type, Date.today, 1, 7)
 end
 
 ### THEN ###

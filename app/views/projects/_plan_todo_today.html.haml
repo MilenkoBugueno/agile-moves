@@ -68,7 +68,7 @@
       %th{:width => "130px;"}
 
     - @tomatoes.each do |tomato|
-      -if (!tomato.publish_date.present? || !tomato.publish_date.today?) && tomato.state != 2 && !tomato.move.present?
+      -if (!tomato.publish_date.present? || !tomato.publish_date.today?) && tomato.state != 2
         %tr
           %td= check_box_tag "tomato_ids[]", tomato.id
           %td
