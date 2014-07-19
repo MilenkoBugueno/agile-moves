@@ -62,6 +62,10 @@ And(/^I see '(.*)' tomatoes in the tomatoes list widget$/) do |count|
 
 end
 
+And(/^I see the '(.*)' move$/) do |title|
+  page.should have_content title
+end
+
 
 Then /^I should have ([0-9]+) moves?$/ do |count|
   Move.count.should == count.to_i
