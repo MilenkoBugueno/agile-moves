@@ -65,7 +65,7 @@
       %th{:width => "200px;"} Title
       %th{:width => "100px;"} Owner
       %th{:width => "80px;"} Publish date
-      %th{:width => "130px;"}
+      %th{:width => "130px;"} Move
 
     - @tomatoes.each do |tomato|
       -if (!tomato.publish_date.present? || !tomato.publish_date.today?) && tomato.state != 2
@@ -88,4 +88,4 @@
           %td= link_to tomato.title, tomato
           %td= tomato.user.name
           %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td
+          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
