@@ -86,7 +86,7 @@ class ProjectsController < ApplicationController
     @moves_by_date = @moves.group_by(&:publish_date)
 
 
-    @moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars} if @move_type!= nil && @move_type.star_rating
+    #@moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars} if @move_type!= nil && @move_type.star_rating
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
     

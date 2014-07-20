@@ -39,12 +39,13 @@
       %tr
         %td= check_box_tag "tomatoes_ids[]", tomato.id
         %td 
-          - if tomato.state == 0 # not planed
-            = image_tag("tomategrau.png", :width => 20, :height => 20)
-          - elsif tomato.state == 1 #planed
+          - if tomato.state == 1 #planed
             = image_tag("tomategruen.png", :width => 20, :height => 20)
           - elsif tomato.state == 2 #done
             = image_tag("tomaterot.png", :width => 20, :height => 20)
+          - else
+            = image_tag("tomategrau.png", :width => 20, :height => 20)
+
         %td= link_to tomato.title, tomato
         %td= link_to tomato.move.title, move_path(tomato.move_id) if tomato.move.present?
         %td= link_to tomato.user.name, tomatoes_path(:user => tomato.user.id, :date => @date)  unless tomato.user == nil
