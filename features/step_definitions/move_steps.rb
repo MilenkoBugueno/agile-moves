@@ -1,5 +1,14 @@
 ### UTILITY METHODS ###
 
+
+def sign_in_as_first_user
+  visit '/users/sign_out'
+  visit '/users/sign_in'
+  fill_in "Email", :with => "user@example.com"
+  fill_in "Password", :with => "changeme"
+  click_button "Sign in"
+end
+
 def create_tomatoes(num, date, user_id)
   @tomatoes = []
   for i in 0..num
@@ -20,29 +29,31 @@ def create_project()
 end
 
 
-def create_move(move_type, date, user_id)
+def create_move(move_type, date, user_id, num)
   visit '/'
   click_link "Test project"
   first(:link, "New Move").click
   select move_type.title, :from => "Move type"
-  fill_in "Title", :with => move_type.title
+  fill_in "Title", :with => move_type.title + " " +num.to_s
   click_button "Create Move"
 end
 
 def create_moves(move_type, date, user_id, count)
-  for i in 0..count
-    create_move(move_type, date, user_id)
+  for i in 1..count
+    create_move(move_type, date, user_id, i)
   end
 end
 
 ### GIVEN ###
 
 Given(/^(.*) tomatoes of me are planned for today$/) do |number|
+  sign_in_as_first_user()
   delete_tomatoes()
   create_tomatoes(number.to_i, Date.today(), 1)
 end
 
 Given /^I have no moves$/ do
+  sign_in_as_first_user()
   Move.delete_all
 end
 
