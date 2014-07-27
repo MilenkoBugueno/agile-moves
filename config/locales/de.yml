@@ -100,7 +100,7 @@ de:
             activityinventory: "Activity Inventory"
             backtomove: "Zurück zu move"
             backtoplan: "Zurück zum Plan"
-            open: "Öffnen"
+            open: "Move Öffnen"
         index: "Letzte Moves"
         team:
           select_all: "Alle wählen"
