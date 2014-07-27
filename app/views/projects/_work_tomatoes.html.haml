@@ -1,6 +1,7 @@
 %table.table.table-striped
   %tr
-    %th{:width => "100px;"} Rating
+    %th{:width => "20px;"}
+    %th{:width => "80px;"}
     %th{:width => "150px;"} Title
     %th{:width => "80px;"} Owner
     %th{:width => "100px;"} Team
@@ -10,20 +11,19 @@
     -if move.tomatoes.present?
       %tr
         %td
-          /thumbs
-          - if move.ratings.present?
-            -if move.thumbs_down > 0
-              = image_tag("daumenrunter.png", :width => 20, :height => 20)
-            -elsif move.thumbs_up > 0
-              = image_tag("daumenrunter.png", :width => 20, :height => 20)
-          - else
+          /rating
+          - if !move.ratings.present?
             = image_tag("bewerten.png", :width => 20, :height => 20)
-          /stars
-          - if move.ratings.present?
-            -if move.stars > 0
-              = "#{move.stars}"
-              = image_tag("star.png", :width => 15, :height => 15)
-              ="/ #{move.ratings.count} votes"
+        %td
+          /tomatoes
+          - move.tomatoes.each do |tomato|
+            - if tomato.state == 1 #planed
+              =image_tag("tomategruen.png", :width => 15, :height => 15)
+            - elsif tomato.state == 2 #done
+              = image_tag("tomaterot.png", :width => 15, :height => 15 )
+            - else
+              =image_tag("tomategrau.png", :width => 15, :height => 15)
+
         %td= link_to move.title, move
         %td= move.user.name if move.user.present?
         %td
