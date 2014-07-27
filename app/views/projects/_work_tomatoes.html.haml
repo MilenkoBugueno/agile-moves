@@ -17,13 +17,7 @@
         %td
           /tomatoes
           - move.tomatoes.each do |tomato|
-            - if tomato.state == 1 #planed
-              =image_tag("tomategruen.png", :width => 15, :height => 15)
-            - elsif tomato.state == 2 #done
-              = image_tag("tomaterot.png", :width => 15, :height => 15 )
-            - else
-              =image_tag("tomategrau.png", :width => 15, :height => 15)
-
+            = image_tag(tomato_icon_path(tomato.state), :width => 15, :height => 15)
         %td= link_to move.title, move
         %td= move.user.name if move.user.present?
         %td

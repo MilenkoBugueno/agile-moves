@@ -24,13 +24,7 @@
         -@moves_by_date[date].each do |move|
           -if move.tomatoes.present?
             -move.tomatoes.each do |tomato|
-              - if tomato.state == 1 #planed
-                =link_to  image_tag("tomategruen.png", :width => 15, :height => 15), move_path(tomato.move)
-              - elsif tomato.state == 2 #done
-                = link_to image_tag("tomaterot.png", :width => 15, :height => 15 ), move_path(tomato.move)
-              - else
-                =link_to image_tag("tomategrau.png", :width => 15, :height => 15), move_path(tomato.move)
-
+              = image_tag(tomato_icon_path(tomato.state), :width => 15, :height => 15)
             
 %br
 %br

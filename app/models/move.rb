@@ -140,7 +140,7 @@ class Move < ActiveRecord::Base
 
     elsif move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
       for i in 1..move_type.tomatoes_number
-        Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 0, :body => self.body, :project_id => self.project_id)
+        Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 0, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
       end
     end
 

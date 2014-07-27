@@ -27,7 +27,10 @@
           /mark as done button
           = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
             = f.hidden_field :publish_date, :value => Date.today()
-            = f.hidden_field :state, :value => 2
+            - if @tomato.state == 3 # extra unplanned
+              = f.hidden_field :state, :value => 4 #extra done
+            -else
+              = f.hidden_field :state, :value => 2
             -if @tomato.state != 2
               = f.hidden_field :start_time
               = f.hidden_field :end_time
