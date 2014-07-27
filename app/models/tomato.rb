@@ -1,10 +1,11 @@
 class Tomato < ActiveRecord::Base
-  attr_accessible :body, :end_time, :start_time, :state, :title, :user_id, :move_id, :publish_date, :name, :project_id
+  attr_accessible :body, :end_time, :start_time, :state, :title, :user_id, :move_id, :publish_date, :name, :project_id, :user_ids
   belongs_to :move
   belongs_to :user
   has_one :rating
   has_many :comments
   belongs_to :project
+  has_and_belongs_to_many :users
   
   scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
   scope :by_user_ids, lambda {|uid| joins(:move) & Move.by_user_ids(uid)}

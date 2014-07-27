@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
 
   has_and_belongs_to_many :moves
+  has_and_belongs_to_many :tomatoes
   has_and_belongs_to_many :projects
   has_many :comments
 end

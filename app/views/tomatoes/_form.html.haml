@@ -5,6 +5,11 @@
   = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;'}
   -if @project.present?
     = f.association :user, :label => t("moves.links.owner"), :collection => @project.users
+    = f.hidden_field :project_id, :value => @project.id
+    -if @tomato.new_record?
+      = f.association :users, :as => :check_boxes, :label => t("projects.team"), :checked => [current_user.id], :collection => @project.users
+    -else
+      = f.association :users, :as => :check_boxes, :label => t("projects.team"), :collection => @project.users
   -else
     = f.association :user, :label => t("moves.links.owner")
   -if !@tomato.new_record?

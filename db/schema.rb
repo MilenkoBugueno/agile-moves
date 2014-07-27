@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140705200213) do
+ActiveRecord::Schema.define(:version => 20140727092729) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -174,6 +174,13 @@ ActiveRecord::Schema.define(:version => 20140705200213) do
     t.time     "end_time"
     t.integer  "project_id"
   end
+
+  create_table "tomatoes_users", :id => false, :force => true do |t|
+    t.integer "tomato_id"
+    t.integer "user_id"
+  end
+
+  add_index "tomatoes_users", ["tomato_id", "user_id"], :name => "index_tomatoes_users_on_tomato_id_and_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
