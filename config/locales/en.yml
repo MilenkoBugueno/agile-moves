@@ -104,6 +104,7 @@ en:
           makemyday: "Make my day"
           backtomove: "Back to move"
           backtoplan: "Back to plan"
+          open: "open"
       index: "Last moves"
       team:
         select_all: "Select all"
