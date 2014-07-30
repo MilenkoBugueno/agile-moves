@@ -28,7 +28,7 @@
               = link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
               = link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
 
-      -if @move.move_type.make_my_day
+      -if @move.move_type.make_my_day || @move.move_type.make_my_sprint
         %h5= t("projects.newtomato")
         =simple_form_for [@move, Tomato.new] , :html => { :class => 'form-horizontal' } do |f|
           = f.hidden_field :state, :value => 3 # extra tomato
