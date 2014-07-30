@@ -1,5 +1,5 @@
 class MoveType < ActiveRecord::Base
-  attr_accessible :body, :thumb_rating, :star_rating, :has_tomatoes, :tomatoes_number, :has_twitter_idea, :make_my_day, :title, :project_ids, :widget_ids
+  attr_accessible :body, :thumb_rating, :star_rating, :has_tomatoes, :tomatoes_number, :has_twitter_idea, :make_my_day, :make_my_sprint, :title, :project_ids, :widget_ids
   has_and_belongs_to_many :moves
   has_and_belongs_to_many :projects
 

@@ -31,6 +31,8 @@ puts 'DEFAULT WIDGETS'
 
 plan_todo_today = Widget.find_or_create_by_title(:title => "Plan Todo Today", :path=>"projects/plan_todo_today", :widget_type => 0)
 
+plan_sprint = Widget.find_or_create_by_title(:title => "Plan Sprint", :path=>"projects/plan_sprint", :widget_type => 0)
+
 
 work_rating = Widget.find_or_create_by_title(:title => "Work rating", :path=>"projects/work_rating", :widget_type => 1)
 
@@ -90,11 +92,14 @@ todo_today_move = MoveType.find_or_create_by_title :title => "Todo Today", :has_
 todo_today_move.widgets = [plan_todo_today, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
 puts 'move type: ' << todo_today_move.title
 
+sprint_move = MoveType.find_or_create_by_title :title => "Sprint Move", :has_tomatoes => true, :tomatoes_number => -1, :thumb_rating => true, :star_rating => true, :make_my_sprint => true
+sprint_move.widgets = [plan_sprint, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
+puts 'move type: ' << sprint_move.title
 
 puts 'DEFAULT PROJECTS'
 project = Project.find_or_create_by_title(:title => "Test project")
 project.users = [user, user1, user2]
-project.move_types = [star_move, thumbs_move, tomatoes_move, teamtomatoes_move, todo_today_move]
+project.move_types = [star_move, thumbs_move, tomatoes_move, teamtomatoes_move, todo_today_move, sprint_move]
 puts 'project: ' << project.title
 
 project2 = Project.find_or_create_by_title(:title => "Test project 2")

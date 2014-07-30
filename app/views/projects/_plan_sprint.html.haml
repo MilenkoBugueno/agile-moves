@@ -1,0 +1,69 @@
+%h5= t("moves.links.todotoday").upcase
+=form_tag sendto_tomatoes_path, method: :put do
+  =t("helpers.links.send")+":"
+  =hidden_field_tag :move_type_id, @move_type.id
+  =hidden_field_tag :project_id, @project.id
+  =hidden_field_tag :publish_date, nil
+  =submit_tag t("moves.links.activityinventory"), :class => 'btn btn-mini'
+
+  = link_to t("moves.links.makemyday"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_day: true), :class => 'btn btn-warning',:style=> 'float: right;'
+
+  %br
+  %br
+  %table.table.table-striped
+    %tr
+      %th{:width => "30px;"}
+      %th{:width => "50px;"}
+      %th{:width => "200px;"} Title
+      %th{:width => "100px;"} Owner
+      %th{:width => "80px;"} Publish date
+      %th{:width => "130px;"} Move
+
+    - @tomatoes.each do |tomato|
+      -if tomato.publish_date.present? && tomato.publish_date.today?
+        %tr
+          %td= check_box_tag "tomato_ids[]", tomato.id
+          %td
+            = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
+          %td= link_to tomato.title, tomato
+          %td= tomato.user.name
+          %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+
+
+%hr
+
+
+%h5 ACTUAL SPRINT
+
+
+%hr
+
+%h5= t("moves.links.activityinventory").upcase
+=form_tag sendto_tomatoes_path, method: :put do
+  =t("helpers.links.send")+":"
+  =hidden_field_tag :move_type_id, @move_type.id
+  =hidden_field_tag :project_id, @project.id
+  =hidden_field_tag :publish_date, Date.today()
+  =submit_tag t("moves.links.todotoday"), :class => 'btn btn-mini'
+  %br
+  %br
+  %table.table.table-striped
+    %tr
+      %th{:width => "30px;"}
+      %th{:width => "50px;"}
+      %th{:width => "200px;"} Title
+      %th{:width => "100px;"} Owner
+      %th{:width => "80px;"} Publish date
+      %th{:width => "130px;"} Move
+
+    - @tomatoes.each do |tomato|
+      -if (!tomato.publish_date.present? || !tomato.publish_date.today?) && (!tomato.move.present? || (tomato.move.present? && !tomato.move.move_type.make_my_day))
+        %tr
+          %td= check_box_tag "tomato_ids[]", tomato.id
+          %td
+            = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
+          %td= link_to tomato.title, tomato
+          %td= tomato.user.name
+          %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
