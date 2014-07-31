@@ -193,7 +193,15 @@ class TomatoesController < ApplicationController
   def sendto
     @move_type = MoveType.find(params[:move_type_id])
     @project = Project.find(params[:project_id])
-    @publish_date = params[:publish_date]==""? nil : params[:publish_date]
+
+    if params["move_to_cur_sprint"].present?
+      @publish_date = Date.tomorrow
+    elsif params["move_to_today"].present?
+      @publish_date = Date.today
+    else
+      @publish_date = nil
+    end
+
     Tomato.update_all({publish_date: @publish_date}, {id: params[:tomato_ids]})
     redirect_to plan_projects_path(:id => @project.id, :move_type => @move_type.id)
   end

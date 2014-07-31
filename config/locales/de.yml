@@ -101,6 +101,7 @@ de:
             backtomove: "Zurück zu move"
             backtoplan: "Zurück zum Plan"
             open: "Move Öffnen"
+            currentsprint: "Aktueller Sprint"
         index: "Letzte Moves"
         team:
           select_all: "Alle wählen"

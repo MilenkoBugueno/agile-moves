@@ -3,8 +3,8 @@
   =t("helpers.links.send")+":"
   =hidden_field_tag :move_type_id, @move_type.id
   =hidden_field_tag :project_id, @project.id
-  =hidden_field_tag :publish_date, nil
-  =submit_tag t("moves.links.activityinventory"), :class => 'btn btn-mini'
+  =submit_tag t("moves.links.currentsprint"), :name=> "move_to_cur_sprint", :class => 'btn btn-mini' if @actual_sprint.present?
+  =submit_tag t("moves.links.activityinventory"), :name=> "move_to_act_inv", :class => 'btn btn-mini'
 
   = link_to t("moves.links.makemyday"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_day: true), :class => 'btn btn-warning',:style=> 'float: right;'
 
@@ -19,30 +19,29 @@
       %th{:width => "80px;"} Publish date
       %th{:width => "130px;"} Move
 
-    - @tomatoes.each do |tomato|
-      -if tomato.publish_date.present? && tomato.publish_date.today?
-        %tr
-          %td= check_box_tag "tomato_ids[]", tomato.id
-          %td
-            = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
-          %td= link_to tomato.title, tomato
-          %td= tomato.user.name
-          %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+    - @todo_today_tomatoes.each do |tomato|
+      %tr
+        %td= check_box_tag "tomato_ids[]", tomato.id
+        %td
+          = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
+        %td= link_to tomato.title, tomato
+        %td= tomato.user.name
+        %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+        %td= link_to tomato.move.title, tomato.move if tomato.move.present?
 
 
 %hr
 
 
 -if @actual_sprint.present?
-  %h5 ACTUAL SPRINT
+  %h5= "CURRENT SPRINT: " + @actual_sprint.title + " (from #{@actual_sprint.start_date} to #{@actual_sprint.publish_date})"
   =form_tag sendto_tomatoes_path, method: :put do
     =t("helpers.links.send")+":"
     =hidden_field_tag :move_type_id, @move_type.id
     =hidden_field_tag :project_id, @project.id
-    =hidden_field_tag :publish_date, Date.today()
-    =submit_tag t("moves.links.todotoday"), :class => 'btn btn-mini'
-    =submit_tag t("moves.links.activityinventory"), :class => 'btn btn-mini'
+    =submit_tag t("moves.links.todotoday"), :name=> "move_to_today", :class => 'btn btn-mini'
+    =submit_tag t("moves.links.activityinventory"), :name=> "move_to_act_inv", :class => 'btn btn-mini'
+
 
     %br
     %br
@@ -55,17 +54,18 @@
         %th{:width => "80px;"} Publish date
         %th{:width => "130px;"} Move
 
-      - @tomatoes.each do |tomato|
-        -if tomato.publish_date <= @actual_sprint.publish_date && tomato.publish_date >= @actual_sprint.start_date
-          %tr
-            %td= check_box_tag "tomato_ids[]", tomato.id
-            %td
-              = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
-            %td= link_to tomato.title, tomato
-            %td= tomato.user.name
-            %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-            %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+      - @actual_sprint_tomatoes.each do |tomato|
+        %tr
+          %td= check_box_tag "tomato_ids[]", tomato.id
+          %td
+            = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
+          %td= link_to tomato.title, tomato
+          %td= tomato.user.name
+          %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
 
+-else
+  %h5 NO CURRENT SPRINT
 
 %hr
 
@@ -74,8 +74,9 @@
   =t("helpers.links.send")+":"
   =hidden_field_tag :move_type_id, @move_type.id
   =hidden_field_tag :project_id, @project.id
-  =hidden_field_tag :publish_date, Date.today()
-  =submit_tag t("moves.links.todotoday"), :class => 'btn btn-mini'
+  =submit_tag t("moves.links.todotoday"), :name=> "move_to_today", :class => 'btn btn-mini'
+  =submit_tag t("moves.links.currentsprint"), :name=> "move_to_cur_sprint", :class => 'btn btn-mini' if @actual_sprint.present?
+
   %br
   %br
   %table.table.table-striped
@@ -87,13 +88,12 @@
       %th{:width => "80px;"} Publish date
       %th{:width => "130px;"} Move
 
-    - @tomatoes.each do |tomato|
-      -if (!tomato.publish_date.present? || !tomato.publish_date.today?) && (!tomato.move.present? || (tomato.move.present? && !tomato.move.move_type.make_my_day))
-        %tr
-          %td= check_box_tag "tomato_ids[]", tomato.id
-          %td
-            = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
-          %td= link_to tomato.title, tomato
-          %td= tomato.user.name
-          %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+    - @activity_inventory_tomatoes.each do |tomato|
+      %tr
+        %td= check_box_tag "tomato_ids[]", tomato.id
+        %td
+          = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
+        %td= link_to tomato.title, tomato
+        %td= tomato.user.name
+        %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
+        %td= link_to tomato.move.title, tomato.move if tomato.move.present?

@@ -30,7 +30,13 @@ class ProjectsController < ApplicationController
       @move_type = @project.move_types.has_widget_type(0).first
     end
 
-    @actual_sprint = Move.where("user_id=? AND move_type_id=? AND start_date <= ? AND publish_date >= ?", current_user.id, @move_type.id, Date.today(), Date.today()).first
+    @actual_sprint = Move.where("user_id=? AND move_type_id=? AND start_date <= ? AND publish_date >= ?", current_user.id, @move_type.id, Date.today(), Date.today()).first if @move_type.make_my_sprint
+
+    if @actual_sprint.present?
+      @todo_today_tomatoes = @tomatoes.where("publish_date = ?", Date.today)
+      @activity_inventory_tomatoes = @tomatoes.where("publish_date > ? OR publish_date IS NULL", @actual_sprint.publish_date)
+      @actual_sprint_tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ? AND publish_date != ? ", @actual_sprint.publish_date, @actual_sprint.start_date, Date.today)
+    end
 
     respond_to do |format|
       format.html # show.html.erb
