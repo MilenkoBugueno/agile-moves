@@ -51,6 +51,8 @@ tomatoes_timer = Widget.find_or_create_by_title(:title => "Tomatoes timer", :pat
 
 tomatoes_list = Widget.find_or_create_by_title(:title => "Tomatoes list", :path=>"moves/tomatoes_list", :widget_type => 3)
 
+tomatoes_sprint = Widget.find_or_create_by_title(:title => "Tomatoes Sprint", :path=>"moves/tomatoes_sprint", :widget_type => 3)
+
 thumb_rating = Widget.find_or_create_by_title(:title => "Thumb rating", :path=>"moves/thumbrating", :widget_type => 3)
 
 star_rating = Widget.find_or_create_by_title(:title => "Star rating", :path=>"moves/starrating", :widget_type => 3)
@@ -93,7 +95,7 @@ todo_today_move.widgets = [plan_todo_today, work_tomatoes, report_tomatoes, move
 puts 'move type: ' << todo_today_move.title
 
 sprint_move = MoveType.find_or_create_by_title :title => "Sprint Move", :has_tomatoes => true, :tomatoes_number => -1, :thumb_rating => true, :star_rating => true, :make_my_sprint => true
-sprint_move.widgets = [plan_sprint, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
+sprint_move.widgets = [plan_sprint, work_tomatoes, report_tomatoes, move_general, tomatoes_sprint, star_rating, thumb_rating, comments, moves_actions]
 puts 'move type: ' << sprint_move.title
 
 puts 'DEFAULT PROJECTS'

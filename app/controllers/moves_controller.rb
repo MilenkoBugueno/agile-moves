@@ -59,9 +59,12 @@ class MovesController < ApplicationController
       flash[:notice] = "Blog article published"
     end
 
-
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @move_type = @move.move_type
+
+    if @move.present? && @move.start_date.present? && @move.publish_date.present?
+      @actual_sprint_tomatoes = Tomato.where("project_id = ? AND publish_date <= ? AND publish_date >= ?", @project.id, @move.publish_date, @move.start_date)
+    end
 
     respond_to do |format|
       format.html # show.html.erb

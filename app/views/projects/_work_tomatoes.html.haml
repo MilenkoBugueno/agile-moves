@@ -8,7 +8,7 @@
     %th{:width => "80px;"} Publish date
 
   -@moves.each do |move|
-    -if move.tomatoes.present?
+    -if move.tomatoes.present? || move.move_type.make_my_sprint || move.move_type.make_my_day
       %tr
         %td
           /rating
@@ -23,4 +23,10 @@
         %td
           -move.users.each do |user|
             =user.name+ " "
-        %td= move.publish_date.to_s(:short) unless move.publish_date == nil
+        %td
+          -if move.move_type.make_my_sprint && move.publish_date.present? && move.start_date.present?
+            = move.start_date.to_s(:short)
+            = " - "
+            = move.publish_date.to_s(:short)
+          -elsif move.publish_date.present?
+            = move.publish_date.to_s(:short)

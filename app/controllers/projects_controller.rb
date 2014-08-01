@@ -36,6 +36,9 @@ class ProjectsController < ApplicationController
       @todo_today_tomatoes = @tomatoes.where("publish_date = ?", Date.today)
       @activity_inventory_tomatoes = @tomatoes.where("publish_date > ? OR publish_date IS NULL", @actual_sprint.publish_date)
       @actual_sprint_tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ? AND publish_date != ? ", @actual_sprint.publish_date, @actual_sprint.start_date, Date.today)
+    else
+      @todo_today_tomatoes = @tomatoes.where("publish_date = ?", Date.today)
+      @activity_inventory_tomatoes = @tomatoes.where("publish_date > ? OR publish_date IS NULL", Date.today())
     end
 
     respond_to do |format|

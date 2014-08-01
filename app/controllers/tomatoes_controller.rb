@@ -77,6 +77,7 @@ class TomatoesController < ApplicationController
     @tomato = Tomato.new
     @tomato.user_id = current_user.id
     @project = Project.find(params[:project_id]) if params[:project_id].present?
+    @move_type = MoveType.find(params[:move_type]) if params[:move_type].present?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -195,7 +196,12 @@ class TomatoesController < ApplicationController
     @project = Project.find(params[:project_id])
 
     if params["move_to_cur_sprint"].present?
-      @publish_date = Date.tomorrow
+      @actual_sprint = Move.where("user_id=? AND move_type_id=? AND start_date <= ? AND publish_date >= ?", current_user.id, @move_type.id, Date.today(), Date.today()).first if @move_type.make_my_sprint
+      if @actual_sprint.present? && @actual_sprint.publish_date.present?
+        @publish_date = @actual_sprint.publish_date
+      else
+        @publish_date = Date.tomorrow
+      end
     elsif params["move_to_today"].present?
       @publish_date = Date.today
     else
