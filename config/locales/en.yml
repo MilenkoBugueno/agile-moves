@@ -106,6 +106,7 @@ en:
           backtoplan: "Back to plan"
           open: "Open Move"
           currentsprint: "Current Sprint"
+          makemysprint: "Make my Sprint"
       index: "Last moves"
       team:
         select_all: "Select all"

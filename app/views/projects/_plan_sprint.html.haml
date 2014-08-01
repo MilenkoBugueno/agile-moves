@@ -6,7 +6,7 @@
   =submit_tag t("moves.links.currentsprint"), :name=> "move_to_cur_sprint", :class => 'btn btn-mini' if @actual_sprint.present?
   =submit_tag t("moves.links.activityinventory"), :name=> "move_to_act_inv", :class => 'btn btn-mini'
 
-  /= link_to t("moves.links.makemyday"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_day: true), :class => 'btn btn-warning',:style=> 'float: right;'
+  = link_to t("moves.links.makemysprint"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_sprint: true), :class => 'btn btn-warning',:style=> 'float: right;'
 
   %br
   %br

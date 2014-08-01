@@ -118,6 +118,11 @@ class MovesController < ApplicationController
     @move = Move.find(params[:id])
     @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
+    if @move.move_type.make_my_sprint && @move.project_id.present? && @move.publish_date.present? && @move.start_date.present?
+      tomatoes = Tomato.where("project_id = ? AND publish_date <= ? AND publish_date >= ?", @move.project_id, @move.publish_date, @move.start_date)
+      @move.tomatoes << tomatoes
+    end
+
     log_admin("AdminLog: Move updated")
     respond_to do |format|
       if @move.update_attributes(params[:move])
