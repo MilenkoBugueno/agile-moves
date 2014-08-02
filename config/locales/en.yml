@@ -107,6 +107,8 @@ en:
           open: "Open Move"
           currentsprint: "Current Sprint"
           makemysprint: "Make my Sprint"
+          newsprint: "Create New Sprint"
+          nocurrentsprint: "No Current Sprint"
       index: "Last moves"
       team:
         select_all: "Select all"

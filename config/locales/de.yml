@@ -103,6 +103,8 @@ de:
             open: "Move Öffnen"
             currentsprint: "Aktueller Sprint"
             makemysprint: "Make my Sprint"
+            newsprint: "Neuer Sprint Erstellen"
+            nocurrentsprint: "Kein aktueller Sprint"
         index: "Letzte Moves"
         team:
           select_all: "Alle wählen"

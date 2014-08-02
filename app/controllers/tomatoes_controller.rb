@@ -96,6 +96,7 @@ class TomatoesController < ApplicationController
   # POST /tomatoes.json
   def create
     @move = Move.find(params[:move_id]) if params[:move_id].present?
+
     if @move != nil
       user_id = params['tomato']['user_id']
       if user_id.kind_of?(Array)
@@ -116,6 +117,8 @@ class TomatoesController < ApplicationController
       if @tomato.save
         if @move.present?
           format.html { redirect_to @move, notice: 'Tomato was successfully created.' }
+        elsif @tomato.move_type.present?
+          format.html { redirect_to plan_projects_path(:id => @tomato.project.id, :move_type => @tomato.move_type.id), notice: 'Tomato was very successfully created.' }
         else
           format.html { redirect_to plan_projects_path(:id => @tomato.project.id), notice: 'Tomato was successfully created.' }
         end

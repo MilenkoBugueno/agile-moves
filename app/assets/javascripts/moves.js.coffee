@@ -5,5 +5,8 @@ jQuery ->
   $('#move_publish_date').datepicker
     dateFormat: 'yy-mm-dd'
 jQuery ->
+  $('#move_start_date').datepicker
+    dateFormat: 'yy-mm-dd'
+jQuery ->
   $('#tomato_publish_date').datepicker
     dateFormat: 'yy-mm-dd'

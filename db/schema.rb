@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140730050343) do
+ActiveRecord::Schema.define(:version => 20140802132208) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(:version => 20140730050343) do
     t.time     "start_time"
     t.time     "end_time"
     t.integer  "project_id"
+    t.integer  "move_type_id"
   end
 
   create_table "tomatoes_users", :id => false, :force => true do |t|

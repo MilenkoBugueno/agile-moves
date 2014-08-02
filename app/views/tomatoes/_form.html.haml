@@ -18,5 +18,7 @@
     = f.input :state, :collection =>  [["Undone", 0], ["Done", 2]], :as => :radio_buttons, item_wrapper_class: 'inline'
   -else
     = f.hidden_field :state, :value => 0
+  -if @move_type.present?
+    = f.hidden_field :move_type_id, :value => @move_type.id
   .form-actions
     = f.button :submit, :class => 'btn-primary'
