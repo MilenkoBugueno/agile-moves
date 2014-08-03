@@ -1,3 +1,8 @@
+-if @actual_sprint.present?
+  = simple_form_for @actual_sprint, :html => { :class => 'form-horizontal' } do |f|
+    = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "planned").id
+    = f.button :submit, :class => 'btn btn-warning', :value=> t("moves.links.makemysprint"), :style=> 'float: right;'
+
 %h5= t("moves.links.todotoday").upcase
 =form_tag sendto_tomatoes_path, method: :put do
   =t("helpers.links.send")+":"
@@ -5,11 +10,6 @@
   =hidden_field_tag :project_id, @project.id
   =submit_tag t("moves.links.currentsprint"), :name=> "move_to_cur_sprint", :class => 'btn btn-mini' if @actual_sprint.present?
   =submit_tag t("moves.links.activityinventory"), :name=> "move_to_act_inv", :class => 'btn btn-mini'
-
-  -if @actual_sprint.present?
-    = simple_form_for @actual_sprint, :html => { :class => 'form-horizontal' } do |f|
-      = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "closed").id
-      = f.button :submit, :class => 'btn btn-warning', :value=> t("moves.links.makemysprint"),:style=> 'float: right;'
 
   %br
   %br

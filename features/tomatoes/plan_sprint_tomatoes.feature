@@ -23,4 +23,17 @@ Feature: Plan tomatoes
     Then I see the message Tomato was successfully created
     And I see 1 tomatoes in the activity inventory list
 
+  Scenario: Create several unplanned tomato
+    Given I am in the sprint plan view
+    When I create 3 new tomatoes
+    Then I see the message Tomato was successfully created
+    And I see 3 tomatoes in the activity inventory list
 
+  Scenario: Make my sprint
+    Given I am in the sprint plan view
+    And I create a new sprint
+    And I am in the sprint plan view
+    And I create 4 new tomatoes
+    When I press the button make my sprint
+    Then I see the message Move was successfully updated
+    And the state of the move is planned

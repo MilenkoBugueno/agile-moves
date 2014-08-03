@@ -1,6 +1,5 @@
 %table.table.table-striped
   %tr
-    %th{:width => "20px;"}
     %th{:width => "80px;"}
     %th{:width => "150px;"} Title
     %th{:width => "80px;"} Owner
@@ -8,12 +7,8 @@
     %th{:width => "80px;"} Publish date
 
   -@moves.each do |move|
-    -if move.tomatoes.present? || move.move_type.make_my_sprint || move.move_type.make_my_day
+    -if (move.tomatoes.present? || move.move_type.make_my_sprint || move.move_type.make_my_day) && !move.reviewed_by_me(current_user)
       %tr
-        %td
-          /rating
-          - if !move.ratings.present?
-            = image_tag("bewerten.png", :width => 20, :height => 20)
         %td
           /tomatoes
           - move.tomatoes.each do |tomato|

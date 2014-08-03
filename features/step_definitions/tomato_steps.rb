@@ -79,6 +79,10 @@ When(/^I create a new sprint$/) do
   click_button "Create Move"
 end
 
+When(/^I press the button make my sprint$/) do
+  click_button "Make my Sprint"
+end
+
 
 
 ### THEN ###
@@ -106,4 +110,8 @@ end
 
 Then(/^I don't see a "(.*?)" button$/) do |text|
   page.should_not have_content text
+end
+
+Then(/^the state of the move is (.*)$/) do |state|
+  page.should have_content state
 end
