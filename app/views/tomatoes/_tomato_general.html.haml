@@ -14,4 +14,19 @@
       .span6
         =raw(@tomato.body)
       .span4
-        %h5="Owner: #{@tomato.user.name}" unless @tomato.user == nil
+        %p
+          %strong=t("moves.links.owner") + ": "
+          ="#{@tomato.user.name}" if @tomato.user.present?
+        %p
+          %strong=t("tomato.publish_date") + ": "
+          ="#{@tomato.publish_date}" if @tomato.publish_date
+        %p
+          %strong=t("tomato.start_time") + ": "
+          ="#{@tomato.start_time}" if @tomato.start_time
+        %p
+          %strong=t("tomato.end_time") + ": "
+          ="#{@tomato.end_time}" if @tomato.end_time
+        %p
+          %strong=t("moves.links.team") + ": "
+          -@tomato.users.each do |usr|
+            ="#{usr.name} - "
