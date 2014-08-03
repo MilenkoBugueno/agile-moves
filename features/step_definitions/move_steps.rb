@@ -24,6 +24,13 @@ def delete_tomatoes()
   end
 end
 
+def delete_moves()
+  @moves = Move.all
+  @moves.each do |move|
+    move.destroy
+  end
+end
+
 def create_project()
   @project = FactoryGirl.create(:project, :title => "Project 1")
 end
