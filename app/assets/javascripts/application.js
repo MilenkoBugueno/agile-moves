@@ -49,3 +49,17 @@ function select_all_team(name, text_all, text_none) {
     }
 
 }
+
+$(document).ready(function(){
+    $("select").change(function(){
+        $( "select option:selected").each(function(){
+            if($(this).attr("value")=="1"){
+                $(".move_users").show();
+            }
+            if($(this).attr("value")=="2"){
+                $(".move_users").hide();
+
+            }
+        });
+    }).change();
+});
