@@ -16,4 +16,6 @@ class MoveType < ActiveRecord::Base
     end
     return has_view
   end
+
+
 end
