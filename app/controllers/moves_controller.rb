@@ -79,7 +79,8 @@ class MovesController < ApplicationController
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     @states = State.order(:position)
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
-    @move_type = params[:move_type] ? params[:move_type] : MoveType.first
+    move_type_id = params[:move_type] ? params[:move_type] : MoveType.first
+    @move_type = MoveType.find(move_type_id) if move_type_id.present?
 
     respond_to do |format|
       format.html # new.html.erb
