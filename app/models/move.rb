@@ -143,7 +143,7 @@ class Move < ActiveRecord::Base
       # Is a todo_today move present and the tomato is planned for today then add the tomato to the todo_today move
       # Else create a "normal" tomato move
       my_make_my_day_move = nil
-      my_tomatoes_for_today = Tomato.where("publish_date=? AND user_id=?", Date.today(), self.user_id)
+      my_tomatoes_for_today = Tomato.where("publish_date=? AND user_id=? AND project_id=?", Date.today(), self.user_id, self.project_id)
       my_tomatoes_for_today.each do |tomato|
         if tomato.move.present? && tomato.move.move_type.make_my_day
           my_make_my_day_move =  tomato.move
