@@ -2,14 +2,14 @@
   .col-md-6
     %ol.breadcrumb
       %li
-        =link_to @project.title, "#"
+        =@project.title
       %li
         - if page == "work"
-          =link_to t("projects.work"), work_projects_path
+          =t("projects.work")
         - elsif  page == "report"
-          =link_to t("projects.report"), report_projects_path
+          =t("projects.report")
         - elsif  page == "plan"
-          =link_to t("projects.plan"), plan_projects_path
+          =t("projects.plan")
       %li.active= @move_type.title
   .col-md-3
     - if page == "plan"
