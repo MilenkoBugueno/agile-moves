@@ -69,7 +69,7 @@ end
 
 When(/^I create a '(.*)' move$/) do |move_type|
   move_type = MoveType.find_or_create_by_title(:title => move_type)
-  create_move(move_type, Date.today, 1)
+  create_move(move_type, Date.today, 1, 1)
 end
 
 ### THEN ###

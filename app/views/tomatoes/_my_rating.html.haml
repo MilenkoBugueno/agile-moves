@@ -74,5 +74,5 @@
         %blockquote
           =raw(rating.body)
       %p
-        - if @tomato.user == current_user
+        - if @tomato.user == current_user || (@tomato.users.include? current_user)
           = link_to t("helpers.links.edit"), edit_rating_path(rating), :class => 'btn btn-mini'

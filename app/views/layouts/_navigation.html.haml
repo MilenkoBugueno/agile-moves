@@ -13,7 +13,8 @@
                 =t("navigation.projects")
                 %b.caret
               %ul.dropdown-menu
-                -Project.all.each do |project|
+                -my_projects= Project.by_user_ids(current_user.id)
+                -my_projects.all.each do |project|
                   %li
                     =link_to project.title, work_projects_path(:id=>project.id)
           %ul.nav.navbar-nav
