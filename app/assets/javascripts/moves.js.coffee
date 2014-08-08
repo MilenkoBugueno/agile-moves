@@ -10,3 +10,10 @@ jQuery ->
 jQuery ->
   $('#tomato_publish_date').datepicker
     dateFormat: 'yy-mm-dd'
+
+# Hiding team field. TODO: hide only if move_type.has_team
+# jQuery ->
+#  $('#move_user_ids_1').parent().parent().parent().hide()
+#  move_types = $('#move_move_type_id').html()
+#  console.log(move_types)
+#  move_types.hide()
