@@ -9,4 +9,24 @@ class Project < ActiveRecord::Base
 
   scope :by_user_ids, lambda {|uid| joins(:users).where(["users.id =?", uid])}
 
+  def has_make_my_sprint()
+    has_sprint = false
+    self.move_types.each do |move_type|
+      if move_type.make_my_sprint
+        has_sprint = true
+      end
+    end
+    return has_sprint
+  end
+
+  def has_make_my_day()
+    has_sprint = false
+    self.move_types.each do |move_type|
+      if move_type.make_my_day
+        has_sprint = true
+      end
+    end
+    return has_sprint
+  end
+
 end

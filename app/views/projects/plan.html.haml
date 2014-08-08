@@ -1,17 +1,6 @@
 =render :partial => "header", :locals => {:page => "plan"}
 
 .row
-  .col-md-2
-    .list-group
-      -@project.move_types.each do |move_type|
-        -if move_type.has_view(0)
-          -if @move_type == move_type
-            = link_to move_type.title, plan_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info active"
-          -else
-            = link_to move_type.title, plan_projects_path(id: @project.id, date: @date, move_type: move_type.id), :class => "list-group-item list-group-item-info"
-
-  .col-md-10
+  .col-md-12
     -if @move_type != nil
-      - @move_type.widgets.each do |widget|
-        -if widget.widget_type == 0
-          =render :partial => widget.path
+      =render :partial => "plan_sprint"

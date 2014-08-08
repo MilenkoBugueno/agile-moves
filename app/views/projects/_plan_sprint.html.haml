@@ -3,6 +3,10 @@
     = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "planned").id
     = f.button :submit, :class => 'btn btn-warning', :value=> t("moves.links.makemysprint"), :style=> 'float: right;'
 
+-if @project.has_make_my_day()
+  = link_to t("moves.links.makemyday"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_day: true), :class => 'btn btn-warning',:style=> 'float: right;'
+
+
 %h5= t("moves.links.todotoday").upcase
 =form_tag sendto_tomatoes_path, method: :put do
   =t("helpers.links.send")+":"
@@ -67,16 +71,17 @@
             %td= tomato.user.name
             %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
             %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+  %hr
 
--else
+-elsif @project.has_make_my_sprint()
   .row
     .col-md-3
       %h5= t("moves.links.nocurrentsprint").upcase
     .col-md-2
       = link_to t("moves.links.newsprint"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_sprint: true), :class => 'btn btn-warning',:style=> 'float: right;'
+  %hr
 
 
-%hr
 
 %h5= t("moves.links.activityinventory").upcase
 =form_tag sendto_tomatoes_path, method: :put do
