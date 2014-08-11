@@ -62,8 +62,12 @@ class MovesController < ApplicationController
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @move_type = @move.move_type
 
+    @actual_sprint_tomatoes = []
     if @move.present? && @move.start_date.present? && @move.publish_date.present?
-      @actual_sprint_tomatoes = Tomato.where("project_id = ? AND publish_date <= ? AND publish_date >= ?", @project.id, @move.publish_date, @move.start_date)
+      @tomatoes = Tomato.order('created_at DESC')
+      @tomatoes = @tomatoes.by_project_id(@project.id)
+      @tomatoes = @tomatoes.by_user_id(@move.user.id)
+      @actual_sprint_tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ?", @move.publish_date, @move.start_date)
     end
 
     respond_to do |format|
