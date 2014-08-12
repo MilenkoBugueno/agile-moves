@@ -136,7 +136,7 @@ class Move < ActiveRecord::Base
     move_type = self.move_type
     if move_type.make_my_day != nil && move_type.make_my_day
       tomatoes = Tomato.where("project_id = ? AND user_id = ? AND publish_date= ?", self.project_id, self.user_id, Date.today())
-      self.tomatoes << tomatoes
+      tomatoes.update_all(state: 1) #plan todo_today
 
     elsif move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
       # check if there is already a todo_today move
@@ -149,15 +149,17 @@ class Move < ActiveRecord::Base
           my_make_my_day_move =  tomato.move
         end
       end
-      if my_make_my_day_move.present? && self.publish_date == Date.today()
-        for i in 1..move_type.tomatoes_number
-          Tomato.create(:move_id => my_make_my_day_move.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 3, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
-        end
-      else
-        for i in 1..move_type.tomatoes_number
+
+      #create tomatoes for the tomato move
+      for i in 1..move_type.tomatoes_number
+        if my_make_my_day_move.present? && self.publish_date == Date.today()
+          Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 3, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
+        else
           Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 0, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
         end
+
       end
+
     end
 
   end

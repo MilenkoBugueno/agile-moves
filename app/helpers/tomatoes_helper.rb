@@ -15,7 +15,7 @@ module TomatoesHelper
       end
     else
       if state == 1 #planed
-        path = "tomategruen.png"
+        path = "tomategrau.png"
       elsif state == 2 #done
         path = "tomaterot.png"
       elsif state == 3 #extra unplanned

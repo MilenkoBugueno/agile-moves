@@ -17,15 +17,23 @@
           %strong=t("moves.links.owner") + ": "
           ="#{@move.user.name}"
         %p
-          %strong=t("moves.links.movetype") + ": "
-          ="#{@move.move_type.title}"
-        %p
-          %strong=t("moves.links.state") + ": "
-          ="#{@move.state.title}" if @move.state.present?
-        %p
           %strong=t("moves.links.team") + ": "
           -@move.users.each do |usr|
             ="#{usr.name} - "
+        %p
+          %strong=t("moves.links.movetype") + ": "
+          ="#{@move.move_type.title}"
+        -if @move.start_date.present? && @move.publish_date.present?
+          %p
+            %strong=t("moves.links.duration") + ": "
+            = " from #{@move.start_date.to_s(:short)} to #{@move.publish_date.to_s(:short)}"
+        -elsif @move.publish_date.present?
+          %p
+            %strong=t("tomato.publish_date") + ": "  if @move.publish_date.present?
+            ="#{@move.publish_date}" if @move.publish_date.present?
+        %p
+          %strong=t("moves.links.state") + ": "
+          ="#{@move.state.title}" if @move.state.present?
         %p
           %strong=t("moves.links.category") + ": "
           ="#{@move.category.title}" if @move.category.present?

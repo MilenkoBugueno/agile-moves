@@ -14,7 +14,7 @@
           %th{:width => "120px;"} Publish date
           %th{:width => "40px;"} Actions
 
-        - @move.tomatoes.each do |tomato|
+        - @tomatoes.each do |tomato|
           %tr
             %td
               = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)

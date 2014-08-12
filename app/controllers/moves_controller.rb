@@ -62,12 +62,17 @@ class MovesController < ApplicationController
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @move_type = @move.move_type
 
-    @actual_sprint_tomatoes = []
-    if @move.present? && @move.start_date.present? && @move.publish_date.present?
-      @tomatoes = Tomato.order('created_at DESC')
-      @tomatoes = @tomatoes.by_project_id(@project.id)
-      @tomatoes = @tomatoes.by_user_id(@move.user.id)
-      @actual_sprint_tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ?", @move.publish_date, @move.start_date)
+    @tomatoes = Tomato.order('created_at DESC')
+    @tomatoes = @tomatoes.by_project_id(@project.id)
+    @tomatoes = @tomatoes.by_user_id(@move.user.id)
+    if @move.present? && @move.publish_date.present?
+      if @move.move_type.make_my_day
+        @tomatoes = @tomatoes.where("publish_date = ?", @move.publish_date)
+      elsif @move.move_type.make_my_sprint && @move.start_date.present?
+        @tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ?", @move.publish_date, @move.start_date)
+      elsif @move.tomatoes.present?
+        @tomatoes = @move.tomatoes
+      end
     end
 
     respond_to do |format|
@@ -85,6 +90,8 @@ class MovesController < ApplicationController
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
     move_type_id = params[:move_type] ? params[:move_type] : MoveType.first
     @move_type = MoveType.find(move_type_id) if move_type_id.present?
+
+    @state = State.find_by_title(params[:state]) if params[:state].present?
 
     respond_to do |format|
       format.html # new.html.erb

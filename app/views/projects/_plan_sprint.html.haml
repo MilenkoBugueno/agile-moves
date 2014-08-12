@@ -7,7 +7,7 @@
         = f.button :submit, :class => 'btn btn-warning', :value=> t("moves.links.makemysprint"), :style=> 'float: right;'
   .col-md-2
     -if @project.has_make_my_day()
-      = link_to t("moves.links.makemyday"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_day: true), :class => 'btn btn-warning',:style=> 'float: left;'
+      = link_to t("moves.links.makemyday"), new_move_path(project_id: @project.id, move_type: @move_type.id, make_my_day: true, state: "planned"), :class => 'btn btn-warning',:style=> 'float: left;'
 
 
 %h5= t("moves.links.todotoday").upcase
