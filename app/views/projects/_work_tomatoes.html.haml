@@ -1,6 +1,6 @@
 %table.table.table-striped
   %tr
-    %th{:width => "80px;"}
+    %th{:width => "40px;"}
     %th{:width => "150px;"} Title
     %th{:width => "80px;"} Owner
     %th{:width => "100px;"} Team
@@ -11,8 +11,13 @@
       %tr
         %td
           /tomatoes
-          - move.tomatoes.each do |tomato|
-            = image_tag(tomato_icon_path(tomato), :width => 15, :height => 15)
+          - if move.tomatoes.count > 0
+            - move.tomatoes.each do |tomato|
+              = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
+          -elsif move.move_type.make_my_day
+            = image_tag("todo_today.gif", :width => 25, :height => 25)
+          -elsif move.move_type.make_my_sprint
+            = image_tag("sprint.gif", :width => 25, :height => 25)
         %td= link_to move.title, move
         %td= move.user.name if move.user.present?
         %td

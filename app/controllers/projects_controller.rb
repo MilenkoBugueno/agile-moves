@@ -25,10 +25,7 @@ class ProjectsController < ApplicationController
 
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
-    @move_type = MoveType.find(params[:move_type]) if params[:move_type].present?
-    if @move_type == nil || !@move_type.has_view(0)
-      @move_type = @project.move_types.has_widget_type(0).first
-    end
+    @move_type = MoveType.find_by_make_my_sprint(true)
 
     @actual_sprint = Move.where("user_id=? AND move_type_id=? AND start_date <= ? AND publish_date >= ?", current_user.id, @move_type.id, Date.today(), Date.today()).first if @move_type.make_my_sprint
 
