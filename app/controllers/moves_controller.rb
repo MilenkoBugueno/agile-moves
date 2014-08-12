@@ -88,8 +88,17 @@ class MovesController < ApplicationController
     @project = Project.find(params[:project_id]) if params[:project_id].present?
     @states = State.order(:position)
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
-    move_type_id = params[:move_type] ? params[:move_type] : MoveType.first
-    @move_type = MoveType.find(move_type_id) if move_type_id.present?
+
+    if params[:make_my_sprint].present?
+      @move_type = MoveType.find_by_make_my_sprint(true)
+    elsif params[:make_my_day].present?
+      @move_type = MoveType.find_by_make_my_day(true)
+    elsif params[:move_type].present?
+      @move_type = MoveType.find(params[:move_type])
+    else
+      @move_type = MoveType.first
+    end
+
 
     @state = State.find_by_title(params[:state]) if params[:state].present?
 
@@ -130,10 +139,6 @@ class MovesController < ApplicationController
     @move = Move.find(params[:id])
     @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
-    if @move.move_type.make_my_sprint && @move.project_id.present? && @move.publish_date.present? && @move.start_date.present?
-      tomatoes = Tomato.where("project_id = ? AND publish_date <= ? AND publish_date >= ?", @move.project_id, @move.publish_date, @move.start_date)
-      @move.tomatoes << tomatoes
-    end
 
     log_admin("AdminLog: Move updated")
     respond_to do |format|
