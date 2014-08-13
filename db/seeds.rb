@@ -67,9 +67,10 @@ publish_wordpress = Widget.find_or_create_by_title(:title => "Publish wordpress"
 
 
 puts 'DEFAULT MOVE TYPES'
-star_move = MoveType.find_or_create_by_title :title => "Team Idea", :star_rating => true
+star_move = MoveType.find_or_create_by_title :title => "Team Idea", :star_rating => true, :has_twitter_idea => true
 star_move.widgets = [work_rating, report_rating, move_general, star_rating, moves_actions, comments]
 puts 'move type: ' << star_move.title
+
 
 thumbs_move = MoveType.find_or_create_by_title :title => "Review", :thumb_rating => true
 thumbs_move.widgets = [work_rating, report_rating, move_general, thumb_rating, moves_actions, comments]
