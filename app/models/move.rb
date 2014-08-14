@@ -136,7 +136,11 @@ class Move < ActiveRecord::Base
     move_type = self.move_type
     if move_type.make_my_day != nil && move_type.make_my_day
       tomatoes = Tomato.where("project_id = ? AND user_id = ? AND publish_date= ?", self.project_id, self.user_id, Date.today())
-      tomatoes.update_all(state: 1) #plan todo_today
+      tomatoes.each do |tomato|
+        if tomato.state < 1 #not planned
+          tomato.update(state: 1) #plan todo_today
+        end
+      end
 
     elsif move_type.tomatoes_number != nil && move_type.tomatoes_number > 0
       # check if there is already a todo_today move
