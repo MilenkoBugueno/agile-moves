@@ -173,3 +173,35 @@ function show_commentdiv(id, cancel, comment, offset) {
         document.getElementById(buttonname).value = comment;
     }
 }
+
+function change_end()
+{
+    var end_hour;
+    var end_minute;
+
+    var dropdown_start_hour = document.getElementById("tomato_start_time_4i");
+    var start_hour = dropdown_start_hour.options[dropdown_start_hour.selectedIndex].value;
+
+    var dropdown_start_minute = document.getElementById("tomato_start_time_5i");
+    var start_minute = dropdown_start_minute.options[dropdown_start_minute.selectedIndex].value;
+    start_minute = parseInt(start_minute);
+
+    var dropdown_end_hour = document.getElementById("tomato_end_time_4i");
+    var end_hour = dropdown_end_hour.options[dropdown_end_hour.selectedIndex].value;
+
+    var dropdown_end_minute = document.getElementById("tomato_end_time_5i");
+    var end_minute = dropdown_end_minute.options[dropdown_end_minute.selectedIndex].value;
+    end_minute = parseInt(end_minute);
+
+    if((start_minute + 30) < 60)
+    {
+        end_minute = start_minute + 30;
+
+    }
+
+    dropdown_end_minute.selectedIndex = end_minute;
+}
+
+function change_start()
+{
+}

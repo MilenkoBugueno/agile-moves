@@ -37,8 +37,8 @@
               = f.hidden_field :end_time
               = f.button :submit, t("tomatoes.actions.markasdone"), :class => 'btn-primary'
             -else
-              = f.input :start_time
-              = f.input :end_time
+              = f.input :start_time, :input_html => {:onchange => "change_end()"}
+              = f.input :end_time #, :input_html => {:onchange => "change_start()"}
               = f.button :submit
     -else
       %p= t("tomato.publish_date") + ": "+ @tomato.publish_date.to_s
