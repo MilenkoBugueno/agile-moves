@@ -138,7 +138,7 @@ class Move < ActiveRecord::Base
       tomatoes = Tomato.where("project_id = ? AND user_id = ? AND publish_date= ?", self.project_id, self.user_id, Date.today())
       tomatoes.each do |tomato|
         if tomato.state < 1 #not planned
-          tomato.update(state: 1) #plan todo_today
+          tomato.update_attributes(state: 1) #plan todo_today
         end
       end
 
