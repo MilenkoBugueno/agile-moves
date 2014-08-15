@@ -1,4 +1,5 @@
 class LiveTomatoesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /live_tomatoes
   # GET /live_tomatoes.json
   def index

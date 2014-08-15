@@ -1,4 +1,5 @@
 class WidgetsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /widgets
   # GET /widgets.json
   def index

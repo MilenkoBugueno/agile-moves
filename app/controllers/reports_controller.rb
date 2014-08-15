@@ -1,4 +1,5 @@
 class ReportsController < ApplicationController
+  before_filter :authenticate_user!
   def index
     @user = params[:user] ? params[:user] : current_user.id
   end

@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!
   # Workaround for lost user session on create comment - TODO needs another solution maybe
   skip_before_filter :verify_authenticity_token
 

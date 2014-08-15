@@ -1,4 +1,5 @@
 class InterruptionsController < ApplicationController
+  before_filter :authenticate_user!
   # GET /interruptions
   # GET /interruptions.json
   def index
