@@ -163,8 +163,10 @@ class TomatoesController < ApplicationController
       LiveTomato.update(@live_tomato, :status => '2')
     end
     log_admin("AdminLog: Tomato updated")
+
     respond_to do |format|
       if @tomato.update_attributes(params[:tomato])
+        close_move_when_all_tomatoes_done(@tomato.move)
         format.html { redirect_to @tomato, notice: 'Tomato was successfully updated.' }
         format.json { head :no_content }
       else
@@ -221,13 +223,15 @@ class TomatoesController < ApplicationController
     @move = Move.find(params[:move_id]) if params[:move_id].present?
 
     if @tomato.state == 3 # extra unplanned
-      state = 4
+      @tomato.update_attributes(state: 4)
     else
-      state = 2
+      @tomato.update_attributes(state: 2)
     end
 
+    close_move_when_all_tomatoes_done(@move)
+
     respond_to do |format|
-      if @tomato.update_attributes(state: state)
+      if @tomato.present?
         if @move.present?
           format.html { redirect_to @move, notice: 'Tomato was successfully updated.' }
         else
@@ -238,6 +242,24 @@ class TomatoesController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @tomato.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  private
+
+  def close_move_when_all_tomatoes_done(move)
+
+    if move.present?
+      close_move = true
+      move.tomatoes.each do |tomato| # is there a tomato undone?
+        if tomato.state != 2 && tomato.state != 4
+          close_move = false
+        end
+      end
+      if close_move
+        move.update_attributes(state_id: State.find_by_title("closed").id)
+      end
+
     end
   end
 
