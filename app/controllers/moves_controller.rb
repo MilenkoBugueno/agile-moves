@@ -62,7 +62,7 @@ class MovesController < ApplicationController
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @move_type = @move.move_type
 
-    @tomatoes = Tomato.order('created_at DESC')
+    @tomatoes = Tomato.order('publish_date ASC')
     @tomatoes = @tomatoes.by_project_id(@project.id)
     @tomatoes = @tomatoes.by_user_id(@move.user.id)
     if @move.present? && @move.publish_date.present?
