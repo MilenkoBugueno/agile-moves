@@ -12,10 +12,11 @@ class Move < ActiveRecord::Base
   has_many :tomatoes
   has_many :comments
 
+  cattr_accessor :skip_callbacks
 
   after_create :create_objects
 
-  after_update :update_objects
+  after_update :update_objects, :unless => :skip_callbacks
 
   scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
   scope :by_project_id, lambda {|uid| where(["#{table_name}.project_id =?", uid])}
