@@ -25,8 +25,12 @@
                 = user.name if user.name.present?
             %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
             %td
-              = link_to t("helpers.links.edit"), edit_tomato_path(tomato), :class => 'btn btn-mini'
-              = link_to t("helpers.links.destroy"), tomato, :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
+              /mark as done button
+              -if tomato.state != 2 && tomato.state != 4
+                =form_tag markasdone_tomatoes_path, method: :put do
+                  =hidden_field_tag :move_id, @move.id
+                  =hidden_field_tag :tomato_id, tomato.id
+                  =submit_tag t("tomatoes.actions.markasdone"), :class => 'btn btn-mini'
 
 //      -if @move.move_type.make_my_day || @move.move_type.make_my_sprint
 //        %h5= t("projects.newtomato")

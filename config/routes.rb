@@ -42,6 +42,7 @@ AgileMovesOs::Application.routes.draw do
       put :done
       put :move
       put :sendto
+      put :markasdone
     end
   end
 

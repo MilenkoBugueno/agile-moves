@@ -216,5 +216,30 @@ class TomatoesController < ApplicationController
     redirect_to plan_projects_path(:id => @project.id, :move_type => @move_type.id)
   end
 
+  def markasdone
+    @tomato = Tomato.find(params[:tomato_id])
+    @move = Move.find(params[:move_id]) if params[:move_id].present?
+
+    if @tomato.state == 3 # extra unplanned
+      state = 4
+    else
+      state = 2
+    end
+
+    respond_to do |format|
+      if @tomato.update_attributes(state: state)
+        if @move.present?
+          format.html { redirect_to @move, notice: 'Tomato was successfully updated.' }
+        else
+          format.html { redirect_to @move, notice: 'Tomato was successfully updated.' }
+        end
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @tomato.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
 end
