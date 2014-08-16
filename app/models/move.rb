@@ -146,17 +146,11 @@ class Move < ActiveRecord::Base
       # check if there is already a todo_today move
       # Is a todo_today move present and the tomato is planned for today then add the tomato to the todo_today move
       # Else create a "normal" tomato move
-      my_make_my_day_move = nil
-      my_tomatoes_for_today = Tomato.where("publish_date=? AND user_id=? AND project_id=?", Date.today(), self.user_id, self.project_id)
-      my_tomatoes_for_today.each do |tomato|
-        if tomato.move.present? && tomato.move.move_type.make_my_day
-          my_make_my_day_move =  tomato.move
-        end
-      end
+      my_make_my_day_move = Move.where("publish_date=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_day(true)).first
 
       #create tomatoes for the tomato move
       for i in 1..move_type.tomatoes_number
-        if my_make_my_day_move.present? && self.publish_date == Date.today()
+        if my_make_my_day_move.present? && my_make_my_day_move.state_id == State.find_by_title("planned").id
           Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 3, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
         else
           Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 0, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)

@@ -32,7 +32,13 @@
                   =hidden_field_tag :tomato_id, tomato.id
                   =submit_tag t("tomatoes.actions.markasdone"), :class => 'btn btn-mini'
 
-//      -if @move.move_type.make_my_day || @move.move_type.make_my_sprint
+      -if @move.move_type.make_my_day && @move.state != State.find_by_title("planned")
+        = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
+          = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "planned").id
+          = f.button :submit, :class => 'btn btn-warning', :value=> t("moves.links.makemyday"), :style=> 'float: left;'
+
+
+//    -if @move.move_type.make_my_day || @move.move_type.make_my_sprint
 //        %h5= t("projects.newtomato")
 //        =simple_form_for [@move, Tomato.new] , :html => { :class => 'form-horizontal' } do |f|
 //          -if @move.state == State.find_by_title("planned") # if the move is already planned all additional tomatoes are marked as extra tomatoes
