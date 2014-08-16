@@ -15,6 +15,8 @@ class Move < ActiveRecord::Base
 
   after_create :create_objects
 
+  after_update :update_objects
+
   scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
   scope :by_project_id, lambda {|uid| where(["#{table_name}.project_id =?", uid])}
   scope :by_state_id, lambda {|uid| where(["#{table_name}.state_id =?", uid])}
@@ -163,6 +165,13 @@ class Move < ActiveRecord::Base
 
     end
 
+  end
+
+  def update_objects
+    if self.move_type.tomatoes_number == 1 && self.tomatoes.count == 1 # "only one tomato" move should update the tomato
+      tomato = self.tomatoes.first
+      tomato.update_attributes(:title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
+    end
   end
 
 
