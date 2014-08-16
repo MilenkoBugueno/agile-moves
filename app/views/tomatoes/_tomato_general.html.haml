@@ -19,13 +19,13 @@
           ="#{@tomato.user.name}" if @tomato.user.present?
         %p
           %strong=t("tomato.publish_date") + ": "
-          ="#{@tomato.publish_date}" if @tomato.publish_date
+          ="#{@tomato.publish_date.to_s(:short)}" if @tomato.publish_date
         %p
           %strong=t("tomato.start_time") + ": "
-          ="#{@tomato.start_time}" if @tomato.start_time
+          ="#{@tomato.start_time.to_s(:time)}" if @tomato.start_time
         %p
           %strong=t("tomato.end_time") + ": "
-          ="#{@tomato.end_time}" if @tomato.end_time
+          ="#{@tomato.end_time.to_s(:time)}" if @tomato.end_time
         %p
           %strong=t("moves.links.team") + ": "
           -@tomato.users.each do |usr|
