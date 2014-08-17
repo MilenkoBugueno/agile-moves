@@ -172,7 +172,25 @@ class Move < ActiveRecord::Base
     if self.move_type.tomatoes_number == 1 && self.tomatoes.count == 1 # "only one tomato" move should update the tomato
       tomato = self.tomatoes.first
       tomato.update_attributes(:title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
+
+      my_make_my_day_move = Move.where("publish_date=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_day(true).id).first
+      my_make_my_sprint_move = Move.where("publish_date>=? AND start_date<=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_sprint(true).id).first
+
+      if tomato.state != 4 && tomato.state != 2 #not done yet
+        if my_make_my_day_move.present? && my_make_my_day_move.state_id == State.find_by_title("planned").id
+          state = 3
+        elsif my_make_my_sprint_move.present? && my_make_my_sprint_move.state_id == State.find_by_title("planned").id
+          state = 3
+        else
+          state = 0
+        end
+        tomato.update_attributes(state: state)
+      end
+
+
+
     end
+
   end
 
 
