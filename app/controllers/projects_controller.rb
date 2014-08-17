@@ -90,9 +90,14 @@ class ProjectsController < ApplicationController
       @move_type = @project.move_types.has_widget_type(2).first
     end
     @moves = @moves.by_move_type(@move_type.id) unless @move_type.id == nil
-
     @moves_by_date = @moves.group_by(&:publish_date)
 
+
+    @tomatoes = Tomato.order('created_at DESC')
+    @tomatoes = @tomatoes.by_user_id(params[:user] ) if params[:user].present?
+    @tomatoes = @tomatoes.by_project_id(@project.id) if params[:id].present?
+
+    @tomatoes_by_date = @tomatoes.group_by(&:publish_date)
 
     #@moves = @moves.by_star_rating().sort{|a,b| b.stars <=> a.stars} if @move_type!= nil && @move_type.star_rating
 
