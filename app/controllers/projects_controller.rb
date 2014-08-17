@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
       @project = Project.all.first
     end
 
-    @tomatoes = Tomato.order('created_at DESC')
+    @tomatoes = Tomato.order('publish_date ASC')
     @tomatoes = @tomatoes.by_project_id(@project.id)
     @tomatoes = @tomatoes.by_user_id(current_user.id)
 
@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
 
     @user = params[:user] ? params[:user] : current_user.id
 
-    @moves = Move.order('created_at DESC')
+    @moves = Move.order('publish_date ASC')
     @moves = @moves.by_user_ids(@user)
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
     @moves = @moves.not_closed
@@ -79,7 +79,7 @@ class ProjectsController < ApplicationController
       @project = Project.all.first
     end
 
-    @moves = Move.order('created_at DESC')
+    @moves = Move.order('publish_date ASC')
     @moves = @moves.by_user_id(params[:user] ) if params[:user].present?
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
 
