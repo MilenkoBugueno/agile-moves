@@ -19,44 +19,40 @@
     = link_to ">", date: @date.next_month, :id => @project.id, :move_type => @move_type
   = calendar @date do |date| 
     = date.day
-    - if @moves_by_date[date]
+    - if @tomatoes_by_date[date]
       %ul
-        -@moves_by_date[date].each do |move|
-          -if move.tomatoes.present?
-            -move.tomatoes.each do |tomato|
-              = image_tag(tomato_icon_path(tomato), :width => 15, :height => 15)
-            
-%br
-%br
+        -@tomatoes_by_date[date].each do |tomato|
+          = image_tag(tomato_icon_path(tomato), :width => 15, :height => 15)
+
 %table.table.table-striped
   %tr
-    %th{:width => "100px;"} Rating
+    %th{:width => "40px;"}
     %th{:width => "150px;"} Title
     %th{:width => "80px;"} Owner
     %th{:width => "100px;"} Team
     %th{:width => "80px;"} Publish date
 
   -@moves.each do |move|
-    -if move.tomatoes.present?
+    -if (move.tomatoes.present? || move.move_type.make_my_sprint || move.move_type.make_my_day) && !move.reviewed_by_me(current_user)
       %tr
         %td
-          /thumbs
-          - if move.ratings.present?
-            -if move.thumbs_down > 0
-              = image_tag("daumenrunter.png", :width => 20, :height => 20)
-            -elsif move.thumbs_up > 0
-              = image_tag("daumenrunter.png", :width => 20, :height => 20)
-          - else
-            = image_tag("bewerten.png", :width => 20, :height => 20)
-          /stars
-          - if move.ratings.present?
-            -if move.stars > 0
-              = "#{move.stars}"
-              = image_tag("star.png", :width => 15, :height => 15)
-              ="/ #{move.ratings.count} votes"
+          /tomatoes
+          - if move.tomatoes.count > 0
+            - move.tomatoes.each do |tomato|
+              = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
+          -elsif move.move_type.make_my_day
+            = image_tag("todo_today.gif", :width => 25, :height => 25)
+          -elsif move.move_type.make_my_sprint
+            = image_tag("sprint.gif", :width => 25, :height => 25)
         %td= link_to move.title, move
         %td= move.user.name if move.user.present?
         %td
           -move.users.each do |user|
             =user.name+ " "
-        %td= move.publish_date.to_s(:short) unless move.publish_date == nil
+        %td
+          -if move.move_type.make_my_sprint && move.publish_date.present? && move.start_date.present?
+            = move.start_date.to_s(:short)
+            = " - "
+            = move.publish_date.to_s(:short)
+          -elsif move.publish_date.present?
+            = move.publish_date.to_s(:short)

@@ -121,13 +121,31 @@ class MovesController < ApplicationController
   # POST /moves
   # POST /moves.json
   def create
-    @move = Move.new(params[:move])
+    tomatoes_number = params["txtTomatoNo"].to_i if params["txtTomatoNo"].present?
+
+    if tomatoes_number <= 0
+      tomatoes_number = 1
+    elsif tomatoes_number >= 20
+      tomatoes_number = 20
+    end
+
+    for i in 1..tomatoes_number
+      @move = Move.new(params[:move])
+      @move.save
+    end
+
     @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
 
+
+
     respond_to do |format|
       if @move.save
-        format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully created.' }
+        if tomatoes_number > 1
+          format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: "#{tomatoes_number} Moves were successfully created." }
+        else
+          format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully created.' }
+        end
         format.json { render json: @move, status: :created, location: @move }
       else
         format.html { render action: "new" }
