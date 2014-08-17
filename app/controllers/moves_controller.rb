@@ -141,7 +141,11 @@ class MovesController < ApplicationController
 
     respond_to do |format|
       if @move.save
-        format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully created.' }
+        if tomatoes_number > 1
+          format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: "#{tomatoes_number} Moves were successfully created." }
+        else
+          format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully created.' }
+        end
         format.json { render json: @move, status: :created, location: @move }
       else
         format.html { render action: "new" }
