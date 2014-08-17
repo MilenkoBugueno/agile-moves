@@ -29,6 +29,7 @@
   %p{:align => "center"}
     = link_to t("moves.team.select_all"), "javascript:select_all_team('move[user_ids][]', '#{t('moves.team.select_all')}', '#{t('moves.team.select_none')}');", :id => 'link_all_team', :class => 'btn'
   .form-actions
+    = text_field_tag "txtTomatoNo", nil, "value" => 1, "style" => "height:30px;width:3em;"
     = f.button :submit, :class => 'btn-primary'
     -if @project.present?
       = link_to "Cancel", work_projects_path(:id => @project.id), :class => 'btn'

@@ -121,9 +121,23 @@ class MovesController < ApplicationController
   # POST /moves
   # POST /moves.json
   def create
-    @move = Move.new(params[:move])
+    tomatoes_number = params["txtTomatoNo"].to_i if params["txtTomatoNo"].present?
+
+    if tomatoes_number <= 0
+      tomatoes_number = 1
+    elsif tomatoes_number >= 20
+      tomatoes_number = 20
+    end
+
+    for i in 1..tomatoes_number
+      @move = Move.new(params[:move])
+      @move.save
+    end
+
     @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
+
+
 
     respond_to do |format|
       if @move.save
