@@ -33,7 +33,7 @@
     %th{:width => "80px;"} Publish date
 
   -@moves.each do |move|
-    -if (move.tomatoes.present? || move.move_type.make_my_sprint || move.move_type.make_my_day) && !move.reviewed_by_me(current_user)
+    -if (move.tomatoes.present? || move.move_type.make_my_sprint || move.move_type.make_my_day)
       %tr
         %td
           /tomatoes
@@ -44,6 +44,9 @@
             = image_tag("todo_today.gif", :width => 25, :height => 25)
           -elsif move.move_type.make_my_sprint
             = image_tag("sprint.gif", :width => 25, :height => 25)
+          - if (current_user.has_role? :admin) && !move.reviewed_by_me(current_user)
+            = image_tag("bewerten.png", :width => 20, :height => 20)
+
         %td= link_to move.title, move
         %td= move.user.name if move.user.present?
         %td
