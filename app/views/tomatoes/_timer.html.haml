@@ -32,7 +32,7 @@
               = f.hidden_field :state, :value => 4 #extra done
             -else
               = f.hidden_field :state, :value => 2
-            -if @tomato.state != 2
+            -if @tomato.state != 2 && @tomato.state != 4
               = f.hidden_field :start_time
               = f.hidden_field :end_time
               = f.button :submit, t("tomatoes.actions.markasdone"), :class => 'btn-primary'

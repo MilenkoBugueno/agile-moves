@@ -1,6 +1,8 @@
 .panel.panel-primary
   .panel-heading
-    %h2= @tomato.title
+    %h2
+      = image_tag(tomato_icon_path(@tomato), :width => 30, :height => 30)
+      = @tomato.title
   .panel-body
     -if @tomato.move.present?
       = link_to t("moves.links.backtomove"), @tomato.move, :class => 'btn'
