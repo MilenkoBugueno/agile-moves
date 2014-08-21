@@ -130,25 +130,7 @@ class TomatoesController < ApplicationController
       end
     end
   end
-  
-  def done
-    @move = Move.find(params[:move_id]) unless params[:move_id] == nil
 
-    if params["commit"]=="mark as done"
-      Tomato.update_all({state: 2, publish_date: Date.today}, {id: params[:tomatoes_ids]})
-    elsif params["commit"]=="plan today"
-      Tomato.update_all({state: 1, publish_date: Date.today}, {id: params[:tomatoes_ids]})
-    elsif params["commit"]=="unplan"
-      Tomato.update_all({state: 0, publish_date: nil}, {id: params[:tomatoes_ids]})
-    end  
-    
-    if @move!= nil
-      redirect_to @move
-    else
-      redirect_to tomatoes_path(:user => current_user.id, :date => Date.today)
-    end
-  end
-  
   
   # PUT /tomatoes/1
   # PUT /tomatoes/1.json
@@ -214,7 +196,11 @@ class TomatoesController < ApplicationController
       @publish_date = nil
     end
 
-    Tomato.update_all({publish_date: @publish_date}, {id: params[:tomato_ids]})
+
+    params[:tomato_ids].each do |tomato_id|
+      tomato = Tomato.find(tomato_id)
+      tomato.update_attributes(publish_date: @publish_date) if tomato.present?
+    end
     redirect_to plan_projects_path(:id => @project.id, :move_type => @move_type.id)
   end
 

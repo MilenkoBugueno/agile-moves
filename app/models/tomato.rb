@@ -28,7 +28,7 @@ class Tomato < ActiveRecord::Base
       move = Move.find(self.move_id)
       if move.tomatoes.count == 1
         Move.skip_callbacks = true # for multiple records
-        move.update_attributes!(:title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
+        move.update_attributes(:title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
         Move.skip_callbacks = false # reset
       end
 
