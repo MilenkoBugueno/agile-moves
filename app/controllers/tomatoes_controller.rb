@@ -243,7 +243,9 @@ class TomatoesController < ApplicationController
         end
       end
       if close_move
+        Move.skip_callbacks = true # for multiple records
         move.update_attributes(state_id: State.find_by_title("closed").id)
+        Move.skip_callbacks = false
       end
 
     end
