@@ -30,7 +30,7 @@
               = f.hidden_field :publish_date, :value => Date.today()
             - if @tomato.state == 3 # extra unplanned
               = f.hidden_field :state, :value => 4 #extra done
-            -else
+            -elsif @tomato.state <= 1 # unplanned
               = f.hidden_field :state, :value => 2
             -if @tomato.state != 2 && @tomato.state != 4
               = f.hidden_field :start_time
