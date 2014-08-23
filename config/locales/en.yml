@@ -152,3 +152,5 @@ en:
   tomato:
     goal: "Goals"
     result: "Results"
+  media:
+    index: "Media"

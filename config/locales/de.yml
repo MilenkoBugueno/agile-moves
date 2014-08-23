@@ -207,3 +207,5 @@ de:
     end_time: "Endzeit"
     goal: "Ziele"
     result: "Ergebnisse"
+  media:
+    index: "Medien"
