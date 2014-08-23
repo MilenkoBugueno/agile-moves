@@ -131,6 +131,7 @@ en:
       actions:
           markasdone: "Mark as done"
       list: "Tomatoes list"
+      results: "Results"
   live_tomato:
       livelist: "Who's working right now?"
       title: "Title"
@@ -148,3 +149,6 @@ en:
     edit: "Edit Account"
   categories:
     index: "Categories"
+  tomato:
+    goal: "Goals"
+    result: "Results"

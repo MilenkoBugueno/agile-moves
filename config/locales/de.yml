@@ -127,6 +127,7 @@ de:
       actions:
           markasdone: "Mark as done"
       list: "Tomatenlist"
+      results: "Ergebnisse"
   live_tomato:
       livelist: "Wer arbeitet gerade?"
       title: "Bezeichnung"
@@ -204,3 +205,5 @@ de:
     publish_date: "Datum"
     start_time: "Startzeit"
     end_time: "Endzeit"
+    goal: "Ziele"
+    result: "Ergebnisse"

@@ -14,7 +14,15 @@
       = link_to t("helpers.links.destroy"), tomato_path(@tomato), :method => "delete", :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-danger'
     .row
       .span6
-        =raw(@tomato.body)
+        %br
+        %p
+          %strong=t("tomato.goal") + ": "
+          %blockquote
+            =raw(@tomato.body)
+        %p
+          %strong=t("tomato.result") + ": "
+          %blockquote
+            =raw(@tomato.results)
       .span4
         %p
           %strong=t("moves.links.owner") + ": "

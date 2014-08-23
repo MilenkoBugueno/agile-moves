@@ -1,7 +1,8 @@
 = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
   = f.association :project, include_blank: false,  :selected => @project.id
   = f.input :title, input_html: {style: 'width:500px;height:30px;'}
-  = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}
+  = f.input :body, :as => :ckeditor, :label => t("tomato.goal")
+  = f.input :results, :as => :ckeditor, :label => t("tomato.result")
   = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;'}
   -if @project.present?
     = f.association :user, :label => t("moves.links.owner"), :collection => @project.users
