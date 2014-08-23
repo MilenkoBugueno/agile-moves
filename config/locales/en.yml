@@ -154,3 +154,7 @@ en:
     result: "Results"
   media:
     index: "Media"
+    link:
+      current: "practicing right now"
+      partially: "partially practiced"
+      ready: "Performed"

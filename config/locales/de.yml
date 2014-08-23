@@ -209,3 +209,6 @@ de:
     result: "Ergebnisse"
   media:
     index: "Medien"
+    link:
+      partially: "Teilweise geübt"
+      ready: "Aufgeführt"

@@ -2,7 +2,11 @@ AgileMovesOs::Application.routes.draw do
 
 
 
-  resources :media
+  resources :media do
+    collection do
+      put :sendto
+    end
+  end
 
 
   resources :widgets

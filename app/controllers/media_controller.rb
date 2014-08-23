@@ -2,7 +2,11 @@ class MediaController < ApplicationController
   # GET /media
   # GET /media.json
   def index
-    @media = Medium.all
+    @media = Medium.order("title ASC")
+
+    @media_current = @media.where("state_id=?", 1)
+    @media_partial = @media.where("state_id=?", 2)
+    @media_ready = @media.where("state_id=?", 3)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -80,4 +84,24 @@ class MediaController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def sendto
+    if params["move_to_current"].present?
+      state = 1
+    elsif params["move_to_partial"].present?
+      state = 2
+    elsif params["move_to_ready"].present?
+      state = 3
+    else
+      state = 1
+    end
+
+
+    params[:medium_ids].each do |medium_id|
+      medium = Medium.find(medium_id)
+      medium.update_attributes(state_id: state)
+    end
+    redirect_to media_url
+  end
+
 end
