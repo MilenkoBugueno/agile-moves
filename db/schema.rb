@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140822231727) do
+ActiveRecord::Schema.define(:version => 20140823133227) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -66,6 +66,20 @@ ActiveRecord::Schema.define(:version => 20140822231727) do
     t.integer  "tomato_id"
     t.integer  "thumb_rating"
     t.integer  "star_rating"
+  end
+
+  create_table "media", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "artist"
+    t.string   "composer"
+    t.string   "arranger"
+    t.string   "writer"
+    t.string   "catalog"
+    t.string   "publisher"
+    t.integer  "state_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "move_types", :force => true do |t|

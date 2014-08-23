@@ -2,6 +2,9 @@ AgileMovesOs::Application.routes.draw do
 
 
 
+  resources :media
+
+
   resources :widgets
 
 
