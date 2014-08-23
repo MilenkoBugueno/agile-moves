@@ -149,8 +149,8 @@ class Move < ActiveRecord::Base
       # check if there is already a todo_today move
       # Is a todo_today move present and the tomato is planned for today then add the tomato to the todo_today move
       # Else create a "normal" tomato move
-      my_make_my_day_move = Move.where("publish_date=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_day(true).id).first
-      my_make_my_sprint_move = Move.where("publish_date>=? AND start_date<=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_sprint(true).id).first
+      my_make_my_day_move = Move.where("publish_date=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_day(true).id).first if MoveType.find_by_make_my_day(true).present?
+      my_make_my_sprint_move = Move.where("publish_date>=? AND start_date<=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_sprint(true).id).first if MoveType.find_by_make_my_sprint(true).present?
 
       #create tomatoes for the tomato move
       for i in 1..move_type.tomatoes_number
