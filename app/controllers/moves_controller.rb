@@ -72,6 +72,9 @@ class MovesController < ApplicationController
         @tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ?", @move.publish_date, @move.start_date)
       elsif @move.tomatoes.present?
         @tomatoes = @move.tomatoes
+        @sprint_move = @move.get_sprint()
+        @todotoday_move = @move.get_todo_today()
+
       else
         @tomatoes = []
       end

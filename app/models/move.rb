@@ -128,6 +128,22 @@ class Move < ActiveRecord::Base
     return comments
   end
 
+  def get_todo_today
+    my_make_my_day_move = nil
+    if MoveType.find_by_make_my_day(true)
+      my_make_my_day_move = Move.where("publish_date=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_day(true).id).first
+    end
+    return my_make_my_day_move
+  end
+
+  def get_sprint
+    my_make_my_sprint_move = nil
+    if MoveType.find_by_make_my_sprint(true)
+      my_make_my_sprint_move = Move.where("publish_date>=? AND start_date<=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_sprint(true).id).first
+    end
+    return my_make_my_sprint_move
+  end
+
   private
   def init
     if self.new_record? && self.state_id.nil?
@@ -149,8 +165,8 @@ class Move < ActiveRecord::Base
       # check if there is already a todo_today move
       # Is a todo_today move present and the tomato is planned for today then add the tomato to the todo_today move
       # Else create a "normal" tomato move
-      my_make_my_day_move = Move.where("publish_date=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_day(true).id).first if MoveType.find_by_make_my_day(true).present?
-      my_make_my_sprint_move = Move.where("publish_date>=? AND start_date<=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_sprint(true).id).first if MoveType.find_by_make_my_sprint(true).present?
+      my_make_my_day_move = self.get_todo_today()
+      my_make_my_sprint_move = self.get_sprint()
 
       #create tomatoes for the tomato move
       for i in 1..move_type.tomatoes_number
@@ -169,8 +185,8 @@ class Move < ActiveRecord::Base
   end
 
   def update_objects
-    my_make_my_day_move = Move.where("publish_date=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_day(true).id).first
-    my_make_my_sprint_move = Move.where("publish_date>=? AND start_date<=? AND user_id=? AND project_id=? AND move_type_id=?", self.publish_date, self.publish_date, self.user_id, self.project_id, MoveType.find_by_make_my_sprint(true).id).first
+    my_make_my_day_move = self.get_todo_today()
+    my_make_my_sprint_move = self.get_sprint()
 
     if self.move_type.tomatoes_number == 1 && self.tomatoes.count == 1 # "only one tomato" move should update the tomato
       tomato = self.tomatoes.first
