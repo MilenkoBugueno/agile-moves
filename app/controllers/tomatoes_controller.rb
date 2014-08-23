@@ -236,9 +236,11 @@ class TomatoesController < ApplicationController
   def close_move_when_all_tomatoes_done(move)
 
     if move.present?
-      close_move = true
+      close_move = false
       move.tomatoes.each do |tomato| # is there a tomato undone?
-        if tomato.state != 2 && tomato.state != 4
+        if tomato.state == 2 || tomato.state == 4
+          close_move = true
+        else
           close_move = false
         end
       end
