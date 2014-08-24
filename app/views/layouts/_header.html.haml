@@ -1,0 +1,44 @@
+- if @project.present?
+  - page = controller.action_name
+  .row
+    .col-md-1
+    .col-md-5
+      %ol.breadcrumb
+        %li
+          =@project.title
+        %li
+          - if page == "work"
+            =t("projects.work")
+          - elsif  page == "report"
+            =t("projects.report")
+          - elsif  page == "plan"
+            =t("projects.plan")
+          - else
+            = page
+        %li.active= @move_type.title
+    .col-md-3
+      = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary', :type => "button"
+    .col-md-3
+      - if page == "work"
+        .btn-group
+          = link_to t("projects.plan"), plan_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default" if has_plan_view(@project)
+          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default active"
+          = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default"
+
+      -elsif page == "report"
+        .btn-group
+          = link_to t("projects.plan"), plan_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default" if has_plan_view(@project)
+          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default"
+          = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default active"
+      -elsif page == "plan"
+        .btn-group
+          = link_to t("projects.plan"), plan_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default active" if has_plan_view(@project)
+          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default"
+          = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default"
+      -else
+        .btn-group
+          = link_to t("projects.plan"), plan_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default" if has_plan_view(@project)
+          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date, move_type: @move_type.id), :class => "btn btn-default"
+          = link_to t("projects.report"), report_projects_path(id: @project.id, move_type: @move_type.id), :class=> "btn btn-default"
+
+
