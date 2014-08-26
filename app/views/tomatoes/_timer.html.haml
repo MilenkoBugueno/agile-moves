@@ -39,7 +39,10 @@
             -else
               = f.input :start_time, :input_html => {:onchange => "change_end()"}
               = f.input :end_time, :input_html => {:onchange => "change_start()"}
+              = label_tag 'tomato_length', t('tomatoes.timer.length'), class: 'time optional control-label'
+              = text_field_tag "tomato_length", nil, "value" => 25, "onChange" => "change_end()", "style" => "height:25px;width:2.5em;padding-left:2px;"
               = f.button :submit
+
     -else
       %p= t("tomato.publish_date") + ": "+ @tomato.publish_date.to_s
       %p= t("tomato.start_time") + ": "+ @tomato.start_time.to_s

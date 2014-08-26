@@ -23,7 +23,6 @@
 
       .row
         .span8
-
           /mark as done button
           = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
             - if !@tomato.publish_date.present?
@@ -37,9 +36,12 @@
               = f.hidden_field :end_time
               = f.button :submit, t("tomatoes.actions.markasdone"), :class => 'btn-primary'
             -else
-              = f.input :start_time
-              = f.input :end_time
+              = f.input :start_time, :input_html => {:onchange => "change_end()"}
+              = f.input :end_time, :input_html => {:onchange => "change_start()"}
+              = label_tag 'tomato_length', t('tomatoes.timer.length'), class: 'time optional control-label'
+              = text_field_tag "tomato_length", nil, "value" => 25, "onChange" => "change_end()", "style" => "height:25px;width:2.5em;padding-left:2px;"
               = f.button :submit
+
     -else
       %p= t("tomato.publish_date") + ": "+ @tomato.publish_date.to_s
       %p= t("tomato.start_time") + ": "+ @tomato.start_time.to_s
