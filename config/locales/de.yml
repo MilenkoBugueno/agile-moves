@@ -125,6 +125,7 @@ de:
         start: "Start Timer"
         stop: "Die Tomate ist vorbei!"
         timer: "Timer"
+        length: "Tomatendauer"
       actions:
           markasdone: "Mark as done"
       list: "Tomatenlist"

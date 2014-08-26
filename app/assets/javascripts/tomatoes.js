@@ -178,6 +178,8 @@ function change_end()
 {
     var end_hour;
     var end_minute;
+    var tomato_length = document.getElementById("tomato_length").value;
+    tomato_length = parseInt(tomato_length);
 
     var dropdown_start_hour = document.getElementById("tomato_start_time_4i");
     var start_hour = dropdown_start_hour.options[dropdown_start_hour.selectedIndex].value;
@@ -195,18 +197,18 @@ function change_end()
     var end_minute = dropdown_end_minute.options[dropdown_end_minute.selectedIndex].value;
     end_minute = parseInt(end_minute);
 
-    if ((start_minute + 30) < 60) {
-            end_minute = start_minute + 30;
+    if ((start_minute + tomato_length) < 60) {
+            end_minute = start_minute + tomato_length;
             end_hour = start_hour;
     }
-    else if ((start_minute + 30) > 60) {
+    else if ((start_minute + tomato_length) > 59) {
         if (start_hour == 23) {
             end_hour = 0;
         }
         else {
             end_hour = start_hour + 1;
         }
-        end_minute = start_minute - 30;
+        end_minute = start_minute - 60 + tomato_length;
 
     }
     dropdown_end_hour.selectedIndex = end_hour;
@@ -215,8 +217,8 @@ function change_end()
 
 function change_start()
 {
-    var end_hour;
-    var end_minute;
+    var tomato_length = document.getElementById("tomato_length").value;
+    tomato_length = parseInt(tomato_length);
 
     var dropdown_start_hour = document.getElementById("tomato_start_time_4i");
     var start_hour = dropdown_start_hour.options[dropdown_start_hour.selectedIndex].value;
@@ -234,18 +236,25 @@ function change_start()
     var end_minute = dropdown_end_minute.options[dropdown_end_minute.selectedIndex].value;
     end_minute = parseInt(end_minute);
 
-    if ((end_minute - 30) >= 0) {
-        start_minute = end_minute - 30;
-        end_hour = start_hour;
+    if ((end_minute - tomato_length) > 0) {
+        start_minute = end_minute - tomato_length;
+        //end_hour = start_hour;
     }
-    else if ((end_minute - 30) < 0) {
-        if (end_hour == 0) {
-            start_hour = 23;
+    else {
+        if ((end_minute - tomato_length) < 0) {
+            if (end_hour == 0) {
+                start_hour = 23;
+            }
+            else {
+                start_hour = end_hour - 1;
+            }
+            start_minute = end_minute + 60 - tomato_length;
         }
-        else {
-            start_hour = end_hour - 1;
+        if ((end_minute - tomato_length) == 0) {
+            start_hour = end_hour;
+            start_minute = 0;
         }
-        start_minute = end_minute + 30;
+
 
     }
     dropdown_start_hour.selectedIndex = start_hour;
