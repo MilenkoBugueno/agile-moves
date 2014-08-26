@@ -1,5 +1,5 @@
 class Move < ActiveRecord::Base
-  attr_accessible :body, :move_type_id, :user_id, :title, :user_ids, :state_id, :publish_date, :start_date, :project_id, :category_id
+  attr_accessible :body, :move_type_id, :user_id, :title, :user_ids, :state_id, :publish_date, :start_date, :project_id, :category_id, :planned_at
   validates_presence_of :title, :move_type_id
   
   belongs_to :user
@@ -15,6 +15,8 @@ class Move < ActiveRecord::Base
   cattr_accessor :skip_callbacks
 
   after_create :create_objects
+
+  before_update :update_plan, :unless => :skip_callbacks
 
   after_update :update_objects, :unless => :skip_callbacks
 
@@ -152,6 +154,10 @@ class Move < ActiveRecord::Base
   end
 
   def create_objects
+    #first: initialize planned_at
+    self.planned_at = self.created_at
+
+    #check if tomato should be planned for today
     move_type = self.move_type
     if move_type.make_my_day != nil && move_type.make_my_day
       tomatoes = Tomato.where("project_id = ? AND user_id = ? AND publish_date= ?", self.project_id, self.user_id, Date.today())
@@ -184,7 +190,15 @@ class Move < ActiveRecord::Base
 
   end
 
+  def update_plan
+    if self.publish_date_changed? || self.state_id_changed?
+      self.planned_at = DateTime.now()
+    end
+
+  end
+
   def update_objects
+
     my_make_my_day_move = self.get_todo_today()
     my_make_my_sprint_move = self.get_sprint()
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140823133227) do
+ActiveRecord::Schema.define(:version => 20140825182403) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20140823133227) do
     t.integer  "project_id"
     t.integer  "category_id"
     t.date     "start_date"
+    t.datetime "planned_at"
   end
 
   create_table "moves_users", :id => false, :force => true do |t|
