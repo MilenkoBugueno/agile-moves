@@ -238,7 +238,11 @@ function change_start()
 
     if ((end_minute - tomato_length) > 0) {
         start_minute = end_minute - tomato_length;
-        //end_hour = start_hour;
+        if (end_hour != start_hour)
+        {
+            start_hour = end_hour;
+        }
+
     }
     else {
         if ((end_minute - tomato_length) < 0) {
