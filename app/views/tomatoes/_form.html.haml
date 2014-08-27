@@ -17,7 +17,7 @@
     = f.input :start_time, :input_html => {:onchange => "change_end()"}
     = f.input :end_time, :input_html => {:onchange => "change_start()"}
     = label_tag 'tomato_length', t('tomatoes.timer.length'), class: 'time optional control-label'
-    = text_field_tag "tomato_length", nil, "value" => 25, "onChange" => "change_end()", "style" => "height:25px;width:2.5em;padding-left:2px;"
+    = text_field_tag "tomato_length", nil, "value" => 25, "onChange" => "change_end()", "style" => "height:25px;width:5em;margin-left:1.56em;"
     = f.input :state, :collection =>  [["Undone", 0], ["Done", 2]], :as => :radio_buttons, item_wrapper_class: 'inline'
   -else
     = f.hidden_field :state, :value => 0
