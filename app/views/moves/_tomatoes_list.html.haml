@@ -17,7 +17,7 @@
         - @tomatoes.each do |tomato|
           %tr
             %td
-              = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
+              = image_tag(tomato_icon_path_at_move(tomato, @move), :width => 20, :height => 20)
             %td= link_to tomato.title, tomato
             %td= tomato.user.name unless tomato.user == nil
             %td

@@ -16,6 +16,8 @@ class Move < ActiveRecord::Base
 
   after_create :create_objects
 
+  before_create :update_planned_at
+
   before_update :update_plan, :unless => :skip_callbacks
 
   after_update :update_objects, :unless => :skip_callbacks
@@ -155,7 +157,6 @@ class Move < ActiveRecord::Base
 
   def create_objects
     #first: initialize planned_at
-    self.planned_at = self.created_at
 
     #check if tomato should be planned for today
     move_type = self.move_type
@@ -197,34 +198,16 @@ class Move < ActiveRecord::Base
 
   end
 
+  def update_planned_at
+    self.planned_at = DateTime.now()
+  end
+
   def update_objects
-
-    my_make_my_day_move = self.get_todo_today()
-    my_make_my_sprint_move = self.get_sprint()
-
     if self.move_type.tomatoes_number == 1 && self.tomatoes.count == 1 # "only one tomato" move should update the tomato
       tomato = self.tomatoes.first
       tomato.update_attributes(:title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
-
-      if tomato.state != 4 && tomato.state != 2 #not done yet
-        if my_make_my_day_move.present? && my_make_my_day_move.state_id == State.find_by_title("planned").id
-          state = 3
-        elsif my_make_my_sprint_move.present? && my_make_my_sprint_move.state_id == State.find_by_title("planned").id
-          state = 3
-        else
-          state = 0
-        end
-        tomato.update_attributes(state: state)
-      end
     elsif self.move_type.tomatoes_number == 1 && self.tomatoes.count != 1 # create missing tomato
-      if my_make_my_day_move.present? && my_make_my_day_move.state_id == State.find_by_title("planned").id
-        Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 3, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
-      elsif my_make_my_sprint_move.present? && my_make_my_sprint_move.state_id == State.find_by_title("planned").id
-        Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 3, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
-      else
-        Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 0, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
-      end
-
+      Tomato.create(:move_id => self.id, :title => self.title, :user_id => self.user_id, :publish_date=> self.publish_date, :state => 0, :body => self.body, :project_id => self.project_id, :user_ids => self.user_ids)
     elsif self.move_type.tomatoes_number.present? && self.move_type.tomatoes_number < 1  && self.tomatoes.count >= 1 # delete tomatoes
       self.tomatoes.each do tomato
         tomato.delete()
