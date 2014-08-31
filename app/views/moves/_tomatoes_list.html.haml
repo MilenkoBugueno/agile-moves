@@ -41,19 +41,11 @@
           = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "planned").id
           = f.button :submit, :class => 'btn btn-warning', :value=> t("moves.links.makemysprint"), :style=> 'float: left;'
 
+      -if @move_type.is_user_story
+        = link_to t("projects.newmove"), new_move_path(project_id: @project.id, user_story: @move), :class => 'btn btn-primary', :type => "button"
+      -elsif @move_type.make_my_day
+        = link_to t("projects.newmove"), new_move_path(project_id: @project.id, date: @move.publish_date), :class => 'btn btn-primary', :type => "button"
+      -elsif @move_type.make_my_sprint
+        = link_to t("projects.newmove"), new_move_path(project_id: @project.id, date: @move.publish_date), :class => 'btn btn-primary', :type => "button"
 
-//    -if @move.move_type.make_my_day || @move.move_type.make_my_sprint
-//        %h5= t("projects.newtomato")
-//        =simple_form_for [@move, Tomato.new] , :html => { :class => 'form-horizontal' } do |f|
-//          -if @move.state == State.find_by_title("planned") # if the move is already planned all additional tomatoes are marked as extra tomatoes
-//            = f.hidden_field :state, :value => 3 # extra tomato
-//          -else
-//            = f.hidden_field :state, :value => -1 # not planned
-//          = f.hidden_field :move_id, :value => @move.id
-//          = f.hidden_field :project_id, :value => @project.id
-//          = f.hidden_field :publish_date, :value => @move.publish_date if @move.publish_date.present?
-//          = f.hidden_field :user_id, :value => current_user.id
-//          .form-actions
-//            = f.input :title, label: t("projects.title"), input_html: {style: 'width:500px;height:30px;'}
-//            = f.association :users, :as => :check_boxes, :label => t("projects.team"), :checked => [current_user.id], :collection => @project.users
-//            = f.button :submit, :class => 'btn-primary'
+

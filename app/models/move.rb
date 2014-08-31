@@ -1,5 +1,5 @@
 class Move < ActiveRecord::Base
-  attr_accessible :body, :move_type_id, :user_id, :title, :user_ids, :state_id, :publish_date, :start_date, :project_id, :category_id, :planned_at
+  attr_accessible :body, :move_type_id, :user_id, :title, :user_ids, :state_id, :publish_date, :start_date, :project_id, :category_id, :planned_at, :user_story_id
   validates_presence_of :title, :move_type_id
   
   belongs_to :user
@@ -11,6 +11,9 @@ class Move < ActiveRecord::Base
   has_many :ratings
   has_many :tomatoes
   has_many :comments
+
+  has_many :sub_moves, class_name: "Move", foreign_key: "user_story_id"
+  belongs_to :user_story, class_name: "Move"
 
   cattr_accessor :skip_callbacks
 
