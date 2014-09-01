@@ -18,6 +18,8 @@
             = image_tag("todo_today.gif", :width => 25, :height => 25)
           -elsif move.move_type.make_my_sprint
             = image_tag("sprint.gif", :width => 25, :height => 25)
+          -elsif move.move_type.is_user_story
+            = image_tag("user_story.png", :width => 25, :height => 25)
         %td= link_to move.title, move
         %td= move.user.name if move.user.present?
         %td
