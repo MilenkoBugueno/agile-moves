@@ -66,7 +66,9 @@ class MovesController < ApplicationController
     @tomatoes = @tomatoes.by_project_id(@project.id)
     @tomatoes = @tomatoes.by_user_id(@move.user.id)
     if @move.present? && @move.publish_date.present?
-      if @move.move_type.make_my_day
+      if @move.move_type.present? && @move.move_type.is_user_story
+        @tomatoes = @move.sub_moves
+      elsif @move.move_type.make_my_day
         @tomatoes = @tomatoes.where("publish_date = ?", @move.publish_date)
       elsif @move.move_type.make_my_sprint && @move.start_date.present?
         @tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ?", @move.publish_date, @move.start_date)
@@ -95,7 +97,13 @@ class MovesController < ApplicationController
     @states = State.order(:position)
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
 
-    if params[:make_my_sprint].present?
+    @user_story = Move.find(params[:user_story_id]) if params[:user_story_id].present?
+
+    @date = params[:date] if params[:date].present?
+
+    if @user_story.present? || @date.present?
+      @move_type = MoveType.find_by_tomatoes_number(1)
+    elsif params[:make_my_sprint].present?
       @move_type = MoveType.find_by_make_my_sprint(true)
     elsif params[:make_my_day].present?
       @move_type = MoveType.find_by_make_my_day(true)

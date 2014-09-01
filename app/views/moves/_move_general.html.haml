@@ -8,6 +8,7 @@
           %strong= t("helpers.links.backto")
           = link_to t("moves.links.backtosprint"), @sprint_move, :class => 'btn btn-info' if @sprint_move.present?
           = link_to t("moves.links.backtotodotoday"), @todotoday_move, :class => 'btn btn-info' if @todotoday_move.present?
+          = link_to t("moves.links.backtouserstory"), @move.user_story, :class => 'btn btn-info' if @move.user_story.present?
           = link_to t("moves.links.backtoproject"), work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn btn-info'
         %p
           - if (current_user.has_role? :admin) || (current_user.id == @move.user_id)  || (@move.users.include? current_user)

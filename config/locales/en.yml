@@ -112,6 +112,7 @@ en:
           nocurrentsprint: "No Current Sprint"
           backtosprint: "Sprint"
           backtotodotoday: "Todo Today"
+          backtouserstory: "User Story"
       index: "Last moves"
       team:
         select_all: "Select all"

@@ -106,6 +106,7 @@ de:
             makemysprint: "Make my Sprint"
             newsprint: "Neuer Sprint Erstellen"
             nocurrentsprint: "Kein aktueller Sprint"
+            backtouserstory: "User Story"
         index: "Letzte Moves"
         team:
           select_all: "Alle wählen"

@@ -42,7 +42,7 @@
           = f.button :submit, :class => 'btn btn-warning', :value=> t("moves.links.makemysprint"), :style=> 'float: left;'
 
       -if @move_type.is_user_story
-        = link_to t("projects.newmove"), new_move_path(project_id: @project.id, user_story: @move), :class => 'btn btn-primary', :type => "button"
+        = link_to t("projects.newmove"), new_move_path(project_id: @project.id, date: @move.publish_date, user_story_id: @move.id), :class => 'btn btn-primary', :type => "button"
       -elsif @move_type.make_my_day
         = link_to t("projects.newmove"), new_move_path(project_id: @project.id, date: @move.publish_date), :class => 'btn btn-primary', :type => "button"
       -elsif @move_type.make_my_sprint

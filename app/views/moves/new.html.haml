@@ -12,11 +12,16 @@
   -else
     = f.association :move_type, include_blank: false
     = f.association :project, include_blank: false
+  -if @user_story.present?
+    = f.association :user_story, :selected => @user_story.id
   = f.input :title, input_html: {style: 'height:30px;width: 500px;'}
   = f.input :body, :as => :ckeditor, :label => t("tomato.goal")
   - if @move_type.present? && @move_type.make_my_sprint
     = f.input :start_date, :as => :string, input_html: {style: 'height:30px;', value: Date.today()}
-  = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;', value: Date.today() }
+  -if @date.present?
+    = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;', value: @date }
+  -else
+    = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;', value: Date.today() }
   = f.association :category, :collection => Category.order("title ASC")
   -if @project.present?
     = f.association :user, :label => t("moves.links.owner"),  :selected =>  current_user.id, :collection => @project.users
