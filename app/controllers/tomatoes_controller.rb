@@ -149,7 +149,7 @@ class TomatoesController < ApplicationController
     respond_to do |format|
       if @tomato.update_attributes(params[:tomato])
         close_move_when_all_tomatoes_done(@tomato.move)
-        format.html { redirect_to @tomato, notice: 'Tomato was successfully updated.' }
+        format.html { redirect_to @tomato.move, notice: 'Tomato was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

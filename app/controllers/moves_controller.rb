@@ -72,11 +72,11 @@ class MovesController < ApplicationController
         @tomatoes = @tomatoes.where("publish_date = ?", @move.publish_date)
       elsif @move.move_type.make_my_sprint && @move.start_date.present?
         @tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ?", @move.publish_date, @move.start_date)
-      elsif @move.tomatoes.present?
-        @tomatoes = @move.tomatoes
+      elsif @move.tomatoes.present? && @move.tomatoes.count == 1
+        @tomato = @move.tomatoes.first
+        @tomatoes = []
         @sprint_move = @move.get_sprint()
         @todotoday_move = @move.get_todo_today()
-
       else
         @tomatoes = []
       end

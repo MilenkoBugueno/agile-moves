@@ -82,12 +82,12 @@ class RatingsController < ApplicationController
           @project = Project.find(@move.project_id)
           format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully skipped.' }
           format.json { head :no_content }
-        elsif @tomato.present?
-          format.html { redirect_to @tomato, notice: 'Rating was successfully created.' }
-          format.json { render json: @tomato, status: :created, location: @tomato }
         elsif @move.present?
           format.html { redirect_to @move, notice: 'Rating was successfully created.' }
           format.json { render json: @move, status: :created, location: @move }
+        elsif @tomato.move.present?
+          format.html { redirect_to @tomato.move, notice: 'Rating was successfully created.' }
+          format.json { render json: @tomato.move, status: :created, location: @tomato }
         else
           format.html { render action: "new" }
           format.json { render json: @move.errors, status: :unprocessable_entity }

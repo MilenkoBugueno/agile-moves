@@ -1,13 +1,9 @@
--if (@tomato.present? && @tomato.state == 2) || !@move.move_type.has_tomatoes # for tomato moves this widget is shown after the tomamto is done
+-if (@tomato.state == 2 || @tomato.state == 4) && !@tomato.rating.present?
   .panel.panel-default
     .panel-heading
-      %h4= t("helpers.retro")
+      %h3.panel-title= t("tomatoes.results")
     .panel-body
-      .row
-        .span10
-          -if @move.users.include? current_user || @move.user == current_user
-            = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
-              = f.input :body, :as => :ckeditor, :input_html => { :ckeditor => {:toolbar => "mini"}}, :label => false
-              = f.button :submit, :class => 'btn btn-primary'
-          -else
-            =raw(@tomato.body)
+      /mark as done button
+      = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
+        = f.input :results, :as => :ckeditor, label: false
+        = f.button :submit

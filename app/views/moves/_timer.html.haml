@@ -5,7 +5,7 @@
   .panel-heading
     %h3.panel-title= t("tomatoes.timer.timer")
   .panel-body
-    -if @tomato != nil && (@tomato.move.users.include? current_user || @tomato.move.user == current_user)
+    -if @tomato != nil && (@tomato.user == current_user || (@tomato.users.include? current_user))
       .row
         -if @tomato.state != 2
           .span3
@@ -23,15 +23,16 @@
 
       .row
         .span8
+
           /mark as done button
           = simple_form_for @tomato, :html => { :class => 'form-horizontal' } do |f|
             - if !@tomato.publish_date.present?
               = f.hidden_field :publish_date, :value => Date.today()
             - if @tomato.state == 3 # extra unplanned
               = f.hidden_field :state, :value => 4 #extra done
-            -else
+            -elsif @tomato.state <= 1 # unplanned
               = f.hidden_field :state, :value => 2
-            -if @tomato.state != 2
+            -if @tomato.state != 2 && @tomato.state != 4
               = f.hidden_field :start_time
               = f.hidden_field :end_time
               = f.button :submit, t("tomatoes.actions.markasdone"), :class => 'btn-primary'
@@ -39,7 +40,9 @@
               = f.input :start_time, :input_html => {:onchange => "change_end()"}
               = f.input :end_time, :input_html => {:onchange => "change_start()"}
               = label_tag 'tomato_length', t('tomatoes.timer.length'), class: 'time optional control-label'
-              = text_field_tag "tomato_length", nil, "value" => 25, "onChange" => "change_end()", "style" => "height:25px;width:2.5em;padding-left:2px;"
+              = text_field_tag "tomato_length", nil, "value" => 25, "onChange" => "change_end()", "style" => "height:25px;width:5em;margin-left:1.56em;", :class => "time optional"
+              %br
+              %br
               = f.button :submit
 
     -else
