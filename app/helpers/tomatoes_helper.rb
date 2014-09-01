@@ -30,7 +30,8 @@ module TomatoesHelper
     return path
   end
 
-  def tomato_icon_path_at_move(tomato, move)
+  def tomato_icon_path_at_move(tomato_move, move)
+    tomato = tomato_move.tomatoes.first
     state = tomato.state
 
     extra_planned = false

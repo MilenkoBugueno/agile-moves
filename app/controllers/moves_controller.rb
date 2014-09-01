@@ -32,8 +32,8 @@ class MovesController < ApplicationController
     @ratings = Tomato.where(:move_id => :id)
 
     if @move.tomatoes.present?
-      @tomatoes = @move.tomatoes
-      @tomato = @tomatoes.first
+      @tomato_moves = @move.tomatoes
+      @tomato = @tomato_moves.first
       # Custom Query for Comments as Nested Set Tree
       @comments = Comment.find_by_sql(["SELECT n.content, n.user_id, n.created_at, n.tomato_id, n.lft, n.rgt, n.move_id, n.id, p.tomato_id, COUNT(*)-1 AS level FROM comments AS n, comments AS p WHERE (n.tomato_id = p.tomato_id) AND (n.tomato_id = ?) AND (n.lft BETWEEN p.lft AND p.rgt) GROUP BY n.lft ORDER BY n.lft;", @tomato.id])
     else
@@ -62,23 +62,24 @@ class MovesController < ApplicationController
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @move_type = @move.move_type
 
-    @tomatoes = Tomato.order('publish_date ASC')
-    @tomatoes = @tomatoes.by_project_id(@project.id)
-    @tomatoes = @tomatoes.by_user_id(@move.user.id)
+    @tomato_moves = Move.order('publish_date ASC')
+    @tomato_moves = @tomato_moves.by_project_id(@project.id)
+    @tomato_moves = @tomato_moves.by_user_id(@move.user.id)
+    @tomato_moves = @tomato_moves.by_tomatoes_number(1)
     if @move.present? && @move.publish_date.present?
       if @move.move_type.present? && @move.move_type.is_user_story
-        @tomatoes = @move.sub_moves
+        @tomato_moves = @move.sub_moves
       elsif @move.move_type.make_my_day
-        @tomatoes = @tomatoes.where("publish_date = ?", @move.publish_date)
+        @tomato_moves = @tomato_moves.where("publish_date = ?", @move.publish_date)
       elsif @move.move_type.make_my_sprint && @move.start_date.present?
-        @tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ?", @move.publish_date, @move.start_date)
+        @tomato_moves = @tomato_moves.where("publish_date <= ? AND publish_date >= ?", @move.publish_date, @move.start_date)
       elsif @move.tomatoes.present? && @move.tomatoes.count == 1
         @tomato = @move.tomatoes.first
-        @tomatoes = []
+        @tomato_moves = []
         @sprint_move = @move.get_sprint()
         @todotoday_move = @move.get_todo_today()
       else
-        @tomatoes = []
+        @tomato_moves = []
       end
 
     end

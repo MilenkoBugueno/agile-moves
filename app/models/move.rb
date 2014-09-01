@@ -29,6 +29,7 @@ class Move < ActiveRecord::Base
   scope :by_project_id, lambda {|uid| where(["#{table_name}.project_id =?", uid])}
   scope :by_state_id, lambda {|uid| where(["#{table_name}.state_id =?", uid])}
   scope :by_move_type, lambda {|uid| where(["#{table_name}.move_type_id =?", uid])}
+  scope :by_tomatoes_number, lambda {|uid| joins(:move_type).where(["move_types.tomatoes_number =?", uid])}
   scope :by_user_ids, lambda {|uid| joins(:users).where(["users.id =?", uid])}
   scope :already_reviewed, lambda {|uid| joins(:ratings).where(["ratings.user_id =?", uid])}
   scope :not_closed , lambda { where("#{table_name}.state_id != ?", State.find_or_create_by_title(:title => "closed").id)}

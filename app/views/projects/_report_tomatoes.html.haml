@@ -33,7 +33,7 @@
     %th{:width => "80px;"} Publish date
 
   -@moves.each do |move|
-    -if (move.tomatoes.present? || move.move_type.make_my_sprint || move.move_type.make_my_day)
+    -if (move.tomatoes.present? || move.move_type.make_my_sprint || move.move_type.make_my_day || move.move_type.is_user_story)
       %tr
         %td
           /tomatoes
