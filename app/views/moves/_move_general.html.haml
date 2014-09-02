@@ -14,8 +14,14 @@
           - if (current_user.has_role? :admin) || (current_user.id == @move.user_id)  || (@move.users.include? current_user)
             = link_to t("helpers.links.edit"), edit_move_path(@move), :class => 'btn'
         %br
-        %br
-        %p=raw(@move.body)
+        %p
+          %strong=t("tomato.goal") + ": "
+          %i
+            =raw(@move.body)
+        %p
+          %strong=t("tomato.result") + ": "
+          %i
+            =raw(@move.results)
 
 
       .span4
