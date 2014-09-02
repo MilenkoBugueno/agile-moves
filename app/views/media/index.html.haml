@@ -1,7 +1,7 @@
 
 - model_class = Medium
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1=t "media.index"
 
 = link_to t('.new', :default => t("helpers.links.new")), new_medium_path, :class => 'btn btn-primary'
 
@@ -15,14 +15,14 @@
     %thead
       %tr
         %th
-        %th= model_class.human_attribute_name(:title)
-        %th= model_class.human_attribute_name(:artist)
-        %th= model_class.human_attribute_name(:composer)
-        %th= model_class.human_attribute_name(:arranger)
-        %th= model_class.human_attribute_name(:writer)
-        %th= model_class.human_attribute_name(:catalog)
-        %th= model_class.human_attribute_name(:publisher)
-        %th= "Signature"
+        %th= t("simple_form.labels.medium.title")
+        %th= t("simple_form.labels.medium.artist")
+        %th= t("simple_form.labels.medium.composer")
+        %th= t("simple_form.labels.medium.arranger")
+        %th= t("simple_form.labels.medium.writer")
+        %th= t("simple_form.labels.medium.catalog")
+        %th= t("simple_form.labels.medium.publisher")
+        %th= t("simple_form.labels.medium.signature")
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
       = render :partial => 'medium', :collection => @media_current
@@ -40,14 +40,14 @@
     %thead
       %tr
         %th
-        %th= model_class.human_attribute_name(:title)
-        %th= model_class.human_attribute_name(:artist)
-        %th= model_class.human_attribute_name(:composer)
-        %th= model_class.human_attribute_name(:arranger)
-        %th= model_class.human_attribute_name(:writer)
-        %th= model_class.human_attribute_name(:catalog)
-        %th= model_class.human_attribute_name(:publisher)
-        %th= "Signature"
+        %th= t("simple_form.labels.medium.title")
+        %th= t("simple_form.labels.medium.artist")
+        %th= t("simple_form.labels.medium.composer")
+        %th= t("simple_form.labels.medium.arranger")
+        %th= t("simple_form.labels.medium.writer")
+        %th= t("simple_form.labels.medium.catalog")
+        %th= t("simple_form.labels.medium.publisher")
+        %th= t("simple_form.labels.medium.signature")
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
       = render :partial => 'medium', :collection => @media_partial
@@ -64,14 +64,14 @@
     %thead
       %tr
         %th
-        %th= model_class.human_attribute_name(:title)
-        %th= model_class.human_attribute_name(:artist)
-        %th= model_class.human_attribute_name(:composer)
-        %th= model_class.human_attribute_name(:arranger)
-        %th= model_class.human_attribute_name(:writer)
-        %th= model_class.human_attribute_name(:catalog)
-        %th= model_class.human_attribute_name(:publisher)
-        %th= "Signature"
+        %th= t("simple_form.labels.medium.title")
+        %th= t("simple_form.labels.medium.artist")
+        %th= t("simple_form.labels.medium.composer")
+        %th= t("simple_form.labels.medium.arranger")
+        %th= t("simple_form.labels.medium.writer")
+        %th= t("simple_form.labels.medium.catalog")
+        %th= t("simple_form.labels.medium.publisher")
+        %th= t("simple_form.labels.medium.signature")
         %th=t '.actions', :default => t("helpers.actions")
     %tbody
       = render :partial => 'medium', :collection => @media_ready

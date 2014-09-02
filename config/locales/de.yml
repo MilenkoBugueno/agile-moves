@@ -211,7 +211,8 @@ de:
     goal: "Ziele"
     result: "Ergebnisse"
   media:
-    index: "Medien"
+    index: "Repertoireliste"
     link:
-      partially: "Teilweise geübt"
-      ready: "Aufgeführt"
+      current: "ÜBE ICH GERADE"
+      partially: "TEILWEISE GEÜBT"
+      ready: "AUFGEFÜHRT"
