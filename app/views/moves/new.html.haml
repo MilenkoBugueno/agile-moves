@@ -16,6 +16,7 @@
     = f.association :user_story, :selected => @user_story.id
   = f.input :title, input_html: {style: 'height:30px;width: 500px;'}
   = f.input :body, :as => :ckeditor, :label => t("tomato.goal")
+  = f.input :results, :as => :ckeditor, :label => t("tomato.result")
   - if @move_type.present? && @move_type.make_my_sprint
     = f.input :start_date, :as => :string, input_html: {style: 'height:30px;', value: Date.today()}
   -if @date.present?
