@@ -26,11 +26,13 @@
             %td= tomato_move.publish_date.to_s(:short) unless tomato_move.publish_date == nil
             %td
               /mark as done button
-              -if tomato_move.state != 2 && tomato_move.state != 4
-                =form_tag markasdone_tomatoes_path, method: :put do
-                  =hidden_field_tag :move_id, @move.id
-                  =hidden_field_tag :tomato_id, tomato_move.id
-                  =submit_tag t("tomatoes.actions.markasdone"), :class => 'btn btn-mini'
+              -if tomato_move.tomatoes.present?
+                -tomato = tomato_move.tomatoes.first
+                -if tomato.state != 2 && tomato.state != 4
+                  =form_tag markasdone_tomatoes_path, method: :put do
+                    =hidden_field_tag :move_id, @move.id
+                    =hidden_field_tag :tomato_id, tomato.id
+                    =submit_tag t("tomatoes.actions.markasdone"), :class => 'btn btn-mini'
 
       -if @move.move_type.make_my_day && @move.state != State.find_by_title("planned")
         = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
