@@ -22,9 +22,9 @@
         %td
           -if move.state.present? && move.state.closed
             %strike
-              = link_to move.title, move
+              = link_to create_title(move), move
           -else
-            = link_to move.title, move
+            = link_to create_title(move), move
 
         %td= move.user.name
         %td= move.category.title if move.category.present?
@@ -49,9 +49,9 @@
         %td
           -if move.state.present? && move.state.closed
             %strike
-              = link_to move.title, move
+              = link_to create_title(move), move
           -else
-            = link_to move.title, move
+            = link_to create_title(move), move
         %td= move.user.name
         %td= move.category.title if move.category.present?
         %td= move.publish_date.to_s(:short) unless move.publish_date == nil

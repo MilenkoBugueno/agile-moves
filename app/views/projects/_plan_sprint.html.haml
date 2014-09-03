@@ -37,7 +37,7 @@
           %td= link_to tomato.title, tomato
           %td= tomato.user.name
           %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+          %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?
 
 
 %hr
@@ -76,7 +76,7 @@
             %td= link_to tomato.title, tomato
             %td= tomato.user.name
             %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-            %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+            %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?
   %hr
 
 -elsif @project.has_make_my_sprint()
@@ -117,4 +117,4 @@
           %td= link_to tomato.title, tomato
           %td= tomato.user.name
           %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td= link_to tomato.move.title, tomato.move if tomato.move.present?
+          %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?

@@ -23,7 +23,7 @@
             -total = total + rating.star_rating unless rating.star_rating == nil 
         ="#{total} Stars"
             
-      %td= link_to move.title, move
+      %td= link_to create_title(move), move
       %td= move.user.name
       %td
         -move.users.each do |reviewer|

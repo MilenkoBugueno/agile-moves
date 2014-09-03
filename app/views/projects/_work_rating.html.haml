@@ -16,7 +16,7 @@
             = image_tag("idea.png", :width => 25, :height => 25)
           - else
             = image_tag("bewerten.png", :width => 20, :height => 20)
-        %td= link_to move.title, move
+        %td= link_to create_title(move), move
         %td= move.user.name
         %td
           -move.users.each do |reviewer|

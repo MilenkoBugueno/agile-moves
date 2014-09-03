@@ -49,7 +49,7 @@
           - if (current_user.has_role? :admin) && !move.reviewed_by_me(current_user)
             = image_tag("bewerten.png", :width => 20, :height => 20)
 
-        %td= link_to move.title, move
+        %td= link_to create_title(move), move
         %td= move.user.name if move.user.present?
         %td
           -move.users.each do |user|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140902150650) do
+ActiveRecord::Schema.define(:version => 20140903094548) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -82,6 +82,13 @@ ActiveRecord::Schema.define(:version => 20140902150650) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "media_moves", :id => false, :force => true do |t|
+    t.integer "medium_id"
+    t.integer "move_id"
+  end
+
+  add_index "media_moves", ["medium_id", "move_id"], :name => "index_media_moves_on_medium_id_and_move_id"
+
   create_table "move_types", :force => true do |t|
     t.string   "title"
     t.text     "body"
@@ -95,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20140902150650) do
     t.boolean  "make_my_day",      :default => false
     t.boolean  "make_my_sprint"
     t.boolean  "is_user_story"
+    t.boolean  "has_media"
   end
 
   create_table "move_types_projects", :id => false, :force => true do |t|

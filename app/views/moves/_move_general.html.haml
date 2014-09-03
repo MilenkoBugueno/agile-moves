@@ -1,6 +1,9 @@
 .panel.panel-primary
   .panel-heading
-    %h3= @move.title
+    %h3
+      -if @move.tomatoes.present?
+        = image_tag(tomato_icon_path(@tomato), :width => 30, :height => 30)
+      =create_title(@move)
   .panel-body
     .row
       .span7

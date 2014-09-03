@@ -24,7 +24,7 @@
               - else
                 = image_tag("bewerten.png", :width => 20, :height => 20)
 
-            %td= link_to tomato_move.title, tomato_move
+            %td= link_to create_title(tomato_move), tomato_move
             %td= tomato_move.user.name unless tomato_move.user == nil
             %td
               - tomato_move.users.each do |user|

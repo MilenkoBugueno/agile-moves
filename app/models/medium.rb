@@ -1,6 +1,8 @@
 class Medium < ActiveRecord::Base
-  attr_accessible :arranger, :artist, :catalog, :composer, :description, :publisher, :state_id, :title, :writer
+  attr_accessible :arranger, :artist, :catalog, :composer, :description, :publisher, :state_id, :title, :writer, :move_ids
   validates_presence_of :title, :composer
+
+  has_and_belongs_to_many :moves
 
   after_initialize :init
 
