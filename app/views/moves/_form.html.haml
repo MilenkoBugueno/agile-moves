@@ -6,8 +6,11 @@
     -else
       = f.association :move_type, include_blank: false
       = f.association :project, include_blank: false
+    -if @move.present? && @move.user_story_id.present?
+      = f.association :user_story, :collection => @user_stories
     = f.input :title, input_html: {style: 'height:30px;width:500px;'}
-    = f.association :mediums, as: :select, :input_html => { :multiple => false }
+    -if @move_type.present? && @move_type.has_media
+      = f.association :mediums, as: :select, :input_html => { :multiple => false }, :label => t("moves.links.composition")
     = f.input :body, :as => :ckeditor, :label => t("tomato.goal")
     = f.input :results, :as => :ckeditor, :label => t("tomato.result")
     - if @move_type.present? && @move_type.make_my_sprint

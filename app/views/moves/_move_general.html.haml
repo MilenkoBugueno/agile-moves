@@ -52,4 +52,8 @@
         %p
           %strong=t("moves.links.category") + ": "
           ="#{@move.category.title}" if @move.category.present?
-
+        -if @move_type.present? && @move_type.has_media &&  @move.mediums.count == 1
+          -composition = @move.mediums.first
+          %p
+            %strong=t("moves.links.composition") + ": "
+            = link_to composition.title, composition

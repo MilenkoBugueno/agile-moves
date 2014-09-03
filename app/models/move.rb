@@ -38,6 +38,7 @@ class Move < ActiveRecord::Base
   
   scope :by_star_rating, lambda {joins(:move_type).where(['move_types.star_rating =?', true])}
   scope :by_thumb_rating, lambda {joins(:move_type).where(['move_types.thumb_rating =?', true])}
+  scope :by_user_stories, lambda {joins(:move_type).where(['move_types.is_user_story =?', true])}
 
   after_initialize :init
 

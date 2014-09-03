@@ -99,6 +99,7 @@ class MovesController < ApplicationController
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
 
     @user_story = Move.find(params[:user_story_id]) if params[:user_story_id].present?
+    @user_stories = Move.by_user_stories()
 
     @date = params[:date] if params[:date].present?
 
@@ -128,6 +129,7 @@ class MovesController < ApplicationController
     @move = Move.find(params[:id])
     @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
+    @user_stories = Move.by_user_stories()
   end
 
   # POST /moves

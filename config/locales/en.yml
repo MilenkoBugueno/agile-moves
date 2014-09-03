@@ -113,6 +113,7 @@ en:
           backtosprint: "Sprint"
           backtotodotoday: "Todo Today"
           backtouserstory: "User Story"
+          composition: "Composition"
       index: "Last moves"
       team:
         select_all: "Select all"
@@ -163,3 +164,5 @@ en:
       current: "practicing right now"
       partially: "partially practiced"
       ready: "Performed"
+    new: "New composition"
+    edit: "Edit composition"

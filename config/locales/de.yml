@@ -107,6 +107,7 @@ de:
             newsprint: "Neuer Sprint Erstellen"
             nocurrentsprint: "Kein aktueller Sprint"
             backtouserstory: "User Story"
+            composition: "Stück"
         index: "Letzte Moves"
         team:
           select_all: "Alle wählen"
@@ -216,3 +217,5 @@ de:
       current: "ÜBE ICH GERADE"
       partially: "TEILWEISE GEÜBT"
       ready: "AUFGEFÜHRT"
+    new: "Neues Stück"
+    edit: "Stück Editieren"

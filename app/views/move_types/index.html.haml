@@ -13,6 +13,7 @@
       %th= model_class.human_attribute_name(:make_my_day)
       %th= model_class.human_attribute_name(:make_my_sprint)
       %th= model_class.human_attribute_name(:is_user_story)
+      %th= model_class.human_attribute_name(:has_media)
       %th=t("helpers.actions")
   %tbody
     - @move_types.each do |move_type|
@@ -26,6 +27,7 @@
         %td= move_type.make_my_day
         %td= move_type.make_my_sprint
         %td= move_type.is_user_story
+        %td= move_type.has_media
         %td
           = link_to t("helpers.links.edit"), edit_move_type_path(move_type), :class => 'btn btn-mini'
           = link_to t("helpers.links.destroy"), move_type_path(move_type), :method => :delete, :data => { :confirm => t("helpers.links.confirm") }, :class => 'btn btn-mini btn-danger'
