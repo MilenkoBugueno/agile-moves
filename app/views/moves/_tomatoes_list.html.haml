@@ -17,7 +17,13 @@
         - @tomato_moves.each do |tomato_move|
           %tr
             %td
-              = image_tag(tomato_icon_path_at_move(tomato_move, @move), :width => 20, :height => 20)
+              -if tomato_move.move_type.has_tomatoes? && tomato_move.tomatoes.count == 1
+                = image_tag(tomato_icon_path_at_move(tomato_move, @move), :width => 20, :height => 20)
+              -elsif tomato_move.move_type.has_twitter_idea
+                = image_tag("idea.png", :width => 25, :height => 25)
+              - else
+                = image_tag("bewerten.png", :width => 20, :height => 20)
+
             %td= link_to tomato_move.title, tomato_move
             %td= tomato_move.user.name unless tomato_move.user == nil
             %td
