@@ -219,3 +219,5 @@ de:
       ready: "AUFGEFÜHRT"
     new: "Neues Stück"
     edit: "Stück Editieren"
+  move:
+    nominate: "Nominiere diesen Move zu einer Zertifizierung"

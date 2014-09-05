@@ -5,4 +5,5 @@ class Registration < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :certification
+  has_many :moves
 end

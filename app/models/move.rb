@@ -1,6 +1,6 @@
 class Move < ActiveRecord::Base
   attr_accessible :body, :move_type_id, :user_id, :title, :user_ids, :state_id, :publish_date, :start_date, \
-            :project_id, :category_id, :planned_at, :user_story_id, :results, :medium_ids
+            :project_id, :category_id, :planned_at, :user_story_id, :results, :medium_ids, :registration_id
   validates_presence_of :title, :move_type_id
   
   belongs_to :user
@@ -8,11 +8,13 @@ class Move < ActiveRecord::Base
   belongs_to :state
   belongs_to :project
   belongs_to :category
+  belongs_to :registration
   has_and_belongs_to_many :users
   has_and_belongs_to_many :mediums
   has_many :ratings
   has_many :tomatoes
   has_many :comments
+
 
   has_many :sub_moves, class_name: "Move", foreign_key: "user_story_id"
   belongs_to :user_story, class_name: "Move"

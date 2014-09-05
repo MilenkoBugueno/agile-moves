@@ -1,5 +1,10 @@
 .input-group
   = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
+    .row
+      .col-md-7
+      .col-md-5
+        =f.association :registration, :label => t("move.nominate"), :inline => false, input_html: {style: 'display:block;'}
+
     -if @project.present?
       = f.association :move_type, include_blank: false, :collection => @project.move_types
       = f.association :project, include_blank: false
@@ -14,8 +19,17 @@
     = f.input :body, :as => :ckeditor, :label => t("tomato.goal")
     = f.input :results, :as => :ckeditor, :label => t("tomato.result")
     - if @move_type.present? && @move_type.make_my_sprint
-      = f.input :start_date, :as => :string, input_html: {style: 'height:30px;'}
-    = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;'}
+      -if @move.new_record?
+        = f.input :start_date, :as => :string, input_html: {style: 'height:30px;', value: Date.today()}
+      -else
+        = f.input :start_date, :as => :string, input_html: {style: 'height:30px;'}
+    -if @move.new_record?
+      -if @date.present?
+        = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;', value: @date }
+      -else
+        = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;', value: Date.today() }
+    -else
+      = f.input :publish_date, :as => :string, input_html: {style: 'height:30px;'}
     = f.association :category, :collection => Category.order("title ASC")
     -if @project.present?
       = f.association :user, :label => t("moves.links.owner"), :collection => @project.users
@@ -24,6 +38,8 @@
     -else
       = f.association :user, :label => t("moves.links.owner")
       = f.association :users, :as => :check_boxes, :label => t("projects.team")
+    -if @move.new_record?
+      = f.hidden_field :state_id, :value => @state.id if @state.present?
     %p{:align => "center"}
       = link_to t("moves.team.select_all"), "javascript:select_all_team('move[user_ids][]', '#{t('moves.team.select_all')}', '#{t('moves.team.select_none')}');", :id => 'link_all_team', :class => 'btn'
     .form-actions
