@@ -1,0 +1,11 @@
+= simple_form_for @certification, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :title
+  = f.input :label
+  = f.input :level_id
+  = f.input :description
+  = f.input :user_id
+  = f.input :move_type_id
+  = f.input :approvements
+  = f.input :moves_number
+  = f.button :submit, :class => 'btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), certifications_path, :class => 'btn btn-default'

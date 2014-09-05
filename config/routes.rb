@@ -1,20 +1,6 @@
 AgileMovesOs::Application.routes.draw do
 
 
-
-  resources :media do
-    collection do
-      put :sendto
-    end
-  end
-
-
-  resources :widgets
-
-
-  resources :categories
-
-
   scope "(:locale)" do                   #To change the url from for example http://localhost:3000/users/edit?locale=en
                                       # to http://localhost:3000/en/users/edit
   resources :projects do
@@ -61,6 +47,21 @@ AgileMovesOs::Application.routes.draw do
   get '/en/live_refresh' => 'live_tomatoes#index'
 
   resources :admin_logs
+
+  resources :certifications
+
+
+  resources :media do
+    collection do
+      put :sendto
+    end
+  end
+
+
+  resources :widgets
+
+
+  resources :categories
 
   authenticated :user do
     root :to => 'moves#index'
