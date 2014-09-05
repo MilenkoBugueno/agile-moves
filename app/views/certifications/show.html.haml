@@ -35,16 +35,15 @@
       %thead
         %tr
           %th
-          %th= "user_id"
-          %th= "start_date"
-          %th= "end_date"
+          %th= t("simple_form.labels.registration.user_id")
+          %th= t("simple_form.labels.registration.start_date")
+          %th= t("simple_form.labels.registration.end_date")
           %th=t '.actions', :default => t("helpers.actions")
       %tbody
         - @registrations.each do |registration|
           %tr
             %td
-            /%td= link_to registration.user.name, registration_path(registration)
-            %td= registration.user.name
+            %td= link_to registration.user.name, registration_path(registration)
             %td= registration.start_date
             %td= registration.end_date
             %td

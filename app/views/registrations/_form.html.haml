@@ -1,6 +1,6 @@
 = simple_form_for @registration, :html => { :class => 'form-horizontal' } do |f|
   -if @certification.present?
-    = f.association :certification, input_html: {style: 'height:30px;'}, :selected => @certification
+    = f.association :certification, input_html: {style: 'height:30px;'}, :selected => @certification.id
   -else
     = f.association :certification, input_html: {style: 'height:30px;'}
   -if @registration.new_record? && current_user.present?

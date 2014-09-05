@@ -30,10 +30,17 @@ de:
         description: 'Training'
         label: 'Abkürzung'
         level: 'Level'
-        user: 'Zertifizierung Owner'
+        user: 'Zertifizierungs Owner'
         move_type: 'Move typ'
-        approvements: 'Benötigte Anzahl von Bestätigungen'
+        approvements: 'Benötigte Anzahl von Teamspieler Bestätigungen'
         moves_number: 'Benötigte Anzahl von bestätigten Moves'
+        conditions: "Zertifizierungsbedingungen"
+        registrations: "Registrierungen"
+        certifications: "Zertifizierungen"
+      registration:
+        user_id: "Kandidat"
+        start_date: "Zertifizierungsstart"
+        end_date: "Zertifizierungssende"
 
 
 

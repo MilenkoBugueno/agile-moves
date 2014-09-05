@@ -32,8 +32,16 @@ en:
         level: 'Level'
         user: 'Certification Owner'
         move_type: 'Move type'
-        approvements: 'Required number of approvements'
+        approvements: 'Required number of peer approvements'
         moves_number: 'Required number of approved moves'
+        conditions: "Certification Requirements"
+        registrations: "Registrations"
+        certifications: "Certifications"
+
+      registration:
+        user_id: "Candidate"
+        start_date: "Certification start"
+        end_date: "Certification end"
 
     #     new:
     #       email: 'E-mail to sign in.'
