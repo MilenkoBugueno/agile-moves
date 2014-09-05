@@ -7,6 +7,7 @@
         %p
           - if (current_user.has_role? :admin) || (current_user.id == @certification.user_id)
             = link_to t("helpers.links.edit"), edit_certification_path(@certification), :class => 'btn'
+            = link_to t("helpers.links.back"), certifications_path, :class => 'btn'
         %br
         %p
           %strong=t("simple_form.labels.certification.description") + ": "
@@ -41,7 +42,7 @@
           %th= t("simple_form.labels.registration.progress")
           %th=t '.actions', :default => t("helpers.actions")
       %tbody
-        - @registrations.each do |registration|
+        - @certification.registrations.each do |registration|
           %tr
             %td
             %td= link_to registration.user.name, registration_path(registration)
@@ -49,8 +50,8 @@
             %td= registration.end_date.to_s(:short) if registration.end_date.present?
             %td
               .progress
-                .progress-bar{:role=>"progressbar", "aria-valuenow"=>"60", "aria-valuemin"=>"0", "aria-valuemax"=>"100", "style"=>"width: 60%;"}
-                  ="6"
+                .progress-bar{:role=>"progressbar", "aria-valuenow"=>"#{registration.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@certification.moves_number}", "style"=>"width: #{get_progressbar_width(registration)}%;"}
+                  =registration.moves.count
                 %p{:style => 'float: right;'}
                   =@certification.moves_number if @certification.moves_number.present?
             %td

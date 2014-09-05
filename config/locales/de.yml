@@ -33,6 +33,8 @@ de:
       movetypes: "Move types"
       adminlog: "Admin Log"
       widgets: "Widgets"
+      certifications: "Zertifizierungen"
+      allcertifications: "Alle Zertifizierungen"
   login:
       signin: "Anmelden"
       signup: "Registrieren"

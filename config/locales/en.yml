@@ -36,6 +36,8 @@ en:
       moves: "Moves"
       adminlog: "Admin Log"
       widgets: "Widgets"
+      certifications: "Certifications"
+      allcertifications: "All certifications"
   login:
       signin: "Sign in"
       signup: "Sign up"
