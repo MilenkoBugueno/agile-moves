@@ -6,6 +6,7 @@ class MoveType < ActiveRecord::Base
   has_and_belongs_to_many :projects
 
   has_and_belongs_to_many :widgets
+  has_many :certifications
 
   scope :has_widget_type, lambda {|uid| joins(:widgets).where(["widgets.widget_type =?", uid])}
 
