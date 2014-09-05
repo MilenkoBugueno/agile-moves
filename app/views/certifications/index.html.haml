@@ -22,7 +22,7 @@
           = get_level_title(certification.level_id)
         %td
         %td= certification.registrations.count
-        %td
+        %td="0"
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_certification_path(certification), :class => 'btn btn-default btn-mini'
           = link_to t('.destroy', :default => t("helpers.links.destroy")), certification_path(certification), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
