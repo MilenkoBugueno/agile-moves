@@ -98,6 +98,8 @@ class MovesController < ApplicationController
     @states = State.order(:position)
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
 
+    @my_certifications = Registration.where("user_id=?", current_user.id)
+
     @user_story = Move.find(params[:user_story_id]) if params[:user_story_id].present?
     @user_stories = Move.by_user_stories()
 
@@ -130,6 +132,9 @@ class MovesController < ApplicationController
     @move_type = @move.move_type
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @user_stories = Move.by_user_stories()
+
+    @my_certifications = Registration.where("user_id=?", @move.user.id)
+
   end
 
   # POST /moves

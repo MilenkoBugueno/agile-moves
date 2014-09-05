@@ -3,7 +3,7 @@
     .col-md-5
       = f.input :title, input_html: {style: 'width:300px;height:30px;'}
       = f.input :label, input_html: {style: 'width:300px;height:30px;'}
-      = f.input :level_id, :collection => [["Apprentice", 1], ["Journeyman", 2], ["Master", 3]], :as => :radio_buttons, :checked => 1
+      = f.input :level_id, :collection => [[get_level_title(1), 1], [get_level_title(2), 2], [get_level_title(3), 3]], :as => :radio_buttons, :checked => 1
 
       .panel.panel-default
         .panel-heading
