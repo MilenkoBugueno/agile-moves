@@ -1,0 +1,7 @@
+= simple_form_for @registration, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :certification_id
+  = f.input :user_id
+  = f.input :start_date
+  = f.input :end_date
+  = f.button :submit, :class => 'btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), registrations_path, :class => 'btn btn-default'

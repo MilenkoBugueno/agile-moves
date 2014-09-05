@@ -170,3 +170,5 @@ en:
     labels:
       certification:
         conditions: "Certification Requirements"
+        registrations: "Registrations"
+        certifications: "Certifications"
