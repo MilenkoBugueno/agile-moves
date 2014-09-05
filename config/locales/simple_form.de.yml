@@ -25,6 +25,17 @@ de:
         publisher: 'Verlag'
         signature: 'Signatur'
 
+      certification:
+        title: 'Titel'
+        description: 'Training'
+        label: 'Abkürzung'
+        level: 'Level'
+        user: 'Zertifizierung Owner'
+        move_type: 'Move typ'
+        approvements: 'Benötigte Anzahl von Bestätigungen'
+        moves_number: 'Benötigte Anzahl von bestätigten Moves'
+
+
 
     #     new:
     #       email: 'E-mail to sign in.'

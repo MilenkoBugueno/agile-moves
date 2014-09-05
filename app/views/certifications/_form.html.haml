@@ -1,11 +1,21 @@
 = simple_form_for @certification, :html => { :class => 'form-horizontal' } do |f|
-  = f.input :title
-  = f.input :label
-  = f.input :level_id, :collection => [["Apprentice", 1], ["Journeyman", 2], ["Master", 3]], :as => :radio_buttons
-  = f.input :description
-  = f.association :user
-  = f.association :move_type
-  = f.input :approvements
-  = f.input :moves_number
-  = f.button :submit, :class => 'btn-primary'
-  = link_to t('.cancel', :default => t("helpers.links.cancel")), certifications_path, :class => 'btn btn-default'
+  .row
+    .col-md-5
+      = f.input :title, input_html: {style: 'width:300px;height:30px;'}
+      = f.input :label, input_html: {style: 'width:300px;height:30px;'}
+      = f.input :level_id, :collection => [["Apprentice", 1], ["Journeyman", 2], ["Master", 3]], :as => :radio_buttons
+
+      .panel.panel-default
+        .panel-heading
+          %h7.panel-title= t("simple_form.labels.certification.conditions")
+        .panel-body
+          = f.association :move_type
+          = f.input :approvements, input_html: {style: 'width:50px;height:30px;'}
+          = f.input :moves_number, input_html: {style: 'width:50px;height:30px;'}
+    .col-md-7
+      = f.association :user
+      = f.input :description, :as => :ckeditor
+  %hr
+  .row
+    = f.button :submit, :class => 'btn-primary', :style=> 'float: right;;margin-left:1.4em;'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), certifications_path, :class => 'btn btn-default', :style=> 'float: right;'

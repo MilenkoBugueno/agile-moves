@@ -25,6 +25,15 @@ en:
         publisher: 'Publisher'
         signature: 'Signature'
 
+      certification:
+        title: 'Title'
+        description: 'Training'
+        label: 'Short name'
+        level: 'Level'
+        user: 'Certification Owner'
+        move_type: 'Move type'
+        approvements: 'Required number of approvements'
+        moves_number: 'Required number of approved moves'
 
     #     new:
     #       email: 'E-mail to sign in.'

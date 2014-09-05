@@ -166,3 +166,7 @@ en:
       ready: "Performed"
     new: "New composition"
     edit: "Edit composition"
+  simple_form:
+    labels:
+      certification:
+        conditions: "Certification Requirements"

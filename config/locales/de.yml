@@ -219,3 +219,7 @@ de:
       ready: "AUFGEFÜHRT"
     new: "Neues Stück"
     edit: "Stück Editieren"
+  simple_form:
+    labels:
+      certification:
+        conditions: "Zertifizierungsbedingungen"
