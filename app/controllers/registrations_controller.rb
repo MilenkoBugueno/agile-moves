@@ -26,6 +26,8 @@ class RegistrationsController < ApplicationController
   def new
     @registration = Registration.new
 
+    @certification = Certification.find(params[:certification_id]) if params[:certification_id].present?
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @registration }

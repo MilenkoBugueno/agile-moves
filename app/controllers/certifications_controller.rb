@@ -16,6 +16,8 @@ class CertificationsController < ApplicationController
   def show
     @certification = Certification.find(params[:id])
 
+    @registrations = Registration.all
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @certification }
