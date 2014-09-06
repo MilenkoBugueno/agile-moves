@@ -6,7 +6,10 @@
         =f.association :registration, :label => t("move.nominate"), :label_method => lambda { |registration| "#{registration.certification.label} (#{get_level_title(registration.certification.level_id)}) | #{registration.user.name}" }
 
     -if @project.present?
-      = f.association :move_type, include_blank: false, :collection => @project.move_types
+      - if  @move_type.present?
+        = f.association :move_type, include_blank: false, :collection => @project.move_types, :selected => @move_type.id
+      -else
+        = f.association :move_type, include_blank: false, :collection => @project.move_types
       = f.association :project, include_blank: false
     -else
       = f.association :move_type, include_blank: false

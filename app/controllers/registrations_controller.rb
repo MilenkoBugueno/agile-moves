@@ -15,6 +15,8 @@ class RegistrationsController < ApplicationController
   def show
     @registration = Registration.find(params[:id])
 
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @registration }

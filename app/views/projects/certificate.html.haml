@@ -18,7 +18,7 @@
         - @certifications.each do |certification|
           %tr
             %td
-            %td= link_to certification.title, certification_path(certification)
+            %td= link_to certification.title, certification_path(certification, project_id: @project.id)
             %td= certification.label
             %td
               = get_level_title(certification.level_id)

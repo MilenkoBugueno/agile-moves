@@ -15,6 +15,7 @@ class CertificationsController < ApplicationController
   # GET /certifications/1.json
   def show
     @certification = Certification.find(params[:id])
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
 
     @registrations = Registration.all
 
