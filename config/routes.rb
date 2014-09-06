@@ -11,6 +11,7 @@ AgileMovesOs::Application.routes.draw do
       get :work
       get :report
       get :plan
+      get :certificate
     end
        end
   resources :interruptions

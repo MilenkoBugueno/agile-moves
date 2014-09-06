@@ -113,6 +113,21 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def certificate
+    @certifications = Certification.all
+
+    if params[:id].present?
+      @project = Project.find(params[:id])
+    else
+      @project = Project.all.first
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @project }
+    end
+  end
+
   # GET /projects/1
   # GET /projects/1.json
   def show
