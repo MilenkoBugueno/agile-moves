@@ -105,6 +105,8 @@ class MovesController < ApplicationController
 
     @date = params[:date] if params[:date].present?
 
+    @registrations = Registration.all
+
     @compositions = Medium.joins(:moves).where(:moves => {:user_id => current_user.id}).where(:state_id=> 1)
         #Medium.by_move_ids([@move.id, @move.id])
 

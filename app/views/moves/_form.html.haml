@@ -3,7 +3,8 @@
     .row
       .col-md-7
       .col-md-5
-        =f.association :registration, :label => t("move.nominate"), :label_method => lambda { |registration| "#{registration.certification.label} (#{get_level_title(registration.certification.level_id)}) | #{registration.user.name}" }
+        -if @registrations.present?
+          =f.association :registration, :label => t("move.nominate"), :label_method => lambda { |registration| "#{registration.certification.label} (#{get_level_title(registration.certification.level_id)}) | #{registration.user.name}" }, :collection => @registrations
 
     -if @project.present?
       - if  @move_type.present?
