@@ -3,6 +3,7 @@
   = f.input :body, input_html: {style: 'height:200px;width: 500px;'}
   = f.association :users, :as => :check_boxes, :label => "Team"
   = f.association :move_types, :as => :check_boxes, :label => "Activate following moves"
+  = f.association :certifications, :as => :check_boxes, :label => "Activate following certificates"
   .form-actions
     = f.button :submit, :class => 'btn-primary'
     = link_to t("helpers.links.cancel"), projects_path, :class => 'btn'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140905151540) do
+ActiveRecord::Schema.define(:version => 20140906084436) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(:version => 20140905151540) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "certifications_projects", :id => false, :force => true do |t|
+    t.integer "certification_id"
+    t.integer "project_id"
+  end
+
+  add_index "certifications_projects", ["certification_id", "project_id"], :name => "index_certifications_projects_on_certification_id_and_project_id"
 
   create_table "comments", :force => true do |t|
     t.text     "content"
