@@ -2,3 +2,77 @@
   .panel-heading
     %h4.panel-title= t("media.index")
   .panel-body
+    .page-header
+
+    %h5= t("media.link.current").upcase
+    =form_tag sendto_media_path, method: :put do
+      =t("helpers.links.send")+":"
+      =submit_tag t("media.link.partially"), :name=> "move_to_partial", :class => 'btn btn-mini'
+      =submit_tag t("media.link.ready"), :name=> "move_to_ready", :class => 'btn btn-mini'
+
+      %table.table.table-striped
+        %thead
+          %tr
+            %th
+            %th= t("simple_form.labels.medium.title")
+            %th= t("simple_form.labels.medium.artist")
+            %th= t("simple_form.labels.medium.composer")
+            %th= t("simple_form.labels.medium.arranger")
+            %th= t("simple_form.labels.medium.writer")
+            %th= t("simple_form.labels.medium.catalog")
+            %th= t("simple_form.labels.medium.publisher")
+            %th= t("simple_form.labels.medium.signature")
+            %th=t '.actions', :default => t("helpers.actions")
+        %tbody
+          = render :partial => 'media/medium', :collection => @move.mediums.where("state_id=1")
+
+    %h5= t("media.link.partially").upcase
+    =form_tag sendto_media_path, method: :put do
+      =t("helpers.links.send")+":"
+      =submit_tag t("media.link.current"), :name=> "move_to_current", :class => 'btn btn-mini'
+      =submit_tag t("media.link.ready"), :name=> "move_to_ready", :class => 'btn btn-mini'
+
+      %table.table.table-striped
+        %thead
+          %tr
+            %th
+            %th= t("simple_form.labels.medium.title")
+            %th= t("simple_form.labels.medium.artist")
+            %th= t("simple_form.labels.medium.composer")
+            %th= t("simple_form.labels.medium.arranger")
+            %th= t("simple_form.labels.medium.writer")
+            %th= t("simple_form.labels.medium.catalog")
+            %th= t("simple_form.labels.medium.publisher")
+            %th= t("simple_form.labels.medium.signature")
+            %th=t '.actions', :default => t("helpers.actions")
+        %tbody
+          = render :partial => 'media/medium', :collection => @move.mediums.where("state_id=2")
+
+    %br
+
+    %h5= t("media.link.ready").upcase
+    =form_tag sendto_media_path, method: :put do
+      =t("helpers.links.send")+":"
+      =submit_tag t("media.link.partially"), :name=> "move_to_partial", :class => 'btn btn-mini'
+      =submit_tag t("media.link.current"), :name=> "move_to_current", :class => 'btn btn-mini'
+
+      %table.table.table-striped
+        %thead
+          %tr
+            %th
+            %th= t("simple_form.labels.medium.title")
+            %th= t("simple_form.labels.medium.artist")
+            %th= t("simple_form.labels.medium.composer")
+            %th= t("simple_form.labels.medium.arranger")
+            %th= t("simple_form.labels.medium.writer")
+            %th= t("simple_form.labels.medium.catalog")
+            %th= t("simple_form.labels.medium.publisher")
+            %th= t("simple_form.labels.medium.signature")
+            %th=t '.actions', :default => t("helpers.actions")
+        %tbody
+          = render :partial => 'media/medium', :collection => @move.mediums.where("state_id=3")
+
+
+    %br
+
+    = link_to t('.new', :default => t("helpers.links.new")), new_medium_path(move_id: @move.id), :class => 'btn btn-primary'

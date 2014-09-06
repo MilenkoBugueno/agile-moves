@@ -14,6 +14,8 @@
           /rating
           - if move.move_type.has_twitter_idea
             = image_tag("idea.png", :width => 25, :height => 25)
+          - elsif move.move_type.has_media
+            = image_tag("song.png", :width => 25, :height => 25)
           - else
             = image_tag("bewerten.png", :width => 20, :height => 20)
         %td= link_to create_title(move), move

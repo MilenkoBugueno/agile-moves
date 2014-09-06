@@ -7,5 +7,7 @@
   = f.input :writer
   = f.input :catalog
   = f.input :publisher
+  -if @medium.new_record? && @move.present?
+    = f.hidden_field :move_ids, :value => @move.id
   = f.button :submit, :class => 'btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), media_path, :class => 'btn btn-default'

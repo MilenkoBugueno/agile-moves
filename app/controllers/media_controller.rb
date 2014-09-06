@@ -29,6 +29,7 @@ class MediaController < ApplicationController
   # GET /media/new.json
   def new
     @medium = Medium.new
+    @move = Move.find(params[:move_id]) if params[:move_id].present?
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,7 +49,12 @@ class MediaController < ApplicationController
 
     respond_to do |format|
       if @medium.save
-        format.html { redirect_to @medium, notice: 'Medium was successfully created.' }
+        if @medium.moves.present?
+          format.html { redirect_to @medium.moves.first, notice: 'Medium was successfully created.' }
+        else
+          format.html { redirect_to @medium, notice: 'Medium was successfully created.' }
+        end
+
         format.json { render json: @medium, status: :created, location: @medium }
       else
         format.html { render action: "new" }
@@ -64,7 +70,12 @@ class MediaController < ApplicationController
 
     respond_to do |format|
       if @medium.update_attributes(params[:medium])
-        format.html { redirect_to @medium, notice: 'Medium was successfully updated.' }
+        if @medium.moves.present?
+          format.html { redirect_to @medium.moves.first, notice: 'Medium was successfully updated.' }
+        else
+          format.html { redirect_to @medium, notice: 'Medium was successfully updated.' }
+        end
+
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -96,12 +107,18 @@ class MediaController < ApplicationController
       state = 1
     end
 
-
     params[:medium_ids].each do |medium_id|
       medium = Medium.find(medium_id)
       medium.update_attributes(state_id: state)
     end
-    redirect_to media_url
+
+     medium = Medium.find(params[:medium_ids].first) if params[:medium_ids].present?
+    if medium.present? && medium.moves.present?
+      redirect_to medium.moves.first
+    else
+      redirect_to media_url
+    end
+
   end
 
 end
