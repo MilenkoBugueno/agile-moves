@@ -10,4 +10,14 @@ class Certification < ActiveRecord::Base
 
   has_and_belongs_to_many :projects
 
+  def get_registration(user)
+    user_registration= nil
+    self.registrations.each do |registration|
+      if registration.user_id == user.id
+        user_registration = registration
+      end
+    end
+    return user_registration
+  end
+
 end

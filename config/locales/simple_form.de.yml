@@ -37,6 +37,7 @@ de:
         conditions: "Zertifizierungsbedingungen"
         registrations: "Registrierungen"
         certifications: "Zertifizierungen"
+        myprogress: "Mein Fortschritt"
       registration:
         user_id: "Kandidat"
         start_date: "Zertifizierungsstart"

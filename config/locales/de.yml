@@ -77,6 +77,8 @@ de:
          skipped: "übersprungen"
          send: "Senden zu"
          backto: "Zurück zu:"
+         registrate: "registriere dich"
+         registrated: "registriert"
       titles:
             edit: "Bearbeiten %{model}"
             save: "Speichern %{model}"

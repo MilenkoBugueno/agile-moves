@@ -1,4 +1,39 @@
 
 .row
   .col-md-12
-    Hallo
+    .page-header
+      %h3=t("navigation.certifications")
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+          %th= t("simple_form.labels.certification.title")
+          %th= t("simple_form.labels.certification.label")
+          %th= t("simple_form.labels.certification.level")
+          %th= t("simple_form.labels.certification.description")
+          %th= t("simple_form.labels.certification.registrations")
+          %th= t("simple_form.labels.certification.certifications")
+          %th=t '.actions', :default => t("simple_form.labels.certification.myprogress")
+      %tbody
+        - @certifications.each do |certification|
+          %tr
+            %td
+            %td= link_to certification.title, certification_path(certification)
+            %td= certification.label
+            %td
+              = get_level_title(certification.level_id)
+            %td
+            %td= certification.registrations.count
+            %td="0"
+            %td
+              -my_registration = certification.get_registration(current_user)
+              -if my_registration.present?
+                .progress
+                  .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{my_registration.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{certification.moves_number}", "style"=>"width: #{get_progressbar_width(my_registration)}%;"}
+                    =my_registration.moves.count
+                  %p{:style => 'float: right;'}
+                    =certification.moves_number if certification.moves_number.present?
+              -else
+                = link_to t("helpers.links.registrate"), new_registration_path(certification_id: certification.id), :class => 'btn btn-primary btn-mini'
+
+

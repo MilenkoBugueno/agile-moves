@@ -80,6 +80,8 @@ en:
           skipped: "übersprungen"
           send: "send to"
           backto: "Back to:"
+          registrate: "registrate"
+          registrated: "registrated"
       titles:
           edit: "Edit %{model}"
           save: "Save %{model}"

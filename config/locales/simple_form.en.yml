@@ -37,6 +37,7 @@ en:
         conditions: "Certification Requirements"
         registrations: "Registrations"
         certifications: "Certifications"
+        myprogress: "My progress"
 
       registration:
         user_id: "Candidate"

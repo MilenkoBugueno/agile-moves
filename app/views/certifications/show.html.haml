@@ -50,7 +50,7 @@
             %td= registration.end_date.to_s(:short) if registration.end_date.present?
             %td
               .progress
-                .progress-bar{:role=>"progressbar", "aria-valuenow"=>"#{registration.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@certification.moves_number}", "style"=>"width: #{get_progressbar_width(registration)}%;"}
+                .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{registration.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@certification.moves_number}", "style"=>"width: #{get_progressbar_width(registration)}%;"}
                   =registration.moves.count
                 %p{:style => 'float: right;'}
                   =@certification.moves_number if @certification.moves_number.present?
