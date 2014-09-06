@@ -119,6 +119,8 @@ de:
         rating:
           thumbrating: "Daumenbewertung"
           starrating: "Sternebewertung"
+        nominated: "Nominierte Moves"
+        peer_review: "Peer Review"
   tomatoes:
       rating:
           starrating: "Fun rating"
@@ -225,3 +227,4 @@ de:
     edit: "Stück Editieren"
   move:
     nominate: "Nominiere diesen Move zu einer Zertifizierung"
+    nominate_new: "Neuer Move Nominieren"

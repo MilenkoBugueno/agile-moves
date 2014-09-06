@@ -15,19 +15,23 @@
           %strong=t("simple_form.labels.registration.user_id") + ": "
           ="#{@registration.user.name}" if @registration.user.present?
         %p
+          %strong=t("simple_form.labels.registration.user_ids") + ": "
+          -@registration.users.each do |user|
+            ="#{user.name}; "
+        %p
           %strong=t("simple_form.labels.certification.move_type") + ": "
           ="#{@registration.certification.move_type.title}" if @registration.certification.move_type.present?
         %p
           %strong=t("simple_form.labels.registration.progress") + ": "
           .progress
-            .progress-bar{:role=>"progressbar", "aria-valuenow"=>"#{@registration.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@registration.certification.moves_number}", "style"=>"width: #{get_progressbar_width(@registration)}%;"}
+            .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{@registration.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@registration.certification.moves_number}", "style"=>"width: #{get_progressbar_width(@registration)}%;"}
               =@registration.moves.count
             %p{:style => 'float: right;'}
               =@registration.certification.moves_number if @registration.certification.moves_number.present?
 
 .panel.panel-default
   .panel-heading
-    %h4= t("moves.index")
+    %h4= t("moves.nominated")
   .panel-body
     %table.table.table-striped
       %thead
@@ -55,7 +59,7 @@
               = link_to t('.edit', :default => t("helpers.links.edit")), edit_move_path(move), :class => 'btn btn-default btn-mini'
               = link_to t('.destroy', :default => t("helpers.links.destroy")), move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-    = link_to t('.new', :default => t("helpers.links.new")), new_move_path(project_id: @project.id, registration_id: @registration.id, move_type: @registration.certification.move_type_id), :class => 'btn btn-primary'
+    = link_to t("move.nominate_new"), new_move_path(project_id: @project.id, registration_id: @registration.id, move_type: @registration.certification.move_type_id), :class => 'btn btn-primary'
 
 
 

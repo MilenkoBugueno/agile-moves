@@ -125,6 +125,8 @@ en:
       rating:
         starrating: "Star rating"
         thumbrating: "Thumb rating"
+      nominated: "Nominated Moves"
+      peer_review: "Peer Review"
   tomatoes:
       rating:
           starrating: "Fun rating"
@@ -172,3 +174,4 @@ en:
     edit: "Edit composition"
   move:
     nominate: "Nominate this move to a certification"
+    nominate_new: "Nominate new move"

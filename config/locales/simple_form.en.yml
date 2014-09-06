@@ -54,3 +54,4 @@ en:
     #     password: 'No special characters, please.'
 
         progress: "Progress"
+        user_ids: "Reviewer Team"
