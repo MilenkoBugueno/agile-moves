@@ -68,43 +68,44 @@ moves_actions = Widget.find_or_create_by_title(:title=> "Moves actions", :path=>
 
 publish_wordpress = Widget.find_or_create_by_title(:title => "Publish wordpress", :path=>"moves/publish_wordpress", :widget_type => 3)
 
+peer_review = Widget.find_or_create_by_title(:title => "Peer review", :path=>"moves/peer_review", :widget_type => 3)
 
 puts 'DEFAULT MOVE TYPES'
 star_move = MoveType.find_or_create_by_title :title => "Team Idea", :star_rating => true, :has_twitter_idea => true
-star_move.widgets = [work_rating, report_rating, move_general, star_rating, moves_actions, comments]
+star_move.widgets = [work_rating, report_rating, move_general, star_rating, moves_actions, comments, peer_review]
 puts 'move type: ' << star_move.title
 
 
 thumbs_move = MoveType.find_or_create_by_title :title => "Review", :thumb_rating => true
-thumbs_move.widgets = [work_rating, report_rating, move_general, thumb_rating, moves_actions, comments]
+thumbs_move.widgets = [work_rating, report_rating, move_general, thumb_rating, moves_actions, comments, peer_review]
 puts 'move type: ' << thumbs_move.title
 
 vision_move = MoveType.find_or_create_by_title :title => "Vision", :thumb_rating => true
-vision_move.widgets = [work_rating, report_rating, move_general, thumb_rating, moves_actions, comments]
+vision_move.widgets = [work_rating, report_rating, move_general, thumb_rating, moves_actions, comments, peer_review]
 puts 'move type: ' << vision_move.title
 
 tomatoes_move = MoveType.find_or_create_by_title :title => "Tomato", :has_tomatoes => true, :tomatoes_number => 1, :star_rating => true
-tomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_retro, tomato_rating, star_rating, comments, moves_actions]
+tomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_retro, tomato_rating, star_rating, comments, moves_actions, peer_review]
 puts 'move type: ' << tomatoes_move.title
 
 teamtomatoes_move = MoveType.find_or_create_by_title :title => "Teamtomato", :has_tomatoes => true, :tomatoes_number => 1, :thumb_rating => true, :star_rating => true
-teamtomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_retro, tomato_rating, star_rating, thumb_rating, comments, tomato_retro, moves_actions]
+teamtomatoes_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_timer, tomato_retro, tomato_rating, star_rating, thumb_rating, comments, tomato_retro, moves_actions, peer_review]
 puts 'move type: ' << teamtomatoes_move.title
 
 user_story_move = MoveType.find_or_create_by_title :title => "User Story Move", :has_tomatoes => true, :tomatoes_number => 0, :thumb_rating => true, :star_rating => true, :is_user_story => true
-user_story_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
+user_story_move.widgets = [work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions, peer_review]
 puts 'move type: ' << user_story_move.title
 
 todo_today_move = MoveType.find_or_create_by_title :title => "Todo Today", :has_tomatoes => true, :tomatoes_number => -1, :thumb_rating => true, :star_rating => true, :make_my_day => true
-todo_today_move.widgets = [plan_todo_today, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
+todo_today_move.widgets = [plan_todo_today, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions, peer_review]
 puts 'move type: ' << todo_today_move.title
 
 sprint_move = MoveType.find_or_create_by_title :title => "Sprint Move", :has_tomatoes => true, :tomatoes_number => -1, :thumb_rating => true, :star_rating => true, :make_my_sprint => true
-sprint_move.widgets = [plan_sprint, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
+sprint_move.widgets = [plan_sprint, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions, peer_review]
 puts 'move type: ' << sprint_move.title
 
 repertoire_move = MoveType.find_or_create_by_title :title => "Repertoire List", :thumb_rating => true, :star_rating => true, :has_media => true
-repertoire_move.widgets = [work_rating, report_rating, move_general, repertoire_list, star_rating, thumb_rating, comments, moves_actions]
+repertoire_move.widgets = [work_rating, report_rating, move_general, repertoire_list, star_rating, thumb_rating, comments, moves_actions, peer_review]
 puts 'move type: ' << repertoire_move.title
 
 

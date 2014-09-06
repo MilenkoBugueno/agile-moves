@@ -4,7 +4,7 @@
   .panel-body
     .page-header
 
-    %h5= t("media.link.current").upcase
+    %h6= t("media.link.current").upcase
     =form_tag sendto_media_path, method: :put do
       =t("helpers.links.send")+":"
       =submit_tag t("media.link.partially"), :name=> "move_to_partial", :class => 'btn btn-mini'
@@ -26,7 +26,7 @@
         %tbody
           = render :partial => 'media/medium', :collection => @move.mediums.where("state_id=1")
 
-    %h5= t("media.link.partially").upcase
+    %h6= t("media.link.partially").upcase
     =form_tag sendto_media_path, method: :put do
       =t("helpers.links.send")+":"
       =submit_tag t("media.link.current"), :name=> "move_to_current", :class => 'btn btn-mini'
@@ -48,9 +48,7 @@
         %tbody
           = render :partial => 'media/medium', :collection => @move.mediums.where("state_id=2")
 
-    %br
-
-    %h5= t("media.link.ready").upcase
+    %h6= t("media.link.ready").upcase
     =form_tag sendto_media_path, method: :put do
       =t("helpers.links.send")+":"
       =submit_tag t("media.link.partially"), :name=> "move_to_partial", :class => 'btn btn-mini'
