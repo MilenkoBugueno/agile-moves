@@ -170,9 +170,9 @@ class MovesController < ApplicationController
 
         if @move.user_story_id.present?
           format.html { redirect_to move_path(@move.user_story_id), notice: message}
-        elsif @todotoday_move.present?
+        elsif @move.tomatoes.present? && @todotoday_move.present?
           format.html { redirect_to @todotoday_move, notice: message}
-        elsif @sprint_move.present?
+        elsif @move.tomatoes.present? && @sprint_move.present?
           format.html { redirect_to @sprint_move, notice: message}
         else
           format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: message}
