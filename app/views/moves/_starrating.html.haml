@@ -36,10 +36,23 @@
     -if @move.move_type.star_rating && !@move.star_rating_by(current_user)
       %h5= t("helpers.links.newstarrating")
       %br
-
+      //rate_me() ist in tomatoes.js
+      %fieldset.star_rating
+        %input{:type => "radio", :id => "star5", :name => "rating", :value => "5", :onClick => "rate_me(5);"}
+        %label{:for => "star5"} dummy
+        %input{:type => "radio", :id => "star4", :name => "rating", :value => "4", :onClick => "rate_me(4);"}
+        %label{:for => "star4"} dummy
+        %input{:type => "radio", :id => "star3", :name => "rating", :value => "3", :onClick => "rate_me(3);"}
+        %label{:for => "star3"} dummy
+        %input{:type => "radio", :id => "star2", :name => "rating", :value => "2", :onClick => "rate_me(2);"}
+        %label{:for => "star2"} dummy
+        %input{:type => "radio", :id => "star1", :name => "rating", :value => "1", :onClick => "rate_me(1);"}
+        %label{:for => "star1"} dummy
+      %br
       =simple_form_for [@move, Rating.new] do |f|
-        = f.input :star_rating, :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
+        //= f.input :star_rating, :collection => 1..5, :as => :radio_buttons, item_wrapper_class: 'inline'
         = f.hidden_field :user_id, :value => current_user.id
+        = f.hidden_field :star_rating, :value => "0"
         .form-actions
           = f.button :submit, :class => 'btn-primary'
           = f.submit t("helpers.links.reject"), :class => 'btn btn-danger', name: "reject_star_rating"
