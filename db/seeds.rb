@@ -47,6 +47,8 @@ report_tomatoes = Widget.find_or_create_by_title(:title => "Report tomatoes", :p
 
 move_general = Widget.find_or_create_by_title(:title => "Move general", :path=>"moves/move_general", :widget_type => 3)
 
+repertoire_list = Widget.find_or_create_by_title(:title => "Repertoire list", :path=>"moves/repertoire_list", :widget_type => 3)
+
 tomatoes_timer = Widget.find_or_create_by_title(:title => "Tomatoes timer", :path=>"moves/timer", :widget_type => 3)
 
 tomato_retro = Widget.find_or_create_by_title(:title => "Tomato retro", :path=>"moves/tomato_retro", :widget_type => 3)
@@ -101,10 +103,15 @@ sprint_move = MoveType.find_or_create_by_title :title => "Sprint Move", :has_tom
 sprint_move.widgets = [plan_sprint, work_tomatoes, report_tomatoes, move_general, tomatoes_list, star_rating, thumb_rating, comments, moves_actions]
 puts 'move type: ' << sprint_move.title
 
+repertoire_move = MoveType.find_or_create_by_title :title => "Repertoire List", :thumb_rating => true, :star_rating => true, :has_media => true
+repertoire_move.widgets = [work_rating, report_rating, move_general, repertoire_list, star_rating, thumb_rating, comments, moves_actions]
+puts 'move type: ' << repertoire_move.title
+
+
 puts 'DEFAULT PROJECTS'
 project = Project.find_or_create_by_title(:title => "Test project")
 project.users = [user, user1, user2]
-project.move_types = [star_move, thumbs_move, tomatoes_move, teamtomatoes_move, user_story_move, todo_today_move, sprint_move]
+project.move_types = [star_move, thumbs_move, tomatoes_move, teamtomatoes_move, user_story_move, repertoire_move, todo_today_move, sprint_move]
 puts 'project: ' << project.title
 
 project2 = Project.find_or_create_by_title(:title => "Test project 2")
