@@ -107,7 +107,7 @@ class MovesController < ApplicationController
 
     @registrations = Registration.all
 
-    @compositions = Medium.joins(:moves).where(:moves => {:user_id => current_user.id}).where(:state_id=> 1)
+    @compositions = Medium.joins(:moves).where(:moves => {:user_id => current_user.id}).where(:state_id=> 1).order('title ASC')
         #Medium.by_move_ids([@move.id, @move.id])
 
     if @user_story.present? || @date.present?

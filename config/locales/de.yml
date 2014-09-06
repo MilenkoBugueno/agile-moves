@@ -15,6 +15,7 @@ de:
       new: "Neues Projekt"
       moves: "Moves"
       newtomato: "Neue Tomate"
+      certificate: "Zertifizierung"
   editaccount:
       edit: "Konto bearbeiten"
       cancelaccount: "Konto löschen"
@@ -222,7 +223,7 @@ de:
     link:
       current: "ÜBE ICH GERADE"
       partially: "TEILWEISE GEÜBT"
-      ready: "AUFGEFÜHRT"
+      ready: "KONZERTREIFE"
     new: "Neues Stück"
     edit: "Stück Editieren"
   move:

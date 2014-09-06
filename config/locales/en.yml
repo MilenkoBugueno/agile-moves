@@ -15,6 +15,7 @@ en:
       new: "New Project"
       moves: "Moves"
       newtomato: "New tomato"
+      certificate: "Certificate"
   editaccount:
       edit: "Edit account"
       cancelaccount: "Cancel my account"
