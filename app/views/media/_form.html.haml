@@ -1,12 +1,11 @@
 = simple_form_for @medium, :html => { :class => 'form-horizontal' } do |f|
-  = f.input :title
-  = f.input :description
-  = f.input :artist
-  = f.input :composer
-  = f.input :arranger
-  = f.input :writer
-  = f.input :catalog
-  = f.input :publisher
+  = f.input :title, input_html: {style: 'height:30px;width: 500px;'}
+  = f.input :artist, input_html: {style: 'height:30px;width: 500px;'}
+  = f.input :composer, input_html: {style: 'height:30px;width: 500px;'}
+  = f.input :arranger, input_html: {style: 'height:30px;width: 500px;'}
+  = f.input :writer, input_html: {style: 'height:30px;width: 500px;'}
+  = f.input :catalog, input_html: {style: 'height:30px;width: 500px;'}
+  = f.input :publisher, input_html: {style: 'height:30px;width: 500px;'}
   -if @medium.new_record? && @move.present?
     = f.hidden_field :move_ids, :value => @move.id
   = f.button :submit, :class => 'btn-primary'

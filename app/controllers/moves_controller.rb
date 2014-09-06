@@ -105,6 +105,9 @@ class MovesController < ApplicationController
 
     @date = params[:date] if params[:date].present?
 
+    @compositions = Medium.joins(:moves).where(:moves => {:user_id => current_user.id}).where(:state_id=> 1)
+        #Medium.by_move_ids([@move.id, @move.id])
+
     if @user_story.present? || @date.present?
       @move_type = MoveType.find_by_tomatoes_number(1)
     elsif params[:make_my_sprint].present?

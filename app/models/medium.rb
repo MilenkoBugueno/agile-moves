@@ -4,6 +4,8 @@ class Medium < ActiveRecord::Base
 
   has_and_belongs_to_many :moves
 
+  scope :by_move_ids, lambda {|uid| joins(:moves).where(["moves.id IN (1,2,3)", [uid]])}
+
   after_initialize :init
 
   private

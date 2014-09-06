@@ -17,8 +17,8 @@
     -if @move.present? && @move.user_story_id.present?
       = f.association :user_story, :collection => @user_stories
     = f.input :title, input_html: {style: 'height:30px;width:500px;'}
-    -if @move_type.present? && @move_type.has_media
-      = f.association :mediums, as: :select, :input_html => { :multiple => false }, :label => t("moves.links.composition")
+    -if @move_type.present? && (@move_type.tomatoes_number == 1 || @move_type.has_twitter_idea) && @compositions.present?
+      = f.association :mediums, as: :select, :input_html => { :multiple => false }, :label => t("moves.links.composition"), :collection => @compositions
     = f.input :body, :as => :ckeditor, :label => t("tomato.goal")
     = f.input :results, :as => :ckeditor, :label => t("tomato.result")
     - if @move_type.present? && @move_type.make_my_sprint
