@@ -29,23 +29,25 @@
           %th= t("simple_form.labels.certification.title")
           %th= t("simple_form.labels.certification.label")
           %th= t("simple_form.labels.certification.level")
-          %th= t("simple_form.labels.certification.description")
-          %th= t("simple_form.labels.certification.registrations")
-          %th= t("simple_form.labels.certification.certifications")
-          %th=t '.actions', :default => t("simple_form.labels.certification.myprogress")
+          %th= t("simple_form.labels.registration.user_id")
+          %th= t("simple_form.labels.registration.user_ids")
+          %th=t '.actions', :default => t("simple_form.labels.certification.progress")
       %tbody
         - @certifications.each do |certification|
+          -my_registration = certification.get_registration(current_user)
           %tr
             %td
             %td= link_to certification.title, certification_path(certification, project_id: @project.id)
             %td= certification.label
             %td
               = get_level_title(certification.level_id)
+            %td= my_registration.user.name if my_registration.present?
             %td
-            %td= certification.registrations.count
-            %td="0"
+              -if my_registration.present?
+                -my_registration.users.each do |user|
+                  = user.name + "- "
             %td
-              -my_registration = certification.get_registration(current_user)
+
               -if my_registration.present?
                 .progress
                   .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{my_registration.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{certification.moves_number}", "style"=>"width: #{get_progressbar_width(my_registration)}%;"}
