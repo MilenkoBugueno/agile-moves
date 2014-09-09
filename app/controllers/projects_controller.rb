@@ -106,7 +106,7 @@ class ProjectsController < ApplicationController
     @user = params[:user] ? params[:user] : current_user.id
     
     @users = User.all
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -115,6 +115,9 @@ class ProjectsController < ApplicationController
 
   def certificate
     @certifications = Certification.all
+
+    user_id = params[:user] ? params[:user] : current_user.id
+    @user = User.find(user_id)
 
     if params[:id].present?
       @project = Project.find(params[:id])
