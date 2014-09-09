@@ -6,9 +6,10 @@
 
     %h6= t("media.link.current").upcase
     =form_tag sendto_media_path, method: :put do
-      =t("helpers.links.send")+":"
-      =submit_tag t("media.link.partially"), :name=> "move_to_partial", :class => 'btn btn-mini'
-      =submit_tag t("media.link.ready"), :name=> "move_to_ready", :class => 'btn btn-mini'
+      -if default_edit_permissions(current_user, @move)
+        =t("helpers.links.send")+":"
+        =submit_tag t("media.link.partially"), :name=> "move_to_partial", :class => 'btn btn-mini'
+        =submit_tag t("media.link.ready"), :name=> "move_to_ready", :class => 'btn btn-mini'
 
       %table.table.table-striped
         %thead
@@ -28,9 +29,10 @@
 
     %h6= t("media.link.partially").upcase
     =form_tag sendto_media_path, method: :put do
-      =t("helpers.links.send")+":"
-      =submit_tag t("media.link.current"), :name=> "move_to_current", :class => 'btn btn-mini'
-      =submit_tag t("media.link.ready"), :name=> "move_to_ready", :class => 'btn btn-mini'
+      -if default_edit_permissions(current_user, @move)
+        =t("helpers.links.send")+":"
+        =submit_tag t("media.link.current"), :name=> "move_to_current", :class => 'btn btn-mini'
+        =submit_tag t("media.link.ready"), :name=> "move_to_ready", :class => 'btn btn-mini'
 
       %table.table.table-striped
         %thead
@@ -50,9 +52,10 @@
 
     %h6= t("media.link.ready").upcase
     =form_tag sendto_media_path, method: :put do
-      =t("helpers.links.send")+":"
-      =submit_tag t("media.link.partially"), :name=> "move_to_partial", :class => 'btn btn-mini'
-      =submit_tag t("media.link.current"), :name=> "move_to_current", :class => 'btn btn-mini'
+      -if default_edit_permissions(current_user, @move)
+        =t("helpers.links.send")+":"
+        =submit_tag t("media.link.partially"), :name=> "move_to_partial", :class => 'btn btn-mini'
+        =submit_tag t("media.link.current"), :name=> "move_to_current", :class => 'btn btn-mini'
 
       %table.table.table-striped
         %thead
@@ -72,5 +75,5 @@
 
 
     %br
-
-    = link_to t('.new', :default => t("helpers.links.new")), new_medium_path(move_id: @move.id), :class => 'btn btn-primary'
+    -if default_edit_permissions(current_user, @move)
+      = link_to t('.new', :default => t("helpers.links.new")), new_medium_path(move_id: @move.id), :class => 'btn btn-primary'

@@ -17,4 +17,18 @@ module ApplicationHelper
     return ""
   end
 
+  def default_edit_permissions(user, object)
+    if !object.present? || !user.present?
+    elsif object.user.present? && object.users.present?
+      ret_val =  (user.has_role? :admin) || (user.id == object.user_id)  || (object.users.include? user)
+    elsif object.user.present?
+      ret_val =  (user.has_role? :admin) || (user.id == object.user_id)
+    else
+      ret_val =  false
+    end
+
+    return ret_val
+
+  end
+
 end
