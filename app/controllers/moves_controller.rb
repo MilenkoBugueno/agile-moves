@@ -98,14 +98,10 @@ class MovesController < ApplicationController
     @states = State.order(:position)
     @states = @states.where(project_id: params[:project_id]) if params[:project_id].present?
 
-    @my_certifications = Registration.where("user_id=?", current_user.id)
-
     @user_story = Move.find(params[:user_story_id]) if params[:user_story_id].present?
     @user_stories = Move.by_user_stories()
 
     @date = params[:date] if params[:date].present?
-
-    @registrations = Registration.all
 
     @compositions = Medium.joins(:moves).where(:moves => {:user_id => current_user.id}).where(:state_id=> 1).order('title ASC')
         #Medium.by_move_ids([@move.id, @move.id])
@@ -122,6 +118,7 @@ class MovesController < ApplicationController
       @move_type = MoveType.first
     end
 
+    @my_registration = get_my_active_registration(current_user, @move_type)
 
     @state = State.find_by_title(params[:state]) if params[:state].present?
 
@@ -223,6 +220,18 @@ class MovesController < ApplicationController
       format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id) }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def get_my_active_registration(user, move_type)
+    @certifications = Certification.where(:move_type_id => move_type.id)
+    @certifications.each do |certification|
+      if certification.get_registration(user).present?
+        return certification.get_registration(user)
+      end
+    end
+    return nil
   end
 
 end

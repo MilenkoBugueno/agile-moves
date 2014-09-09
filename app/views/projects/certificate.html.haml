@@ -37,7 +37,11 @@
           -my_registration = certification.get_registration(current_user)
           %tr
             %td
-            %td= link_to certification.title, certification_path(certification, project_id: @project.id)
+            %td
+              -if my_registration.present?
+                = link_to certification.title, registration_path(my_registration, project_id: @project.id)
+              -else
+                = link_to certification.title, certification_path(certification, project_id: @project.id)
             %td= certification.label
             %td
               = get_level_title(certification.level_id)
