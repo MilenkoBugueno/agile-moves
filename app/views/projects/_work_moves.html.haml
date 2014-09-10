@@ -25,8 +25,8 @@
         /= simple_form_for move, :html => { :class => 'form-horizontal' } do |f|
         /  = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "closed").id
         /  = f.button :submit, :class => 'btn btn-mini btn-danger', :value=> t("moves.links.close")
-        =simple_form_for [move, Rating.new] do |f|
-          = f.hidden_field :user_id, :value => current_user.id
-          = f.submit t("helpers.links.skip"), :class => 'btn btn-mini btn-warning', name: "skip_star_rating"
+        /=simple_form_for [move, Rating.new] do |f|
+        /  = f.hidden_field :user_id, :value => current_user.id
+        /  = f.submit t("helpers.links.skip"), :class => 'btn btn-mini btn-warning', name: "skip_star_rating"
 
 %br

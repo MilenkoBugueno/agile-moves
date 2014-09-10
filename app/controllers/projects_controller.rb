@@ -68,7 +68,8 @@ class ProjectsController < ApplicationController
     @moves = @moves.by_move_type(@move_type.id) unless @move_type.id == nil
 
     @review_moves = Move.order('publish_date ASC').by_project_id(@project.id) if params[:id].present?
-    @review_moves = @review_moves.nominated_and_to_be_reviewed_by() if @review_moves.present?
+    @review_moves = @review_moves.nominated() if @review_moves.present?
+    #@review_moves = @review_moves.by_reviewer(current_user.id)
 
 
 

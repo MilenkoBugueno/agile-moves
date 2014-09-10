@@ -10,4 +10,6 @@ class Registration < ActiveRecord::Base
 
   scope :by_move_type_id, lambda {|uid| joins(:certification).where(["certifications.move_type_id =?", uid])}
 
+  scope :by_user_ids, lambda {|uid| joins(:users).where(["users.id =?", uid])}
+
 end

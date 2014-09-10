@@ -42,7 +42,9 @@ class Move < ActiveRecord::Base
   scope :by_thumb_rating, lambda {joins(:move_type).where(['move_types.thumb_rating =?', true])}
   scope :by_user_stories, lambda {joins(:move_type).where(['move_types.is_user_story =?', true])}
   scope :by_media, lambda {joins(:move_type).where(['move_types.has_media =?', true])}
-  scope :nominated_and_to_be_reviewed_by, lambda {joins(:registration).where(['moves.registration_id IS NOT NULL'])}
+  scope :nominated, lambda {joins(:registration).where(['moves.registration_id IS NOT NULL'])}
+
+  scope :by_reviewer, lambda {|uid| joins(:registration) & Registration.by_user_ids(uid)}
 
   after_initialize :init
 
