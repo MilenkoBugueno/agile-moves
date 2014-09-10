@@ -1,23 +1,22 @@
+%hr
+
+%h4=t("moves.peer_review")
+
 %table.table.table-striped
   %tr
     %th{:width => "40px;"}
-    %th{:width => "200px;"} Title
-    %th{:width => "100px;"} Owner
-    %th{:width => "200px;"} Team
-    %th{:width => "80px;"} Publish date
-    %th{:width => "40px;"} Actions
+    %th{:width => "200px;"}= t("simple_form.labels.certification.title")
+    %th{:width => "100px;"}= t("simple_form.labels.registration.user_id")
+    %th{:width => "200px;"}= t("simple_form.labels.registration.user_ids")
+    %th{:width => "80px;"}= t("simple_form.labels.registration.end_date")
+    %th{:width => "40px;"}= t("helpers.actions")
     
-  - @moves.each do |move|
+  - @review_moves.each do |move|
     -if !move.reviewed_by_me(current_user)
       %tr
         %td
           /rating
-          - if move.move_type.has_twitter_idea
-            = image_tag("idea.png", :width => 25, :height => 25)
-          - elsif move.move_type.has_media
-            = image_tag("song.png", :width => 25, :height => 25)
-          - else
-            = image_tag("bewerten.png", :width => 20, :height => 20)
+          = image_tag(get_move_icon(move), :width => 25, :height => 25)
         %td= link_to create_title(move), move
         %td= move.user.name
         %td

@@ -229,3 +229,4 @@ de:
   move:
     nominate: "Nominiere diesen Move zu einer Zertifizierung"
     nominate_new: "Neuer Move Nominieren"
+    nominated: "Nominiert für:"

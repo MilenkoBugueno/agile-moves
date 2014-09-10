@@ -1,0 +1,32 @@
+%h4=t("moves.index")
+
+%table.table.table-striped
+  %tr
+    %th{:width => "40px;"}
+    %th{:width => "200px;"} Title
+    %th{:width => "100px;"} Owner
+    %th{:width => "200px;"} Team
+    %th{:width => "80px;"} Publish date
+    %th{:width => "40px;"} Actions
+    
+  - @moves.each do |move|
+    %tr
+      %td
+        /rating
+        = image_tag(get_move_icon(move), :width => 25, :height => 25)
+      %td= link_to create_title(move), move
+      %td= move.user.name
+      %td
+        -move.users.each do |reviewer|
+          = reviewer.name
+      %td= move.publish_date.to_s(:short) unless move.publish_date == nil
+      %td
+        /-if move.user == current_user
+        /= simple_form_for move, :html => { :class => 'form-horizontal' } do |f|
+        /  = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "closed").id
+        /  = f.button :submit, :class => 'btn btn-mini btn-danger', :value=> t("moves.links.close")
+        =simple_form_for [move, Rating.new] do |f|
+          = f.hidden_field :user_id, :value => current_user.id
+          = f.submit t("helpers.links.skip"), :class => 'btn btn-mini btn-warning', name: "skip_star_rating"
+
+%br

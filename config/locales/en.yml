@@ -176,3 +176,4 @@ en:
   move:
     nominate: "Nominate this move to a certification"
     nominate_new: "Nominate new move"
+    nominated: "Nominated to:"
