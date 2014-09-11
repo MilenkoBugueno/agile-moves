@@ -72,7 +72,6 @@ class ProjectsController < ApplicationController
     #@review_moves = @review_moves.by_reviewer(current_user.id)
 
 
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
