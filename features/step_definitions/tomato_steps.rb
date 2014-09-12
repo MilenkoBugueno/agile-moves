@@ -87,10 +87,6 @@ end
 
 ### THEN ###
 
-Then(/^I see the message (.*)$/) do |message|
-  page.should have_content message
-end
-
 Then(/^I see (.*) tomatoes in the todo today list$/) do |count|
   for i in 1..count.to_i()
     page.should have_content "Tomato "+ i.to_s()
