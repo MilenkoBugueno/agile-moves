@@ -16,7 +16,7 @@
           /rating
           = image_tag(get_move_icon(move), :width => 25, :height => 25)
         %td= link_to create_title(move), move
-        %td= move.user.name
+        %td= move.user.name if move.user.present?
         %td
           -move.users.each do |reviewer|
             = reviewer.name
