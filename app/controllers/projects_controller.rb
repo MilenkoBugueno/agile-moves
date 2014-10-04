@@ -85,7 +85,7 @@ class ProjectsController < ApplicationController
       @project = Project.all.first
     end
 
-    @moves = Move.order('publish_date ASC')
+    @moves = Move.order('publish_date DESC')
     @moves = @moves.by_user_id(params[:user] ) if params[:user].present?
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
 
@@ -99,7 +99,7 @@ class ProjectsController < ApplicationController
     @moves_by_date = @moves.group_by(&:publish_date)
 
 
-    @tomatoes = Tomato.order('created_at DESC')
+    @tomatoes = Tomato.order('publish_date DESC')
     @tomatoes = @tomatoes.by_user_id(params[:user] ) if params[:user].present?
     @tomatoes = @tomatoes.by_project_id(@project.id) if params[:id].present?
 
