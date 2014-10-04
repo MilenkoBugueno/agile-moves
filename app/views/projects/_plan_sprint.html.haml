@@ -27,17 +27,16 @@
       %th{:width => "200px;"} Title
       %th{:width => "100px;"} Owner
       %th{:width => "80px;"} Publish date
-      %th{:width => "130px;"} Move
     -if @todo_today_tomatoes.present?
       - @todo_today_tomatoes.each do |tomato|
         %tr
           %td= check_box_tag "tomato_ids[]", tomato.id
           %td
             = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
-          %td= link_to tomato.title, tomato
+          %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?
           %td= tomato.user.name
           %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?
+
 
 
 %hr
@@ -65,7 +64,6 @@
         %th{:width => "200px;"} Title
         %th{:width => "100px;"} Owner
         %th{:width => "80px;"} Publish date
-        %th{:width => "130px;"} Move
 
       - if @actual_sprint_tomatoes.present?
         - @actual_sprint_tomatoes.each do |tomato|
@@ -73,10 +71,10 @@
             %td= check_box_tag "tomato_ids[]", tomato.id
             %td
               = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
-            %td= link_to tomato.title, tomato
+            %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?
             %td= tomato.user.name
             %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-            %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?
+
   %hr
 
 -elsif @project.has_make_my_sprint()
@@ -106,7 +104,6 @@
       %th{:width => "200px;"} Title
       %th{:width => "100px;"} Owner
       %th{:width => "80px;"} Publish date
-      %th{:width => "130px;"} Move
 
     - if  @activity_inventory_tomatoes.present?
       - @activity_inventory_tomatoes.each do |tomato|
@@ -114,7 +111,7 @@
           %td= check_box_tag "tomato_ids[]", tomato.id
           %td
             = image_tag(tomato_icon_path(tomato), :width => 20, :height => 20)
-          %td= link_to tomato.title, tomato
+          %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?
           %td= tomato.user.name
           %td= tomato.publish_date.to_s(:short) unless tomato.publish_date == nil
-          %td= link_to create_title(tomato.move), tomato.move if tomato.move.present?
+

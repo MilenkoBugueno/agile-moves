@@ -47,11 +47,11 @@ class TomatoesController < ApplicationController
 
 
     #@wp_categories = wp_getCategories("learningtocode.de", "teamtool", "teamtool01", "1")
-    @wp_categories = Hash.new
-    @wp_blogs = wp_getUsersBlogs("learningtocode.de", "teamtool", "teamtool01")
-    @wp_blogs.each do |blog|
-      @wp_categories[blog] = wp_getCategories(blog, "teamtool", "teamtool01", "1")
-    end
+    #@wp_categories = Hash.new
+    #@wp_blogs = wp_getUsersBlogs("learningtocode.de", "teamtool", "teamtool01")
+    #@wp_blogs.each do |blog|
+    #  @wp_categories[blog] = wp_getCategories(blog, "teamtool", "teamtool01", "1")
+    #end
 
     # Wordpress Veröffentlichung
     if params[:wppublish] == "true"

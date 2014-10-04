@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
 
     @user = params[:user] ? params[:user] : current_user.id
 
-    @moves = Move.order('publish_date ASC')
+    @moves = Move.order('publish_date DESC')
     @moves = @moves.by_user_ids(@user)
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
     @moves = @moves.not_closed
@@ -67,7 +67,7 @@ class ProjectsController < ApplicationController
     end
     @moves = @moves.by_move_type(@move_type.id) unless @move_type.id == nil
 
-    @review_moves = Move.order('publish_date ASC').by_project_id(@project.id) if params[:id].present?
+    @review_moves = Move.order('publish_date DESC').by_project_id(@project.id) if params[:id].present?
     @review_moves = @review_moves.nominated() if @review_moves.present?
     #@review_moves = @review_moves.by_reviewer(current_user.id)
 
