@@ -1,9 +1,6 @@
 AgileMovesOs::Application.routes.draw do
 
 
-  resources :registrations
-
-
   scope "(:locale)" do                   #To change the url from for example http://localhost:3000/users/edit?locale=en
                                       # to http://localhost:3000/en/users/edit
   resources :projects do
