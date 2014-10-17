@@ -11,6 +11,11 @@ jQuery ->
   $('#tomato_publish_date').datepicker
     dateFormat: 'yy-mm-dd'
 
+jQuery ->
+  $("#move_registration_id").parent().parent().hide()
+  $("#toggle_nominate").click ->
+    $("#move_registration_id").parent().parent().show()
+    return
 # Hiding team field. TODO: hide only if move_type.has_team
 # jQuery ->
 #  $('#move_user_ids_1').parent().parent().parent().hide()

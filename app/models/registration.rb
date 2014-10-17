@@ -9,7 +9,7 @@ class Registration < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   scope :by_move_type_id, lambda {|uid| joins(:certification).where(["certifications.move_type_id =?", uid])}
-
+  scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
   scope :by_user_ids, lambda {|uid| joins(:users).where(["users.id =?", uid])}
 
 end

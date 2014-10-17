@@ -40,7 +40,7 @@
           ="#{@move.move_type.title}"
         %p
           %strong=t("move.nominated")
-          =link_to "#{@move.registration.certification.title}", registration_path(@move.registration, project_id: @project.id )if @move.registration.present?
+          =link_to "#{@move.registration.certification.title}", registration_path(@move.registration, project_id: @project.id) if @move.registration.present?
         -if @move.start_date.present? && @move.publish_date.present?
           %p
             %strong=t("moves.links.duration") + ": "

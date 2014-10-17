@@ -118,6 +118,10 @@ class MovesController < ApplicationController
       @move_type = MoveType.first
     end
 
+    @my_certifications = Registration.order("created_at DESC")
+    @my_certifications = @my_certifications.by_user_id(current_user.id)
+    @my_certifications = @my_certifications.by_move_type_id(@move_type.id)
+
     @my_registration = get_my_active_registration(current_user, @move_type)
 
     @state = State.find_by_title(params[:state]) if params[:state].present?
@@ -135,7 +139,10 @@ class MovesController < ApplicationController
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @user_stories = Move.by_user_stories()
 
-    @my_certifications = Registration.where("user_id=?", @move.user.id)
+    @my_certifications = Registration.order("created_at DESC")
+    @my_certifications = @my_certifications.by_user_id(current_user.id)
+
+    @my_registration = get_my_active_registration(current_user, @move_type)
 
   end
 
