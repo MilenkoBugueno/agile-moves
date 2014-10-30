@@ -5,6 +5,12 @@
 ### GIVEN ###
 
 Given(/^(.*) nominates a move for a certification$/) do |name|
+  user = User.find_or_create_by_title(:name => name)
+  registration = FactoryGirl.create(:registration, :title => "Move for certification", :user_id => 1, :move_type_id => move_type.id)
+  move_type = MoveType.find_or_create_by_title(:title => "Vision")
+  move = FactoryGirl.create(:move, :title => "Move for certification", :user_id => 1, :move_type_id => move_type.id)
+
+
   pending
 end
 
