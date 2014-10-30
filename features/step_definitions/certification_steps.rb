@@ -4,6 +4,14 @@
 
 ### GIVEN ###
 
+Given(/^(.*) nominates a move for a certification$/) do |name|
+  pending
+end
+
+Given(/^I am reviewer for his certification$/) do
+  pending
+end
+
 ### WHEN ###
 When(/^I create (.*) new certifications$/) do |count|
   for i in 1..count.to_i
@@ -16,5 +24,13 @@ When(/^I create (.*) new certifications$/) do |count|
 end
 
 
+When(/^I go to my work view$/) do
+  pending
+end
+
 ### THEN ###
 
+
+Then(/^I expect to see the nominated move$/) do
+  pending
+end
