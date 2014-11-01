@@ -59,7 +59,7 @@
               = link_to t('.edit', :default => t("helpers.links.edit")), edit_move_path(move), :class => 'btn btn-default btn-mini'
               = link_to t('.destroy', :default => t("helpers.links.destroy")), move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
 
-    = link_to t("move.nominate_new"), new_move_path(project_id: @project.id, registration_id: @registration.id, move_type: @registration.certification.move_type_id), :class => 'btn btn-primary'
+    = link_to t("move.nominate_new"), new_move_path(project_id: @project.id, registration_id: @registration.id, move_type: @registration.certification.move_type_id), :class => 'btn btn-primary' if @project.present?
 
 
 
