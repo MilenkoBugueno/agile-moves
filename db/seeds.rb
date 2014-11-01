@@ -70,11 +70,11 @@ publish_wordpress = Widget.find_or_create_by_title(:title => "Publish wordpress"
 
 peer_review = Widget.find_or_create_by_title(:title => "Peer review", :path=>"moves/peer_review", :widget_type => 3)
 
+
 puts 'DEFAULT MOVE TYPES'
 star_move = MoveType.find_or_create_by_title :title => "Team Idea", :star_rating => true, :has_twitter_idea => true
 star_move.widgets = [work_rating, report_rating, move_general, star_rating, moves_actions, comments, peer_review]
 puts 'move type: ' << star_move.title
-
 
 thumbs_move = MoveType.find_or_create_by_title :title => "Review", :thumb_rating => true
 thumbs_move.widgets = [work_rating, report_rating, move_general, thumb_rating, moves_actions, comments, peer_review]
@@ -109,14 +109,20 @@ repertoire_move.widgets = [work_rating, report_rating, move_general, repertoire_
 puts 'move type: ' << repertoire_move.title
 
 
+puts 'DEFAULT CERTIFICATIONS'
+vis_03 = Certification.find_or_create_by_title :title => "Warum aufstehen?", :label => "VIS-03", :level_id => 1, :approvements => 2, :move_type_id => vision_move.id
+
+
 puts 'DEFAULT PROJECTS'
 project = Project.find_or_create_by_title(:title => "Test project")
 project.users = [user, user1, user2]
 project.move_types = [star_move, thumbs_move, tomatoes_move, teamtomatoes_move, user_story_move, repertoire_move, todo_today_move, sprint_move]
+project.certifications = [vis_03]
 puts 'project: ' << project.title
 
 project2 = Project.find_or_create_by_title(:title => "Test project 2")
 project2.users = [user, user2]
 project2.move_types = [thumbs_move, tomatoes_move]
+
 puts 'project: ' << project2.title
 
