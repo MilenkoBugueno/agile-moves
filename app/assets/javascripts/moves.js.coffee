@@ -22,3 +22,15 @@ jQuery ->
 #  move_types = $('#move_move_type_id').html()
 #  console.log(move_types)
 #  move_types.hide()
+
+
+#jQuery ->
+#  $("#move_move_type_id").change ->
+#    $.ajax
+#      url: "update_values"
+#      data:
+#        move_type: $("#move_move_type_id option:selected").val()
+#
+#      dataType: "script"
+#
+#    return
