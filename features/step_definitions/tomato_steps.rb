@@ -4,12 +4,13 @@
 
 ### GIVEN ###
 
-Given(/^I am in the plan view$/) do
+Given(/^I am in the (.*) view$/) do |view|
   sign_in_as_first_user()
   visit '/'
   click_link "Test project"
-  click_link "Plan"
+  click_link view
 end
+
 
 Given(/^I am in the sprint plan view$/) do
   sign_in_as_first_user()

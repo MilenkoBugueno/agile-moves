@@ -18,6 +18,10 @@ Given(/^I am reviewer for his certification$/) do
   pending
 end
 
+And(/^A new certification is available$/) do
+  pending
+end
+
 ### WHEN ###
 When(/^I create (.*) new certifications$/) do |count|
   for i in 1..count.to_i
@@ -40,3 +44,14 @@ end
 Then(/^I expect to see the nominated move$/) do
   pending
 end
+
+
+When(/^I am not registered to it$/) do
+  pending
+end
+
+
+And(/^fill the registration with my review team$/) do
+  pending
+end
+

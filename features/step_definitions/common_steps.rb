@@ -15,6 +15,9 @@ When(/^I click in the navigation bar on (.*)$/) do |entry|
   click_link entry
 end
 
+When(/^I click on the button (.*)$/) do |title|
+  click_link title
+end
 
 ### THEN ###
 Then(/^I see the menu entry (.*)$/) do |entry|
@@ -23,4 +26,9 @@ end
 
 Then(/^I see the message (.*)$/) do |message|
   page.should have_content message
+end
+
+
+Then(/^I see the button (.*)$/) do |title|
+  page.should have_link title
 end

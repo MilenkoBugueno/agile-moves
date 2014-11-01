@@ -1,16 +1,19 @@
-Feature: Registrating to a Certification
+Feature: Registration to a Certification
   In order to get a certification
   An user
   Should register to a certification
 
   Scenario: Registration button
-    Given There is a certification available in the certificate view
-    When I am not registered to it
-    Then I see a register button
+    Given I am logged in
+    When I am in the certificate view
+    And A new certification is available
+    Then I see the button register
 
   Scenario: Registration
-    Given There is a certification available in the certificate view
-    And I am not registerd to it
-    When I click on the register button
+    Given I am logged in
+    And I am in the certificate view
+    And A new certification is available
+    When I click on the button register
     And fill the registration with my review team
     Then I see the message Registration was successfully created
+
