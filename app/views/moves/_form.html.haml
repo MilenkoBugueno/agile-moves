@@ -11,15 +11,7 @@
     .row
       .col-md-12
 
-        -if @project.present?
-          - if  @move_type.present?
-            = f.association :move_type, include_blank: false, :collection => @project.move_types, :selected => @move_type.id
-          -else
-            = f.association :move_type, include_blank: false, :collection => @project.move_types
-          = f.association :project, include_blank: false
-        -else
-          = f.association :move_type, include_blank: false
-          = f.association :project, include_blank: false
+        = f.association :project, include_blank: false
         -if @move.present? && @move.user_story_id.present?
           = f.association :user_story, :collection => @user_stories
         = f.input :title, input_html: {style: 'height:30px;width:500px;'}
