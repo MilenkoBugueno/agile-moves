@@ -1,7 +1,11 @@
 - model_class = Move
 .page-header
   -if @move_type.present?
-    %h1=t 'helpers.titles.new' + @move_type.title
+
+    %h2
+      %span
+        = image_tag(get_move_icon_by_move_type(@move_type), :width => 40, :height => 40)
+        =t("helpers.links.new") + " #{@move_type.title} Move"
   -else
     %h1=t 'helpers.titles.new'
 
