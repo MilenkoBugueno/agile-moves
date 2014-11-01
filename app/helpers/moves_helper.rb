@@ -30,4 +30,25 @@ module MovesHelper
     return path
   end
 
+  def get_move_icon_by_move_type(move_type)
+    if move_type.make_my_day
+      path = "todo_today.gif"
+    elsif move_type.make_my_sprint
+      path = "sprint.gif"
+    elsif move_type.is_user_story
+      path = "user_story.png"
+    elsif move_type.has_twitter_idea
+      path = "idea.png"
+    elsif move_type.has_media
+      path = "song.png"
+    elsif move_type.has_tomatoes
+      path = "tomaterot.png"
+    else
+      path = "bewerten.png"
+    end
+
+    return path
+  end
+
+
 end

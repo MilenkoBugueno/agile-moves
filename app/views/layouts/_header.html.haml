@@ -25,7 +25,18 @@
 
     .col-md-3
       -if @move_type.present?
-        = link_to t("projects.newmove"), new_move_path(project_id: @project.id, move_type: @move_type.id), :class => 'btn btn-primary', :type => "button"
+        .btn-group
+          %button.btn.btn-default.dropdown-toggle{:type=>"button", "data-toggle"=>"dropdown"}
+            = t("projects.newmove")
+            %b.caret
+          %ul.dropdown-menu{:role=>"menu"}
+            -@project.move_types.each do |move_type|
+              %span
+                %li
+                  = image_tag(get_move_icon_by_move_type(move_type), :width => 20, :height => 20)
+                  = link_to move_type.title, new_move_path(project_id: @project.id, move_type: move_type.id)
+                  %br
+
       -else
         = link_to t("projects.newmove"), new_move_path(project_id: @project.id), :class => 'btn btn-primary', :type => "button"
     .col-md-3
