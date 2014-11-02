@@ -62,10 +62,9 @@ class ProjectsController < ApplicationController
 
 
     @move_type = MoveType.find(params[:move_type]) if params[:move_type].present?
-    if @move_type == nil || !@move_type.has_view(1)
-      @move_type = @project.move_types.has_widget_type(1).first
-    end
-    @moves = @moves.by_move_type(@move_type.id) unless @move_type.id == nil
+    @move_type_id = @move_type.present? ? @move_type.id : nil
+
+    @moves = @moves.by_move_type(@move_type.id) if @move_type.present?
 
     @review_moves = Move.order('publish_date DESC').by_project_id(@project.id) if params[:id].present?
     @review_moves = @review_moves.nominated() if @review_moves.present?

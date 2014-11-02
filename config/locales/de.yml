@@ -122,6 +122,7 @@ de:
           starrating: "Sternebewertung"
         nominated: "Nominierte Moves"
         peer_review: "Peer Review"
+        all: "Alle Moves"
   tomatoes:
       rating:
           starrating: "Fun rating"

@@ -1,6 +1,10 @@
 .row
   .col-md-2
     .list-group
+      -if !@move_type.present?
+        = link_to t("moves.all"), work_projects_path(id: @project.id, date: @date), :class => "list-group-item list-group-item-info active"
+      -else
+        = link_to t("moves.all"), work_projects_path(id: @project.id, date: @date), :class => "list-group-item list-group-item-info"
       -@project.move_types.each do |move_type|
         -if move_type.has_view(1)
           -if @move_type == move_type

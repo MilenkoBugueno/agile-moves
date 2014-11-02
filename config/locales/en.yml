@@ -128,6 +128,7 @@ en:
         thumbrating: "Thumb rating"
       nominated: "Nominated Moves"
       peer_review: "Peer Review"
+      all: "All Moves"
   tomatoes:
       rating:
           starrating: "Fun rating"

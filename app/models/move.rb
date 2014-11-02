@@ -1,7 +1,7 @@
 class Move < ActiveRecord::Base
   attr_accessible :body, :move_type_id, :user_id, :title, :user_ids, :state_id, :publish_date, :start_date, \
             :project_id, :category_id, :planned_at, :user_story_id, :results, :medium_ids, :registration_id
-  validates_presence_of :title, :move_type_id
+  validates_presence_of :title
   
   belongs_to :user
   belongs_to :move_type

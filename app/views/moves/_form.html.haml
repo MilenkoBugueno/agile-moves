@@ -10,7 +10,7 @@
 
     .row
       .col-md-12
-
+        = f.hidden_field  :move_type_id, :value => @move_type.id
         = f.association :project, include_blank: false
         -if @move.present? && @move.user_story_id.present?
           = f.association :user_story, :collection => @user_stories
@@ -55,7 +55,7 @@
             = text_field_tag "txtTomatoNo", nil, "value" => 1, "style" => "height:30px;width:3em;"
           = f.button :submit, :class => 'btn-primary'
           -if @project.present?
-            = link_to "Cancel", work_projects_path(:id => @project.id, :move_type => @move_type.id), :class => 'btn'
+            = link_to "Cancel", work_projects_path(:id => @project.id, :move_type => @move_type_id), :class => 'btn'
           -else
             = link_to "Cancel", root_path, :class => 'btn'
 
