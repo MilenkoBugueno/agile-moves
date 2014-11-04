@@ -24,6 +24,10 @@ Then(/^I see the menu entry (.*)$/) do |entry|
   page.should have_content entry
 end
 
+Then(/^I see the entry (.*)$/) do |entry|
+  page.should have_content entry
+end
+
 Then(/^I see the message (.*)$/) do |message|
   page.should have_content message
 end

@@ -18,9 +18,10 @@ Given(/^I am reviewer for his certification$/) do
   pending
 end
 
-And(/^A new certification is available$/) do
-  pending
+And(/^I am not registered to any certification$/) do
+  #pending: when the database is setup, there are no registrations
 end
+
 
 ### WHEN ###
 When(/^I create (.*) new certifications$/) do |count|
@@ -41,6 +42,8 @@ end
 ### THEN ###
 
 
+
+
 Then(/^I expect to see the nominated move$/) do
   pending
 end
@@ -52,6 +55,9 @@ end
 
 
 And(/^fill the registration with my review team$/) do
-  pending
+  check "user1"
+  check "user2"
+  click_button "Create Registration"
 end
+
 

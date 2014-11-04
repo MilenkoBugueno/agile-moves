@@ -110,13 +110,13 @@ puts 'move type: ' << repertoire_move.title
 
 
 puts 'DEFAULT CERTIFICATIONS'
-vis_03 = Certification.find_or_create_by_title :title => "Warum aufstehen?", :label => "VIS-03", :level_id => 1, :approvements => 2, :move_type_id => vision_move.id
+vis_03 = Certification.find_or_create_by_title :title => "Warum aufstehen?", :label => "VIS-03", :level_id => 1, :approvements => 2, :move_type_id => vision_move.id, :moves_number => 10
 
 
 puts 'DEFAULT PROJECTS'
 project = Project.find_or_create_by_title(:title => "Test project")
 project.users = [user, user1, user2]
-project.move_types = [star_move, thumbs_move, tomatoes_move, teamtomatoes_move, user_story_move, repertoire_move, todo_today_move, sprint_move]
+project.move_types = [star_move, vision_move, thumbs_move, tomatoes_move, teamtomatoes_move, user_story_move, repertoire_move, todo_today_move, sprint_move]
 project.certifications = [vis_03]
 puts 'project: ' << project.title
 
