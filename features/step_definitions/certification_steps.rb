@@ -4,6 +4,12 @@
 
 ### GIVEN ###
 
+Given(/^I am registered to (.*)$/) do |cert_short_name|
+  certification = Certification.find_or_create_by_label(:label => cert_short_name)
+  @registration = FactoryGirl.create(:registration, :user_id => 1, :certification_id => certification.id)
+
+end
+
 Given(/^(.*) nominates a move for a certification$/) do |name|
   user = User.find_or_create_by_title(:name => name)
   registration = FactoryGirl.create(:registration, :title => "Move for certification", :user_id => 1, :move_type_id => move_type.id)
@@ -41,17 +47,6 @@ end
 
 ### THEN ###
 
-
-
-
-Then(/^I expect to see the nominated move$/) do
-  pending
-end
-
-
-When(/^I am not registered to it$/) do
-  pending
-end
 
 
 And(/^fill the registration with my review team$/) do

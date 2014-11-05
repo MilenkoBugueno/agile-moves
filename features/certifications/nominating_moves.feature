@@ -4,7 +4,8 @@ Feature: Nominating Moves
   Should nominate moves to a certification
 
   Scenario: I can nominate vision moves to the certification VIS-03
-    Given I am registered to VIS-03
+    Given I am logged in
+    And I am registered to VIS-03
     When I'm creating a 'vision' move
     Then I see the button Nominate
 

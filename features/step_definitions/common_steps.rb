@@ -36,3 +36,4 @@ end
 Then(/^I see the button (.*)$/) do |title|
   page.should have_link title
 end
+

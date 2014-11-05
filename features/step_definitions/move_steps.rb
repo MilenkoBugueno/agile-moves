@@ -39,7 +39,7 @@ end
 def create_move(move_type, date, user_id, num)
   visit '/'
   click_link "Test project"
-  first(:link, "New Move").click
+  first(:link, "New " + move_type.title).click
   select move_type.title, :from => "Move type"
   fill_in "Title", :with => move_type.title + " " +num.to_s
   click_button "Create Move"
@@ -65,7 +65,16 @@ Given /^I have no moves$/ do
 end
 
 
+
 ### WHEN ###
+
+
+When(/^I'm creating a '(.*)' move$/) do |move_type|
+  move_type = MoveType.find_or_create_by_title(:title => move_type)
+  visit '/projects/work?id=1'
+  first(:link, "New " + move_type.title).click
+
+end
 
 When(/^I create a '(.*)' move$/) do |move_type|
   move_type = MoveType.find_or_create_by_title(:title => move_type)
