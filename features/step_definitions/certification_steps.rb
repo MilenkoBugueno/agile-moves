@@ -6,15 +6,15 @@
 
 Given(/^I am registered to (.*)$/) do |cert_short_name|
   certification = Certification.find_or_create_by_label(:label => cert_short_name)
-  @registration = FactoryGirl.create(:registration, :user_id => 1, :certification_id => certification.id)
+  @registration = FactoryGirl.create(:registration, :user_id => @user.id, :certification_id => certification.id)
 
 end
 
 Given(/^(.*) nominates a move for a certification$/) do |name|
   user = User.find_or_create_by_title(:name => name)
-  registration = FactoryGirl.create(:registration, :title => "Move for certification", :user_id => 1, :move_type_id => move_type.id)
+  registration = FactoryGirl.create(:registration, :title => "Move for certification", :user_id => @user.id, :move_type_id => move_type.id)
   move_type = MoveType.find_or_create_by_title(:title => "Vision")
-  move = FactoryGirl.create(:move, :title => "Move for certification", :user_id => 1, :move_type_id => move_type.id)
+  move = FactoryGirl.create(:move, :title => "Move for certification", :user_id => @user.id, :move_type_id => move_type.id)
 
 
   pending

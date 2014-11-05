@@ -9,7 +9,7 @@ Feature: Certification List for Admins
     Then I see the menu entry Certifications
 
   Scenario: Create a new Certification
-    Given I am in the plan view
+    Given I am logged in as a admin
     And I am in the Certifications page
     When I create 1 new certifications
     Then I see the message Certification was successfully created

@@ -1,14 +1,6 @@
 ### UTILITY METHODS ###
 
 
-def sign_in_as_first_user
-  visit '/users/sign_out'
-  visit '/users/sign_in'
-  fill_in "Email", :with => "user@example.com"
-  fill_in "Password", :with => "changeme"
-  click_button "Sign in"
-end
-
 def create_tomatoes(num, date, user_id)
   @tomatoes = []
   for i in 0..num

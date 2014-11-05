@@ -52,6 +52,11 @@ def sign_in
   click_button "Sign in"
 end
 
+def add_to_default_project
+  @project = Project.find_or_create_by_title("Test project")
+  @project.users << @user
+end
+
 ### GIVEN ###
 Given /^I am not logged in$/ do
   visit '/users/sign_out'
@@ -60,6 +65,7 @@ end
 Given /^I am logged in$/ do
   create_user
   sign_in
+  add_to_default_project
 end
 
 Given /^I am logged in as a admin$/ do

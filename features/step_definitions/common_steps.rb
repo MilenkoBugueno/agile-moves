@@ -16,7 +16,7 @@ When(/^I click in the navigation bar on (.*)$/) do |entry|
 end
 
 When(/^I click on the button (.*)$/) do |title|
-  click_link title
+  first( :link, title).click
 end
 
 ### THEN ###

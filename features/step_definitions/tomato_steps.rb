@@ -5,7 +5,6 @@
 ### GIVEN ###
 
 Given(/^I am in the (.*) view$/) do |view|
-  sign_in_as_first_user()
   visit '/'
   click_link "Test project"
   click_link view
@@ -13,7 +12,6 @@ end
 
 
 Given(/^I am in the sprint plan view$/) do
-  sign_in_as_first_user()
   visit '/'
   click_link "Test project"
   click_link "Plan"
@@ -25,20 +23,17 @@ Given(/^no sprint is planned$/) do
 end
 
 Given(/^I have (.*) moves with unplanned tomatoes$/) do |count|
-  sign_in_as_first_user()
   move_type = MoveType.find_or_create_by_title(:title => "Tomato")
   create_moves(move_type, Date.today, 1, count.to_i)
 end
 
 
 Given(/^I have (.*) moves with tomatoes planned for today$/) do |count|
-  sign_in_as_first_user()
   move_type = MoveType.find_or_create_by_title(:title => "Tomato")
   create_moves(move_type, Date.today, 1, count.to_i)
 end
 
 Given(/^I have (.*) moves with tomatoes planned for yesterday$/) do |count|
-  sign_in_as_first_user()
   move_type = MoveType.find_or_create_by_title(:title => "Tomato")
   create_moves(move_type, Date.yesterday, 1, count.to_i)
 end
