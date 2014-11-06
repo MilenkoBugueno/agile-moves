@@ -37,6 +37,16 @@ def create_move(move_type, date, user_id, num)
   click_button "Create Move"
 end
 
+def nominate_move(move_type, date, user_id, num, reg)
+  visit '/'
+  click_link "Test project"
+  first(:link, "New " + move_type.title).click
+  click_link "Nominate"
+  select reg.certification_label, :from => "Nominate this move"
+  fill_in "Title", :with => move_type.title + " " +num.to_s
+  click_button "Create Move"
+end
+
 def create_moves(move_type, date, user_id, count)
   for i in 1..count
     create_move(move_type, date, user_id, i)
@@ -67,6 +77,16 @@ When(/^I'm creating a '(.*)' move$/) do |move_type|
   first(:link, "New " + move_type.title).click
 
 end
+
+When(/^I nominate a '(.*)' move to (.*)$/) do |move_type, certification|
+  move_type = MoveType.find_or_create_by_title(:title => move_type)
+  cert = Certification.find_or_create_by_label(certification)
+  reg = Registration.find_by_certification_id(cert.id)
+  nominate_move(move_type, Date.today, @user.id, 1, reg)
+
+end
+
+
 
 When(/^I create a '(.*)' move$/) do |move_type|
   move_type = MoveType.find_or_create_by_title(:title => move_type)

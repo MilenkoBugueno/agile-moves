@@ -41,6 +41,7 @@ When(/^I create (.*) new certifications$/) do |count|
 end
 
 
+
 When(/^I go to my work view$/) do
   pending
 end

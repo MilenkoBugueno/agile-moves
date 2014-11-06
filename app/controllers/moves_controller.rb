@@ -172,9 +172,13 @@ class MovesController < ApplicationController
       if @move.save
 
         if tomatoes_number > 1
-          message =  "#{tomatoes_number} Moves were successfully created."
+          message =  "#{tomatoes_number} Moves were successfully created"
         else
-          message =  "Move was successfully created."
+          message =  "Move was successfully created"
+        end
+
+        if @move.registration.present?
+          message <<  " and nominated to the certification #{@move.registration.certification.label}"
         end
 
         if @move.user_story_id.present?

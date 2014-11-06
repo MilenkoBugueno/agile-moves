@@ -19,6 +19,7 @@ When(/^I click on the button (.*)$/) do |title|
   first( :link, title).click
 end
 
+
 ### THEN ###
 Then(/^I see the menu entry (.*)$/) do |entry|
   page.should have_content entry

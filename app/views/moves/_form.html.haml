@@ -3,7 +3,7 @@
     .row
       .col-md-10
         -if @my_registration.present?
-          =f.association :registration, :collection => @my_certifications, :label => t("move.nominate_move"), :label_method => lambda { |registration| "#{registration.certification.label} (#{get_level_title(registration.certification.level_id)}) | #{registration.user.name}" }, input_html: {style: 'height:30px;width:280px;'}
+          =f.association :registration, :collection => @my_certifications, :label => t("move.nominate_move"), :label_method => lambda { |registration| registration.certification_label }, input_html: {style: 'height:30px;width:280px;'}
       .col-md-2
         -if @my_registration.present?
           = link_to t("move.nominate"), "#", :class => 'btn', :id => "toggle_nominate", :style => 'float: right;'
