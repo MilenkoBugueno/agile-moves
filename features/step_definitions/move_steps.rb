@@ -42,7 +42,7 @@ def nominate_move(move_type, date, user_id, num, reg)
   click_link "Test project"
   first(:link, "New " + move_type.title).click
   click_link "Nominate"
-  select reg.certification_label, :from => "Nominate this move"
+  find('#move_registration_id').find(:xpath, 'option[2]').select_option
   fill_in "Title", :with => move_type.title + " " +num.to_s
   click_button "Create Move"
 end

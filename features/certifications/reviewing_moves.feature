@@ -5,7 +5,7 @@ Feature: Reviewing Moves
 
 
   Scenario: As Reviewer I can review nominated moves
-    Given user1 nominates a move for a certification
-    And I am reviewer for his certification
+    Given mark nominates a Vision move for VIS-03
+    And I am reviewer for the certification
     When I go to my work view
     Then I expect to see the nominated move

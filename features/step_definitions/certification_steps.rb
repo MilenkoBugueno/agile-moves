@@ -2,6 +2,8 @@
 ### UTILITY METHODS ###
 
 
+
+
 ### GIVEN ###
 
 Given(/^I am registered to (.*)$/) do |cert_short_name|
@@ -10,17 +12,17 @@ Given(/^I am registered to (.*)$/) do |cert_short_name|
 
 end
 
-Given(/^(.*) nominates a move for a certification$/) do |name|
-  user = User.find_or_create_by_title(:name => name)
-  registration = FactoryGirl.create(:registration, :title => "Move for certification", :user_id => @user.id, :move_type_id => move_type.id)
-  move_type = MoveType.find_or_create_by_title(:title => "Vision")
-  move = FactoryGirl.create(:move, :title => "Move for certification", :user_id => @user.id, :move_type_id => move_type.id)
+Given(/^(.*) nominates a (.*) move for (.*)$/) do |name, mv_tp, cert|
+  user = create_user_by_name(name)
+  @nominator = FactoryGirl.create(:user, email: user[:email])
+  certification = Certification.find_or_create_by_label(cert)
+  @registration = FactoryGirl.create(:registration, :user_id => @nominator.id, :certification_id => certification.id)
+  move_type = MoveType.find_or_create_by_title(mv_tp)
+  @move = FactoryGirl.create(:move, :title => "Move for certification", :user_id => @nominator.id, :move_type_id => move_type.id, :registration_id => @registration.id)
 
-
-  pending
 end
 
-Given(/^I am reviewer for his certification$/) do
+Given(/^I am reviewer for the certification$/) do
   pending
 end
 

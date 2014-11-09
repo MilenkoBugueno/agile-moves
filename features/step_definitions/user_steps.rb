@@ -5,6 +5,13 @@ def create_visitor
     :password => "changeme", :password_confirmation => "changeme" }
 end
 
+def create_user_by_name(name)
+  user ||= { :name => name, :email => name+"@peer.com",
+             :password => "changeme", :password_confirmation => "changeme" }
+  return user
+end
+
+
 def find_user
   @user ||= User.first conditions: {:email => @visitor[:email]}
 end
