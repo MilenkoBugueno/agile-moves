@@ -20,7 +20,7 @@
   - @moves.each do |move|
     %tr
       %td= link_to create_title(move), move
-      %td= move.project.title
+      %td= move.project.title if move.project.present?
       %td= move.user.name if move.user.present?
       %td
         -move.users.each do |reviewer|

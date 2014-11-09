@@ -59,10 +59,24 @@ def sign_in
   click_button "Sign in"
 end
 
+def sign_in_as(user)
+  visit '/users/sign_in'
+  fill_in "Email", :with => user.email
+  fill_in "Password", :with => user.password
+  click_button "Sign in"
+end
+
+
 def add_to_default_project
   @project = Project.find_or_create_by_title("Test project")
   @project.users << @user
 end
+
+def add_user_to_default_project(user)
+  @project = Project.find_or_create_by_title("Test project")
+  @project.users << user
+end
+
 
 ### GIVEN ###
 Given /^I am not logged in$/ do

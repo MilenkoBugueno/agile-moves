@@ -67,9 +67,8 @@ class ProjectsController < ApplicationController
     @moves = @moves.by_move_type(@move_type.id) if @move_type.present?
 
     @review_moves = Move.order('publish_date DESC').by_project_id(@project.id) if params[:id].present?
-    @review_moves = @review_moves.nominated() if @review_moves.present?
-    #@review_moves = @review_moves.by_reviewer(current_user.id)
-
+    @registrations = Registration.order('created_at DESC').by_user_ids(current_user.id)
+    @review_moves = @review_moves.by_reviewer(current_user.id)
 
     respond_to do |format|
       format.html # show.html.erb

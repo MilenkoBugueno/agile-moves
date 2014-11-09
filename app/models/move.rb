@@ -44,7 +44,7 @@ class Move < ActiveRecord::Base
   scope :by_media, lambda {joins(:move_type).where(['move_types.has_media =?', true])}
   scope :nominated, lambda {joins(:registration).where(['moves.registration_id IS NOT NULL'])}
 
-  scope :by_reviewer, lambda {|uid| joins(:registration) & Registration.by_user_ids(uid)}
+  scope :by_reviewer, lambda {|uid| joins(:registration).where(registration_id: Registration.by_user_ids(uid).map(&:id)) }
 
   after_initialize :init
 

@@ -18,13 +18,24 @@ Given(/^(.*) nominates a (.*) move for (.*)$/) do |name, mv_tp, cert|
   certification = Certification.find_or_create_by_label(cert)
   @registration = FactoryGirl.create(:registration, :user_id => @nominator.id, :certification_id => certification.id)
   move_type = MoveType.find_or_create_by_title(mv_tp)
-  @move = FactoryGirl.create(:move, :title => "Move for certification", :user_id => @nominator.id, :move_type_id => move_type.id, :registration_id => @registration.id)
+  @nominated_move = FactoryGirl.create(:move, :title => "Move for certification", :user_id => @nominator.id, :move_type_id => move_type.id, :registration_id => @registration.id)
 
 end
 
 Given(/^I am reviewer for the certification$/) do
-  pending
+  @me = create_user_by_name("me")
+  @reviewer = FactoryGirl.create(:user, email: @me[:email])
+  add_user_to_default_project(@reviewer)
+  @registration.users = [@reviewer]
+
 end
+
+Given(/^I am not reviewer for the certification$/) do
+  @me = create_user_by_name("me")
+  @reviewer = FactoryGirl.create(:user, email: @me[:email])
+  add_user_to_default_project(@reviewer)
+end
+
 
 And(/^I am not registered to any certification$/) do
   #pending: when the database is setup, there are no registrations
@@ -45,7 +56,9 @@ end
 
 
 When(/^I go to my work view$/) do
-  pending
+  sign_in_as(@reviewer)
+  visit '/projects/work?id=1'
+
 end
 
 ### THEN ###
@@ -59,3 +72,10 @@ And(/^fill the registration with my review team$/) do
 end
 
 
+Then(/^I expect to see the nominated move$/) do
+  page.should have_content @nominated_move.title
+end
+
+Then(/^I dont expect to see the nominated move$/) do
+  page.should_not have_content @nominated_move.title
+end

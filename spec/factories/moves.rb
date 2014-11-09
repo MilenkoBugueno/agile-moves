@@ -8,5 +8,6 @@ FactoryGirl.define do
     title "MyText"
     state_id 1
     publish_date Date.today()
+    project_id 1
   end
 end
