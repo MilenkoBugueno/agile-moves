@@ -12,13 +12,17 @@ Given(/^I am registered to (.*)$/) do |cert_short_name|
 
 end
 
-Given(/^(.*) nominates a (.*) move for (.*)$/) do |name, mv_tp, cert|
+Given(/^(.*) nominates (.*) (.*) moves for (.*)$/) do |name, numb, mv_tp, cert|
   user = create_user_by_name(name)
   @nominator = FactoryGirl.create(:user, email: user[:email])
   certification = Certification.find_or_create_by_label(cert)
   @registration = FactoryGirl.create(:registration, :user_id => @nominator.id, :certification_id => certification.id)
   move_type = MoveType.find_or_create_by_title(mv_tp)
-  @nominated_move = FactoryGirl.create(:move, :title => "Move for certification", :user_id => @nominator.id, :move_type_id => move_type.id, :registration_id => @registration.id)
+  @nominated_moves = []
+  for i in 1..numb.to_i
+    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @nominator.id, :move_type_id => move_type.id, :registration_id => @registration.id)
+    @nominated_moves << nominated_move
+  end
 
 end
 
@@ -72,10 +76,14 @@ And(/^fill the registration with my review team$/) do
 end
 
 
-Then(/^I expect to see the nominated move$/) do
-  page.should have_content @nominated_move.title
+Then(/^I expect to see the nominated moves$/) do
+  @nominated_moves.each do |move|
+    page.should have_content move.title
+  end
 end
 
-Then(/^I dont expect to see the nominated move$/) do
-  page.should_not have_content @nominated_move.title
+Then(/^I dont expect to see the nominated moves$/) do
+  @nominated_moves.each do |move|
+    page.should_not have_content move.title
+  end
 end
