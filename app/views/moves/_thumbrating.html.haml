@@ -32,8 +32,6 @@
                 =raw(rating.body)
 
     -if @move.move_type.thumb_rating && !@move.thumb_rating_by(current_user)
-      %h5= t("helpers.links.newthumbrating")
-      %br
 
       =simple_form_for [@move, Rating.new] do |f|
         = f.hidden_field :user_id, :value => current_user.id

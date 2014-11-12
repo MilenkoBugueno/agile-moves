@@ -19,6 +19,13 @@ When(/^I click on the button (.*)$/) do |title|
   first( :link, title).click
 end
 
+When(/^I go to my (.*) view$/) do |view|
+  visit '/'
+  click_link "Test project"
+  click_link view
+
+end
+
 
 ### THEN ###
 Then(/^I see the menu entry (.*)$/) do |entry|

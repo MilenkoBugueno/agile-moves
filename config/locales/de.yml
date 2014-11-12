@@ -118,7 +118,7 @@ de:
           select_all: "Alle wählen"
           select_none: "Alle abwählen"
         rating:
-          thumbrating: "Daumenbewertung"
+          thumbrating: "Genehmigung"
           starrating: "Sternebewertung"
         nominated: "Nominierte Moves"
         peer_review: "Peer Review"

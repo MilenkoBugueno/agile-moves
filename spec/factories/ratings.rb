@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :rating do
-    body "MyText"
-    star_rating 1
-    thumb_rating 1
+    body "Rating Body"
+    star_rating -1
+    thumb_rating -1
     user_id 1
     move_id 1
   end

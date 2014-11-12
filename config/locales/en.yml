@@ -125,7 +125,7 @@ en:
         select_none: "Select none"
       rating:
         starrating: "Star rating"
-        thumbrating: "Thumb rating"
+        thumbrating: "Approval"
       nominated: "Nominated Moves"
       peer_review: "Peer Review"
       all: "All Moves"

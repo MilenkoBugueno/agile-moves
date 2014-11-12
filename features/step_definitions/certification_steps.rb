@@ -27,23 +27,40 @@ Given(/^(.*) nominates (.*) (.*) moves for (.*)$/) do |name, numb, mv_tp, cert|
 end
 
 Given(/^I am reviewer for the certification$/) do
-  @me = create_user_by_name("me")
-  @reviewer = FactoryGirl.create(:user, email: @me[:email])
-  add_user_to_default_project(@reviewer)
-  @registration.users = [@reviewer]
+  @registration.users = [@user]
 
 end
 
 Given(/^I am not reviewer for the certification$/) do
-  @me = create_user_by_name("me")
-  @reviewer = FactoryGirl.create(:user, email: @me[:email])
-  add_user_to_default_project(@reviewer)
+  #nothing
 end
 
 
 And(/^I am not registered to any certification$/) do
   #pending: when the database is setup, there are no registrations
 end
+
+
+And(/^my certification has (\d+) nominated (.*) moves$/) do |num, mv_tp|
+  move_type = MoveType.find_or_create_by_title(mv_tp)
+  @nominated_moves = []
+  for i in 1..num.to_i
+    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @user.id, :move_type_id => move_type.id, :registration_id => @registration.id)
+    @nominated_moves << nominated_move
+  end
+end
+
+And(/^my certification has (\d+) approved (.*) moves$/) do |num, mv_tp|
+  move_type = MoveType.find_or_create_by_title(mv_tp)
+  @nominated_moves = []
+  for i in 1..num.to_i
+    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @user.id, :move_type_id => move_type.id, :registration_id => @registration.id)
+    FactoryGirl.create(:rating, :thumb_rating => 1, :user_id=> 2, :move_id => nominated_move.id) #approval 1
+    FactoryGirl.create(:rating, :thumb_rating => 1, :user_id=> 3, :move_id => nominated_move.id) #approval 2
+    @nominated_moves << nominated_move
+  end
+end
+
 
 
 ### WHEN ###
@@ -55,14 +72,6 @@ When(/^I create (.*) new certifications$/) do |count|
     select "Team Idea", :from => "Move type"
     click_button "Create Certification"
   end
-end
-
-
-
-When(/^I go to my work view$/) do
-  sign_in_as(@reviewer)
-  visit '/projects/work?id=1'
-
 end
 
 ### THEN ###
@@ -86,4 +95,9 @@ Then(/^I dont expect to see the nominated moves$/) do
   @nominated_moves.each do |move|
     page.should_not have_content move.title
   end
+end
+
+
+Then(/^I see in the progress bar '(.*)\/(.*)'$/) do |progress, total|
+  expect(find('div.progress-bar')['aria-valuenow']).to eq(progress)
 end
