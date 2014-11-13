@@ -26,4 +26,17 @@ class Registration < ActiveRecord::Base
     return "#{self.certification.label} (#{title}) | #{self.user.name}"
   end
 
+  def approved_moves
+    approved_moves = []
+    min_moves_num = self.certification.moves_number
+    self.moves.each do |move|
+      if move.thumbs_up >= min_moves_num && move.rejects <= 0
+        approved_moves << move
+      end
+    end
+
+    return approved_moves
+  end
+
+
 end
