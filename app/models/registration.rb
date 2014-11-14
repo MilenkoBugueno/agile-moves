@@ -12,6 +12,9 @@ class Registration < ActiveRecord::Base
   scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
   scope :by_user_ids, lambda {|uid| joins(:users).where(["users.id =?", uid])}
 
+  after_create :init
+
+
   def certification_label
     level = self.certification.level_id
     title = ""
@@ -38,5 +41,11 @@ class Registration < ActiveRecord::Base
     return approved_moves
   end
 
+  private
+  def init
+    if self.new_record? && self.certification.present? && self.certification.duration.present?
+      self.end_date = self.start_date + self.certification.duration.day
+    end
+  end
 
 end

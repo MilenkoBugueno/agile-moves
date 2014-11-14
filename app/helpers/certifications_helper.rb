@@ -5,7 +5,7 @@ module CertificationsHelper
       title = "Apprentice"
     elsif  level == 2
       title = "Journeyman"
-    elsif  level == 2
+    elsif  level == 3
       title = "Master"
     end
     return title

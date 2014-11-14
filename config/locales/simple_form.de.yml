@@ -38,6 +38,7 @@ de:
         registrations: "Registrierungen"
         certifications: "Zertifizierungen"
         myprogress: "Mein Fortschritt"
+        duration: "Dauer"
       registration:
         user_id: "Kandidat"
         start_date: "Zertifizierungsstart"

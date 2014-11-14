@@ -11,9 +11,11 @@
         .panel-body
           = f.association :move_type
           -if @certification.new_record?
-            = f.input :approvements, input_html: {style: 'width:50px;height:30px;', :value => 3}
+            = f.input :duration, input_html: {style: 'width:50px;height:30px;', :value => 30}
+            = f.input :approvements, input_html: {style: 'width:50px;height:30px;', :value => 2}
             = f.input :moves_number, input_html: {style: 'width:50px;height:30px;', :value => 10}
           -else
+            = f.input :duration, input_html: {style: 'width:50px;height:30px;'}
             = f.input :moves_number, input_html: {style: 'width:50px;height:30px;'}
             = f.input :approvements, input_html: {style: 'width:50px;height:30px;'}
 

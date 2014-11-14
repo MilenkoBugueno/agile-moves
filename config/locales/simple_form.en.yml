@@ -38,6 +38,7 @@ en:
         registrations: "Registrations"
         certifications: "Certifications"
         myprogress: "My progress"
+        duration: "Duration"
 
       registration:
         user_id: "Candidate"
