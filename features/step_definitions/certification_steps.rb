@@ -74,6 +74,17 @@ When(/^I create (.*) new certifications$/) do |count|
   end
 end
 
+When(/^I'm creating a new (.*) certification$/) do |mv_tp|
+  move_type = MoveType.find_or_create_by_title(mv_tp)
+  click_link "New"
+  fill_in "Title", :with => "Certification " + move_type.title
+  fill_in "Short name", :with => "CER-01"
+  select move_type.title, :from => "Move type"
+
+end
+
+
+
 ### THEN ###
 
 
@@ -100,4 +111,8 @@ end
 
 Then(/^I see in the progress bar '(.*)\/(.*)'$/) do |progress, total|
   expect(find('div.progress-bar')['aria-valuenow']).to eq(progress)
+end
+
+Then(/^I can set the duration of the certification$/) do
+  page.should have_content "Duration"
 end
