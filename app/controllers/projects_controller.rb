@@ -118,8 +118,6 @@ class ProjectsController < ApplicationController
   end
 
   def certificate
-    @certifications = Certification.all
-
     user_id = params[:user] ? params[:user] : current_user.id
     @user = User.find(user_id)
 
@@ -128,6 +126,9 @@ class ProjectsController < ApplicationController
     else
       @project = Project.all.first
     end
+
+    @certifications = @project.certifications
+
 
     respond_to do |format|
       format.html # index.html.erb
