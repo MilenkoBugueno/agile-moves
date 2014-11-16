@@ -123,7 +123,15 @@ end
 And(/^I see for (.*) the duration '(.*)'$/) do |cert, range|
   rows = find(".table.table-striped").all('tr')
   table = rows.map { |r| r.all('th,td').map { |c| c.text.strip } }
-  certification = table[2]
+  for i in 1..(table.size-1)
+    row = table[i]
+    if row[2] == cert
+      cert_row = i
+    end
+
+  end
+
+  certification = table[i]
   duration = certification[2]
   duration.should have_content range
 
