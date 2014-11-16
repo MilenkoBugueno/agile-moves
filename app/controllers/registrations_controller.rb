@@ -94,10 +94,18 @@ class RegistrationsController < ApplicationController
   def destroy
     @registration = Registration.find(params[:id])
     @certification = @registration.certification
-    @registration.destroy
+    if @registration.project.present?
+      @project = @registration.project@registration.destroy
+    end
+
 
     respond_to do |format|
-      format.html { redirect_to @certification }
+      if @project.present?
+        format.html { redirect_to certificate_projects_path(:id => @project.id)}
+      else
+        format.html { redirect_to @certification }
+      end
+
       format.json { head :no_content }
     end
   end
