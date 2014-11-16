@@ -21,6 +21,15 @@
         %p
           %strong=t("simple_form.labels.certification.move_type") + ": "
           ="#{@registration.certification.move_type.title}" if @registration.certification.move_type.present?
+
+        %p
+          %strong=t("simple_form.labels.registration.start_date") + ": "
+          ="#{@registration.start_date}" if @registration.start_date.present?
+        %p
+          %strong=t("simple_form.labels.registration.end_date") + ": "
+          ="#{@registration.end_date}" if @registration.end_date.present?
+
+
         %p
           %strong=t("simple_form.labels.registration.progress") + ": "
           .progress

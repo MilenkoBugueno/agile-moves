@@ -83,17 +83,19 @@ When(/^I'm creating a new (.*) certification$/) do |mv_tp|
 
 end
 
-
-
-### THEN ###
-
-
-
-And(/^fill the registration with my review team$/) do
+When(/^fill the registration with my review team$/) do
   check "user1"
   check "user2"
   click_button "Create Registration"
 end
+
+When(/^fill the registration with the start date '(.*)'$/) do |date|
+  fill_in "Certification start", :with => date
+  click_button "Create Registration"
+end
+
+
+### THEN ###
 
 
 Then(/^I expect to see the nominated moves$/) do
@@ -115,4 +117,14 @@ end
 
 Then(/^I can set the duration of the certification$/) do
   page.should have_content "Duration"
+end
+
+
+And(/^I see for (.*) the duration '(.*)'$/) do |cert, range|
+  rows = find(".table.table-striped").all('tr')
+  table = rows.map { |r| r.all('th,td').map { |c| c.text.strip } }
+  certification = table[2]
+  duration = certification[2]
+  duration.should have_content range
+
 end

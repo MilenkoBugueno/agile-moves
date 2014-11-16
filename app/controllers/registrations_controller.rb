@@ -29,6 +29,8 @@ class RegistrationsController < ApplicationController
     @registration = Registration.new
 
     @certification = Certification.find(params[:certification_id]) if params[:certification_id].present?
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -48,7 +50,14 @@ class RegistrationsController < ApplicationController
 
     respond_to do |format|
       if @registration.save
-        format.html { redirect_to @registration.certification, notice: 'Registration was successfully created.' }
+        @project = Project.find(@registration.project_id) if @registration.project_id.present?
+        message = 'Registration was successfully created.'
+        if @project.present?
+          format.html { redirect_to certificate_projects_path(:id => @project.id), notice: message}
+        else
+          format.html { redirect_to @registration.certification, notice: message }
+        end
+
         format.json { render json: @registration, status: :created, location: @registration }
       else
         format.html { render action: "new" }
@@ -64,7 +73,14 @@ class RegistrationsController < ApplicationController
 
     respond_to do |format|
       if @registration.update_attributes(params[:registration])
-        format.html { redirect_to @registration.certification, notice: 'Registration was successfully updated.' }
+        @project = Project.find(@registration.project_id) if @registration.project_id.present?
+        message = 'Registration was successfully updated.'
+        if @project.present?
+          format.html { redirect_to certificate_projects_path(:id => @project.id), notice: message}
+        else
+          format.html { redirect_to @registration.certification, notice: message }
+        end
+
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

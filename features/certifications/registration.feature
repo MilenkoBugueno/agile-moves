@@ -16,5 +16,15 @@
     When I am in the Certificate view
     And I click on the button register
     And fill the registration with my review team
-    Then I see the message Registration was successfully created
+    Then I land in the Certificate view
+    And I see the message Registration was successfully created
+
+    Scenario: Duration for TOM-01
+      Given I am logged in
+      And I am not registered to any certification
+      When I am in the Certificate view
+      And I click on the button register
+      And fill the registration with the start date '2014-11-11'
+      Then I see the message Registration was successfully created
+      And I see for TOM-01 the duration '11 Nov - 10 Dec'
 

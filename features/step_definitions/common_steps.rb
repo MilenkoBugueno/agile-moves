@@ -45,3 +45,14 @@ Then(/^I see the button (.*)$/) do |title|
   page.should have_link title
 end
 
+
+Then(/^I land in the (.*) view$/) do |title|
+  find('.breadcrumb').should have_content title
+end
+
+Then(/^I see the following entry:$/) do |expected_table|
+  # table is a table.hashes.keys # => [:Short name, :Duration]
+  rows = find(".table.table-striped").all('tr')
+  table = rows.map { |r| r.all('th,td').map { |c| c.text.strip } }
+  expected_table.diff!(table)
+end

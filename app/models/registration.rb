@@ -1,9 +1,10 @@
 class Registration < ActiveRecord::Base
-  attr_accessible :certification_id, :end_date, :start_date, :user_id, :user_ids
+  attr_accessible :certification_id, :end_date, :start_date, :user_id, :user_ids, :project_id
 
   validates_presence_of :certification_id, :user_id
 
   belongs_to :user
+  belongs_to :project
   belongs_to :certification
   has_many :moves
   has_and_belongs_to_many :users
