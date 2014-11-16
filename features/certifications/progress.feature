@@ -43,4 +43,4 @@ Feature: Progress of my Certification
     Given I am registered to VIS-03
     And my certification has 10 approved Vision moves
     When I go to my Certificate view
-    Then I see for VIS-03 the entry completed
+    Then I see for VIS-03 in the progress bar '10/10'

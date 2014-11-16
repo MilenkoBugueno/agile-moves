@@ -232,3 +232,7 @@ de:
     nominate_new: "Neuer Move Nominieren"
     nominated: "Nominiert für:"
     nominate_move: "Nominiere diesen Move"
+  simple_form:
+    labels:
+      registration:
+        completed: "abgeschlossen"

@@ -179,3 +179,7 @@ en:
     nominate_new: "Nominate new move"
     nominated: "Nominated to:"
     nominate_move: "Nominate this move"
+  simple_form:
+    labels:
+      registration:
+        completed: "completed"
