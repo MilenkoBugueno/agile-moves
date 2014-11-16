@@ -42,6 +42,14 @@ class Registration < ActiveRecord::Base
     return approved_moves
   end
 
+  def completed
+    result = false
+    if approved_moves.count >= self.certification.moves_number
+      result = true
+    end
+    return result
+  end
+
   private
   def init
     if self.certification_id.present?
