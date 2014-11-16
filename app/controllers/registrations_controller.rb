@@ -95,8 +95,9 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find(params[:id])
     @certification = @registration.certification
     if @registration.project.present?
-      @project = @registration.project@registration.destroy
+      @project = @registration.project
     end
+    @registration.destroy
 
 
     respond_to do |format|
