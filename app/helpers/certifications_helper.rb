@@ -14,6 +14,6 @@ module CertificationsHelper
   def get_progressbar_width(registration)
     certification = registration.certification
 
-    return (registration.moves.count.to_f/certification.moves_number)*100
+    return (registration.approved_moves.count.to_f/certification.moves_number)*100
   end
 end

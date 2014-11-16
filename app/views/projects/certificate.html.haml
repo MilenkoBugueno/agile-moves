@@ -38,7 +38,7 @@
               -if my_registration.present?
                 .progress
                   .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{my_registration.approved_moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{certification.moves_number}", "style"=>"width: #{get_progressbar_width(my_registration)}%;"}
-                    =my_registration.moves.count
+                    =my_registration.approved_moves.count
                   %p{:style => 'float: right;'}
                     =certification.moves_number if certification.moves_number.present?
               -else

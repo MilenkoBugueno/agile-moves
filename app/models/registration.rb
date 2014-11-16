@@ -32,7 +32,7 @@ class Registration < ActiveRecord::Base
 
   def approved_moves
     approved_moves = []
-    min_moves_num = self.certification.moves_number
+    min_moves_num = self.certification.approvements
     self.moves.each do |move|
       if move.thumbs_up >= min_moves_num && move.rejects <= 0
         approved_moves << move

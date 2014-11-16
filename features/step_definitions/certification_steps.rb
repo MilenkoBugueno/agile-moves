@@ -8,7 +8,7 @@
 
 Given(/^I am registered to (.*)$/) do |cert_short_name|
   certification = Certification.find_or_create_by_label(:label => cert_short_name)
-  @registration = FactoryGirl.create(:registration, :user_id => @user.id, :certification_id => certification.id)
+  @registration = FactoryGirl.create(:registration, :user_id => @user.id, :certification_id => certification.id, :start_date => Date.today())
 
 end
 
@@ -38,6 +38,7 @@ end
 
 And(/^I am not registered to any certification$/) do
   #pending: when the database is setup, there are no registrations
+  registrations = Registration.destroy_all
 end
 
 
@@ -111,8 +112,9 @@ Then(/^I dont expect to see the nominated moves$/) do
 end
 
 
-Then(/^I see in the progress bar '(.*)\/(.*)'$/) do |progress, total|
-  expect(find('div.progress-bar')['aria-valuenow']).to eq(progress)
+Then(/^I see for (.*) in the progress bar '(.*)\/(.*)'$/) do |cert, progress, total|
+  result = find('tr', text: cert)
+  expect(result.find('div.progress-bar')['aria-valuenow']).to eq(progress)
 end
 
 Then(/^I can set the duration of the certification$/) do
