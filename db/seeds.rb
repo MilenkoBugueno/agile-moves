@@ -110,8 +110,8 @@ puts 'move type: ' << repertoire_move.title
 
 
 puts 'DEFAULT CERTIFICATIONS'
-vis_03 = Certification.find_or_create_by_title :title => "Warum aufstehen?", :label => "VIS-03", :level_id => 1, :approvements => 2, :move_type_id => vision_move.id, :moves_number => 10
-tom_01 = Certification.find_or_create_by_title :title => "Aufdrehen - fertig - los", :label => "TOM-01", :level_id => 1, :approvements => 2, :move_type_id => tomatoes_move.id, :moves_number => 10
+vis_03 = Certification.find_or_create_by_title :title => "Warum aufstehen?", :label => "VIS-03", :level_id => 1, :approvements => 2, :move_type_id => vision_move.id, :moves_number => 10, :duration => 30
+tom_01 = Certification.find_or_create_by_title :title => "Aufdrehen - fertig - los", :label => "TOM-01", :level_id => 1, :approvements => 2, :move_type_id => tomatoes_move.id, :moves_number => 10, :duration => 30
 
 puts 'DEFAULT REGISTRATION'
 reg_vis_03 = Registration.find_or_create_by_certification_id :certification_id => vis_03.id, :user_id => user.id

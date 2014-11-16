@@ -19,6 +19,11 @@ When(/^I click on the button (.*)$/) do |title|
   first( :link, title).click
 end
 
+When(/^I click for (.*) on the button (.*)$/) do |entry, title|
+  find(:xpath, "//tr[contains(.,'#{entry}')]/td/a", :text => title).click
+end
+
+
 When(/^I go to my (.*) view$/) do |view|
   visit '/'
   click_link "Test project"
@@ -38,6 +43,11 @@ end
 
 Then(/^I see the message (.*)$/) do |message|
   page.should have_content message
+end
+
+Then(/^I see for (.*) the entry (.*)$/) do |key, entry|
+  expect(find(:xpath, "//tr[contains(.,'#{key}')]/td/a", :text => entry)).to eq entry
+
 end
 
 

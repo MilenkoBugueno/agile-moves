@@ -44,8 +44,9 @@ class Registration < ActiveRecord::Base
 
   private
   def init
-    if self.new_record? && self.certification.present? && self.certification.duration.present?
-      self.end_date = self.start_date + self.certification.duration.day
+    if self.certification_id.present?
+      certification = Certification.find(self.certification_id)
+      self.update_attributes(end_date: self.start_date + certification.duration.day)
     end
   end
 

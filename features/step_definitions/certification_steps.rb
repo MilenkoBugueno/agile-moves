@@ -131,8 +131,8 @@ And(/^I see for (.*) the duration '(.*)'$/) do |cert, range|
 
   end
 
-  certification = table[i]
-  duration = certification[2]
+  certification = table[1]
+  duration = certification[5]
   duration.should have_content range
 
 end
