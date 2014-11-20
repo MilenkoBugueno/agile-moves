@@ -29,6 +29,8 @@ class Move < ActiveRecord::Base
 
   after_update :update_objects, :unless => :skip_callbacks
 
+  before_destroy :destroy_elements
+
   scope :by_user_id, lambda {|uid| where(["#{table_name}.user_id =?", uid])}
   scope :by_project_id, lambda {|uid| where(["#{table_name}.project_id =?", uid])}
   scope :by_state_id, lambda {|uid| where(["#{table_name}.state_id =?", uid])}
@@ -226,6 +228,19 @@ class Move < ActiveRecord::Base
         tomato.delete()
       end
 
+    end
+
+  end
+
+  def destroy_elements
+    self.tomatoes.each do |tomato|
+      tomato.destroy
+    end
+    self.comments.each do |comment|
+      comment.destroy
+    end
+    self.ratings.each do |rating|
+      rating.destroy
     end
 
   end
