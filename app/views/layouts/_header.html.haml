@@ -61,5 +61,12 @@
           = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date), :class => "btn btn-default"
           = link_to t("projects.report"), report_projects_path(id: @project.id), :class=> "btn btn-default"
           = link_to t("projects.certificate"), certificate_projects_path(id: @project.id), :class=> "btn btn-default active" if @project.certifications.present?
+      -else
+        .btn-group
+          = link_to t("projects.plan"), plan_projects_path(id: @project.id, date: @date), :class => "btn btn-default" if has_plan_view(@project)
+          = link_to t("projects.work"), work_projects_path(id: @project.id, date: @date), :class => "btn btn-default"
+          = link_to t("projects.report"), report_projects_path(id: @project.id), :class=> "btn btn-default"
+          = link_to t("projects.certificate"), certificate_projects_path(id: @project.id), :class=> "btn btn-default" if @project.certifications.present?
+
 
 
