@@ -15,6 +15,8 @@ class InscriptionsController < ApplicationController
   def show
     @inscription = Inscription.find(params[:id])
 
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @inscription }
@@ -25,6 +27,10 @@ class InscriptionsController < ApplicationController
   # GET /inscriptions/new.json
   def new
     @inscription = Inscription.new
+
+    @certification = Certification.find(params[:certification_id]) if params[:certification_id].present?
+    @project = Project.find(params[:project_id]) if params[:project_id].present?
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +50,14 @@ class InscriptionsController < ApplicationController
 
     respond_to do |format|
       if @inscription.save
-        format.html { redirect_to @inscription, notice: 'Inscription was successfully created.' }
+        @project = Project.find(@inscription.project_id) if @inscription.project_id.present?
+        message = 'Registration was successfully created.'
+        if @project.present?
+          format.html { redirect_to certificate_projects_path(:id => @project.id), notice: message}
+        else
+          format.html { redirect_to @inscription.certification, notice: message }
+        end
+
         format.json { render json: @inscription, status: :created, location: @inscription }
       else
         format.html { render action: "new" }
@@ -60,7 +73,13 @@ class InscriptionsController < ApplicationController
 
     respond_to do |format|
       if @inscription.update_attributes(params[:inscription])
-        format.html { redirect_to @inscription, notice: 'Inscription was successfully updated.' }
+        @project = Project.find(@inscription.project_id) if @inscription.project_id.present?
+        message = 'Registration was successfully updated.'
+        if @project.present?
+          format.html { redirect_to certificate_projects_path(:id => @project.id), notice: message}
+        else
+          format.html { redirect_to @inscription.certification, notice: message }
+        end
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -73,10 +92,19 @@ class InscriptionsController < ApplicationController
   # DELETE /inscriptions/1.json
   def destroy
     @inscription = Inscription.find(params[:id])
+    @certification = @inscription.certification
+    if @inscription.project.present?
+      @project = @inscription.project
+    end
+
     @inscription.destroy
 
     respond_to do |format|
-      format.html { redirect_to inscriptions_url }
+      if @project.present?
+        format.html { redirect_to certificate_projects_path(:id => @project.id)}
+      else
+        format.html { redirect_to @certification }
+      end
       format.json { head :no_content }
     end
   end

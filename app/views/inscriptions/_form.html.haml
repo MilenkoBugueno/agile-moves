@@ -1,12 +1,24 @@
-= simple_form_for(@inscription) do |f|
-  = f.error_notification
+= simple_form_for @inscription, :html => { :class => 'form-horizontal' } do |f|
+  -if @certification.present?
+    = f.association :certification, input_html: {style: 'height:30px;'}, :selected => @certification.id
+  -else
+    = f.association :certification, input_html: {style: 'height:30px;'}
+  -if @inscription.new_record? && current_user.present?
+    = f.association :user, input_html: {style: 'height:30px;'}, :selected => current_user.id
+  -else
+    = f.association :user, input_html: {style: 'height:30px;'}
 
-  .form-inputs
-    = f.input :certification_id
-    = f.input :start_date
-    = f.input :end_date
-    = f.input :user_id
-    = f.input :project_id
+  -if @inscription.new_record?
+    = f.input :start_date, :as => :string, input_html: {style: 'height:30px;', value: Date.today()}
+  -else
+    = f.input :start_date, :as => :string, input_html: {style: 'height:30px;'}
 
-  .form-actions
-    = f.button :submit
+  -if @project.present?
+    = f.hidden_field  :project_id, :value => @project.id
+    = f.association :users, :collection => @project.users, :as => :check_boxes, :label => t("simple_form.labels.registration.user_ids")
+  -else
+    = f.association :users, :as => :check_boxes, :label => t("simple_form.labels.registration.user_ids")
+
+
+  = f.button :submit, :class => 'btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), registrations_path, :class => 'btn btn-default'
