@@ -1,0 +1,12 @@
+= simple_form_for(@inscription) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :certification_id
+    = f.input :start_date
+    = f.input :end_date
+    = f.input :user_id
+    = f.input :project_id
+
+  .form-actions
+    = f.button :submit

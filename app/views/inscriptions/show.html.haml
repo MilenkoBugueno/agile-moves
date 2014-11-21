@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Certification:
+  = @inscription.certification_id
+%p
+  %b Start date:
+  = @inscription.start_date
+%p
+  %b End date:
+  = @inscription.end_date
+%p
+  %b User:
+  = @inscription.user_id
+%p
+  %b Project:
+  = @inscription.project_id
+
+= link_to 'Edit', edit_inscription_path(@inscription)
+\|
+= link_to 'Back', inscriptions_path

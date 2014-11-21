@@ -1,0 +1,27 @@
+%h1 Listing inscriptions
+
+%table
+  %tr
+    %th Certification
+    %th Start date
+    %th End date
+    %th User
+    %th Project
+    %th
+    %th
+    %th
+
+  - @inscriptions.each do |inscription|
+    %tr
+      %td= inscription.certification_id
+      %td= inscription.start_date
+      %td= inscription.end_date
+      %td= inscription.user_id
+      %td= inscription.project_id
+      %td= link_to 'Show', inscription
+      %td= link_to 'Edit', edit_inscription_path(inscription)
+      %td= link_to 'Destroy', inscription, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Inscription', new_inscription_path
