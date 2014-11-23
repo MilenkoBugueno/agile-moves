@@ -45,6 +45,6 @@
                   %p{:style => 'float: right;'}
                     =certification.moves_number if certification.moves_number.present?
               -else
-                = link_to t("helpers.links.registrate"), new_registration_path(certification_id: certification.id, project_id: @project.id), :class => 'btn btn-primary btn-mini'
+                = link_to t("helpers.links.registrate"), new_inscription_path(certification_id: certification.id, project_id: @project.id), :class => 'btn btn-primary btn-mini'
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141121062628) do
+ActiveRecord::Schema.define(:version => 20141123061146) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(:version => 20141121062628) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
+
+  create_table "inscriptions_users", :id => false, :force => true do |t|
+    t.integer "inscription_id"
+    t.integer "user_id"
+  end
+
+  add_index "inscriptions_users", ["inscription_id", "user_id"], :name => "index_inscriptions_users_on_inscription_id_and_user_id"
 
   create_table "interruptions", :force => true do |t|
     t.text     "body"
@@ -155,8 +162,8 @@ ActiveRecord::Schema.define(:version => 20141121062628) do
     t.integer  "move_type_id"
     t.integer  "user_id"
     t.integer  "state_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "title"
     t.date     "publish_date"
     t.integer  "project_id"
@@ -165,7 +172,7 @@ ActiveRecord::Schema.define(:version => 20141121062628) do
     t.datetime "planned_at"
     t.integer  "user_story_id"
     t.text     "results"
-    t.integer  "registration_id"
+    t.integer  "inscription_id"
   end
 
   create_table "moves_users", :id => false, :force => true do |t|
