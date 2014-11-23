@@ -50,8 +50,6 @@ AgileMovesOs::Application.routes.draw do
 
   resources :certifications
 
-  resources :registrations
-
 
   resources :media do
     collection do

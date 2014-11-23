@@ -12,9 +12,9 @@ jQuery ->
     dateFormat: 'yy-mm-dd'
 
 jQuery ->
-  $("#move_registration_id").parent().parent().hide()
+  $("#move_inscription_id").parent().parent().hide()
   $("#toggle_nominate").click ->
-    $("#move_registration_id").parent().parent().show()
+    $("#move_inscription_id").parent().parent().show()
     return
 # Hiding team field. TODO: hide only if move_type.has_team
 # jQuery ->
