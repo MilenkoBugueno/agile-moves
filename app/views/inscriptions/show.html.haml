@@ -1,21 +1,77 @@
-%p#notice= notice
+.panel.panel-info
+  .panel-heading
+    %h3= t("helpers.titles.inscription_for") +" "+ @inscription.certification.label + " (" + get_level_title(@inscription.certification.level_id)+ ")"
+  .panel-body
+    .row
+      .span7
+        %p
+          -if @inscription.project.present?
+            = link_to t('.back', :default => t("helpers.links.back")), certificate_projects_path(:id => @project.id), :class => 'btn btn-default'
+          -else
+            = link_to t('.back', :default => t("helpers.links.back")), inscriptions_path, :class => 'btn btn-default'
+          - if (current_user.has_role? :admin) || (current_user.id == @inscription.user_id)
+            = link_to t('.edit', :default => t("helpers.links.edit")), edit_inscription_path(@inscription), :class => 'btn btn-default'
+            = link_to t('.destroy', :default => t("helpers.links.destroy")), inscription_path(@inscription), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+        %br
+      .span4
+        %p
+          %strong=t("simple_form.labels.registration.user_id") + ": "
+          ="#{@inscription.user.name}" if @inscription.user.present?
+        %p
+          %strong=t("simple_form.labels.registration.user_ids") + ": "
+          -@inscription.users.each do |user|
+            ="#{user.name}; "
+        %p
+          %strong=t("simple_form.labels.certification.move_type") + ": "
+          ="#{@inscription.certification.move_type.title}" if @inscription.certification.move_type.present?
 
-%p
-  %b Certification:
-  = @inscription.certification_id
-%p
-  %b Start date:
-  = @inscription.start_date
-%p
-  %b End date:
-  = @inscription.end_date
-%p
-  %b User:
-  = @inscription.user_id
-%p
-  %b Project:
-  = @inscription.project_id
+        %p
+          %strong=t("simple_form.labels.registration.start_date") + ": "
+          ="#{@inscription.start_date}" if @inscription.start_date.present?
+        %p
+          %strong=t("simple_form.labels.registration.end_date") + ": "
+          ="#{@inscription.end_date}" if @inscription.end_date.present?
 
-= link_to 'Edit', edit_inscription_path(@inscription)
-\|
-= link_to 'Back', inscriptions_path
+
+        %p
+          %strong=t("simple_form.labels.registration.progress") + ": "
+          .progress
+            .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{@inscription.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.moves_number}", "style"=>"width: #{get_progressbar_width(@inscription)}%;"}
+              =@inscription.moves.count
+            %p{:style => 'float: right;'}
+              =@inscription.certification.moves_number if @inscription.certification.moves_number.present?
+
+.panel.panel-default
+  .panel-heading
+    %h4= t("moves.nominated")
+  .panel-body
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+          %th= t("simple_form.labels.move.title")
+          %th= t("simple_form.labels.move.user_id")
+          %th= t("simple_form.labels.move.publish_date")
+          %th= t("simple_form.labels.move.approvements")
+          %th=t '.actions', :default => t("helpers.actions")
+      %tbody
+        - @inscription.moves.each do |move|
+          %tr
+            %td
+            %td= link_to move.user.name, move
+            %td= move.user.name
+            %td= move.publish_date.to_s(:short) if move.publish_date.present?
+            %td
+              .progress
+                .progress-bar{:role=>"progressbar", "aria-valuenow"=>"#{move.ratings.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.approvements}", "style"=>"width: 50%;"}
+                  =move.ratings.count
+                %p{:style => 'float: right;'}
+                  =@inscription.certification.approvements if @inscription.certification.approvements.present?
+            %td
+              = link_to t('.edit', :default => t("helpers.links.edit")), edit_move_path(move), :class => 'btn btn-default btn-mini'
+              = link_to t('.destroy', :default => t("helpers.links.destroy")), move_path(move), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+    = link_to t("move.nominate_new"), new_move_path(project_id: @project.id, inscription_id: @inscription.id, move_type: @inscription.certification.move_type_id), :class => 'btn btn-primary' if @project.present?
+
+
+

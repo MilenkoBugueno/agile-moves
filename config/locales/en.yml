@@ -88,6 +88,7 @@ en:
           save: "Save %{model}"
           delete: "Delete %{model}"
           new: "New"
+          inscription_for: "Inscription for"
       wordpress:
           publish: "Publish to Wordpress"
       miscell:

@@ -85,6 +85,7 @@ de:
             save: "Speichern %{model}"
             delete: "Löschen %{model}"
             new: "Neu"
+            inscription_for: "Anmeldung für"
       wordpress:
         publish: "In Wordpress publizieren"
       miscell:
