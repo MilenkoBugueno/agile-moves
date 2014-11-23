@@ -128,6 +128,7 @@ class ProjectsController < ApplicationController
     end
 
     @certifications = @project.certifications
+    @inscriptions = @project.inscriptions
 
 
     respond_to do |format|

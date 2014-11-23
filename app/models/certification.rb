@@ -7,6 +7,7 @@ class Certification < ActiveRecord::Base
   belongs_to :user
   belongs_to :move_type
   has_many :registrations
+  has_many :inscriptions
 
   has_and_belongs_to_many :projects
 
@@ -18,6 +19,16 @@ class Certification < ActiveRecord::Base
       end
     end
     return user_registration
+  end
+
+  def get_inscription(user)
+    user_inscription= nil
+    self.inscriptions.each do |inscription|
+      if inscription.user_id == user.id
+        user_inscription = inscription
+      end
+    end
+    return user_inscription
   end
 
 end

@@ -17,7 +17,7 @@
           %th= t '.actions', :default => t("simple_form.labels.certification.progress")
       %tbody
         - @certifications.each do |certification|
-          -my_registration = certification.get_registration(current_user)
+          -my_registration = certification.get_inscription(current_user)
           %tr
             %td
             %td
