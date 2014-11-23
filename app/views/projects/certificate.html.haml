@@ -17,31 +17,31 @@
           %th= t '.actions', :default => t("simple_form.labels.certification.progress")
       %tbody
         - @certifications.each do |certification|
-          -my_registration = certification.get_inscription(current_user)
+          -my_inscription = certification.get_inscription(current_user)
           %tr
             %td
             %td
-              -if my_registration.present?
-                = link_to certification.title, registration_path(my_registration, project_id: @project.id)
+              -if my_inscription.present?
+                = link_to certification.title, inscription_path(my_inscription, project_id: @project.id)
               -else
                 = link_to certification.title, certification_path(certification, project_id: @project.id)
             %td= "#{certification.label} (#{get_level_title(certification.level_id)})"
 
-            %td= my_registration.user.name if my_registration.present?
+            %td= my_inscription.user.name if my_inscription.present?
             %td
-              -if my_registration.present?
-                -my_registration.users.each do |user|
+              -if my_inscription.present?
+                -my_inscription.users.each do |user|
                   = user.name + "- "
-            %td="#{my_registration.start_date.to_s(:short)} - #{my_registration.end_date.to_s(:short)}" if my_registration.present? && my_registration.end_date.present?
+            %td="#{my_inscription.start_date.to_s(:short)} - #{my_inscription.end_date.to_s(:short)}" if my_inscription.present? && my_inscription.end_date.present?
             %td
 
-              -if my_registration.present?
+              -if my_inscription.present?
                 .progress
-                  .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{my_registration.approved_moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{certification.moves_number}", "style"=>"width: #{get_progressbar_width(my_registration)}%;"}
-                    -if my_registration.completed
+                  .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{my_inscription.approved_moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{certification.moves_number}", "style"=>"width: #{get_progressbar_width(my_inscription)}%;"}
+                    -if my_inscription.completed
                       =t("simple_form.labels.registration.completed")
                     -else
-                      =my_registration.approved_moves.count
+                      =my_inscription.approved_moves.count
                   %p{:style => 'float: right;'}
                     =certification.moves_number if certification.moves_number.present?
               -else
