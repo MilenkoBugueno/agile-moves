@@ -2,6 +2,6 @@
   .panel-heading
     %h4.panel-title= t("moves.peer_review")
   .panel-body
-    -if @move.registration.present?
-      -@move.registration.users.each do |user|
+    -if @move.inscription.present?
+      -@move.inscription.users.each do |user|
         =user.name +  "; "

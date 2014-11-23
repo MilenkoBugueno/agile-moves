@@ -2,10 +2,10 @@
   = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
     .row
       .col-md-10
-        -if @my_registration.present?
-          =f.association :registration, :collection => @my_certifications, :label => t("move.nominate_move"), :label_method => lambda { |registration| registration.certification_label }, input_html: {style: 'height:30px;width:280px;'}
+        -if @my_inscription.present?
+          =f.association :inscription, :collection => @my_certifications, :label => t("move.nominate_move"), :label_method => lambda { |inscription| inscription.certification_label }, input_html: {style: 'height:30px;width:280px;'}
       .col-md-2
-        -if @my_registration.present?
+        -if @my_inscription.present?
           = link_to t("move.nominate"), "#", :class => 'btn', :id => "toggle_nominate", :style => 'float: right;'
 
     .row

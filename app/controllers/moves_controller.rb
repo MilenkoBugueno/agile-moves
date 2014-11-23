@@ -118,11 +118,11 @@ class MovesController < ApplicationController
       @move_type = MoveType.first
     end
 
-    @my_certifications = Registration.order("created_at DESC")
+    @my_certifications = Inscription.order("created_at DESC")
     @my_certifications = @my_certifications.by_user_id(current_user.id)
     @my_certifications = @my_certifications.by_move_type_id(@move_type.id)
 
-    @my_registration = get_my_active_registration(current_user, @move_type)
+    @my_inscription = get_my_active_inscription(current_user, @move_type)
 
     @state = State.find_by_title(params[:state]) if params[:state].present?
 
@@ -139,10 +139,10 @@ class MovesController < ApplicationController
     @project = Project.find(@move.project_id) if @move.project_id.present?
     @user_stories = Move.by_user_stories()
 
-    @my_certifications = Registration.order("created_at DESC")
+    @my_certifications = Inscription.order("created_at DESC")
     @my_certifications = @my_certifications.by_user_id(current_user.id)
 
-    @my_registration = get_my_active_registration(current_user, @move_type)
+    @my_inscription = get_my_active_inscription(current_user, @move_type)
 
   end
 
@@ -177,8 +177,8 @@ class MovesController < ApplicationController
           message =  "Move was successfully created"
         end
 
-        if @move.registration.present?
-          message <<  " and nominated to the certification #{@move.registration.certification.label}"
+        if @move.inscription.present?
+          message <<  " and nominated to the certification #{@move.inscription.certification.label}"
         end
 
         if @move.user_story_id.present?
@@ -235,11 +235,11 @@ class MovesController < ApplicationController
 
   private
 
-  def get_my_active_registration(user, move_type)
+  def get_my_active_inscription(user, move_type)
     @certifications = Certification.where(:move_type_id => move_type.id)
     @certifications.each do |certification|
-      if certification.get_registration(user).present?
-        return certification.get_registration(user)
+      if certification.get_inscription(user).present?
+        return certification.get_inscription(user)
       end
     end
     return nil
