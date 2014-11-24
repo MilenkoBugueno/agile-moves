@@ -11,8 +11,8 @@
           %th
           %th= t("simple_form.labels.certification.title")
           %th= t("simple_form.labels.certification.label")
-          %th= t("simple_form.labels.registration.user_id")
-          %th= t("simple_form.labels.registration.user_ids")
+          %th= t("simple_form.labels.inscription.user_id")
+          %th= t("simple_form.labels.inscription.user_ids")
           %td= t("simple_form.labels.certification.duration")
           %th= t '.actions', :default => t("simple_form.labels.certification.progress")
       %tbody
@@ -39,7 +39,7 @@
                 .progress
                   .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{my_inscription.approved_moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{certification.moves_number}", "style"=>"width: #{get_progressbar_width(my_inscription)}%;"}
                     -if my_inscription.completed
-                      =t("simple_form.labels.registration.completed")
+                      =t("simple_form.labels.inscription.completed")
                     -else
                       =my_inscription.approved_moves.count
                   %p{:style => 'float: right;'}

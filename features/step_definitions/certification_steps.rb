@@ -8,7 +8,7 @@
 
 Given(/^I am registered to (.*)$/) do |cert_short_name|
   certification = Certification.find_or_create_by_label(:label => cert_short_name)
-  @registration = FactoryGirl.create(:registration, :user_id => @user.id, :certification_id => certification.id, :start_date => Date.today())
+  @inscription = FactoryGirl.create(:inscription, :user_id => @user.id, :certification_id => certification.id, :start_date => Date.today())
 
 end
 
@@ -16,18 +16,18 @@ Given(/^(.*) nominates (.*) (.*) moves for (.*)$/) do |name, numb, mv_tp, cert|
   user = create_user_by_name(name)
   @nominator = FactoryGirl.create(:user, email: user[:email])
   certification = Certification.find_or_create_by_label(cert)
-  @registration = FactoryGirl.create(:registration, :user_id => @nominator.id, :certification_id => certification.id)
+  @inscription = FactoryGirl.create(:inscription, :user_id => @nominator.id, :certification_id => certification.id)
   move_type = MoveType.find_or_create_by_title(mv_tp)
   @nominated_moves = []
   for i in 1..numb.to_i
-    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @nominator.id, :move_type_id => move_type.id, :registration_id => @registration.id)
+    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @nominator.id, :move_type_id => move_type.id, :inscription_id => @inscription.id)
     @nominated_moves << nominated_move
   end
 
 end
 
 Given(/^I am reviewer for the certification$/) do
-  @registration.users = [@user]
+  @inscription.users = [@user]
 
 end
 
@@ -38,7 +38,7 @@ end
 
 And(/^I am not registered to any certification$/) do
   #pending: when the database is setup, there are no registrations
-  registrations = Registration.destroy_all
+  inscriptions = Inscription.destroy_all
 end
 
 
@@ -46,7 +46,7 @@ And(/^my certification has (\d+) nominated (.*) moves$/) do |num, mv_tp|
   move_type = MoveType.find_or_create_by_title(mv_tp)
   @nominated_moves = []
   for i in 1..num.to_i
-    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @user.id, :move_type_id => move_type.id, :registration_id => @registration.id)
+    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @user.id, :move_type_id => move_type.id, :inscription_id => @inscription.id)
     @nominated_moves << nominated_move
   end
 end
@@ -55,7 +55,7 @@ And(/^my certification has (\d+) approved (.*) moves$/) do |num, mv_tp|
   move_type = MoveType.find_or_create_by_title(mv_tp)
   @nominated_moves = []
   for i in 1..num.to_i
-    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @user.id, :move_type_id => move_type.id, :registration_id => @registration.id)
+    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @user.id, :move_type_id => move_type.id, :inscription_id => @inscription.id)
     FactoryGirl.create(:rating, :thumb_rating => 1, :user_id=> 2, :move_id => nominated_move.id) #approval 1
     FactoryGirl.create(:rating, :thumb_rating => 1, :user_id=> 3, :move_id => nominated_move.id) #approval 2
     @nominated_moves << nominated_move
@@ -87,12 +87,12 @@ end
 When(/^fill the registration with my review team$/) do
   check "user1"
   check "user2"
-  click_button "Create Registration"
+  click_button "Create Inscription"
 end
 
 When(/^fill the registration with the start date '(.*)'$/) do |date|
   fill_in "Certification start", :with => date
-  click_button "Create Registration"
+  click_button "Create Inscription"
 end
 
 

@@ -42,7 +42,7 @@ def nominate_move(move_type, date, user_id, num, reg)
   click_link "Test project"
   first(:link, "New " + move_type.title).click
   click_link "Nominate"
-  find('#move_registration_id').find(:xpath, 'option[2]').select_option
+  find('#move_inscription_id').find(:xpath, 'option[2]').select_option
   fill_in "Title", :with => move_type.title + " " +num.to_s
   click_button "Create Move"
 end
@@ -81,7 +81,7 @@ end
 When(/^I nominate a '(.*)' move to (.*)$/) do |move_type, certification|
   move_type = MoveType.find_or_create_by_title(:title => move_type)
   cert = Certification.find_or_create_by_label(certification)
-  reg = Registration.find_by_certification_id(cert.id)
+  reg = Inscription.find_by_certification_id(cert.id)
   nominate_move(move_type, Date.today, @user.id, 1, reg)
 
 end

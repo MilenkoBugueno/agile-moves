@@ -17,7 +17,7 @@ class CertificationsController < ApplicationController
     @certification = Certification.find(params[:id])
     @project = Project.find(params[:project_id]) if params[:project_id].present?
 
-    @inscriptions = Registration.all
+    @inscriptions = Inscription.all
 
     respond_to do |format|
       format.html # show.html.erb

@@ -4,7 +4,6 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :states
   has_many :moves
-  has_many :registrations
   has_many :inscriptions
   has_and_belongs_to_many :move_types
   has_and_belongs_to_many :certifications

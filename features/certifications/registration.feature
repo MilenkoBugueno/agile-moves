@@ -1,4 +1,4 @@
-  Feature: Registration to a Certification
+  Feature: Inscription to a Certification
   In order to get a certification
   An user
   Should register to a certification

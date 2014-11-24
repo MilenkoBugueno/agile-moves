@@ -15,10 +15,10 @@
         %br
       .span4
         %p
-          %strong=t("simple_form.labels.registration.user_id") + ": "
+          %strong=t("simple_form.labels.inscription.user_id") + ": "
           ="#{@inscription.user.name}" if @inscription.user.present?
         %p
-          %strong=t("simple_form.labels.registration.user_ids") + ": "
+          %strong=t("simple_form.labels.inscription.user_ids") + ": "
           -@inscription.users.each do |user|
             ="#{user.name}; "
         %p
@@ -26,15 +26,15 @@
           ="#{@inscription.certification.move_type.title}" if @inscription.certification.move_type.present?
 
         %p
-          %strong=t("simple_form.labels.registration.start_date") + ": "
+          %strong=t("simple_form.labels.inscription.start_date") + ": "
           ="#{@inscription.start_date}" if @inscription.start_date.present?
         %p
-          %strong=t("simple_form.labels.registration.end_date") + ": "
+          %strong=t("simple_form.labels.inscription.end_date") + ": "
           ="#{@inscription.end_date}" if @inscription.end_date.present?
 
 
         %p
-          %strong=t("simple_form.labels.registration.progress") + ": "
+          %strong=t("simple_form.labels.inscription.progress") + ": "
           .progress
             .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{@inscription.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.moves_number}", "style"=>"width: #{get_progressbar_width(@inscription)}%;"}
               =@inscription.moves.count

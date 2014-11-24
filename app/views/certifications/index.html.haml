@@ -21,7 +21,7 @@
         %td
           = get_level_title(certification.level_id)
         %td
-        %td= certification.registrations.count
+        %td= certification.inscriptions.count
         %td="0"
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_certification_path(certification), :class => 'btn btn-default btn-mini'
