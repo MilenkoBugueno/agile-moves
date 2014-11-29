@@ -30,3 +30,11 @@ Feature: Reviewing Moves
     And I am reviewer for the certification
     When I go to my Work view
     Then I expect to see the nominated moves
+
+  Scenario: As reviewer I review 1 nominated Vision move
+    Given mark nominates 1 Tomato moves for TOM-01
+    And I am reviewer for the certification
+    When I go to my Work view
+    And I approve the nominated moves
+    Then I dont expect to see the nominated moves
+

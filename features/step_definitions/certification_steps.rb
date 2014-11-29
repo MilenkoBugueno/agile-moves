@@ -1,6 +1,13 @@
 
 ### UTILITY METHODS ###
 
+def create_and_approve_move(i, move_type, approval_num)
+  nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @user.id, :move_type_id => move_type.id, :inscription_id => @inscription.id)
+  for j in 1..approval_num
+    FactoryGirl.create(:rating, :thumb_rating => 1, :user_id => 1+j, :move_id => nominated_move.id) #approval j
+  end
+  @nominated_moves << nominated_move
+end
 
 
 
@@ -27,7 +34,7 @@ Given(/^(.*) nominates (.*) (.*) moves for (.*)$/) do |name, numb, mv_tp, cert|
 end
 
 Given(/^I am reviewer for the certification$/) do
-  @inscription.users = [@user]
+  @inscription.users << @user
 
 end
 
@@ -51,14 +58,12 @@ And(/^my certification has (\d+) nominated (.*) moves$/) do |num, mv_tp|
   end
 end
 
+
 And(/^my certification has (\d+) approved (.*) moves$/) do |num, mv_tp|
   move_type = MoveType.find_or_create_by_title(mv_tp)
   @nominated_moves = []
   for i in 1..num.to_i
-    nominated_move = FactoryGirl.create(:move, :title => "Move for certification #{i}", :user_id => @user.id, :move_type_id => move_type.id, :inscription_id => @inscription.id)
-    FactoryGirl.create(:rating, :thumb_rating => 1, :user_id=> 2, :move_id => nominated_move.id) #approval 1
-    FactoryGirl.create(:rating, :thumb_rating => 1, :user_id=> 3, :move_id => nominated_move.id) #approval 2
-    @nominated_moves << nominated_move
+    create_and_approve_move(i, move_type, 2)
   end
 end
 
@@ -93,6 +98,18 @@ end
 When(/^fill the registration with the start date '(.*)'$/) do |date|
   fill_in "Certification start", :with => date
   click_button "Create Inscription"
+end
+
+When(/^my nominated (.*) move has been (\d+) times approved$/) do |num|
+  @nominated_moves = []
+  create_and_approve_move(1, move_type, 2)
+
+end
+
+Then(/^I approve the nominated moves$/) do
+  @nominated_moves.each do |move|
+    FactoryGirl.create(:rating, :thumb_rating => 1, :user_id => @user.id, :move_id => move.id) #approval j
+  end
 end
 
 
@@ -137,4 +154,10 @@ And(/^I see for (.*) the duration '(.*)'$/) do |cert, range|
   duration = certification[5]
   duration.should have_content range
 
+end
+
+
+Then(/^I see (\d+) approval in the inscription page$/) do |arg|
+  result = find('tr', text: cert)
+  expect(result.find('div.progress-bar')['aria-valuenow']).to eq(progress)
 end

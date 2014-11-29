@@ -50,5 +50,17 @@ module MovesHelper
     return path
   end
 
+  def get_progressbar_width_moves(move)
+    req_num_approvements = 2
+    if move.inscription.present? && move.inscription.certification.present?
+      cert = move.inscription.certification
+      req_num_approvements = cert.approvements
+    end
+
+    approvals = move.thumbs_up
+
+    return (approvals/req_num_approvements)*100
+  end
+
 
 end

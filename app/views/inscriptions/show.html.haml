@@ -36,8 +36,8 @@
         %p
           %strong=t("simple_form.labels.inscription.progress") + ": "
           .progress
-            .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{@inscription.moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.moves_number}", "style"=>"width: #{get_progressbar_width(@inscription)}%;"}
-              =@inscription.moves.count
+            .progress-bar.progress-bar-success{:role=>"progressbar", "aria-valuenow"=>"#{@inscription.approved_moves.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.moves_number}", "style"=>"width: #{get_progressbar_width(@inscription)}%;"}
+              =@inscription.approved_moves.count
             %p{:style => 'float: right;'}
               =@inscription.certification.moves_number if @inscription.certification.moves_number.present?
 
@@ -63,8 +63,8 @@
             %td= move.publish_date.to_s(:short) if move.publish_date.present?
             %td
               .progress
-                .progress-bar{:role=>"progressbar", "aria-valuenow"=>"#{move.ratings.count}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.approvements}", "style"=>"width: 50%;"}
-                  =move.ratings.count
+                .progress-bar{:role=>"progressbar", "aria-valuenow"=>"#{move.thumbs_up}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.approvements}", "style"=>"width: #{get_progressbar_width_moves(move)};"}
+                  =move.thumbs_up
                 %p{:style => 'float: right;'}
                   =@inscription.certification.approvements if @inscription.certification.approvements.present?
             %td
