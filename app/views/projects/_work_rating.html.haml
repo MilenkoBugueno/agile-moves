@@ -13,16 +13,17 @@
       %th{:width => "40px;"}= t("helpers.actions")
 
     - @review_moves.each do |move|
-      %tr
-        %td
-          /rating
-          = image_tag(get_move_icon(move), :width => 25, :height => 25)
-        %td= link_to create_title(move), move
-        %td= move.user.name
-        %td
-          -move.inscription.users.each do |reviewer|
-            = reviewer.name
-        %td= move.publish_date.to_s(:short) unless move.publish_date == nil
-        %td
+      - if !move.thumb_rating_by(current_user)
+        %tr
+          %td
+            /rating
+            = image_tag(get_move_icon(move), :width => 25, :height => 25)
+          %td= link_to create_title(move), move
+          %td= move.user.name
+          %td
+            -move.inscription.users.each do |reviewer|
+              = reviewer.name
+          %td= move.publish_date.to_s(:short) unless move.publish_date == nil
+          %td
 
   %br

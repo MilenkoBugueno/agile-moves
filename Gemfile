@@ -17,7 +17,7 @@ gem 'rolify'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails', branch: 'bootstrap3'
 gem 'execjs'
-gem "ckeditor"
+gem 'ckeditor', '~> 4.1.1'
 gem 'rubypress'
 group :development do
   gem 'sqlite3'

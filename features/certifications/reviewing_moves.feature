@@ -31,10 +31,10 @@ Feature: Reviewing Moves
     When I go to my Work view
     Then I expect to see the nominated moves
 
-  Scenario: As reviewer I review 1 nominated Vision move
-    Given mark nominates 1 Tomato moves for TOM-01
+  Scenario: Nominated move disappears from my work view when I approve it
+    Given mark nominates 2 Vision moves for VIS-03
     And I am reviewer for the certification
-    When I go to my Work view
-    And I approve the nominated moves
+    When I approve the nominated moves
+    And I go to my Work view
     Then I dont expect to see the nominated moves
 

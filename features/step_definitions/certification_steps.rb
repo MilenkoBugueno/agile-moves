@@ -21,7 +21,7 @@ end
 
 Given(/^(.*) nominates (.*) (.*) moves for (.*)$/) do |name, numb, mv_tp, cert|
   user = create_user_by_name(name)
-  @nominator = FactoryGirl.create(:user, email: user[:email])
+  @nominator = FactoryGirl.create(:user, name: user[:name], email: user[:email])
   certification = Certification.find_or_create_by_label(cert)
   @inscription = FactoryGirl.create(:inscription, :user_id => @nominator.id, :certification_id => certification.id)
   move_type = MoveType.find_or_create_by_title(mv_tp)
@@ -100,10 +100,10 @@ When(/^fill the registration with the start date '(.*)'$/) do |date|
   click_button "Create Inscription"
 end
 
-When(/^my nominated (.*) move has been (\d+) times approved$/) do |num|
+When(/^my nominated (.*) move has been (\d+) times approved$/) do |mv_tp, num|
+  move_type = MoveType.find_or_create_by_title(mv_tp)
   @nominated_moves = []
   create_and_approve_move(1, move_type, 2)
-
 end
 
 Then(/^I approve the nominated moves$/) do
