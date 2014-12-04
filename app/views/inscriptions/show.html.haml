@@ -58,12 +58,12 @@
         - @inscription.moves.each do |move|
           %tr
             %td
-            %td= link_to move.user.name, move
+            %td= link_to move.title, move
             %td= move.user.name
             %td= move.publish_date.to_s(:short) if move.publish_date.present?
             %td
               .progress
-                .progress-bar{:role=>"progressbar", "aria-valuenow"=>"#{move.thumbs_up}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.approvements}", "style"=>"width: #{get_progressbar_width_moves(move)};"}
+                .progress-bar{:role=>"progressbar", "aria-valuenow"=>"#{move.thumbs_up}", "aria-valuemin"=>"0", "aria-valuemax"=>"#{@inscription.certification.approvements}", "style"=>"width: #{get_progressbar_width_moves(move)}%;"}
                   =move.thumbs_up
                 %p{:style => 'float: right;'}
                   =@inscription.certification.approvements if @inscription.certification.approvements.present?

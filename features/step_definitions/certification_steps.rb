@@ -103,7 +103,7 @@ end
 When(/^my nominated (.*) move has been (\d+) times approved$/) do |mv_tp, num|
   move_type = MoveType.find_or_create_by_title(mv_tp)
   @nominated_moves = []
-  create_and_approve_move(1, move_type, 2)
+  create_and_approve_move(1, move_type, num.to_i)
 end
 
 Then(/^I approve the nominated moves$/) do
@@ -157,7 +157,7 @@ And(/^I see for (.*) the duration '(.*)'$/) do |cert, range|
 end
 
 
-Then(/^I see (\d+) approval in the inscription page$/) do |arg|
-  result = find('tr', text: cert)
-  expect(result.find('div.progress-bar')['aria-valuenow']).to eq(progress)
+Then(/^I see (\d+) approvals$/) do |num|
+  result = find('tr', text: @nominated_moves[0].title)
+  expect(result.find('div.progress-bar')['aria-valuenow']).to eq(num)
 end

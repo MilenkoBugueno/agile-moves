@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(:version => 20141123061146) do
     t.datetime "updated_at",    :null => false
   end
 
-  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
+  #add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "states", :force => true do |t|

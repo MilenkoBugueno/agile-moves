@@ -7,9 +7,30 @@ Feature: Move Approval
     Given I am logged in
 
 
+  Scenario: No approvals
+    Given I am registered to VIS-03
+    And my nominated 'vision' move has been 0 times approved
+    When I go to my Certificate view
+    And I click on the button Warum aufstehen?
+    Then I see 0 approvals
+
   Scenario: 1 approval
     Given I am registered to VIS-03
     And my nominated 'vision' move has been 1 times approved
-    Then I see 1 approval in the inscription page
-    #Then I see 1 approval in the approval widget
+    When I go to my Certificate view
+    And I click on the button Warum aufstehen?
+    Then I see 1 approvals
 
+  Scenario: 2 approvals
+    Given I am registered to VIS-03
+    And my nominated 'vision' move has been 2 times approved
+    When I go to my Certificate view
+    And I click on the button Warum aufstehen?
+    Then I see 2 approvals
+
+  Scenario: 3 approvals
+    Given I am registered to VIS-03
+    And my nominated 'vision' move has been 3 times approved
+    When I go to my Certificate view
+    And I click on the button Warum aufstehen?
+    Then I see 3 approvals

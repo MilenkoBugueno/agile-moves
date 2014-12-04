@@ -59,7 +59,7 @@ module MovesHelper
 
     approvals = move.thumbs_up
 
-    return (approvals/req_num_approvements)*100
+    return (approvals.to_f/req_num_approvements)*100
   end
 
 
