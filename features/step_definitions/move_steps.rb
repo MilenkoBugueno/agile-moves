@@ -32,7 +32,6 @@ def create_move(move_type, date, user_id, num)
   visit '/'
   click_link "Test project"
   first(:link, "New " + move_type.title).click
-  select move_type.title, :from => "Move type"
   fill_in "Title", :with => move_type.title + " " +num.to_s
   click_button "Create Move"
 end
@@ -93,10 +92,20 @@ When(/^I create a '(.*)' move$/) do |move_type|
   create_move(move_type, Date.today, 1, 1)
 end
 
+When(/^I delete the '(.*)' move in the move view$/) do |move_type|
+  move_type = MoveType.find_or_create_by_title(:title => move_type)
+  click_link "#{move_type.title} 1"
+  click_link "Delete"
+end
+
 ### THEN ###
 
 Then(/^I see a move created message$/) do
   page.should have_content "Move was successfully created"
+end
+
+Then(/^I see a move deleted message$/) do
+  page.should have_content "Move was successfully deleted"
 end
 
 And(/^I see '(.*)' tomatoes in the tomatoes list widget$/) do |count|
@@ -114,4 +123,5 @@ end
 Then /^I should have ([0-9]+) moves?$/ do |count|
   Move.count.should == count.to_i
 end
+
 

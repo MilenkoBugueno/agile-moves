@@ -228,7 +228,7 @@ class MovesController < ApplicationController
     @move.destroy
     log_admin("AdminLog: Move destroyed")
     respond_to do |format|
-      format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id) }
+      format.html { redirect_to work_projects_path(:id => @project.id, :move_type => @move_type.id), notice: 'Move was successfully deleted' }
       format.json { head :no_content }
     end
   end

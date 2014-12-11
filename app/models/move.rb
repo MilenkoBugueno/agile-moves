@@ -136,16 +136,6 @@ class Move < ActiveRecord::Base
     return thumbs_down
   end
   
-  
-  def comments
-    comments = 0;
-    self.ratings.each do |rating|
-      if rating.thumb_rating == -1 || rating.star_rating == -1
-        comments = comments + 1
-      end
-    end
-    return comments
-  end
 
   def get_todo_today
     my_make_my_day_move = nil
