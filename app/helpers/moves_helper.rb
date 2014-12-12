@@ -10,7 +10,16 @@ module MovesHelper
 
 
   def get_move_icon(move)
-    if move.tomatoes.present? && move.tomatoes.count == 1
+    if move.move_type.icon_id.present?
+      case move.move_type.icon_id
+        when 1
+          path = "dancer.png"
+        when 2
+          path = "blitz.png"
+        when 3
+          path = "teamtomatenrot.png"
+      end
+    elsif move.tomatoes.present? && move.tomatoes.count == 1
       tomato = move.tomatoes.first
       path = tomato_icon_path(tomato)
     elsif move.move_type.make_my_day
@@ -31,7 +40,16 @@ module MovesHelper
   end
 
   def get_move_icon_by_move_type(move_type)
-    if move_type.make_my_day
+    if move_type.icon_id.present?
+      case move_type.icon_id
+        when 1
+          path = "dancer.png"
+        when 2
+          path = "blitz.png"
+        when 3
+          path = "teamtomatenrot.png"
+      end
+    elsif move_type.make_my_day
       path = "todo_today.gif"
     elsif move_type.make_my_sprint
       path = "sprint.gif"
