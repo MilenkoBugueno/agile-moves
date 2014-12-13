@@ -39,7 +39,7 @@ end
 def nominate_move(move_type, date, user_id, num, reg)
   visit '/'
   click_link "Test project"
-  first(:link, "New " + move_type.title).click
+  first(:link, move_type.title).click
   click_link "Nominate"
   find('#move_inscription_id').find(:xpath, 'option[2]').select_option
   fill_in "Title", :with => move_type.title + " " +num.to_s
@@ -73,7 +73,7 @@ end
 When(/^I'm creating a '(.*)' move$/) do |move_type|
   move_type = MoveType.find_or_create_by_title(:title => move_type)
   visit '/projects/work?id=1'
-  first(:link, "New " + move_type.title).click
+  first(:link, move_type.title).click
 
 end
 

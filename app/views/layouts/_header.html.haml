@@ -33,7 +33,7 @@
             %li
               %p
                 = image_tag(get_move_icon_by_move_type(move_type), :width => 20, :height => 20)
-                = link_to t("helpers.links.new") + " " +move_type.title, new_move_path(project_id: @project.id, move_type: move_type.id)
+                = link_to move_type.title, new_move_path(project_id: @project.id, move_type: move_type.id)
 
     .col-md-4
       - if page == "work"
