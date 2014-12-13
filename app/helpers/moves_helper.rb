@@ -16,8 +16,6 @@ module MovesHelper
           path = "dancer.png"
         when 2
           path = "blitz.png"
-        when 3
-          path = "teamtomatenrot.png"
       end
     elsif move.tomatoes.present? && move.tomatoes.count == 1
       tomato = move.tomatoes.first
@@ -46,8 +44,6 @@ module MovesHelper
           path = "dancer.png"
         when 2
           path = "blitz.png"
-        when 3
-          path = "teamtomatenrot.png"
       end
     elsif move_type.make_my_day
       path = "todo_today.gif"
@@ -59,6 +55,8 @@ module MovesHelper
       path = "idea.png"
     elsif move_type.has_media
       path = "song.png"
+    elsif move_type.has_tomatoes && move_type.has_team
+      path = "teamtomatenrot.png"
     elsif move_type.has_tomatoes
       path = "tomaterot.png"
     else

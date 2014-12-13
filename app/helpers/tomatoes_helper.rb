@@ -1,7 +1,14 @@
 module TomatoesHelper
   def tomato_icon_path(tomato)
+    has_team = false
+    if tomato.move.present?
+      move = tomato.move
+      if move.move_type.has_team.present? && move.move_type.has_team
+        has_team = true
+      end
+    end
     state = tomato.state
-    if tomato.users.count > 1
+    if has_team
       if state == 1 #planed
         path = "teamtomatengrau.png"
       elsif state == 2 #done
@@ -46,7 +53,15 @@ module TomatoesHelper
       extra_planned = true
     end
 
-    if tomato.users.count > 1
+    has_team = false
+    if tomato.move.present?
+      move = tomato.move
+      if move.move_type.has_team.present? && move.move_type.has_team
+        has_team = true
+      end
+    end
+
+    if has_team
       if !extra_planned
         if state == 1 #planed
           path = "teamtomatengrau.png"

@@ -1,6 +1,6 @@
 class MoveType < ActiveRecord::Base
   attr_accessible :body, :thumb_rating, :star_rating, :has_tomatoes, :tomatoes_number, :has_twitter_idea, :make_my_day, \
-  :make_my_sprint, :title, :project_ids, :widget_ids, :is_user_story, :has_media, :icon_id
+  :make_my_sprint, :title, :project_ids, :widget_ids, :is_user_story, :has_media, :icon_id, :has_team
 
   has_and_belongs_to_many :moves
   has_and_belongs_to_many :projects

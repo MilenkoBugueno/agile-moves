@@ -34,22 +34,20 @@
         = f.association :category, :collection => Category.order("title ASC")
         -if @move.new_record? &&  @project.present?
           = f.association :user, :label => t("moves.links.owner"),  :selected =>  current_user.id, :collection => @project.users
-          = f.association :users, :as => :check_boxes, :label => t("projects.team"), :checked => [current_user.id], :collection => @project.users
           = f.hidden_field :project_id, :value => @project.id
         -elsif @project.present?
           = f.association :user, :label => t("moves.links.owner"), :collection => @project.users
-          = f.association :users, :as => :check_boxes, :label => t("projects.team"), :collection => @project.users
           = f.hidden_field :project_id, :value => @project.id
         -elsif @move.new_record?
           = f.association :user, :label => t("moves.links.owner"),  :selected =>  current_user.id
-          = f.association :users, :as => :check_boxes, :label => t("projects.team"), :checked => [current_user.id]
         -else
           = f.association :user, :label => t("moves.links.owner")
-          = f.association :users, :as => :check_boxes, :label => t("projects.team")
+        -if @move_type.has_team.present? && @move_type.has_team && @project.present?
+          = f.association :users, :as => :check_boxes, :label => t("projects.team"), :collection => @project.users
+          %p{:align => "center"}
+          = link_to t("moves.team.select_all"), "javascript:select_all_team('move[user_ids][]', '#{t('moves.team.select_all')}', '#{t('moves.team.select_none')}');", :id => 'link_all_team', :class => 'btn'
         -if @move.new_record?
           = f.hidden_field :state_id, :value => @state.id if @state.present?
-        %p{:align => "center"}
-          = link_to t("moves.team.select_all"), "javascript:select_all_team('move[user_ids][]', '#{t('moves.team.select_all')}', '#{t('moves.team.select_none')}');", :id => 'link_all_team', :class => 'btn'
         .form-actions
           -if @move.new_record?
             = text_field_tag "txtTomatoNo", nil, "value" => 1, "style" => "height:30px;width:3em;"

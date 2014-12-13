@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141212061920) do
+ActiveRecord::Schema.define(:version => 20141213202818) do
 
   create_table "admin_logs", :force => true do |t|
     t.string   "user_id"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20141212061920) do
     t.boolean  "is_user_story"
     t.boolean  "has_media"
     t.integer  "icon_id"
+    t.boolean  "has_team"
   end
 
   create_table "move_types_projects", :id => false, :force => true do |t|
