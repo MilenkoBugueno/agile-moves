@@ -1,22 +1,17 @@
 ### UTILITY METHODS ###
 
-
-
-### GIVEN ###
-
-Given(/^I am in the (.*) view$/) do |view|
+def go_to_view(view)
   visit '/'
   click_link "Test project"
   click_link view
 end
 
+### GIVEN ###
 
-Given(/^I am in the sprint plan view$/) do
-  visit '/'
-  click_link "Test project"
-  click_link "Plan"
-  click_link "Sprint Move"
+Given(/^I am in the (.*) view$/) do |view|
+  go_to_view(view)
 end
+
 
 Given(/^no sprint is planned$/) do
   delete_moves()
@@ -43,27 +38,27 @@ end
 
 When(/^I create (.*) new tomatoes$/) do |count|
   for i in 1..count.to_i
-    click_link "New tomato"
+    first( :link, "Tomato").click
     fill_in "Title", :with => "Tomato "+ i.to_s
-    click_button "Create Tomato"
+    click_button "Create Move"
   end
 end
 
 When(/^I create (.*) new tomatoes for today$/) do |count|
   for i in 1..count.to_i
-    click_link "New tomato"
+    first( :link, "Tomato").click
     fill_in "Title", :with => "Tomato "+ i.to_s
     fill_in "Publish date", :with => Date.today()
-    click_button "Create Tomato"
+    click_button "Create Move"
   end
 end
 
 When(/^I create (.*) new tomatoes for tomorrow$/) do |count|
   for i in 1..count.to_i
-    click_link "New tomato"
+    first( :link, "Tomato").click
     fill_in "Title", :with => "Tomato "+ i.to_s
     fill_in "Publish date", :with => Date.tomorrow()
-    click_button "Create Tomato"
+    click_button "Create Move"
   end
 end
 
@@ -84,19 +79,21 @@ end
 ### THEN ###
 
 Then(/^I see (.*) tomatoes in the todo today list$/) do |count|
+  go_to_view("Plan")
   for i in 1..count.to_i()
     page.should have_content "Tomato "+ i.to_s()
   end
 end
 
 Then(/^I see (.*) tomatoes in the activity inventory list$/) do |count|
+  go_to_view("Plan")
   for i in 1..count.to_i()
     page.should have_content "Tomato "+ i.to_s()
   end
 end
 
 Then(/^I see the sprint in the plan view$/) do
-  click_link "Plan"
+  go_to_view("Plan")
   page.should have_content "My Sprint"
 end
 

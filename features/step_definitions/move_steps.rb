@@ -31,7 +31,7 @@ end
 def create_move(move_type, date, user_id, num)
   visit '/'
   click_link "Test project"
-  first(:link, "New " + move_type.title).click
+  first(:link, move_type.title).click
   fill_in "Title", :with => move_type.title + " " +num.to_s
   click_button "Create Move"
 end
