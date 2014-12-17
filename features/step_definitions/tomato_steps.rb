@@ -74,6 +74,9 @@ When(/^I press the button make my sprint$/) do
   click_button "Make my Sprint"
 end
 
+When(/^I press the button (.*)$/) do |title|
+  click_button title
+end
 
 
 ### THEN ###

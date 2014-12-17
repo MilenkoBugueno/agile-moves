@@ -37,6 +37,6 @@ Feature: Plan tomatoes
     And I create a new sprint
     And I am in the Plan view
     And I create 4 new tomatoes
-    When I press the button make my sprint
+    When I press the button Make my Sprint
     Then I see the message Move was successfully updated
     And the state of the move is planned

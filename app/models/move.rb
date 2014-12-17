@@ -200,6 +200,20 @@ class Move < ActiveRecord::Base
     if self.publish_date_changed? || self.state_id_changed?
       self.planned_at = DateTime.now()
     end
+    if self.state_id_changed? && self.state_id == State.find_or_create_by_title("completed").id &&
+        self.move_type.make_my_sprint.present? && self.move_type.make_my_sprint
+      #copy not done tomatoes to activity inventory
+      tomato_moves = Move.order('publish_date ASC')
+      tomato_moves = tomato_moves.by_project_id(self.project_id)
+      tomato_moves = tomato_moves.by_user_id(self.user_id)
+      tomato_moves = tomato_moves.by_tomatoes_number(1)
+      tomato_moves = tomato_moves.where("publish_date <= ? AND publish_date >= ?", self.publish_date, self.start_date)
+
+      tomato_moves.each do |tomato|
+        Move.create(:title => tomato.title, :user_id => tomato.user_id, :publish_date=> nil, :body => tomato.body, :project_id => tomato.project_id, :move_type_id => tomato.move_type_id, :results => tomato.results)
+      end
+
+    end
 
   end
 

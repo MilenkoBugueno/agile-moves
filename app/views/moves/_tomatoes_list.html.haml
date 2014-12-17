@@ -48,6 +48,11 @@
         = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
           = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "planned").id
           = f.button :submit, :class => 'btn btn-warning', :value=> t("moves.links.makemysprint"), :style=> 'float: left;'
+      -elsif @move.move_type.make_my_sprint && @move.state == State.find_by_title("planned")
+        = simple_form_for @move, :html => { :class => 'form-horizontal' } do |f|
+          = f.hidden_field :state_id, :value => State.find_or_create_by_title(:title => "completed").id
+          = f.button :submit, :class => 'btn btn-info', :value=> t("moves.links.completemysprint"), :style=> 'float: left;'
+
 
       -if @move_type.is_user_story
         = link_to t("projects.newmove"), new_move_path(project_id: @project.id, date: @move.publish_date, user_story_id: @move.id), :class => 'btn btn-primary', :type => "button"

@@ -27,7 +27,8 @@ class ProjectsController < ApplicationController
 
     @move_type = MoveType.find_by_make_my_sprint(true)
 
-    @actual_sprint = Move.where("user_id=? AND move_type_id=? AND start_date <= ? AND publish_date >= ?", current_user.id, @move_type.id, Date.today(), Date.today()).first if @move_type.make_my_sprint
+    @actual_sprint = Move.where("user_id=? AND move_type_id=? AND start_date <= ? AND publish_date >= ? AND state_id != ?",
+                                current_user.id, @move_type.id, Date.today(), Date.today(), State.find_or_create_by_title("completed").id).first if @move_type.make_my_sprint
 
     if @actual_sprint.present?
       @todo_today_tomatoes = @tomatoes.where("publish_date = ?", Date.today)

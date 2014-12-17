@@ -120,6 +120,7 @@ en:
           backtotodotoday: "Todo Today"
           backtouserstory: "User Story"
           composition: "Composition"
+          completemysprint: "Complete Sprint"
       index: "Last moves"
       team:
         select_all: "Select all"

@@ -65,6 +65,28 @@ Given /^I have no moves$/ do
   Move.delete_all
 end
 
+Given(/^I have a active sprint with (\d+) done and (\d+) not done tomatoes$/) do |done_no, notdone_no|
+  @sprint_move = FactoryGirl.create(:move, :title => "Sprint 1", :user_id => @user.id,
+                                    :move_type_id => MoveType.find_or_create_by_title("Sprint").id,
+                                    :state_id => State.find_or_create_by_title(:title => "planned").id,
+                                    :start_date => Date.yesterday(),
+                                    :publish_date => Date.tomorrow()
+  )
+  move_type = MoveType.find_or_create_by_title("Tomato")
+  @done_tomatoes = []
+  @notdone_tomatoes = []
+  for i in 1..done_no.to_i()
+    done_tomato = FactoryGirl.create(:move, :title => "Done Tomato #{i}", :user_id => @user.id, :move_type_id => move_type.id, :publish_date=> Date.yesterday())
+    @done_tomatoes << done_tomato
+  end
+
+  for i in 1..notdone_no.to_i()
+    notdone_tomato = FactoryGirl.create(:move, :title => "Not Done Tomato #{i}", :user_id => @user.id, :move_type_id => move_type.id, :publish_date=> Date.yesterday())
+    @notdone_tomatoes << notdone_tomato
+  end
+
+end
+
 
 
 ### WHEN ###
@@ -125,3 +147,9 @@ Then /^I should have ([0-9]+) moves?$/ do |count|
 end
 
 
+
+Then(/^I see (\d+) not done tomatoes$/) do |count|
+  for i in 1..count.to_i()
+    page.should have_content "Not Done Tomato "+ i.to_s()
+  end
+end
