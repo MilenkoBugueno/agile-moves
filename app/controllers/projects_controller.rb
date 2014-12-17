@@ -33,10 +33,12 @@ class ProjectsController < ApplicationController
     if @actual_sprint.present?
       @todo_today_tomatoes = @tomatoes.where("publish_date = ?", Date.today)
       @activity_inventory_tomatoes = @tomatoes.where("publish_date > ? OR publish_date IS NULL", @actual_sprint.publish_date)
+      @activity_inventory_tomatoes = @activity_inventory_tomatoes.not_closed()
       @actual_sprint_tomatoes = @tomatoes.where("publish_date <= ? AND publish_date >= ? AND publish_date != ? ", @actual_sprint.publish_date, @actual_sprint.start_date, Date.today)
     else
       @todo_today_tomatoes = @tomatoes.where("publish_date = ?", Date.today)
       @activity_inventory_tomatoes = @tomatoes.where("publish_date > ? OR publish_date IS NULL", Date.today())
+      @activity_inventory_tomatoes = @activity_inventory_tomatoes.not_closed()
     end
 
     respond_to do |format|
@@ -55,7 +57,7 @@ class ProjectsController < ApplicationController
     @user = params[:user] ? params[:user] : current_user.id
 
     @moves = Move.order('publish_date DESC')
-    @moves = @moves.by_user_ids(@user)
+    @moves = @moves.by_user_id(@user)
     @moves = @moves.by_project_id(@project.id) if params[:id].present?
     @moves = @moves.not_closed
 

@@ -15,7 +15,7 @@ class Tomato < ActiveRecord::Base
   scope :by_user_ids, lambda {|uid| joins(:move) & Move.by_user_ids(uid)}
   scope :by_date, lambda {|uid| where(["#{table_name}.publish_date =?", uid])}
   scope :by_project_id, lambda {|uid| where(["#{table_name}.project_id =?", uid])}
-  scope :not_closed , lambda { where("#{table_name}.state != ? OR #{table_name}.state != ?", 2, 4)}
+  scope :not_closed , lambda { where("#{table_name}.state != ? AND #{table_name}.state != ?", 2, 4)}
 
   def self.my_team_tomatoes(uid)
     where(["users.id =?", uid])

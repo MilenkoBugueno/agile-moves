@@ -207,6 +207,7 @@ class Move < ActiveRecord::Base
       tomato_moves = tomato_moves.by_project_id(self.project_id)
       tomato_moves = tomato_moves.by_user_id(self.user_id)
       tomato_moves = tomato_moves.by_tomatoes_number(1)
+      tomato_moves = tomato_moves.not_closed()
       tomato_moves = tomato_moves.where("publish_date <= ? AND publish_date >= ?", self.publish_date, self.start_date)
 
       tomato_moves.each do |tomato|
